@@ -4,7 +4,7 @@ function readxlssheet()
 	println("Step-1: Pkgs and functions are loaded")
 	filepath = pwd()
 	# df = XLSX.readxlsx(filepath * "\\master-2\\case1\\data\\data.xlsx")
-	df = XLSX.readxlsx("D:/GithubClonefiles/datacentre_unitcommitment/data/data.xlsx")
+	df = XLSX.readxlsx("D:/GithubClonefiles/datacentra_unitcommitment/data/data.xlsx")
 
 	# part-1: read frequency data
 	unitsfreqparam = df["units_frequencyparam"]
@@ -42,11 +42,15 @@ function readxlssheet()
 	Sheet8_list = string("A2", ":", "C", string(size(loaddata[:], 1)))
 	loaddata = convert(Array{Float64, 2}, loaddata[Sheet8_list])
 
+	data_cnetra_data = df["data_centra"]
+	Sheet9_list = string("A2", ":", "I", string(size(data_cnetra_data[:], 1)))
+	datacentra_data = convert(Array{Float64, 2}, data_cnetra_data[Sheet9_list])
+
 	return unitsfreqparam, windsfreqparam, strogesystemdata, gendata, gencost, linedata,
-	loadcurve, loaddata
+	loadcurve, loaddata, datacentra_data
 end
 
-function forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsFreqParam, StrogeData)
+function forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsFreqParam, StrogeData, datacentra_Data)
 
 	# DataGen,DataBranch,DataLoad,LoadCurve,GenCost = IEEE_RTS6()
 	NB = Int64(maximum([maximum(DataBranch[:, 2]), maximum(DataBranch[:, 3])]))::Int64
@@ -118,8 +122,8 @@ function forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsF
 	Pss_η⁻ = StrogeData[:, 11]
 	Pss_δₛ = StrogeData[:, 12]
 
-	# re-normazied data
-	config_param = config(0, 1, 1, 1, 1, 3, 0.005, 0.005, 1, 1, 1, 1e5, 1e5, 50, 0.01, 0)
+	# renormazied data
+	config_param = config(0, 1, 1, 1, 1, 3, 0.005, 0.005, 1, 1, 1, 1e5, 1e5, 50, 0.01, 1)
 
 	units = unit(Gens_Index, Gens_LocateBus, Gens_Pmax, Gens_Pmin, Gens_RU, Gens_RD,
 		Gens_SU, Gens_SD, Gens_TU, Gens_TD, Gens_x0, Gens_t0, Gens_p0, Gens_a,
@@ -139,7 +143,25 @@ function forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsF
 		end
 	end
 
+	# data centra dataset
+	dc_index = convert(Array{Int64}, datacentra_Data[:, 1])
+	dc_locatebus = convert(Array{Int64}, datacentra_Data[:, 2])
+	dc_pmax = datacentra_Data[:, 3]
+	dc_pmin = datacentra_Data[:, 4]
+	dc_voltage_regulation = datacentra_Data[:, 5]
+	dc_idale = datacentra_Data[:, 6]
+	dc_sv_constent = datacentra_Data[:, 7]
+	dc_λ = datacentra_Data[:, 8]
+	dc_μ = datacentra_Data[:, 9]
+
+	tem_computatioinal_task_curves = ones(NT, 1) * 0.2
+	dc_computational_power_tasks = tem_computatioinal_task_curves
+
+	ND2 = size(dc_index)[1]
+
+	datacentra_data = data_centra(dc_index, dc_locatebus, dc_pmax, dc_pmin, dc_voltage_regulation, dc_idale, dc_sv_constent, dc_λ, dc_μ, dc_computational_power_tasks)
+
 	println("Step-2: imput data are loaded")
 
-	return config_param, units, lines, loads, stroges, NB, NG, NL, ND, NT, NC
+	return config_param, units, lines, loads, stroges, NB, NG, NL, ND, NT, NC, ND2, datacentra_data
 end

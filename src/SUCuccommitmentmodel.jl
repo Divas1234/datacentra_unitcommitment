@@ -37,7 +37,8 @@ Stochastic Unit Commitment (SUC) model for power system optimization.
   - `cr⁺`: Up reserve cost
   - `cr⁻`: Down reserve cost
 """
-function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, units::unit, loads::load, winds::wind, lines::transmissionline, config_param::config)
+function SUC_scucmodel(
+		NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND2::Int64, units::unit, loads::load, winds::wind, lines::transmissionline, DataCentras::data_centra, config_param::config)
 	println("Step-3: Creating dispatching model")
 
 	if config_param.is_NetWorkCon == 1
@@ -96,13 +97,13 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, un
 	wind_curtailment_penalty = config_param.is_WindsCuttingCoefficient * 1e0
 
 	if config_param.is_ConsiderDataCentra == 1
-		@variable(scuc, dc_p[1:(ND * NS), 1:NT]>=0)
-		@variable(scuc, dc_f[1:(ND * NS), 1:NT]>=0)
-		# @variable(scuc, dc_v[1:(ND * NS), 1:NT]>=0)
-		@variable(scuc, dc_v²[1:(ND * NS), 1:NT]>=0)
-		@variable(scuc, dc_λ[1:(ND * NS), 1:NT]>=0)
-		@varlable(scuc, dc_Δp1[1:(ND * NS), 1:NT]>=0)
-		@varlable(scuc, dc_Δp2[1:(ND * NS), 1:NT]>=0)
+		@variable(scuc, dc_p[1:(ND2 * NS), 1:NT]>=0)
+		@variable(scuc, dc_f[1:(ND2 * NS), 1:NT]>=0)
+		# @variable(scuc, dc_v[1:(ND2 * NS), 1:NT]>=0)
+		@variable(scuc, dc_v²[1:(ND2 * NS), 1:NT]>=0)
+		@variable(scuc, dc_λ[1:(ND2 * NS), 1:NT]>=0)
+		@variable(scuc, dc_Δu1[1:(ND2 * NS), 1:NT]>=0)
+		@variable(scuc, dc_Δu2[1:(ND2 * NS), 1:NT]>=0)
 	end
 
 	ρ⁺ = c₀ * 2
@@ -420,25 +421,26 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, un
 
 	# NOTE - data centra constraints
 	if config_param.is_ConsiderDataCentra == 1
-		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_p[((s - 1) * ND + 1):(s * ND), t].<=data_centra.p_max)
-		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_p[((s - 1) * ND + 1):(s * ND), t].>=data_centra.p_min)
-		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_p[((s - 1) * ND + 1):(s * ND), t].==data_centra.idle .+ data_centra.sv_constant .* dc_Δu2 / data_centra.μ)
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_p[((s - 1) * ND2 + 1):(s * ND2), t].<=DataCentras.p_max)
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_p[((s - 1) * ND2 + 1):(s * ND2), t].>=DataCentras.p_min)
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_p[((s - 1) * ND2 + 1):(s * ND2), t].==DataCentras.idale .+ DataCentras.sv_constant .* dc_Δu2[((s - 1) * ND2 + 1):(s * ND2), t] ./ DataCentras.μ)
 
-		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu2[((s - 1) * ND + 1):(s * ND), t].<=dc_Δu1[((s - 1) * ND + 1):(s * ND), t])
-		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu2[((s - 1) * ND + 1):(s * ND), t].<=dc_λ[((s - 1) * ND + 1):(s * ND), t])
-		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu2[((s - 1) * ND + 1):(s * ND), t].>=dc_λ[((s - 1) * ND + 1):(s * ND), t] .+ dc_Δu1[((s - 1) * ND + 1):(s * ND), t] - 1)
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu2[((s - 1) * ND2 + 1):(s * ND2), t].<=dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t])
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu2[((s - 1) * ND2 + 1):(s * ND2), t].<=dc_λ[((s - 1) * ND2 + 1):(s * ND2), t])
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu2[((s - 1) * ND2 + 1):(s * ND2), t].>=dc_λ[((s - 1) * ND2 + 1):(s * ND2), t] .+ dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t] - ones(ND2, 1))
 
-		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu1[((s - 1) * ND + 1):(s * ND), t].<=dc_v²[((s - 1) * ND + 1):(s * ND), t])
-		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu1[((s - 1) * ND + 1):(s * ND), t].<=dc_f[((s - 1) * ND + 1):(s * ND), t])
-		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu1[((s - 1) * ND + 1):(s * ND), t].>=dc_v²[((s - 1) * ND + 1):(s * ND), t] .+ dc_f[((s - 1) * ND + 1):(s * ND), t] - 1)
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t].<=dc_v²[((s - 1) * ND2 + 1):(s * ND2), t])
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t].<=dc_f[((s - 1) * ND2 + 1):(s * ND2), t])
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t].>=dc_v²[((s - 1) * ND2 + 1):(s * ND2), t] .+ dc_f[((s - 1) * ND2 + 1):(s * ND2), t] - ones(ND2, 1))
 
-		iter_num = 6
-		iter_block = Int64(round(ND / ter_num))
-		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_λ[((s - 1) * ND + 1):(s * ND), t].<=ones(ND, 1))
-		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_f[((s - 1) * ND + 1):(s * ND), t].<=ones(ND, 1))
-		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_v²[((s - 1) * ND + 1):(s * ND), t].<=ones(ND, 1))
-		@constraint(scuc, [s = 1:NS, t = 1:NT, iter = 1:iter_num],
-			sum(dc_λ[((s - 1) * ND + 1):(s * ND), ((iter - 1) * iter_block + 1):(ter * iter_block)]).==data_centra.λ[:, ((iter - 1) * iter_block + 1):(ter * iter_block)])
+		# iter_num = 6
+		# iter_block = Int64(round(NT / iter_num))
+		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_λ[((s - 1) * ND2 + 1):(s * ND2), t].<=ones(ND2, 1))
+		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_f[((s - 1) * ND2 + 1):(s * ND2), t].<=ones(ND2, 1))
+		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_v²[((s - 1) * ND2 + 1):(s * ND2), t].<=ones(ND2, 1))
+		# @constraint(scuc, [s = 1:NS, t = 1:NT, iter = 1:iter_num],
+		# 	sum(dc_λ[((s - 1) * ND2 + 1):(s * ND2),
+		# 		((iter - 1) * iter_block + 1):(iter * iter_block)]).==sum(DataCentras.λ) .* DataCentras.computational_power_tasks[((iter - 1) * iter_block + 1):(iter * iter_block)])
 	end
 	println("\t constraints: 12) data centra constraints\t\t\t\t done")
 

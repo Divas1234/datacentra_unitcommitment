@@ -1,5 +1,8 @@
 using Pkg
+
+# Activate the project environment
 Pkg.activate("./.pkg")
+# Include necessary modules
 include("src/environment_config.jl")
 include("src/formatteddata.jl")
 include("src/renewableenergysimulation.jl")
@@ -13,16 +16,31 @@ include("src/draw_onlineactivepowerbalance.jl")
 include("src/draw_addditionalpower.jl")
 
 # Destructure directly from function call for clarity
-UnitsFreqParam, WindsFreqParam, StrogeData, DataGen, GenCost, DataBranch, LoadCurve, DataLoad = readxlssheet()
-config_param, units, lines, loads, stroges, NB, NG, NL, ND, NT, NC = forminputdata(
-	DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsFreqParam, StrogeData
+# Read data from Excel sheet
+UnitsFreqParam, WindsFreqParam, StrogeData, DataGen, GenCost, DataBranch, LoadCurve, DataLoad, datacentra_Data = readxlssheet()
+
+# Form input data for the model
+config_param, units, lines, loads, stroges, NB, NG, NL, ND, NT, NC, ND2, DataCentras = forminputdata(
+	DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsFreqParam, StrogeData, datacentra_Data
 )
 
+# Generate wind scenarios
 winds, NW = genscenario(WindsFreqParam, 1)
 
+# Apply boundary conditions
 boundrycondition(NB, NL, NG, NT, ND, units, loads, lines, winds, stroges)
 
-bench_x₀, bench_p₀, bench_pᵨ, bench_pᵩ, bench_seq_sr⁺, bench_seq_sr⁻, bench_pss_charge_p⁺, bench_pss_charge_p⁻, bench_su_cost, bench_sd_cost, bench_prod_cost, bench_cost_sr⁺, bench_cost_sr⁻ = SUC_scucmodel(
-	NT, NB, NG, ND, NC, units, loads, winds, lines, config_param)
+# Run the SUC-SCUC model
+try
+    # Run the SUC-SCUC model
+    bench_x₀, bench_p₀, bench_pᵨ, bench_pᵩ, bench_seq_sr⁺, bench_seq_sr⁻, bench_pss_charge_p⁺, bench_pss_charge_p⁻, bench_su_cost, bench_sd_cost, bench_prod_cost, bench_cost_sr⁺, bench_cost_sr⁻ = SUC_scucmodel(
+        NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, DataCentras, config_param)
+catch e
+    println("An error occurred during SUC_scucmodel execution: ", e)
+    # You might want to re-throw the exception or handle it differently
+    # rethrow(e)
+    bench_x₀, bench_p₀, bench_pᵨ, bench_pᵩ, bench_seq_sr⁺, bench_seq_sr⁻, bench_pss_charge_p⁺, bench_pss_charge_p⁻, bench_su_cost, bench_sd_cost, bench_prod_cost, bench_cost_sr⁺, bench_cost_sr⁻ = zeros(13) # Or some other default/error value
+end
 
+# Save the balance results
 savebalance_result(bench_p₀, bench_pᵨ, bench_pᵩ, bench_pss_charge_p⁺, bench_pss_charge_p⁻, 1)

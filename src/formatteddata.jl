@@ -162,12 +162,13 @@ struct data_centra
 	locatebus::Vector{Int64}
 	p_max::Vector{Float64}
 	p_min::Vector{Float64}
-	stable_voltage::Vector{Float64}
-	frequency_regulation::Vector{Float64}
 	voltage_regulation::Vector{Float64}
+	idale::Vector{Float64}
+	sv_constant::Vector{Float64}
 	λ::Vector{Float64}
 	μ::Vector{Float64}
-	function data_centra(index, locatebus, p_max, p_min, stable_voltage, frequency_regulation, voltage_regulation, λ, μ)
-		return new(index, locatebus, p_max, p_min, stable_voltage, frequency_regulation, voltage_regulation, λ, μ)
+	computational_power_tasks::Matrix{Float64}
+	function data_centra(index, locatebus, p_max, p_min, voltage_regulation, idale, sv_constant, λ, μ, computational_power_tasks)
+		return new(index, locatebus, p_max, p_min, voltage_regulation, idale, sv_constant, λ, μ, computational_power_tasks)
 	end
 end

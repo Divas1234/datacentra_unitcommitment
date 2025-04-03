@@ -1,5 +1,6 @@
-function save_UCresults(x₀, bench_x₀, p₀, pᵨ, pᵩ, seq_sr⁺, seq_sr⁻, pss_charge_p⁺, pss_charge_p⁻, su_cost, sd_cost, prod_cost, cost_sr⁺, cost_sr⁻, bench_p₀, bench_pᵨ, bench_pᵩ, bench_seq_sr⁺, bench_seq_sr⁻, bench_pss_charge_p⁺, bench_pss_charge_p⁻,
-	bench_su_cost, bench_sd_cost, bench_prod_cost, bench_cost_sr⁺, bench_cost_sr⁻, NT, NG, ND, NW, units, winds)
+function save_UCresults(x₀, bench_x₀, p₀, pᵨ, pᵩ, seq_sr⁺, seq_sr⁻, pss_charge_p⁺, pss_charge_p⁻, su_cost, sd_cost, prod_cost, cost_sr⁺,
+		cost_sr⁻, bench_p₀, bench_pᵨ, bench_pᵩ, bench_seq_sr⁺, bench_seq_sr⁻, bench_pss_charge_p⁺, bench_pss_charge_p⁻,
+		bench_su_cost, bench_sd_cost, bench_prod_cost, bench_cost_sr⁺, bench_cost_sr⁻, NT, NG, ND, NW, units, winds)
 	# filepath = pwd()
 	return save("D:/ieee_tpws/code/littlecase//output/bench/" * "mydata_1.jld",
 		"x₀", x₀,
@@ -107,7 +108,7 @@ function savebalance_result(bench_p₀, bench_pᵨ, bench_pᵩ, bench_pss_charge
 
 	filepath = pwd()
 	if flag == 1
-		filepath = "D:/GithubClonefiles/datacentre_unitcommitment/output/bench/"
+		filepath = "D:/GithubClonefiles/datacentra_unitcommitment/output/bench/"
 	elseif flag == 2
 		filepath = "D:/GithubClonefiles/datacentre_unitcommitment/output/"
 	else

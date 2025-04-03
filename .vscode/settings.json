@@ -1,7 +1,7 @@
 {
     "editor.wordWrapColumn": 200,
     "editor.wordWrap": "wordWrapColumn",
-    "editor.fontFamily": "Fira Code, Maison Mono, Apercu Mono Pro, Droid Sans Mono, Geist Mono, JetBrains Mono, Maple Mono, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "Fira Code, Geist Mono, JetBrains Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
     "workbench.editor.highlightModifiedTabs": true,
     "terminal.integrated.fontLigatures.enabled": true,
     "CodeGPT.apiKey": "CodeGPT Plus Beta"
