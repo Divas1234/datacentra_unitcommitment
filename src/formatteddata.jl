@@ -17,44 +17,6 @@ struct config
 	is_MaxIterationsNum::Int64
 	is_CalculPrecision::Float64
 	is_ConsiderDataCentra::Int64
-	# is_Param_A::Int64
-	# is_Param_B::Int64
-	# # method
-	function config(is_NetWorkCon,
-			is_ThermalUnitCon,
-			is_WindUnitCon,
-			is_SysticalCon,
-			is_PieceLinear,
-			is_NumSeg,
-			is_Alpha,
-			is_Belta,
-			is_CoalPrice,
-			is_ActiveLoad,
-			is_WindIntegration,
-			is_LoadsCuttingCoefficient,
-			is_WindsCuttingCoefficient,
-			is_MaxIterationsNum,
-			is_CalculPrecision,
-			is_ConsiderDataCentra
-	)
-		return new(is_NetWorkCon,
-			is_ThermalUnitCon,
-			is_WindUnitCon,
-			is_SysticalCon,
-			is_PieceLinear,
-			is_NumSeg,
-			is_Alpha,
-			is_Belta,
-			is_CoalPrice,
-			is_ActiveLoad,
-			is_WindIntegration,
-			is_LoadsCuttingCoefficient,
-			is_WindsCuttingCoefficient,
-			is_MaxIterationsNum,
-			is_CalculPrecision,
-			is_ConsiderDataCentra
-		)
-	end
 end
 
 struct unit
