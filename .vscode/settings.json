@@ -1,8 +1,22 @@
 {
-    "editor.wordWrapColumn": 200,
+    "editor.wordWrapColumn": 100,
     "editor.wordWrap": "wordWrapColumn",
-    "editor.fontFamily": "Fira Code, Geist Mono, JetBrains Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "Anomymous Pro, Helvetic, SF Pro, Fira Code, Geist Mono, JetBrains Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
     "workbench.editor.highlightModifiedTabs": true,
     "terminal.integrated.fontLigatures.enabled": true,
-    "CodeGPT.apiKey": "CodeGPT Plus Beta"
+    "CodeGPT.apiKey": "CodeGPT Plus Beta",
+    "bookmarks.sideBar.expanded": true,
+    "spellright.language": [
+        "en"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext"
+    ],
+    "editor.fontSize": 15,
+    "cSpell.words": [
+        "microgrid",
+        "microgrids"
+    ]
 }

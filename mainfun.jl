@@ -31,16 +31,8 @@ winds, NW = genscenario(WindsFreqParam, 1)
 boundrycondition(NB, NL, NG, NT, ND, units, loads, lines, winds, stroges)
 
 # Run the SUC-SCUC model
-try
-    # Run the SUC-SCUC model
-    bench_x₀, bench_p₀, bench_pᵨ, bench_pᵩ, bench_seq_sr⁺, bench_seq_sr⁻, bench_pss_charge_p⁺, bench_pss_charge_p⁻, bench_su_cost, bench_sd_cost, bench_prod_cost, bench_cost_sr⁺, bench_cost_sr⁻ = SUC_scucmodel(
-        NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, DataCentras, config_param)
-catch e
-    println("An error occurred during SUC_scucmodel execution: ", e)
-    # You might want to re-throw the exception or handle it differently
-    # rethrow(e)
-    bench_x₀, bench_p₀, bench_pᵨ, bench_pᵩ, bench_seq_sr⁺, bench_seq_sr⁻, bench_pss_charge_p⁺, bench_pss_charge_p⁻, bench_su_cost, bench_sd_cost, bench_prod_cost, bench_cost_sr⁺, bench_cost_sr⁻ = zeros(13) # Or some other default/error value
-end
+bench_x₀, bench_p₀, bench_pᵨ, bench_pᵩ, bench_seq_sr⁺, bench_seq_sr⁻, bench_pss_charge_p⁺, bench_pss_charge_p⁻, bench_su_cost, bench_sd_cost, bench_prod_cost, bench_cost_sr⁺, bench_cost_sr⁻, dc_p, dc_f, dc_v², dc_λ, dc_Δu1, dc_Δu2 = SUC_scucmodel(
+	NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, DataCentras, config_param)
 
 # Save the balance results
 savebalance_result(bench_p₀, bench_pᵨ, bench_pᵩ, bench_pss_charge_p⁺, bench_pss_charge_p⁻, 1)

@@ -433,14 +433,21 @@ function SUC_scucmodel(
 		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t].<=dc_f[((s - 1) * ND2 + 1):(s * ND2), t])
 		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t].>=dc_v²[((s - 1) * ND2 + 1):(s * ND2), t] .+ dc_f[((s - 1) * ND2 + 1):(s * ND2), t] - ones(ND2, 1))
 
-		# iter_num = 6
-		# iter_block = Int64(round(NT / iter_num))
-		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_λ[((s - 1) * ND2 + 1):(s * ND2), t].<=ones(ND2, 1))
-		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_f[((s - 1) * ND2 + 1):(s * ND2), t].<=ones(ND2, 1))
-		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_v²[((s - 1) * ND2 + 1):(s * ND2), t].<=ones(ND2, 1))
-		# @constraint(scuc, [s = 1:NS, t = 1:NT, iter = 1:iter_num],
-		# 	sum(dc_λ[((s - 1) * ND2 + 1):(s * ND2),
-		# 		((iter - 1) * iter_block + 1):(iter * iter_block)]).==sum(DataCentras.λ) .* DataCentras.computational_power_tasks[((iter - 1) * iter_block + 1):(iter * iter_block)])
+		iter_num = 6
+		coeff = 0.05
+		iter_block = Int64(round(NT / iter_num))
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_λ[((s - 1) * ND2 + 1):(s * ND2), t].<=ones(ND2, 1))
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_f[((s - 1) * ND2 + 1):(s * ND2), t].<=ones(ND2, 1))
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_v²[((s - 1) * ND2 + 1):(s * ND2), t].<=ones(ND2, 1))
+		@constraint(scuc, [s = 1:NS, iter = 1:iter_num],
+			sum(dc_λ[((s - 1) * ND2 + 1):(s * ND2),
+				((iter - 1) * iter_block + 1):(iter * iter_block)]).<=(1 + coeff) * sum(DataCentras.λ) * iter_block .* sum(DataCentras.computational_power_tasks[((iter - 1) * iter_block + 1):(iter * iter_block)]))
+		@constraint(scuc, [s = 1:NS, iter = 1:iter_num],
+			sum(dc_λ[((s - 1) * ND2 + 1):(s * ND2),
+				((iter - 1) * iter_block + 1):(iter * iter_block)]).>=(1 - coeff) * sum(DataCentras.λ) * iter_block .* sum(DataCentras.computational_power_tasks[((iter - 1) * iter_block + 1):(iter * iter_block)]))
+        # @show (1 + coeff) * sum(DataCentras.λ) * iter_block .* sum(DataCentras.computational_power_tasks[((iter - 1) * iter_block + 1):(iter * iter_block)]);
+        # @show (1 - coeff) * sum(DataCentras.λ) * iter_block .* sum(DataCentras.computational_power_tasks[((iter - 1) * iter_block + 1):(iter * iter_block)]);
+        # @show sum(JuMP.value.(dc_λ[((s - 1) * ND2 + 1):(s * ND2), ((1 - 1) * iter_block + 1):(1 * iter_block)])) .* sum(DataCentras.computational_power_tasks[((iter - 1) * iter_block + 1):(iter *
 	end
 	println("\t constraints: 12) data centra constraints\t\t\t\t done")
 
@@ -680,10 +687,81 @@ function SUC_scucmodel(
 		end
 		println("The calculation result has been saved to: $output_file")
 		println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+
+		# Open output file for writing results
+		output_file = joinpath(output_dir, "Bench_datacentra_result.txt")
+		open(output_file, "w") do io
+			writedlm(io, [" "])
+			writedlm(io, ["list 1: dc_p"], '\t')
+			writedlm(io, JuMP.value.(dc_p[1:(ND2 * NS), 1:NT]), '\t')
+			writedlm(io, [" "])
+			writedlm(io, ["list 2: dc_f"])
+			writedlm(io, JuMP.value.(dc_f[1:(ND2 * NS), 1:NT]), '\t')
+			writedlm(io, [" "])
+			writedlm(io, ["list 3: dc_v²"])
+			writedlm(io, JuMP.value.(dc_v²[1:(ND2 * NS), 1:NT]), '\t')
+			writedlm(io, [" "])
+			writedlm(io, ["list 4: dc_λ"])
+			writedlm(io, JuMP.value.(dc_λ[1:(ND2 * NS), 1:NT]), '\t')
+			writedlm(io, [" "])
+			writedlm(io, ["list 5: dc_Δu1"])
+			writedlm(io, JuMP.value.(dc_Δu1[1:(ND2 * NS), 1:NT]), '\t')
+			writedlm(io, [" "])
+			writedlm(io, ["list 6: dc_Δu2"])
+			writedlm(io, JuMP.value.(dc_Δu2[1:(ND2 * NS), 1:NT]), '\t')
+		end
+		println("The calculation result has been saved to: $output_file")
+		println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+
+		# Open output file for csv writing results
+		output_dir = "D:/GithubClonefiles/datacentra_unitcommitment/output/data_centra/"
+
+		s = 1
+		@show data_to_write = [
+			("dc_Δu2.csv", JuMP.value.(dc_Δu2[1:(ND2), 1:NT])),
+			("dc_Δu1.csv", JuMP.value.(dc_Δu1[1:(ND2), 1:NT])),
+			("dc_v².csv", JuMP.value.(dc_v²[1:(ND2), 1:NT])),
+			("dc_λ.csv", JuMP.value.(dc_λ[1:(ND2), 1:NT])),
+			("dc_f.csv", JuMP.value.(dc_f[1:(ND2), 1:NT])),
+			("dc_p.csv", JuMP.value.(dc_p[1:(ND2), 1:NT])),
+			("dc_debug_tasks_1.csv", (JuMP.value.(dc_λ[((s - 1) * ND2 + 1):(s * ND2), ((1 - 1) * iter_block + 1):(1 * iter_block)]))),
+			("dc_debug_tasks_2.csv", (JuMP.value.(dc_λ[((s - 1) * ND2 + 1):(s * ND2), ((2 - 1) * iter_block + 1):(2 * iter_block)]))),
+			("dc_debug_tasks_3.csv", (JuMP.value.(dc_λ[((s - 1) * ND2 + 1):(s * ND2), ((3 - 1) * iter_block + 1):(3 * iter_block)]))),
+			("dc_debug_tasks_4.csv", (JuMP.value.(dc_λ[((s - 1) * ND2 + 1):(s * ND2), ((4 - 1) * iter_block + 1):(4 * iter_block)]))),
+			("dc_debug_tasks_5.csv", (JuMP.value.(dc_λ[((s - 1) * ND2 + 1):(s * ND2), ((5 - 1) * iter_block + 1):(5 * iter_block)]))),
+			("dc_debug_tasks_6.csv", (JuMP.value.(dc_λ[((s - 1) * ND2 + 1):(s * ND2), ((6 - 1) * iter_block + 1):(6 * iter_block)])))
+		]
+
+		# @constraint(scuc, [s = 1:NS, t = 1:NT, iter = 1:iter_num],
+		# 	sum(dc_λ[((s - 1) * ND2 + 1):(s * ND2),
+		# 		((iter - 1) * iter_block + 1):(iter * iter_block)]).<=(1 + coeff) * sum(DataCentras.λ) .* DataCentras.computational_power_tasks[((iter - 1) * iter_block + 1):(iter * iter_block)])
+
+        iter = 1
+        println("===============================================================================")
+        @show (1 + coeff) * sum(DataCentras.λ) * iter_block .* sum(DataCentras.computational_power_tasks[((iter - 1) * iter_block + 1):(iter * iter_block)]);
+        @show (1 - coeff) * sum(DataCentras.λ) * iter_block .* sum(DataCentras.computational_power_tasks[((iter - 1) * iter_block + 1):(iter * iter_block)]);
+        @show sum(JuMP.value.(dc_λ[((s - 1) * ND2 + 1):(s * ND2), ((iter - 1) * iter_block + 1):(iter * iter_block)])) .* sum(DataCentras.computational_power_tasks[((iter - 1) * iter_block + 1):(iter * iter_block)]);
+
+        println("===============================================================================")
+
+		for (filename, data) in data_to_write
+			filepath = joinpath(output_dir, filename)
+			try
+				CSV.write(filepath, DataFrame(data, :auto))
+				println("Successfully wrote to $filepath")
+			catch e
+				@error "Failed to write to $filepath" exception=(e, catch_backtrace())
+			end
+		end
+
 	catch e
 		println("Error writing results to file: $e")
 	end
 
+	dc_p, dc_f, dc_v², dc_λ, dc_Δu1, dc_Δu2 = JuMP.value.(dc_p[1:(ND2 * NS), 1:NT]),
+	JuMP.value.(dc_f[1:(ND2 * NS), 1:NT]), JuMP.value.(dc_v²[1:(ND2 * NS), 1:NT]), JuMP.value.(dc_λ[1:(ND2 * NS), 1:NT]),
+	JuMP.value.(dc_Δu1[1:(ND2 * NS), 1:NT]), JuMP.value.(dc_Δu2[1:(ND2 * NS), 1:NT]);
+
 	# Return optimization results
-	return x₀, p₀, pᵨ, pᵩ, seq_sr⁺, seq_sr⁻, pss_charge_p⁺, pss_charge_p⁻, su_cost, sd_cost, prod_cost, cr⁺, cr⁻
+	return x₀, p₀, pᵨ, pᵩ, seq_sr⁺, seq_sr⁻, pss_charge_p⁺, pss_charge_p⁻, su_cost, sd_cost, prod_cost, cr⁺, cr⁻, dc_p, dc_f, dc_v², dc_λ, dc_Δu1, dc_Δu2
 end

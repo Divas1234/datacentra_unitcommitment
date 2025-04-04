@@ -6,7 +6,7 @@
 # 	"StatsPlots"
 # ])
 using Revise, JuMP, Gurobi, Test, DelimitedFiles, PlotlyJS, LaTeXStrings, Plots, DataFrames,
-	  Clustering, StatsPlots
+	  Clustering, StatsPlots, CSV
 gr()
 using Random
 Random.seed!(1234)
