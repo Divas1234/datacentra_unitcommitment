@@ -58,48 +58,20 @@
   Data center clusters, Flexibility Capability, Enhanced Unit Commitment, McCormick Envelopes
 \end{IEEEkeywords}
 
-%\vspace{-0.5cm}
+\vspace{-0.5cm}
 
 \section{Introduction}
-
 \IEEEPARstart{A}{s} the increase in various artificial intelligence technologies and demand energy consumptions, the operation of electrical power systems are becoming diverse and uncontrollable, and they are facing challenges in provide sufficient flexible adjustment resources against emergence events~\cite{6041050,7039172}. In such circumstances, additional flexible mechanisms such as demand response, virtual Power plant, and energy storage systems, etc., needs to be prioritized. Nevertheless, as a significant energy consumer, DCCs have not been fully utilized in the flexibility potential of power system operations. To this end, it it essential to investigate the flexible adjustment characteristic of DCCs, and to explore the potential of DCCs in providing flexible adjustment resources for the economic and reliable operation of electrical power systems.
 
-Recent literature reported several studies on the DCCs flexibility modeling and its application in electrical power systems operation. Specially,
+Recent literature reported several studies on the DCCs flexibility modeling and its application in electrical power systems operation. Specially, 
 Ref.~\cite{10874152} carried out a Quality-of-service-based cost function to describe the workload shifting and server utilization of DCCs, and extended a distributed dispatch framework with considering DCCs flexibility.
 Ref.~\cite{6041050} designed a mix-integer programming model to achieve the the optimal demand management of DCCs.
 Ref.~\cite{7039172} analyzed the progressive load characteristics in DCCs, and proposed two optimization models to estimate the optimal capability planning of storage systems in DCCs and design parameters optimizations.
 Ref.~\cite{10806734} explored the statistical feasibility of DDCs and hydrogen resources in a microgrid context, and carried out a data-driven statistical-feasibility-based robust rolling optimization framework to analysis the optimal operation of DDCs and hydrogen storage systems under complex uncertain factors.
-Ref.~\cite{doi:10.1049/icp.2025.0664} further analyzed the potential capability of DDCs for regulating computational workloads while reducing carbon emissions, and constructed a emission-aware coordinated dispatch method of multi-regional microgrids with DDCs.
-The aforementioned studies primarily emphasize the flexibility capabilities of DCCs within electrical power system operations. However, they often overlook the intricate physical characteristics of DCCs, particularly in relation to workload shifting dynamics and the implementation of advanced high-evolution control strategies.
+Ref.~\cite{doi:10.1049/icp.2025.0664} further analyzed the potential capability of DDCs for regulating computational workloads while reducing carbon emissions, and then constructed a emission-aware coordinated dispatch method of multi-regional microgrids with DDCs.
+The aforementioned studies primarily emphasize the flexibility ability of DCCs within electrical power system operations. However, they often overlook the intricate physical characteristics of DCCs, particularly in relation to workload shifting dynamics and the implementation of advanced high-evolution control strategies.
 
-The workloads in DCCs can be broadly classified into three categories, \cite{6041050}, $i$) $compute$-$intensive$ $workloads$, which include high-performance computing (HPC), machine learning model training, and commercial application services. $ii$) $storage$-$intensive$ $workloads$, which are employed for tasks such as regular file backups, archival systems, and relational database applications. $iii$) $network$-$intensive$ $workloads$, encompassing activities like website hosting, content delivery networks, and network traffic management. Notably, compute-intensive and storage-intensive workloads dominate in DCCs, collectively accounting for approximately $70$\% of the total workload. This dominance is driven by the growing demand for HPC and data-driven techniques. In contrast, network-intensive workloads are typically less predictable and highly time-sensitive, requiring immediate processing to ensure seamless operation. Since the former two workloads are more predictable and flexible, the peak workload requirements of the former two workloads can be effectively shifted or local workload delay responsed through DVFS, \cite{lin2023workload,7039172,6041050}, to achieve spatio-temporal workload balancing and total energy management.
-
-In addition to the energy management process of DCCs using DVFS, additional physical constraints concerning task-size bandwidth and time-tolerant workload types must be taken into account, as they directly influence the feasibility of workload shifting between multiple DCC servers and their operational logic. For instance, excessively shifting time-sensitive workloads, particularly network-intensive ones, between DCCs may lead to potential risks such as data congestion and latency due to limited transmission bandwidth, thereby compromising the ability to meet client's real-time demands. To reflect this issue, 
-Ref.~[] investigated the performance of a queuing model implemented in cloud-based DCCs using DVFS load-dependent strategies, highlighting its impact on energy efficiency and workload management. 
-Ref.~[] analyzed the response characteristics of various time-tolerant tasks on workload completion time and total energy consumption, proposing a dual-timescale collaborative optimization model for multi-DCC systems. 
-Ref.~[] explored the impact of batch workload scheduling in DCCs on the energy consumption, and  developed a day-ahead emission-aware stochastic optimization model for microgrid energy planning and generation management, 
-Ref.~[] introduced a data-driven distributionally robust optimization framework for low-carbon DCC systems, addressing multi-tasking responses and uncertainties in renewable energy integration. 
-Ref.~[] proposed a workload-aware robust DVFS technique, termed the GearDVFS method, to address concurrency challenges in mobile-driven workloads. 
-Ref.~[] provided a comprehensive survey of efficient task scheduling and resource allocation methodologies in multi-DCC networks, emphasizing their applicability in large-scale systems.
-Ref.~[] extended a well-designed low-power task scheduling algorithm for lar
-
-A Workload-Aware DVFS Robust to Concurrent Tasks for Mobile Devices
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+The workloads in DCCs can be broadly classified into three categories, \cite{6041050}, $i$) $compute$-$intensive$ $workloads$, which include high-performance computing (HPC), machine learning model training, and commercial application services. $ii$) $storage$-$intensive$ $workloads$, which are employed for tasks such as regular file backups, archival systems, and relational database applications. $iii$) $network$-$intensive$ $workloads$, encompassing activities like website hosting, content delivery networks, and network traffic management. Notably, compute-intensive and storage-intensive workloads dominate in DCCs, collectively accounting for approximately $70$\% of the total workload. This dominance is driven by the growing demand for HPC and data-driven techniques. In contrast, network-intensive workloads are typically less predictable and highly time-sensitive, requiring immediate processing to ensure seamless operation. Since the former two workloads are more predictable and flexible, the peak workload requirements of the former two workloads can be effectively shifted or adjusted through DVFS, \cite{lin2023workload,7039172,6041050}, to achieve load balancing and energy management.
 
 Driven by such motivation, this paper constructs a set of DVFS-controlled DCCs physical constraints for representing their flexible characteristics under various workload configurations, and further extends an EUC model to reflect proactive flexibility supplement of DCCs. The main contributions of this paper are summarized as follows,
 $i$) A DVFS-controlled physical constraints is developed to characterize the flexibility attributes of DCCs workloads. Furthermore, the proposed constraints are linearized using McCormick Envelopes to enhance computational tractability in UC studies.
@@ -122,8 +94,7 @@ This section presents a coordinated scheduling framework designed to integrate t
     \label{fig:sfr}
   \end{figure}
 
-%\vspace{-0.25cm}
-
+\vspace{-0.25cm}
 \section{reformulated constraints for DVFS-controlled DCCs}
 
 The power consumption of DCCs is primarily influenced by two components: static energy and dynamic energy. The static energy, often referred to as idle power, arises mainly from the leakage current in the CPU core circuits. In contrast, the dynamic energy is predominantly determined by the workload ratio $\lambda_{dcc}$ and the individual service level $\mu_{dcc}$. The total power consumption of DCCs can be expressed as follows, \cite{lin2023workload},
@@ -176,7 +147,7 @@ Despite these constraints, these constraints remains elusive due to the presence
 \begin{subequations}
   \begin{align}
     \text{\textbf{objective function}}: & \text{minimize operation cost}\\
-      \text{\textbf{security constraints}}: & \left \{\!\!\!\! \begin{array}{l}\text{system-wide power balance,}\\
+      \text{\textbf{security constraints}}: & \left \{\!\!\!\! \begin{array}{l}\text{system-wide power balance,}\\ 
         \text{units output bindings,}\\
         \text{and network power flow, etc.}\end{array}\right.\\
         \text{\textbf{DCCs constraints}}:& (2b),(2c), and\, (3a)-(3e)
@@ -192,3 +163,5 @@ Despite these constraints, these constraints remains elusive due to the presence
 \bibliography{IEEEabrv,reference}
 
 \end{document}
+
+

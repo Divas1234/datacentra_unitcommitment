@@ -14,9 +14,11 @@
         "latex",
         "plaintext"
     ],
-    "editor.fontSize": 15,
+    "editor.fontSize": 16,
     "cSpell.words": [
         "microgrid",
         "microgrids"
-    ]
+    ],
+    "github.copilot.chat.agent.thinkingTool": true,
+    "github.copilot.chat.codesearch.enabled": true
 }
