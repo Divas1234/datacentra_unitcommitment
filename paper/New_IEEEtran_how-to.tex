@@ -1,4 +1,6 @@
 \documentclass[lettersize,journal]{IEEEtran}
+% \usepackage[utf8]{inputenc} % Required for inputting international characters
+% \usepackage[T1]{fontenc} % Output font encoding for international characters
 \usepackage{amsmath,amsfonts}
 \usepackage{algorithmic}
 \usepackage{array}
@@ -40,7 +42,8 @@
 \begin{document}
 
 \title{\fontsize{20pt}{24pt}\selectfont Unlocking Flexibility Potential through DVFS-controlled Data Center Clusters in Unit Commitment}
-\author{Yufei Teng, Member, \textit{IEEE}, Yiping Yuan, Member, \textit{IEEE}, Liqian Zhu, Student Member, \textit{IEEE}, Yihang Cao, Student Member, \textit{IEEE}, Zhenyuan Zhang, Senior Member,~\textit{IEEE}}
+% \author{Yufei Teng, Member, \textit{IEEE}, Yiping Yuan, Member, \textit{IEEE}, Liqian Zhu, Student Member, \textit{IEEE}, Yihang Cao, Student Member, \textit{IEEE}, Zhenyuan Zhang, Senior Member,~\textit{IEEE}
+% }
 
 \IEEEaftertitletext{\vspace{-1.0\baselineskip}}
 
@@ -75,26 +78,34 @@ The aforementioned studies primarily emphasise the flexibility capabilities of D
 
 The workloads in DCCs can be broadly classified into three categories, \cite{6041050}, $i$) $compute$-$intensive$ $workloads$, which include high-performance computing (HPC), machine learning model training, and commercial application services. $ii$) $storage$-$intensive$ $workloads$, which are employed for tasks such as regular file backups, archival systems, and relational database applications. $iii$) $network$-$intensive$ $workloads$, encompassing activities like website hosting, content delivery networks, and network traffic management. Notably, compute-intensive and storage-intensive workloads dominate in DCCs, collectively accounting for approximately $70$\% of the total workload. This dominance is driven by the growing demand for HPC and data-driven techniques. In contrast, network-intensive workloads are typically less predictable and highly time-sensitive, requiring immediate processing to ensure seamless operation. Since the former two workloads are more predictable and flexible, the peak workload requirements of the former two workloads can be effectively shifted or local workload delay responsed through DVFS, \cite{lin2023workload,7039172,6041050}, to achieve spatio-temporal workload balancing and total energy management.
 
-In addition to the energy management process of DCCs using DVFS, additional physical constraints concerning task-size bandwidth and time-tolerant workload types must be taken into account, as they directly influence the feasibility of workload shifting between multiple DCC servers and their operational logic. For instance, excessively shifting time-sensitive workloads, particularly network-intensive ones, between DCCs may lead to potential risks such as data congestion and latency due to limited transmission bandwidth, thereby compromising the ability to meet actual real-time demands. To reflect this issue, 
-Ref.~\cite{kuehnDVFSpowerManagementPerformance2019} investigated a queuing model implemented in cloud-based DCCs using DVFS load-dependent strategies, and highlighted its significant on energy efficiency and workload management. 
-Ref.~\cite{hanDualtimeScaleCollaborative2025} analysed the response characteristics of various time-tolerant tasks on workload completion time and total energy consumption, and proposed a dual-timescale collaborative optimization model for multi-DCC systems. 
-Ref.~\cite{dingEmissionawareStochasticResource2018} explored the impact of batch workload scheduling in DCCs on the energy consumption, and  developed a day-ahead emission-aware stochastic optimization model for microgrid energy planning and generation management, 
-Ref.~\cite{hanDatadrivenDistributionallyRobust2025} extended a data-driven distributionally robust optimization framework for low-carbon DCC systems, addressing multi-tasking responses and uncertainties in renewable energy integration. 
-Ref.~\cite{lin2023workload} proposed a workload-aware robust DVFS technique, termed as GearDVFS, to address concurrency challenges in mobile-driven workloads. 
+In addition to the energy management process from DCCs using DVFS control schemes, additional physical constraints concerning task-size bandwidth and time-tolerant workload types must be taken into account, as they directly influence the feasibility of workload shifting between multiple DCC servers and their operational logic. For instance, excessively shifting time-sensitive workloads, particularly network-intensive ones, between DCCs may lead to potential risks such as data congestion and latency due to limited transmission bandwidth, thereby compromising the ability to meet actual real-time demands. To reflect this issue,
+Ref.~\cite{kuehnDVFSpowerManagementPerformance2019} investigated a queuing model implemented in cloud-based DCCs using DVFS load-dependent strategies, and highlighted its significant on energy efficiency and workload management.
+Ref.~\cite{hanDualtimeScaleCollaborative2025} analysed the response characteristics of various time-tolerant tasks on workload completion time and total energy consumption, and proposed a dual-timescale collaborative optimization model for multi-DCC systems.
+Ref.~\cite{dingEmissionawareStochasticResource2018} explored the impact of batch workload scheduling in DCCs on the energy consumption, and  developed a day-ahead emission-aware stochastic optimization model for microgrid energy planning and generation management,
+Ref.~\cite{hanDatadrivenDistributionallyRobust2025} extended a data-driven distributionally robust optimization framework for low-carbon DCC systems, addressing multi-tasking responses and uncertainties in renewable energy integration.
+Ref.~\cite{lin2023workload} proposed a workload-aware robust DVFS technique, termed as GearDVFS, to address concurrency challenges in mobile-driven workloads.
 Ref.~\cite{wangClusterFrameworksEfficient2018} provided a comprehensive survey of efficient task scheduling and resource allocation methodologies in multi-DCC networks.
 Ref.~\cite{8520806} proposed a distributed shortest remaining time first (SRTF) scheduling model for DCCs, designed to minimise flow completion time while ensuring flow-size availability.
 Ref.~\cite{wangSchedulingMachineLearningBasedFlow2018} constructed a machine-learning-based scheduling flow detection and packet-switched optical network (PSON) architecture with centralized control for intra-DCC connectivity and bath workload allocation.
 These studies comprehensively address multi-task assignments and flow-size bandwidth limitations across different DCCs, further developing various task allocation models and analysing the energy consumption of received computing tasks. However, the potential interaction mechanisms between workload processes, particularly those involving multi-task shifting across multiple DCCs and their role in meeting electrical flexibility requirements, remain underexplored.
 
-Driven by such motivation, this paper constructs a new set of DVFS-controlled DCCs physical constraints for representing their flexible characteristics under various workload configurations, and further extends an EUC model to reflect proactive flexibility supplement of DCCs. The main contributions of this paper are summarised as follows,
 
-\begin{itemize}
-  \item A DVFS-controlled physical constraints is developed to characterise the flexibility attributes of DCCs workloads. Furthermore, the proposed constraints are linearized using McCormick Envelopes to enhance computational tractability in UC studies.
-  \item A EUC model is formulated to capture the dynamic flexible response of DCCs. The model incorporates a new coordination mechanism to address multi-timescale interactions between workload shifting in DCCs and grid-side demand fluctuations.
-\end{itemize}
+%Driven by such motivation, this paper constructs a new set of DVFS-controlled DCCs physical constraints for representing their flexible characteristics under various workload configurations, and further extends an EUC model to reflect proactive flexibility supplement of DCCs. The main contributions of this paper are summarised as follows,
 
-The remainder of this abstract is organised as follows. Section II outlines the scheduling framework for power systems, incorporating the consumption characteristics of DCCs workloads. Section III proposed DVFS-controlled physical constraints, and lists a detailed formulation of the proposed EUC model.
-% Section IV presents numerical experiments to demonstrate the effectiveness and practicality of the proposed model.
+% Driven by such motivation, this paper analyzes the flexibility provided by DVFS-controlled DCCs and incorporates it into UC studies. In this work, a key aspect investigated is the physical modeling on interaction mechanism between the energy consumption from DCCs and DVFS-managed workload balancing strategies, on this basis, additional restrictions such as bandwidth restriction and time-delay requirements of different workload typies is considered and reformulated into associate physical constraints. In comparison to previous studies such as various workload shifting strategies, energy consumption reduction, etc., this work comprehensively analysis the coordinated optimization of the power systems operatoin process and DCCs workload execution process, moreover, the availability of active response capability of DVFS-conrolled DCCs is detailed modelled, from the perspective of power grid requirements and specific implementation of load balancing across various DCCs clusters. The main contributions of this paper are summarized as below,
+
+Driven by this motivation, this paper analyses the flexibility offered by DVFS-controlled DCCs and integrates this capability into UC studies. A key aspect of this work is the physical modeling of the interaction mechanism between DCC energy consumption and workload balancing strategies managed by DVFS. Building upon this foundation, additional restrictions such as bandwidth limitations and time-delay requirements for various workload types are reshaped into corresponding physical constraints and linearized reformulated. In contrast to previous studies that focused on workload shifting strategies or energy consumption reduction, this research provides a comprehensive analysis of the coordinated optimization between power system operations and the DCC workload execution process. Moreover, the multi-timescale interactions between active response characteristic of DCCs through workload shifting and grid-side demand fluctuation is modeled in detail, considering both grid-side requirements and specific implementation details of workload balancing processes. 
+
+The main contributions of this paper are summarized below:
+$i$) A DVFS-controlled physical constraints is developed to characteristic the flexibility attributes of DCCs workloads. Furthermore, the proposed constraints are linearized using McCormick Envelopes to enhance computational tractability in UC studies.
+$ii$) A EUC model is formulated to capture the dynamic flexible response of DCCs. The model incorporates a new coordination mechanism to address multi-timescale interactions between workload shifting in DCCs and grid-side demand fluctuations.
+
+The remainder of this paper is organized as follows. 
+Section II introduces the proposed scheduling framework, which integrates the flexibility potential of DVFS-controlled DCCs.
+Section III develops a new set of physical constraints to model DCC workload shifting and local energy consumption requirements. Additionally, the McCormick Envelope method is employed to linearized the nonlinear constraints, enabling the estimation of DCC flexibility potential.
+Section IV incorporates the flexibility potential of DVFS-controlled DCCs into UC and formulates the proposed EUC model in detail.
+Section V presents numerical experiments conducted on benchmark test systems to validate the effectiveness and scalability of the proposed model.
+Finally, Section VI summaries the key findings and insights derived from the case studies.
 
 % \vspace{-0.25cm}
 \section{The proposed Scheduling Framework}
@@ -102,7 +113,6 @@ The remainder of this abstract is organised as follows. Section II outlines the 
 This section presents a coordinated scheduling framework to integrate the flexible response capabilities of DCCs into electrical power system operations. Recognising the difference in scheduling timescales (hourly for grid-side operations versus seconds for DCCs workload management), the framework is structured into two interconnected parts. PART-1 encompasses the grid-side scheduling model, while PART-2 represents the DCCs workload management model.
 
 %Part-1 optimizes the power system's generation schedule, and Part-2 optimizes workload shifting within DCCs.
-
 
 
 \begin{figure}[!h]
@@ -143,7 +153,7 @@ Based on the above physical working principles, the set of physical security con
 \end{subequations}
 
 \noindent
-where $\lceil {\circ} \rceil$ and $\lfloor {\circ} \rfloor$ represent pre-determined upper and lower bounds for the decision variable $\circ$. The term $\phi_{dcc,i}^{dvfs}$ represents the power regulation process for the DCC $i$ through DVFS technique, while $\lambda_{dcc,i}$ describes the workload balancing process for the DCC $i$. The feasibility of workload balancing for compute-intensive and storage-intensive workloads hinges on users' latency tolerance for batch workloads and the capacity to shift workloads among DCCs. When users accept tolerate higher latency, the execution of workloads can be dynamically adjusted across multi DCCs. By optimizing these workload execution patterns, the overall energy consumption of DCCs can be optimized through DVFS and sequentially reduced, thereby enhancing their demand response capabilities for power system operations.
+where $\lceil {\circ} \rceil$ and $\lfloor {\circ} \rfloor$ represent pre-determined upper and lower bounds for the decision variable $\circ$. The term $\phi_{dcc,i}^{dvfs}$ represents the power regulation process for the DCC $i$ through DVFS technique, while $\lambda_{dcc,i}$ describes the workload balancing process for the DCC $i$. The feasibility of workload balancing for compute-intensive and storage-intensive workloads hinges on users' latency tolerance for batch workloads and the capacity to shift workloads among DCCs. When users accept tolerate higher latency, the execution of workloads can be dynamically adjusted across multi DCCs. By optimizing these workload execution patterns, the overall energy consumption of DCCs can be optimised through DVFS and sequentially reduced, thereby enhancing their demand response capabilities for power system operations.
 
 To reflect it, additional concise constraints concerning workload balancing processes among multi DCCs are constructed,
 
@@ -174,11 +184,9 @@ Despite these constraints, these constraints remains elusive due to the presence
 \end{subequations}
 
 
-
-
-
-
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,reference}
 
 \end{document}
+
+
