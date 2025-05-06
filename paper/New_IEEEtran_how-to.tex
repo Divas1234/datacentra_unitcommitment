@@ -1,6 +1,6 @@
 \documentclass[lettersize,journal]{IEEEtran}
 % \usepackage[utf8]{inputenc} % Required for inputting international characters
-% \usepackage[T1]{fontenc} % Output font encoding for international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
 \usepackage{amsmath,amsfonts}
 \usepackage{algorithmic}
 \usepackage{array}
@@ -18,6 +18,7 @@
 %\usepackage{natbib}
 \usepackage{cite}
 \usepackage{tabularx}
+\usepackage[nice]{nicefrac}
 
 \hyphenpenalty=10
 \tolerance=10000
@@ -95,8 +96,7 @@ These studies comprehensively address multi-task assignments and flow-size bandw
 % Driven by such motivation, this paper analyzes the flexibility provided by DVFS-controlled DCCs and incorporates it into UC studies. In this work, a key aspect investigated is the physical modeling on interaction mechanism between the energy consumption from DCCs and DVFS-managed workload balancing strategies, on this basis, additional restrictions such as bandwidth restriction and time-delay requirements of different workload typies is considered and reformulated into associate physical constraints. In comparison to previous studies such as various workload shifting strategies, energy consumption reduction, etc., this work comprehensively analysis the coordinated optimization of the power systems operatoin process and DCCs workload execution process, moreover, the availability of active response capability of DVFS-conrolled DCCs is detailed modelled, from the perspective of power grid requirements and specific implementation of load balancing across various DCCs clusters. The main contributions of this paper are summarized as below,
 
 Driven by this motivation, this paper analyses the flexibility offered by DVFS-controlled DCCs and integrates this capability into UC studies. A key aspect of this work is the physical modeling of the interaction mechanism between DCC energy consumption and workload balancing strategies managed by DVFS. Building upon this foundation, additional restrictions such as bandwidth limitations and time-delay requirements for various workload types are reshaped into corresponding physical constraints and linearized reformulated. In contrast to previous studies that focused on workload shifting strategies or energy consumption reduction, this research provides a comprehensive analysis of the coordinated optimization between power system operations and the DCC workload execution process. Moreover, the multi-timescale interactions between active response characteristic of DCCs through workload shifting and grid-side demand fluctuation is modeled in detail, considering both grid-side requirements and specific implementation details of workload balancing processes. 
-
-The main contributions of this paper are summarized below:
+The main contributions of this paper are summarized:
 $i$) A DVFS-controlled physical constraints is developed to characteristic the flexibility attributes of DCCs workloads. Furthermore, the proposed constraints are linearized using McCormick Envelopes to enhance computational tractability in UC studies.
 $ii$) A EUC model is formulated to capture the dynamic flexible response of DCCs. The model incorporates a new coordination mechanism to address multi-timescale interactions between workload shifting in DCCs and grid-side demand fluctuations.
 
@@ -116,73 +116,109 @@ This section presents a coordinated scheduling framework to integrate the flexib
 
 
 \begin{figure}[!h]
-    \centering
-    \includegraphics[width=0.425\textwidth]{./fig/framework.pdf}
-    \caption{The proposed scheduling framework in this work}
-    \label{fig:sfr}
-  \end{figure}
+\centering
+\includegraphics[width=0.425\textwidth]{./fig/framework.pdf}
+\caption{The proposed scheduling framework in this work}
+\label{fig:sfr}
+\end{figure}
 
 %\vspace{-0.25cm}
 
 \section{reformulated constraints for DVFS-controlled DCCs}
 
-The power consumption of DCCs is primarily influenced by two components: static energy and dynamic energy. The static energy, often referred to as idle power, arises mainly from the leakage current in the CPU core circuits. In contrast, the dynamic energy is predominantly determined by the workload ratio $\lambda_{dcc}$ and the individual service level $\mu_{dcc}$. The total power consumption of DCCs can be expressed as follows, \cite{lin2023workload},
+The power consumption of DCCs is primarily influenced by two components: static energy and dynamic energy. The static energy term, often referred to as idle power, arises mainly from the leakage current in the CPU core circuits. In contrast, the dynamic energy term is predominantly determined by the workload ratio $\lambda_{dcc}$ and the individual service level $\mu_{dcc}$. As such, the total power consumption of DCCs can be expressed as follows, \cite{lin2023workload},
 
 \vspace{-0.25cm}
 \begin{subequations}
   \begin{align}
-    p_{dcc,i} &= p_{dcc,i}^{idle} + p_{dcc,i}^{dyn},\forall i\in\mathcal{I}\\
-    p_{dcc,i}^{idle} &= v_{dcc,i} i_{leak},\forall i\in\mathcal{I}\\
-    p_{dcc,i}^{dyn} &= {\left( C_{dcc,i} f_{dcc,i} v_{dcc,i}^{2} \right )}{\lambda_{dcc,i}}{\mu_{dcc,i}^{-1}}, \forall i\in \mathcal{I}
+    p_{dcc,i} &= p_{dcc,i}^{idle} + p_{dcc,i}^{dyn},&&\forall i\in\mathcal{I}\\
+    p_{dcc,i}^{idle} &= v_{dcc,i} i_{leak},&&\forall i\in\mathcal{I}\\
+    p_{dcc,i}^{dyn} &= {\left( C_{dcc,i} f_{dcc,i} v_{dcc,i}^{2} \right )}{\lambda_{dcc,i}}{\mu_{dcc,i}^{-1}},&& \forall i\in \mathcal{I}
   \end{align}
 \end{subequations}
 
 \noindent
 where $i$ and $\mathcal{I}$ represent the index and set of DCCs. $p_{dcc,i}$ denotes the total power consumption of individual DCC $i$. $p_{dcc,i}^{idle}$ and $p_{dcc,i}^{dyn}$ represent the static (idle) and dynamic power consumption of DCC $i$, respectively. $C_{dcc,i}$ defines the constant representing the effective capacitance of DCC $i$. $f_{dcc,i}$ and $v_{dcc,i}$ denote the operational frequency and voltage of DCC $i$, respectively.
 
-Based on the above physical working principles, the set of physical security constraints representing DCCs workflows can be extended,
+Based on the above physical working principles, the set of associated security constraints representing DCCs workflows can be extended,
 
 \vspace{-0.25cm}
 \begin{subequations}
   \begin{align}
-    p_{dcc,i} & \!\geq\! p_{dcc,i}^{idle} \!+\! p_{dcc,i}^{dyn},\forall i\in\mathcal{I}\\
-    p_{dcc,i}^{idle} &\!\geq\! \lfloor {v}_{dcc,i}\rfloor i_{leak},p_{dcc,i}^{idle} \!\leq\! \lceil {v}_{dcc,i}\rceil i_{leak},\forall i\in\mathcal{I}\\
-    p_{dcc,i}^{dyn}& \!\geq\! \lfloor \phi_{dcc,i}^{dvfs} \rfloor {\lambda_{dcc,i}}{\mu_{dcc,i}^{-1}}, p_{dcc,i}^{dyn} \!\leq\! \lceil \phi_{dcc,i}^{dvfs} \rceil {\lambda_{dcc,i}}{\mu_{dcc,i}^{-1}},\notag \\
-    \phi_{dcc,i}^{dvfs} &= ( C_{dcc,i} f_{dcc,i} v_{dcc,i}^{2} ), \forall i\in \mathcal{I}
+    p_{dcc,i} & \!\geq\! p_{dcc,i}^{idle} \!+\! p_{dcc,i}^{dyn},&&\forall i\in\mathcal{I}\\
+    p_{dcc,i}^{idle} & \!\geq\! \lfloor {v}_{dcc,i}\rfloor i_{leak},&&\forall i\in\mathcal{I}\\
+    p_{dcc,i}^{idle} & \!\leq\! \lceil {v}_{dcc,i}\rceil i_{leak},&&\forall i \in\mathcal{I} \\
+    p_{dcc,i}^{dyn} & \!\geq\! \lfloor ( C_{dcc,i} f_{dcc,i} v_{dcc,i}^{2} ) \rfloor {\lambda_{dcc,i}}{\mu_{dcc,i}^{-1}},&&\forall i \in\mathcal{I} \\ 
+    p_{dcc,i}^{dyn} & \!\leq\! \lceil ( C_{dcc,i} f_{dcc,i} v_{dcc,i}^{2} ) \rceil {\lambda_{dcc,i}}{\mu_{dcc,i}^{-1}},&&\forall i \in\mathcal{I}
+    % \phi_{dcc,i}^{dvfs} &= ( C_{dcc,i} f_{dcc,i} v_{dcc,i}^{2} ), \forall i\in \mathcal{I}
   \end{align}
 \end{subequations}
 
 \noindent
-where $\lceil {\circ} \rceil$ and $\lfloor {\circ} \rfloor$ represent pre-determined upper and lower bounds for the decision variable $\circ$. The term $\phi_{dcc,i}^{dvfs}$ represents the power regulation process for the DCC $i$ through DVFS technique, while $\lambda_{dcc,i}$ describes the workload balancing process for the DCC $i$. The feasibility of workload balancing for compute-intensive and storage-intensive workloads hinges on users' latency tolerance for batch workloads and the capacity to shift workloads among DCCs. When users accept tolerate higher latency, the execution of workloads can be dynamically adjusted across multi DCCs. By optimizing these workload execution patterns, the overall energy consumption of DCCs can be optimised through DVFS and sequentially reduced, thereby enhancing their demand response capabilities for power system operations.
+where $\lceil {\circ} \rceil$ and $\lfloor {\circ} \rfloor$ represent pre-determined upper and lower bounds for the decision variable $\circ$. 
+$\lambda_{dcc,i}$ describes the workload balancing process for the DCC $i$. The feasibility of workload balancing for compute-intensive and storage-intensive workloads hinges on users' latency tolerance for batch workloads and the capacity to shift workloads among multi DCCs. When users accept tolerate higher latency, the execution of workloads can be dynamically adjusted across multi DCCs. By optimizing these workload execution patterns, the overall energy consumption of DCCs can be optimized through DVFS and sequentially reduced, thereby enhancing their demand response capabilities for power system operations.
 
-To reflect it, additional concise constraints concerning workload balancing processes among multi DCCs are constructed,
+Next, to demonstrate the benefits of DVFS-controlled DCCs for achieving smooth energy demand and proactive workload response, additional concise constraints concerning workload balancing processes among multi DCCs are constructed,
 
 \vspace{-0.25cm}
 \begin{subequations}
   \begin{align}
-    \varDelta p_{dcc,i}^{bal} = \phi_{dcc,i}^{dvfs} {\left ( \lambda_{dcc,i}^{ini} + \varDelta \lambda_{dcc,i}\right )}{\mu_{dcc,i}^{-1}}, \forall i\in \mathcal{I}\\
-    p_{dcc,i} \geq p_{dcc,i}^{idle} \!+\! p_{dcc,i}^{dyn} + \varDelta p_{dcc,i}^{bal},\forall i\in\mathcal{I}\\
-    \sum\nolimits_{t\in\mathcal{T}} \sum\nolimits_{i\in\mathcal{I}} \varDelta \lambda_{dcc,i} = 0, \forall i\in\mathcal{I}, \forall t\in\mathcal{T}\\
-    \lfloor f_{dcc,i} \rfloor \leq f_{dcc,i} \leq \lceil f_{dcc,i} \rceil, \forall i\in \mathcal{I}\\
-    \lfloor v_{dcc,i} \rfloor \leq v_{dcc,i} \leq \lceil v_{dcc,i} \rceil, \forall i\in \mathcal{I}
+    p_{dcc,i} \geq p_{dcc,i}^{idle} \!+\! p_{dcc,i}^{dyn} + \varDelta p_{dcc,i}^{bal},&&\forall i\in\mathcal{I}\\
+    \varDelta p_{dcc,i}^{bal} = \phi_{dcc,i}^{dvfs} {\left ( \lambda_{dcc,i}^{ini} + \varDelta \lambda_{dcc,i}\right )}{\mu_{dcc,i}^{-1}},&& \forall i\in \mathcal{I}\\
+    \sum\nolimits_{t\in\mathcal{T}} \sum\nolimits_{i\in\mathcal{I}} \varDelta \lambda_{dcc,i} = 0, \forall i\in\mathcal{I}, &&\forall t\in\mathcal{T}\\
+    \phi_{dcc,i}^{dvfs} = C_{dcc,i} f_{dcc,i} v_{dcc,i}^{2}, &&\forall i\in \mathcal{I} \\
+    \lfloor f_{dcc,i} \rfloor \leq f_{dcc,i} \leq \lceil f_{dcc,i} \rceil, &&\forall i\in \mathcal{I}\\
+    \lfloor v_{dcc,i} \rfloor \leq v_{dcc,i} \leq \lceil v_{dcc,i} \rceil, &&\forall i\in \mathcal{I}
   \end{align}
 \end{subequations}
 
 \noindent
-where $\varDelta p_{dcc,i}^{bal}$ represents the change in the power consumption for DCC $i$ due to workload balancing, $\lambda_{dcc,i}^{ini}$ represents the initial workload, and $\varDelta \lambda_{dcc,i}$ represents the adjusted workload. By incorporating the workload balancing dynamics defined in (3a)-(3c) into (2b) and (2c), the form of DVFS-controlled DCCs constraints can be established.
-Despite these constraints, these constraints remains elusive due to the presence of product terms involving continuous variables $\phi_{dcc,i}^{dvfs}$ and $\varDelta \lambda_{dcc,i}$ in (3a), therefore, the McCormick Envelope method is further extended and then integrated into UC studies. On this basis, an union form of EUC considering DVFS-controlled DDCs is listed below,
+where $\varDelta p_{dcc,i}^{bal}$ represents the change in the power consumption for DCC $i$ due to workload balancing, $\lambda_{dcc,i}^{ini}$ represents the initial workload, and $\varDelta \lambda_{dcc,i}$ represents the adjusted workload. 
+The term $\phi_{dcc,i}^{dvfs}$ represents the power regulation process for the DCC $i$ through DVFS technique, 
+By incorporating the workload balancing dynamics defined in (3a)-(3c) into (2b) and (2c), the form of DVFS-controlled DCCs constraints can be established.
+
+Despite these constraints, these constraints (3a)-(3d) remain elusive due to the presence of product terms involving continuous variables $\phi_{dcc,i}^{dvfs}$ and $\varDelta \lambda_{dcc,i}$ in (3a), therefore, the McCormick Envelope method is introduced to linear the constructed constraints mentioned before. More detailed, 
+let $\iota_{dcc,i} = \phi_{dcc,i}^{dvfs} \times \varDelta \lambda_{dcc,i}$, and additionally introduce two auxiliary variables $\varsigma_{dcc,i}^{up}, \varsigma_{dcc,i}^{dw}$ where $\varsigma_{dcc,i}^{up} = \nicefrac{1}{2}(\phi_{dcc,i}^{dvfs} + \varDelta \lambda_{dcc,i}) $, $\varsigma_{dcc,i}^{dw} = \nicefrac{1}{2}(\phi_{dcc,i}^{dvfs} - \varDelta \lambda_{dcc,i}) $, accordingly, the constraint (3b) can be reformatted as its approximated linear form as below,
 
 \vspace{-0.25cm}
 \begin{subequations}
   \begin{align}
-    \text{\textbf{objective function}}: & \text{minimize operation cost}\\
-      \text{\textbf{security constraints}}: & \left \{\!\!\!\! \begin{array}{l}\text{system-wide power balance,}\\
-        \text{units output bindings,}\\
-        \text{and network power flow, etc.}\end{array}\right.\\
-        \text{\textbf{DCCs constraints}}:& (2b),(2c), and\, (3a)-(3e)
+    \varDelta p_{dcc,i}^{bal} = &\phi_{dcc,i}^{dvfs} \lambda_{dcc,i}^{ini}{\mu_{dcc,i}^{-1}} + \notag \\
+    &\iota_{dcc,i}  {\mu_{dcc,i}^{-1}}, \iota_{dcc,i} \!=\!\phi_{dcc,i}^{dvfs} \varDelta \lambda_{dcc,i}, && \forall i\in \mathcal{I}\\
+    \iota_{dcc,i} \geq &(\varsigma_{dcc,i}^{up})^{2} - (\varsigma_{dcc,i}^{dw})^{2},&& \forall i\in \mathcal{I}\\
+    \varsigma_{dcc,i}^{up} \geq & 0, \varsigma_{dcc,i}^{up} \in \mathbb{R}, \varsigma_{dcc,i}^{dw} \in \mathbb{R},&& \forall i\in \mathcal{I}
   \end{align}
 \end{subequations}
 
+In (4b), the square terms of $\langle \varsigma_{dcc,i}^{up},\varsigma_{dcc,i}^{dw}\rangle $ can be further reshaped as a special ordered sets of type 2 (SOS2) constraint, which MILP solver could accurately identify and compile them. For simplification, let $\langle \varsigma_{dcc,i,z}^{up}, \varsigma_{dcc,i,z}^{dw}\rangle$, respectively, denote the piecewise block of related continuous variables $\langle \varsigma_{dcc,i}^{up},\varsigma_{dcc,i}^{dw}\rangle$, hence, (4b) can be reformulated as below,
+
+\vspace{-0.25cm}
+\begin{subequations}
+  \begin{align}
+   (\varsigma_{dcc,i}^{up})^{2} &= \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,z}^{up}) \varpi_{dcc,i,z}^{up}, && \forall i\in \mathcal{I}\\
+   (\varsigma_{dcc,i}^{dw})^{2} &= \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,z}^{dw}) \varpi_{dcc,i,z}^{dw}, && \forall i\in \mathcal{I}\\
+   \varsigma_{dcc,i}^{up} & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,z}^{up} \varpi_{dcc,i,z}^{up}, &&\forall i\in \mathcal{I}\\
+   \varsigma_{dcc,i}^{dw} & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,z}^{dw} \varpi_{dcc,i,z}^{dw}, && \forall i\in \mathcal{I}\\
+    \Im(\varsigma_{dcc,i,z}^{up}) &= (\varsigma_{dcc,i,z}^{up})^2,  \forall z\in \mathcal{Z}, &&\forall i\in \mathcal{I}\\
+    \Im(\varsigma_{dcc,i,z}^{dw}) &= (\varsigma_{dcc,i,z}^{dw})^2,  \forall z\in \mathcal{Z}, &&\forall i\in \mathcal{I}\\
+    \varsigma_{dcc,i,z}^{up} &\geq 0,\varsigma_{dcc,i,z}^{dw}\geq 0,\forall z\in \mathcal{Z}, &&\forall i\in \mathcal{I}\\
+    \varpi_{dcc,i,z}^{up} &\in\{0,\!1\},\varpi_{dcc,i,z}^{dw}\in\{0,\!1\},\forall z\in \mathcal{Z}, &&\forall i\in \mathcal{I}
+  \end{align}
+\end{subequations}
+
+
+% extended and then integrated into UC studies. On this basis, an union form of EUC considering DVFS-controlled DDCs is listed below,
+
+% \vspace{-0.25cm}
+% \begin{subequations}
+%   \begin{align}
+%     \text{\textbf{objective function}}: & \text{minimize operation cost}\\
+%       \text{\textbf{security constraints}}: & \left \{\!\!\!\! \begin{array}{l}\text{system-wide power balance,}\\
+%         \text{units output bindings,}\\
+%         \text{and network power flow, etc.}\end{array}\right.\\
+%         \text{\textbf{DCCs constraints}}:& (2b),(2c), and\, (3a)-(3e)
+%   \end{align}
+% \end{subequations}
 
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,reference}
