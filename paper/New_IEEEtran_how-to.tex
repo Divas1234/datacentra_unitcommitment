@@ -163,12 +163,12 @@ Next, to demonstrate the benefits of DVFS-controlled DCCs for achieving smooth e
 \vspace{-0.25cm}
 \begin{subequations}
   \begin{align}
-    p_{dcc,i} \geq p_{dcc,i}^{idle} \!+\! p_{dcc,i}^{dyn} + \varDelta p_{dcc,i}^{bal},&&\forall i\in\mathcal{I}\\
-    \varDelta p_{dcc,i}^{bal} = \phi_{dcc,i}^{dvfs} {\left ( \lambda_{dcc,i}^{ini} + \varDelta \lambda_{dcc,i}\right )}{\mu_{dcc,i}^{-1}},&& \forall i\in \mathcal{I}\\
-    \sum\nolimits_{t\in\mathcal{T}} \sum\nolimits_{i\in\mathcal{I}} \varDelta \lambda_{dcc,i} = 0, \forall i\in\mathcal{I}, &&\forall t\in\mathcal{T}\\
-    \phi_{dcc,i}^{dvfs} = C_{dcc,i} f_{dcc,i} v_{dcc,i}^{2}, &&\forall i\in \mathcal{I} \\
-    \lfloor f_{dcc,i} \rfloor \leq f_{dcc,i} \leq \lceil f_{dcc,i} \rceil, &&\forall i\in \mathcal{I}\\
-    \lfloor v_{dcc,i} \rfloor \leq v_{dcc,i} \leq \lceil v_{dcc,i} \rceil, &&\forall i\in \mathcal{I}
+    p_{dcc,i} &\geq p_{dcc,i}^{idle} \!+\! p_{dcc,i}^{dyn} + \varDelta p_{dcc,i}^{bal},&&\forall i\in\mathcal{I}\\
+    \varDelta p_{dcc,i}^{bal} &= \phi_{dcc,i}^{dvfs} {\left ( \lambda_{dcc,i}^{ini} + \varDelta \lambda_{dcc,i}\right )}{\mu_{dcc,i}^{-1}},&& \forall i\in \mathcal{I}\\
+    \sum\nolimits_{t\in\mathcal{T}} & \sum\nolimits_{i\in\mathcal{I}} \varDelta \lambda_{dcc,i} = 0, \forall i\in\mathcal{I},  \!\!\!\! &&\forall t\in\mathcal{T}\\
+    \phi_{dcc,i}^{dvfs} &= C_{dcc,i} f_{dcc,i} v_{dcc,i}^{2}, &&\forall i\in \mathcal{I} \\
+    \lfloor f_{dcc,i} \rfloor &\leq f_{dcc,i} \leq \lceil f_{dcc,i} \rceil, &&\forall i\in \mathcal{I}\\
+    \lfloor v_{dcc,i} \rfloor &\leq v_{dcc,i} \leq \lceil v_{dcc,i} \rceil, &&\forall i\in \mathcal{I}
   \end{align}
 \end{subequations}
 
@@ -177,7 +177,7 @@ where $\varDelta p_{dcc,i}^{bal}$ represents the change in the power consumption
 The term $\phi_{dcc,i}^{dvfs}$ represents the power regulation process for the DCC $i$ through DVFS technique, 
 By incorporating the workload balancing dynamics defined in (3a)-(3c) into (2b) and (2c), the form of DVFS-controlled DCCs constraints can be established.
 
-Despite these constraints, these constraints (3a)-(3d) remain elusive due to the presence of product terms involving continuous variables $\phi_{dcc,i}^{dvfs}$ and $\varDelta \lambda_{dcc,i}$ in (3a), therefore, the McCormick Envelope method is introduced to linear the constructed constraints mentioned before. More detailed, 
+It is important to note that these constraints (3a)-(3d) remain elusive due to the presence of product terms involving continuous variables $\phi_{dcc,i}^{dvfs}$ and $\varDelta \lambda_{dcc,i}$ in (3a), therefore, the McCormick Envelope method is introduced to linear the constructed constraints mentioned before. More detailed, 
 let $\iota_{dcc,i} = \phi_{dcc,i}^{dvfs} \times \varDelta \lambda_{dcc,i}$, and additionally introduce two auxiliary variables $\varsigma_{dcc,i}^{up}, \varsigma_{dcc,i}^{dw}$ where $\varsigma_{dcc,i}^{up} = \nicefrac{1}{2}(\phi_{dcc,i}^{dvfs} + \varDelta \lambda_{dcc,i}) $, $\varsigma_{dcc,i}^{dw} = \nicefrac{1}{2}(\phi_{dcc,i}^{dvfs} - \varDelta \lambda_{dcc,i}) $, accordingly, the constraint (3b) can be reformatted as its approximated linear form as below,
 
 \vspace{-0.25cm}
@@ -190,20 +190,52 @@ let $\iota_{dcc,i} = \phi_{dcc,i}^{dvfs} \times \varDelta \lambda_{dcc,i}$, and 
   \end{align}
 \end{subequations}
 
-In (4b), the square terms of $\langle \varsigma_{dcc,i}^{up},\varsigma_{dcc,i}^{dw}\rangle $ can be further reshaped as a special ordered sets of type 2 (SOS2) constraint, which MILP solver could accurately identify and compile them. For simplification, let $\langle \varsigma_{dcc,i,z}^{up}, \varsigma_{dcc,i,z}^{dw}\rangle$, respectively, denote the piecewise block of related continuous variables $\langle \varsigma_{dcc,i}^{up},\varsigma_{dcc,i}^{dw}\rangle$, hence, (4b) can be reformulated as below,
+In (4b), the standard square terms of $\langle \varsigma_{dcc,i}^{up},\varsigma_{dcc,i}^{dw}\rangle $ can be further reshaped as a special ordered sets of type 2 ($\mathsf{SOS2}$) constraint, which $\mathsf{MILP}$ solver could accurately identify and compile them. For simplification, let $\langle \varsigma_{dcc,i,z}^{up}, \varsigma_{dcc,i,z}^{dw}\rangle$, respectively, denote the piecewise block of related continuous variables $\langle \varsigma_{dcc,i}^{up},\varsigma_{dcc,i}^{dw}\rangle$, hence, (4b) can be reformulated as below,
 
 \vspace{-0.25cm}
 \begin{subequations}
-  \begin{align}
-   (\varsigma_{dcc,i}^{up})^{2} &= \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,z}^{up}) \varpi_{dcc,i,z}^{up}, && \forall i\in \mathcal{I}\\
-   (\varsigma_{dcc,i}^{dw})^{2} &= \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,z}^{dw}) \varpi_{dcc,i,z}^{dw}, && \forall i\in \mathcal{I}\\
-   \varsigma_{dcc,i}^{up} & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,z}^{up} \varpi_{dcc,i,z}^{up}, &&\forall i\in \mathcal{I}\\
-   \varsigma_{dcc,i}^{dw} & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,z}^{dw} \varpi_{dcc,i,z}^{dw}, && \forall i\in \mathcal{I}\\
-    \Im(\varsigma_{dcc,i,z}^{up}) &= (\varsigma_{dcc,i,z}^{up})^2,  \forall z\in \mathcal{Z}, &&\forall i\in \mathcal{I}\\
-    \Im(\varsigma_{dcc,i,z}^{dw}) &= (\varsigma_{dcc,i,z}^{dw})^2,  \forall z\in \mathcal{Z}, &&\forall i\in \mathcal{I}\\
-    \varsigma_{dcc,i,z}^{up} &\geq 0,\varsigma_{dcc,i,z}^{dw}\geq 0,\forall z\in \mathcal{Z}, &&\forall i\in \mathcal{I}\\
-    \varpi_{dcc,i,z}^{up} &\in\{0,\!1\},\varpi_{dcc,i,z}^{dw}\in\{0,\!1\},\forall z\in \mathcal{Z}, &&\forall i\in \mathcal{I}
-  \end{align}
+\begin{align}
+   (\varsigma_{dcc,i}^{up})^{2} &= \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,z}^{up}) \varpi_{dcc,i,z}^{up}, & \forall i\in \mathcal{I}\\
+   (\varsigma_{dcc,i}^{dw})^{2} &= \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,z}^{dw}) \varpi_{dcc,i,z}^{dw}, & \forall i\in \mathcal{I}\\
+   \varsigma_{dcc,i}^{up} & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,z}^{up}, \varpi_{dcc,i,z}^{up}, &\forall i\in \mathcal{I}\\
+   \varsigma_{dcc,i}^{dw} & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,z}^{dw} \varpi_{dcc,i,z}^{dw}, & \forall i\in \mathcal{I}\\
+   \sum\nolimits_{z\in\mathcal{Z}} &\varsigma_{dcc,i,z}^{up} = 1,  \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,z}^{dw} = 1, &\forall i\in \mathcal{I}\\
+    \Im(\varsigma_{dcc,i,z}^{up}) &= (\varsigma_{dcc,i,z}^{up})^2,  \forall z\in \mathcal{Z}, &\forall i\in \mathcal{I}\\ 
+    \Im(\varsigma_{dcc,i,z}^{dw}) &= (\varsigma_{dcc,i,z}^{dw})^2,  \forall z\in \mathcal{Z}, &\forall i\in \mathcal{I}\\
+   \varsigma_{dcc,i,z}^{up} &\geq 0,\varsigma_{dcc,i,z}^{dw}  \geq 0, \forall z\in \mathcal{Z}, &\forall i\in \mathcal{I}\\
+    \varpi_{dcc,i,z}^{up} &\in\{0,\!1\},\varpi_{dcc,i,z}^{dw}\in\{0,\!1\}, \forall z\in \mathcal{Z}, \!\!\!\! &\forall i\in \mathcal{I}
+\end{align}
+\end{subequations}
+
+Similarity, the constraint (3d) can be approximated as associate set of SOS2 constraint through the McCormick Envelope method. the detailed mathematical formulations are listed in appendix A due to the limited space,
+
+\section{Appendix A: Reformulation of constraints (3d) through McCormick Envelope Method} 
+Let $\gamma_{dcc,i}$ denotes the square value of \(v_{dcc,i}^{2}\), i.e., \(\gamma_{dcc,i} = v_{dcc,i}^{2}\), the lower/upper bound of $\gamma_{dcc,i}$ can be obtained through estimating bindings parameters \((\lfloor v_{dcc,i} \rfloor)^2\) and \((\lceil v_{dcc,i} \rceil)^2\), respectively. This process holds because of the monotonic increasing property of the quadratic function. Accordingly, the constraints representing the lower/upper bounds of \(\gamma_{dcc,i}\)  can be derived as below,
+
+\vspace{-0.25cm}
+\begin{subequations}
+\begin{align}
+  & \lfloor v_{dcc,i} \rfloor \leq v_{dcc,i} \leq \lceil v_{dcc,i} \rceil, & \forall i \in \mathcal{I}\\
+  \Rightarrow \quad & (\lfloor v_{dcc,i} \rfloor )^2 \leq \gamma_{dcc,i}  \leq (\lceil v_{dcc,i} \rceil)^2, &\forall i \in \mathcal{I}
+\end{align}
+\end{subequations}
+
+Next, $\phi_{dcc,i}^{dvfs}$ can be equivalently represented as the product of two continuous variables $\gamma_{dcc,i}$ and $f_{dcc,i}$. By utilizing the McCormick Envelope method, a reformulated, linearized approximation of this product, and thus of $\phi_{dcc,i}^{dvfs}$ can be constructed as,
+
+\vspace{-0.25cm}
+\begin{subequations}
+\begin{align}
+\kappa_{dcc,i}^{up} &= \nicefrac{1}{2}(\gamma_{dcc,i} + f_{dcc,i}), &&\forall i\in\mathcal{I}\\ 
+\kappa_{dcc,i}^{dw} &= \nicefrac{1}{2}(\gamma_{dcc,i} - f_{dcc,i}), &&\forall i\in\mathcal{I}\\ 
+\phi_{dcc,i}^{dvfs} &\geq \sum\nolimits_{z\in\mathcal{Z}} \Im(\kappa_{dcc,i,z}^{up})\vartheta_{dcc,i,z}^{up} -&& \\
+&\quad\, \sum\nolimits_{z\in\mathcal{Z}} \Im(\kappa_{dcc,i,z}^{dw})\vartheta_{dcc,i,z}^{dw},&&\forall i\in\mathcal{I}\\ 
+\kappa_{dcc,i}^{up} &= \sum\nolimits_{z\in\mathcal{Z}} \kappa_{dcc,i,z}^{up}\vartheta_{dcc,i,z}^{up},\forall z\in\mathcal{Z}, &&\forall i\in\mathcal{I}\\ 
+\kappa_{dcc,i}^{dw} &= \sum\nolimits_{z\in\mathcal{Z}} \kappa_{dcc,i,z}^{dw}\vartheta_{dcc,i,z}^{dw},\forall z\in\mathcal{Z}, &&\forall i\in\mathcal{I}\\ 
+\sum\nolimits_{z\in\mathcal{Z}} &\vartheta_{dcc,i,z}^{up} = 1, \sum\nolimits_{z\in\mathcal{Z}} \vartheta_{dcc,i,z}^{dw} = 1, &&\forall i\in\mathcal{I}\\ 
+\Im(\kappa_{dcc,i,z}^{up}) &= (\kappa_{dcc,i,z}^{up})^2, \forall z\in\mathcal{Z}, &&\forall i\in\mathcal{I}\\
+\Im(\kappa_{dcc,i,z}^{dw}) &= (\kappa_{dcc,i,z}^{dw})^2, \forall z\in\mathcal{Z}, &&\forall i\in\mathcal{I}\\ 
+\kappa_{dcc,i,z}^{up} &\geq 0, \kappa_{dcc,i,z}^{dw} \geq 0,\forall z\in\mathcal{Z}, &&\forall i\in\mathcal{I}\\ 
+\end{align}
 \end{subequations}
 
 
