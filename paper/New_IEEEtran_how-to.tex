@@ -177,6 +177,22 @@ where $\varDelta p_{dcc,i}^{bal}$ represents the change in the power consumption
 The term $\phi_{dcc,i}^{dvfs}$ represents the power regulation process for the DCC $i$ through DVFS technique, 
 By incorporating the workload balancing dynamics defined in (3a)-(3c) into (2b) and (2c), the form of DVFS-controlled DCCs constraints can be established.
 
+The value of $\lambda_{dcc,i}^{bal}$ primarily depends on users' tolerance for computational workload response time. Generally speaking, greater tolerance allows for a higher $\lambda_{dcc,i}^{bal}$, thereby enhancing the workload balancing capability of DCCs and enabling more flexible adjustment of workloads across clusters. As such, the performance of workload balancing processes can be estimated through the metric of average workload queuing delay duration, $i.e.$, $T_{q} = \nicefrac{1}{(v_{dcc,i} - \lambda_{dcc,i})}$. To address this issue, the following lists the relate binding constraints concerning workload balancing processes,
+
+\vspace{-0.25cm}
+\begin{subequations}
+  \begin{align}
+    & T_{q} \leq T_{tol}^{-1}:T_{q} =  1/({v_{dcc,i} - \lambda_{dcc,i}}), && \\
+    & \Rightarrow \lambda_{dcc,i}^{ini} + \lambda_{dcc,i}^{dyn} + \varDelta \lambda_{dcc,i}^{bal} \leq v_{dcc,i} - T_{tol}^{-1}, && \forall i\in \mathcal{I} \\
+    & \Rightarrow \varDelta \lambda_{dcc,i}^{bal} \leq v_{dcc,i} \!-\! T_{tol}^{-1} \!-\! (\lambda_{dcc,i}^{ini} + \lambda_{dcc,i}^{dyn}), && \forall i\in \mathcal{I}\\
+    & \varDelta \lambda_{dcc,i}^{bal} \geq 0, \varDelta \lambda_{dcc,i}^{bal}  \in \mathbb{R}, && \forall i\in \mathcal{I}
+  \end{align}
+\end{subequations}
+
+\noindent
+where $T_{tol}$ represents the predefined threshold for the average workload queuing delay duration.
+
+
 It is important to note that these constraints (3a)-(3d) remain elusive due to the presence of product terms involving continuous variables $\phi_{dcc,i}^{dvfs}$ and $\varDelta \lambda_{dcc,i}$ in (3a), therefore, the McCormick Envelope method is introduced to linear the constructed constraints mentioned before. More detailed, 
 let $\iota_{dcc,i} = \phi_{dcc,i}^{dvfs} \times \varDelta \lambda_{dcc,i}$, and additionally introduce two auxiliary variables $\varsigma_{dcc,i}^{up}, \varsigma_{dcc,i}^{dw}$ where $\varsigma_{dcc,i}^{up} = \nicefrac{1}{2}(\phi_{dcc,i}^{dvfs} + \varDelta \lambda_{dcc,i}) $, $\varsigma_{dcc,i}^{dw} = \nicefrac{1}{2}(\phi_{dcc,i}^{dvfs} - \varDelta \lambda_{dcc,i}) $, accordingly, the constraint (3b) can be reformatted as its approximated linear form as below,
 
@@ -190,13 +206,13 @@ let $\iota_{dcc,i} = \phi_{dcc,i}^{dvfs} \times \varDelta \lambda_{dcc,i}$, and 
   \end{align}
 \end{subequations}
 
-In (4b), the standard square terms of $\langle \varsigma_{dcc,i}^{up},\varsigma_{dcc,i}^{dw}\rangle $ can be further reshaped as a special ordered sets of type 2 ($\mathsf{SOS2}$) constraint, which $\mathsf{MILP}$ solver could accurately identify and compile them. For simplification, let $\langle \varsigma_{dcc,i,z}^{up}, \varsigma_{dcc,i,z}^{dw}\rangle$, respectively, denote the piecewise block of related continuous variables $\langle \varsigma_{dcc,i}^{up},\varsigma_{dcc,i}^{dw}\rangle$, hence, (4b) can be reformulated as below,
+In (4b), the standard square terms of $\langle \varsigma_{dcc,i}^{up},\varsigma_{dcc,i}^{dw}\rangle $ can be further reshaped as a Special-Ordered-Sets-of-type-2 (SOS2) constraint, which MILP solver could accurately identify and compile them. For simplification, let $\langle \varsigma_{dcc,i,z}^{up}, \varsigma_{dcc,i,z}^{dw}\rangle$, respectively, denote the piecewise block of related continuous variables $\langle \varsigma_{dcc,i}^{up},\varsigma_{dcc,i}^{dw}\rangle$, hence, (4b) can be reformulated as below,
 
 \vspace{-0.25cm}
 \begin{subequations}
 \begin{align}
-   (\varsigma_{dcc,i}^{up})^{2} &= \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,z}^{up}) \varpi_{dcc,i,z}^{up}, & \forall i\in \mathcal{I}\\
-   (\varsigma_{dcc,i}^{dw})^{2} &= \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,z}^{dw}) \varpi_{dcc,i,z}^{dw}, & \forall i\in \mathcal{I}\\
+   \iota_{dcc,i} \geq &= \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,z}^{up}) \varpi_{dcc,i,z}^{up} - \notag \\
+   &\quad\, \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,z}^{dw}) \varpi_{dcc,i,z}^{dw}, & \forall i\in \mathcal{I}\\
    \varsigma_{dcc,i}^{up} & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,z}^{up}, \varpi_{dcc,i,z}^{up}, &\forall i\in \mathcal{I}\\
    \varsigma_{dcc,i}^{dw} & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,z}^{dw} \varpi_{dcc,i,z}^{dw}, & \forall i\in \mathcal{I}\\
    \sum\nolimits_{z\in\mathcal{Z}} &\varsigma_{dcc,i,z}^{up} = 1,  \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,z}^{dw} = 1, &\forall i\in \mathcal{I}\\
@@ -207,10 +223,10 @@ In (4b), the standard square terms of $\langle \varsigma_{dcc,i}^{up},\varsigma_
 \end{align}
 \end{subequations}
 
-Similarity, the constraint (3d) can be approximated as associate set of SOS2 constraint through the McCormick Envelope method. the detailed mathematical formulations are listed in appendix A due to the limited space,
+Similarity, the constraint (3d) can be approximated as associate set of SOS2 constraint through the McCormick Envelope method. the detailed mathematical formulations are listed in appendix A due to the limited space.
 
 \section{Appendix A: Reformulation of constraints (3d) through McCormick Envelope Method} 
-Let $\gamma_{dcc,i}$ denotes the square value of \(v_{dcc,i}^{2}\), i.e., \(\gamma_{dcc,i} = v_{dcc,i}^{2}\), the lower/upper bound of $\gamma_{dcc,i}$ can be obtained through estimating bindings parameters \((\lfloor v_{dcc,i} \rfloor)^2\) and \((\lceil v_{dcc,i} \rceil)^2\), respectively. This process holds because of the monotonic increasing property of the quadratic function. Accordingly, the constraints representing the lower/upper bounds of \(\gamma_{dcc,i}\)  can be derived as below,
+Let $\gamma_{dcc,i}$ denotes the square value of \(v_{dcc,i}^{2}\), $i.e.$, \(\gamma_{dcc,i} = v_{dcc,i}^{2}\), the lower/upper bound of $\gamma_{dcc,i}$ can be obtained through estimating bindings parameters \((\lfloor v_{dcc,i} \rfloor)^2\) and \((\lceil v_{dcc,i} \rceil)^2\), respectively. This process holds because of the monotonic increasing property of the quadratic function. Accordingly, the constraints representing the lower/upper bounds of \(\gamma_{dcc,i}\)  can be derived as below,
 
 \vspace{-0.25cm}
 \begin{subequations}
@@ -234,10 +250,9 @@ Next, $\phi_{dcc,i}^{dvfs}$ can be equivalently represented as the product of tw
 \sum\nolimits_{z\in\mathcal{Z}} &\vartheta_{dcc,i,z}^{up} = 1, \sum\nolimits_{z\in\mathcal{Z}} \vartheta_{dcc,i,z}^{dw} = 1, &&\forall i\in\mathcal{I}\\ 
 \Im(\kappa_{dcc,i,z}^{up}) &= (\kappa_{dcc,i,z}^{up})^2, \forall z\in\mathcal{Z}, &&\forall i\in\mathcal{I}\\
 \Im(\kappa_{dcc,i,z}^{dw}) &= (\kappa_{dcc,i,z}^{dw})^2, \forall z\in\mathcal{Z}, &&\forall i\in\mathcal{I}\\ 
-\kappa_{dcc,i,z}^{up} &\geq 0, \kappa_{dcc,i,z}^{dw} \geq 0,\forall z\in\mathcal{Z}, &&\forall i\in\mathcal{I}\\ 
+\kappa_{dcc,i,z}^{up} &\geq 0, \kappa_{dcc,i,z}^{dw} \geq 0,\forall z\in\mathcal{Z}, &&\forall i\in\mathcal{I}
 \end{align}
 \end{subequations}
-
 
 % extended and then integrated into UC studies. On this basis, an union form of EUC considering DVFS-controlled DDCs is listed below,
 
@@ -256,5 +271,3 @@ Next, $\phi_{dcc,i}^{dvfs}$ can be equivalently represented as the product of tw
 \bibliography{IEEEabrv,reference}
 
 \end{document}
-
-
