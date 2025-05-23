@@ -1,6 +1,7 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.2) (preloaded format=pdflatex 2025.3.3)  22 MAY 2025 22:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.2) (preloaded format=pdflatex 2025.3.3)  23 MAY 2025 20:57
 entering extended mode
  restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **./New_IEEEtran_how-to.tex
 (New_IEEEtran_how-to.tex
@@ -858,8 +859,8 @@ iles/MiKTeX/fonts/enc/dvips/base/8r.enc}
 
 
 
-pdfTeX warning: pdflatex.exe (file ./fig/framework.pdf): PDF inclusion: found P
-DF version <1.6>, but at most version <1.5> allowed
+pdfTeX warning: pdflatex (file ./fig/framework.pdf): PDF inclusion: found PDF v
+ersion <1.6>, but at most version <1.5> allowed
 <./fig/framework.pdf, id=73, 279.80634pt x 214.51843pt>
 File: ./fig/framework.pdf Graphic file (type pdf)
 <use ./fig/framework.pdf>
@@ -913,7 +914,7 @@ TeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/MiKTeX/fon
 ts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/ut
 mbi8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program
  Files/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on New_IEEEtran_how-to.pdf (5 pages, 1285486 bytes).
+Output written on New_IEEEtran_how-to.pdf (5 pages, 1285607 bytes).
 PDF statistics:
  345 PDF objects out of 1000 (max. 8388607)
  101 named destinations out of 1000 (max. 500000)
