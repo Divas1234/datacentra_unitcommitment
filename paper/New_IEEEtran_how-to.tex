@@ -258,12 +258,7 @@ In this proposed methodology,
 \begin{align}
 	& \sum\nolimits_{t\in\mathcal{T}} \sum\nolimits_{g\in\mathcal{G}} [C_{su, g} u_{g,t} + C_{sd,g} v_{g,t}] + \\
 	& \sum\nolimits_{s\in\mathcal{S}} \sum\nolimits_{t\in\mathcal{T}}\biggl [ \sum\nolimits_{g\in\mathcal{G}} \left( \sum\nolimits_{z\in\{1,2,3\}} \!\!\alpha_{g}^{(z)} p_{g,s,t}^{(z)} \!+\! x_{g,t} \beta_{g}^{(z)} \right) + \notag\\
-    & \quad \quad \left. \left(\sum\nolimits_{w\in\mathcal{W}} C_{shed,w} \varDelta p_{w,s,t}\right) + \left(\sum\nolimits_{d\in\mathcal{D}} C_{voll,d} \varDelta p_{d,s,t}\right) \right] \notag
-    \end{align}
-\end{subequations}
-\vspace{-0.5cm}
-\begin{subequations}
-\begin{align}
+    & \quad \quad \left. \left(\sum\nolimits_{w\in\mathcal{W}} C_{shed,w} \varDelta p_{w,s,t}\right) + \left(\sum\nolimits_{d\in\mathcal{D}} C_{voll,d} \varDelta p_{d,s,t}\right) \right] \notag\\
     & s.t., u_{g,t} \,-\, v_{g,t} \,=\, x_{g,t-1}\, -\, x_{g,t},\quad \forall g\in\mathcal{G},\forall t\in\mathcal{T}\\
     & \qquad x_{g,t} - x_{g,t-1} \leq u_{g,t}, \,\,\,\quad\quad\qquad \forall g\in\mathcal{G},\forall t\in\mathcal{T}\\
     & \sum\nolimits_{m\in\mathcal{M}(\omega_g^{dt} - 1,t)} (1 - u_{g,m}) \geq \omega_{g}^{dt} (u_{g,t} - u_{g,t-1}), \notag\\
@@ -293,16 +288,27 @@ In this proposed methodology,
     & \,\,\,\quad\qquad\qquad\qquad \qquad\qquad \forall e\in\mathcal{E}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}\\
     & q_{e,s,t} - q_{e,s,t-1} \leq \gamma_{e}^{ch} \varepsilon_{e,s,t}^{ch},\forall e\in\mathcal{E}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}\\
     & q_{e,s,t-1} - q_{e,s,t} \leq \gamma_{e}^{dis} \varepsilon_{e,s,t}^{dis},\forall e\in\mathcal{E}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}\\
-    & cons.(2b)-(2e), cons.(3d)-(3e), cons.(5a)-(5c), and, \notag\\
+    & cons.(2b)-(2e), cons.(3d)-(3e), cons.(5a)-(5c), \notag\\
     & cons.(6a)-(6h), \qquad\qquad\,\, \forall i\in\mathcal{I}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S} \\
     & con.(7a), and, con.(8a), \quad\quad \forall i\in\mathcal{I}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}
 \end{align}
 \end{subequations}
 
-In the above formulation, constraint () describes the consistency restriction amount units' shut-up decision, shut-down decision and state decisions.
-Constraints () and () enforce the minimum duration restrictions between adjacent shut-on/shut-down decisions of individual unit.
-Constraint () enforce the balance between generators and demands, where the side of demands mainly consist of conventional electrical demand users, and DCCs consumptions.
-Constraint () illustrates the electrical flow restrictions of individual transmission line.
+In the above formulation, 
+The objective function (9a) aims to achieve the economic operation cost of the power systems.
+Constraint (9b) and (9c) enforce the consistency among conventional generators' start-up, shut-down, and on/off status decisions.
+Constraints (9d) and (9e) impose minimum shut-up/shut-down duration restrictions for each conventional generators, ensuring adequate durations between consecutive start-up and shut-down actions.
+Constraint (9f) ensures power balance between generation and demand. The demand side includes both conventional electricity consumers and data center clusters (DCCs).
+Constraint (9g) models the electrical power flow limits on each transmission line.
+Constraints (9h) enforce the upward and downward ramping limits of individual conventional generators.
+Constraints (9i) and (9j) specify the upper and lower bounds of power output for each conventional generator.
+Constraint (9k) restricts the allowable curtailment of wind power, while constraint (9l) accounts for potential forced load curtailment during specific periods.
+Constraints (9m) and (9n) govern the charging and discharging power of battery energy storage systems (BESS).
+Constraint (9o) ensures mutual exclusivity between charging and discharging states of BESS, preventing simultaneous charging and discharging.
+Constraint (9p) tracks the state of charge in BESS, where $\eta_{e}^{ch}$ and $\eta_{e}^{dis}$ denote the charging and discharging efficiencies, respectively.
+Constraints (9q) and (9r) define the ramping limits for battery systems during charging and discharging.
+Constraints (9s) and (9t) represent the physical operating limits of DCCs under DVFS control schemes.
+
 
 
 

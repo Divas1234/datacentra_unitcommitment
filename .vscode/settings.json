@@ -1,7 +1,7 @@
 {
     "editor.wordWrapColumn": 150,
     "editor.wordWrap": "wordWrapColumn",
-    "editor.fontFamily": "Roboto Medium, Dubai, Chaparral Pro, Calisto, Helvetic, SF Pro, Fira Code, Geist Mono, JetBrains Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "SF Pro, Roboto Medium, Dubai, Chaparral Pro, Calisto, Helvetic, Fira Code, Geist Mono, JetBrains Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
     "workbench.editor.highlightModifiedTabs": true,
     "terminal.integrated.fontLigatures.enabled": true,
     "CodeGPT.apiKey": "CodeGPT Plus Beta",
@@ -14,7 +14,7 @@
         "latex",
         "plaintext"
     ],
-    "editor.fontSize": 18,
+    "editor.fontSize": 16,
     "cSpell.words": [
         "distributionally",
         "DVFS",
