@@ -154,7 +154,8 @@ function forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsF
 	dc_λ = datacentra_Data[:, 8]
 	dc_μ = datacentra_Data[:, 9]
 
-	tem_computatioinal_task_curves = ones(NT, 1) * 0.2
+	tem_computatioinal_task_curves = ones(NT, 1) * 0.25
+
 	dc_computational_power_tasks = tem_computatioinal_task_curves
 
 	ND2 = size(dc_index)[1]

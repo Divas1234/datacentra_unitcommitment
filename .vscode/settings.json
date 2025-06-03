@@ -1,7 +1,7 @@
 {
     "editor.wordWrapColumn": 150,
     "editor.wordWrap": "wordWrapColumn",
-    "editor.fontFamily": "SF Pro, Roboto Medium, Dubai, Chaparral Pro, Calisto, Helvetic, Fira Code, Geist Mono, JetBrains Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "Hack, Fira Code, MonoLisa, Monaspace Neon, Roboto Medium, Dubai, Chaparral Pro, Calisto, Helvetic, Fira Code, Geist Mono, JetBrains Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
     "workbench.editor.highlightModifiedTabs": true,
     "terminal.integrated.fontLigatures.enabled": true,
     "CodeGPT.apiKey": "CodeGPT Plus Beta",
@@ -14,7 +14,7 @@
         "latex",
         "plaintext"
     ],
-    "editor.fontSize": 16,
+    "editor.fontSize": 18,
     "cSpell.words": [
         "distributionally",
         "DVFS",
@@ -25,5 +25,6 @@
     "github.copilot.chat.codesearch.enabled": true,
     "window.autoDetectColorScheme": true,
     "latex-workshop.bibtex-format.sort.enabled": true,
-    "latex-workshop.formatting.latex": "latexindent"
+    "latex-workshop.formatting.latex": "latexindent",
+    "terminal.integrated.fontFamily": "Fira Code, Hack Nerd Font, Geist Mono"
 }

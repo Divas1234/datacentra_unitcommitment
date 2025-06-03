@@ -109,7 +109,8 @@ Section V presents numerical experiments conducted on benchmark test systems to 
 Finally, Section VI summaries the key findings and insights derived from the case studies.
 
 % \vspace{-0.25cm}
-\section{The proposed Scheduling Framework}
+% \section{The proposed Scheduling Framework}
+\section{reformulated constraints for DVFS-controlled DCCs}
 
 This section presents a coordinated scheduling framework to integrate the flexible response capabilities of DCCs into electrical power system operations. Recognising the difference in scheduling timescales (hourly for grid-side operations versus seconds for DCCs workload management), the framework is structured into two interconnected parts. PART-1 encompasses the grid-side scheduling model, while PART-2 represents the DCCs workload management model.
 
@@ -124,8 +125,6 @@ This section presents a coordinated scheduling framework to integrate the flexib
 \end{figure}
 
 %\vspace{-0.25cm}
-
-\section{reformulated constraints for DVFS-controlled DCCs}
 
 The power consumption of DCCs is primarily influenced by two components: static energy and dynamic energy. The static energy term, often referred to as idle power, arises mainly from the leakage current in the CPU core circuits. In contrast, the dynamic energy term is predominantly determined by the workload ratio $\lambda_{dcc}$ and the individual service level $\mu_{dcc}$. As such, the total power consumption of DCCs can be expressed as follows, \cite{lin2023workload},
 
@@ -250,14 +249,17 @@ where $\lceil {\varDelta \lambda_{dcc,i}} \rceil$ and $\lfloor {\varDelta \lambd
 
 \section{Improved unit commitment through DVFS-controlled DCCs}
 
-In order to depict the flexibility potential provided by DDCs and investigate the benefit of introducing DVFS-controlled DCCs into union scheduling processes among conventional generators, renewable energy resources and data center clusters, the multiple time-scale coordination mechanism between workload allocation hosted by DCCs and electrical power balance among these mentioned generators should be formulated.
-In this proposed methodology,
+% In order to depict the flexibility potential provided by DDCs and investigate the benefit of introducing DVFS-controlled DCCs into union scheduling processes among conventional generators, renewable energy resources and data center clusters, the multiple time-scale coordination mechanism between workload allocation hosted by DCCs and electrical power balance among these mentioned generators should be formulated.
+% In this proposed methodology,
+
+In order to depict the flexibility potential provided by DDCs during the entire scheduling process, a refined coordination mechanism between active workload balancing hosted by multiple DCCs and electrical scheduling process is designed in this section, then a complete mathematical formulations concerning proposed scheduling model is extended.
+
 
 \vspace{-0.5cm}
 \begin{subequations}
 \begin{align}
-	& \sum\nolimits_{t\in\mathcal{T}} \sum\nolimits_{g\in\mathcal{G}} [C_{su, g} u_{g,t} + C_{sd,g} v_{g,t}] + \\
-	& \sum\nolimits_{s\in\mathcal{S}} \sum\nolimits_{t\in\mathcal{T}}\biggl [ \sum\nolimits_{g\in\mathcal{G}} \left( \sum\nolimits_{z\in\{1,2,3\}} \!\!\alpha_{g}^{(z)} p_{g,s,t}^{(z)} \!+\! x_{g,t} \beta_{g}^{(z)} \right) + \notag\\
+  & \sum\nolimits_{t\in\mathcal{T}} \sum\nolimits_{g\in\mathcal{G}} [C_{su, g} u_{g,t} + C_{sd,g} v_{g,t}] + \\
+  & \sum\nolimits_{s\in\mathcal{S}} \sum\nolimits_{t\in\mathcal{T}}\biggl [ \sum\nolimits_{g\in\mathcal{G}} \left( \sum\nolimits_{z\in\{1,2,3\}} \!\!\alpha_{g}^{(z)} p_{g,s,t}^{(z)} \!+\! x_{g,t} \beta_{g}^{(z)} \right) + \notag\\
     & \quad \quad \left. \left(\sum\nolimits_{w\in\mathcal{W}} C_{shed,w} \varDelta p_{w,s,t}\right) + \left(\sum\nolimits_{d\in\mathcal{D}} C_{voll,d} \varDelta p_{d,s,t}\right) \right] \notag\\
     & s.t., u_{g,t} \,-\, v_{g,t} \,=\, x_{g,t-1}\, -\, x_{g,t},\quad \forall g\in\mathcal{G},\forall t\in\mathcal{T}\\
     & \qquad x_{g,t} - x_{g,t-1} \leq u_{g,t}, \,\,\,\quad\quad\qquad \forall g\in\mathcal{G},\forall t\in\mathcal{T}\\
@@ -294,30 +296,20 @@ In this proposed methodology,
 \end{align}
 \end{subequations}
 
-In the above formulation, 
+In the above formulations, 
 The objective function (9a) aims to achieve the economic operation cost of the power systems.
-Constraint (9b) and (9c) enforce the consistency among conventional generators' start-up, shut-down, and on/off status decisions.
+Constraint (9b) and (9c) enforce the consistency among unit start-up state, shut-down state, and on/off status decisions produced by conventional generators.
 Constraints (9d) and (9e) impose minimum shut-up/shut-down duration restrictions for each conventional generators, ensuring adequate durations between consecutive start-up and shut-down actions.
-Constraint (9f) ensures power balance between generation and demand. The demand side includes both conventional electricity consumers and data center clusters (DCCs).
+Constraint (9f) ensures power balance between generation and demand. The demand side includes both conventional electricity consumers and DCCs.
 Constraint (9g) models the electrical power flow limits on each transmission line.
 Constraints (9h) enforce the upward and downward ramping limits of individual conventional generators.
 Constraints (9i) and (9j) specify the upper and lower bounds of power output for each conventional generator.
 Constraint (9k) restricts the allowable curtailment of wind power, while constraint (9l) accounts for potential forced load curtailment during specific periods.
-Constraints (9m) and (9n) govern the charging and discharging power of battery energy storage systems (BESS).
+Constraints (9m) and (9n) govern the charging and discharging power of BESS.
 Constraint (9o) ensures mutual exclusivity between charging and discharging states of BESS, preventing simultaneous charging and discharging.
 Constraint (9p) tracks the state of charge in BESS, where $\eta_{e}^{ch}$ and $\eta_{e}^{dis}$ denote the charging and discharging efficiencies, respectively.
 Constraints (9q) and (9r) define the ramping limits for battery systems during charging and discharging.
 Constraints (9s) and (9t) represent the physical operating limits of DCCs under DVFS control schemes.
-
-
-
-
-% zhengjiehui
-% zhangyongjun
-% guanlin
-% luzongxiang
-% aixiaomeng
-% fuyang
 
 
 \section{Appendix A: Reformulation of constraints (3c) through McCormick Envelope Method}
