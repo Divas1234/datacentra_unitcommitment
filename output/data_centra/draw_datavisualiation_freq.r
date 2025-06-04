@@ -2,7 +2,7 @@ library(ggplot2)
 library(dplyr)
 
 # Read the CSV file
-data <- read.csv("d://GithubClonefiles//datacentra_unitcommitment//output//data_centra//dc_λ.csv")
+data <- read.csv("d://GithubClonefiles//datacentra_unitcommitment//output//data_centra//dc_f.csv")
 
 # Transpose the data
 data_transposed <- t(data)
@@ -63,7 +63,7 @@ spline.d <- data_long %>%
 q <- ggplot(spline.d, aes(x = time, y = workload, color = DCC)) +
   geom_line(linewidth = 0.95) +
   scale_fill_manual(values = dcc_colors) +
-  scale_y_continuous(name = "Workload Balancing Rate (p.u.)", expand = expansion(mult = c(0, 0.1))) +
+  scale_y_continuous(name = "Frequency (p.u.)", expand = expansion(mult = c(0, 0.1))) +
   scale_x_continuous(name = "Time (h)", breaks = 1:24) +
   coord_cartesian(ylim = c(0, 1)) +
   theme_bw(base_size = 16) +
@@ -83,4 +83,4 @@ q <- ggplot(spline.d, aes(x = time, y = workload, color = DCC)) +
 
 
 # Save the plot to a PDF file
-ggsave(plot = q, width = 8, height = 4, dpi = 300, filename = "d://GithubClonefiles//datacentra_unitcommitment//output//data_centra//stacked_dcc_λ_plot.pdf")
+ggsave(plot = q, width = 8, height = 4, dpi = 300, filename = "d://GithubClonefiles//datacentra_unitcommitment//output//data_centra//stacked_dcc_f_plot.pdf")

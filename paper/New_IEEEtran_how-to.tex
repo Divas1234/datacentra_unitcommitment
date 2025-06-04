@@ -311,6 +311,11 @@ Constraint (9p) tracks the state of charge in BESS, where $\eta_{e}^{ch}$ and $\
 Constraints (9q) and (9r) define the ramping limits for battery systems during charging and discharging.
 Constraints (9s) and (9t) represent the physical operating limits of DCCs under DVFS control schemes.
 
+\section{Case Studies and Analysis}
+
+To validate the effectiveness of the proposed refined UC model, a data center system comprising multiple DCCs is integrated into the IEEE 6-bus test system. The total workload consumption of all DCCs throughout the scheduling horizon is statisticed in Table.~1. Additionally, two wind farms, each with an installed capacity of $5$ MW, are connected at bus 2 in the power system. The sequential load curves and stochastic wind farm outputs are illustrated in Figure []. All experiments are conducted on a personal Lenovo desktop equipped with a Intel(R) Core i7-13700F CPU @$3.46$GHz and RAM $32$GB. Both the proposed model and the benchmark model are implemented in the Julia/JuMP environment. Data visualization is performed using the ggplot2 package in the R programming language.
+
+
 
 \section{Appendix A: Reformulation of constraints (3c) through McCormick Envelope Method}
 Let $\gamma_{dcc,i}$ denotes the square value of \(v_{dcc,i}^{2}\), $i.e.$, \(\gamma_{dcc,i} = v_{dcc,i}^{2}\), the lower/upper bound of $\gamma_{dcc,i}$ can be obtained through estimating bindings parameters \((\lfloor v_{dcc,i} \rfloor)^2\) and \((\lceil v_{dcc,i} \rceil)^2\), respectively. This process holds because of the monotonic increasing property of the quadratic function. Accordingly, the constraints representing the lower/upper bounds of \(\gamma_{dcc,i}\)  can be derived as below,

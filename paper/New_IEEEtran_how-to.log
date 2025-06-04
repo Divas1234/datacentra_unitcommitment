@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.5.27)  3 JUN 2025 16:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.5.27)  4 JUN 2025 21:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -806,7 +806,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 pdfTeX warning: pdflatex (file ./fig/framework.pdf): PDF inclusion: found PDF v
 ersion <1.6>, but at most version <1.5> allowed
-<./fig/framework.pdf, id=69, 279.80634pt x 214.51843pt>
+<./fig/framework.pdf, id=73, 279.80634pt x 214.51843pt>
 File: ./fig/framework.pdf Graphic file (type pdf)
 <use ./fig/framework.pdf>
 Package pdftex.def Info: ./fig/framework.pdf  used on input line 122.
@@ -822,13 +822,13 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `New_IEEEtran_how-to.out' has not changed.
-(rerunfilecheck)             Checksum: F72B4AE8C71ADF6C2996F27CBE97FFCA;1646.
+(rerunfilecheck)             Checksum: BE4D6AA6D345774CD4A2862D9CD221C1;1823.
  ) 
 Here is how much of TeX's memory you used:
- 22418 strings out of 474486
- 416759 string characters out of 5753573
+ 22420 strings out of 474486
+ 416779 string characters out of 5753573
  1972542 words of memory out of 5000000
- 44241 multiletter control sequences out of 15000+600000
+ 44242 multiletter control sequences out of 15000+600000
  649426 words of font info for 121 fonts, out of 8000000 for 9000
  1145 hyphenation exceptions out of 8191
  83i,12n,93p,1434b,482s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -843,9 +843,9 @@ TeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb><C:/Program Files/MiKTeX/fon
 ts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/ut
 mbi8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Program
  Files/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on New_IEEEtran_how-to.pdf (5 pages, 1286390 bytes).
+Output written on New_IEEEtran_how-to.pdf (5 pages, 1288236 bytes).
 PDF statistics:
- 340 PDF objects out of 1000 (max. 8388607)
- 99 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 344 PDF objects out of 1000 (max. 8388607)
+ 100 named destinations out of 1000 (max. 500000)
+ 74 words of extra memory for PDF output out of 10000 (max. 10000000)
 

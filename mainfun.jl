@@ -14,6 +14,7 @@ include("src/saveresult.jl")
 include("src/generatefittingparameters.jl")
 include("src/draw_onlineactivepowerbalance.jl")
 include("src/draw_addditionalpower.jl")
+include("callback.jl")
 
 # Destructure directly from function call for clarity
 # Read data from Excel sheet
@@ -60,3 +61,5 @@ function export_data(LoadCurve, flag)
 		writedlm(io, LoadCurve, '\t')
 	end
 end
+
+run_r_visualizations()
