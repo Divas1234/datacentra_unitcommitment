@@ -44,7 +44,7 @@ using Plots, PlotThemes
 p1 = Plots.plot(LoadCurve[:, 2], label = "Load", legend = :topleft)
 Plots.savefig(p1, "./fig/load.pdf")
 
-export_data(LoadCurve, 1)
+# export_data(LoadCurve, 1)
 function export_data(LoadCurve, flag)
 	if flag == 1
 		filepath = "D:/GithubClonefiles/datacentra_unitcommitment/output/bench/"

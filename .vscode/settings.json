@@ -14,7 +14,7 @@
         "latex",
         "plaintext"
     ],
-    "editor.fontSize": 18,
+    "editor.fontSize": 16,
     "cSpell.words": [
         "distributionally",
         "DVFS",
@@ -26,5 +26,14 @@
     "window.autoDetectColorScheme": true,
     "latex-workshop.bibtex-format.sort.enabled": true,
     "latex-workshop.formatting.latex": "latexindent",
-    "terminal.integrated.fontFamily": "Fira Code, Hack Nerd Font, Geist Mono"
+    "terminal.integrated.fontFamily": "Fira Code, Hack Nerd Font, Geist Mono",
+    "javascript.suggest.completeFunctionCalls": true,
+    "search.experimental.closedNotebookRichContentResults": true,
+    "search.quickOpen.includeSymbols": true,
+    "task.quickOpen.showAll": true,
+    "git.supportCancellation": true,
+    "r.linting.maxLineLength": 800,
+    "r.linting.nameLength": false,
+    "editor.experimental.preferTreeSitter.regex": true,
+    "r.rterm.windows": "D:\\CommonSoftwares\\ProductiveCodingEditors\\R-4.5.0\\bin\\x64\\R.exe"
 }
