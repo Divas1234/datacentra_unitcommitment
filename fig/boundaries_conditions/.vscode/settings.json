@@ -1,0 +1,5 @@
+{
+    "terminal.integrated.fontFamily": "Fira Code, Monaspace Neon, Monaspace Argon",
+    "terminal.integrated.fontLigatures.enabled": true,
+    "editor.fontFamily": "MonoLisa, Monaspace Neon, Monaspace Argon, Consolas, 'Courier New', monospace"
+}

@@ -18,31 +18,33 @@ include("callback.jl")
 
 # Destructure directly from function call for clarity
 # Read data from Excel sheet
-UnitsFreqParam, WindsFreqParam, StrogeData, DataGen, GenCost, DataBranch, LoadCurve, DataLoad, datacentra_Data = readxlssheet()
+UnitsFreqParam, WindsFreqParam, StrogeData, DataGen, GenCost, DataBranch, LoadCurve, DataLoad,
+datacentra_Data, data_centra_jobcurve = readxlssheet()
 
 # Form input data for the model
-config_param, units, lines, loads, stroges, NB, NG, NL, ND, NT, NC, ND2, DataCentras = forminputdata(
-	DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsFreqParam, StrogeData, datacentra_Data
-)
+config_param, units, lines, loads, stroges, NB, NG, NL, ND, NT, NC, ND2,
+DataCentras = forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsFreqParam,
+							StrogeData, datacentra_Data, data_centra_jobcurve)
 
 # Generate wind scenarios
 winds, NW = genscenario(WindsFreqParam, 1)
 
+@assert config_param.is_ConsiderDataCentra == 1
+
 # Apply boundary conditions
-boundrycondition(NB, NL, NG, NT, ND, units, loads, lines, winds, stroges)
+# boundrycondition(NB, NL, NG, NT, ND, units, loads, lines, winds, stroges)
 
 # Run the SUC-SCUC model
-bench_x₀, bench_p₀, bench_pᵨ, bench_pᵩ, bench_seq_sr⁺, bench_seq_sr⁻, bench_pss_charge_p⁺, bench_pss_charge_p⁻, bench_su_cost, bench_sd_cost, bench_prod_cost, bench_cost_sr⁺,
-bench_cost_sr⁻, dc_p, dc_f, dc_v², dc_λ, dc_Δu1, dc_Δu2 = SUC_scucmodel(
-	NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, DataCentras, config_param)
+res = SUC_scucmodel(NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, DataCentras, config_param)
+
 
 # Save the balance results
-savebalance_result(bench_p₀, bench_pᵨ, bench_pᵩ, bench_pss_charge_p⁺, bench_pss_charge_p⁻, 1)
+savebalance_result(res["p₀"], res["pᵨ"], res["pᵩ"], res["pss_charge_p⁺"], res["pss_charge_p⁻"], 1)
 
 # NOTE - data valiation.
 
 using Plots, PlotThemes
-p1 = Plots.plot(LoadCurve[:, 2], label = "Load", legend = :topleft)
+p1 = Plots.plot(LoadCurve[:, 2]; label = "Load", legend = :topleft)
 Plots.savefig(p1, "./fig/load.pdf")
 
 # export_data(LoadCurve, 1)
@@ -58,7 +60,7 @@ function export_data(LoadCurve, flag)
 
 	open(filepath * "LoadCurve.txt", "w") do io
 		# writedlm(io, [" "])
-		writedlm(io, LoadCurve, '\t')
+		return writedlm(io, LoadCurve, '\t')
 	end
 end
 

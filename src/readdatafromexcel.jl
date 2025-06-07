@@ -46,11 +46,16 @@ function readxlssheet()
 	Sheet9_list = string("A2", ":", "I", string(size(data_cnetra_data[:], 1)))
 	datacentra_data = convert(Array{Float64, 2}, data_cnetra_data[Sheet9_list])
 
+	data_centra_jobcurve = df["data_centra_jobcurve"]
+	Sheet9_list = string("A2", ":", "H", string(size(data_centra_jobcurve[:], 1)))
+	data_centra_jobcurve = convert(Array{Float64, 2}, data_centra_jobcurve[Sheet9_list])
+
 	return unitsfreqparam, windsfreqparam, strogesystemdata, gendata, gencost, linedata,
-	loadcurve, loaddata, datacentra_data
+		   loadcurve, loaddata, datacentra_data, data_centra_jobcurve
 end
 
-function forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsFreqParam, StrogeData, datacentra_Data)
+function forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsFreqParam,
+					   StrogeData, datacentra_Data, data_centra_jobcurve)
 
 	# DataGen,DataBranch,DataLoad,LoadCurve,GenCost = IEEE_RTS6()
 	NB = Int64(maximum([maximum(DataBranch[:, 2]), maximum(DataBranch[:, 3])]))::Int64
@@ -126,16 +131,16 @@ function forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsF
 	config_param = config(0, 1, 1, 1, 1, 3, 0.005, 0.005, 1, 1, 1, 1e5, 1e5, 50, 0.01, 1)
 
 	units = unit(Gens_Index, Gens_LocateBus, Gens_Pmax, Gens_Pmin, Gens_RU, Gens_RD,
-		Gens_SU, Gens_SD, Gens_TU, Gens_TD, Gens_x0, Gens_t0, Gens_p0, Gens_a,
-		Gens_b, Gens_c, Gens_CU, Gens_CU1, Gens_CD, Gens_Cold, Hg, Dg, Kg, Fg, Tg,
-		Rg)
+				 Gens_SU, Gens_SD, Gens_TU, Gens_TD, Gens_x0, Gens_t0, Gens_p0, Gens_a,
+				 Gens_b, Gens_c, Gens_CU, Gens_CU1, Gens_CD, Gens_Cold, Hg, Dg, Kg, Fg, Tg,
+				 Rg)
 	# lines = transmissionline(Trans_From, Trans_To, Trans_x, Trans_b, Trans_Pmax, Trans_Pmin)
 
 	lines = transmissionline(Trans_index, Trans_From, Trans_To, Trans_x, Trans_Pmax,
-		Trans_Pmin)
+							 Trans_Pmin)
 
 	stroges = pss(Pss_index, Pss_locatebus, Pss_q_max, Pss_q_min, Pss_p⁺, Pss_p⁻, Pss_P₀,
-		Pss_γ⁺, Pss_γ⁻, Pss_η⁺, Pss_η⁻, Pss_δₛ)
+				  Pss_γ⁺, Pss_γ⁻, Pss_η⁺, Pss_η⁻, Pss_δₛ)
 
 	if size(Loads_PerLoad, 1) == ND
 		if size(Loads_PerLoad, 2) == NT
@@ -143,24 +148,27 @@ function forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsF
 		end
 	end
 
-	# data centra dataset
+	# REVIEW -  data centra dataset
 	dc_index = convert(Array{Int64}, datacentra_Data[:, 1])
 	dc_locatebus = convert(Array{Int64}, datacentra_Data[:, 2])
-	dc_pmax = datacentra_Data[:, 3]
-	dc_pmin = datacentra_Data[:, 4]
+	dc_pmax = datacentra_Data[:, 3] / 100
+	dc_pmin = datacentra_Data[:, 4] / 100
 	dc_voltage_regulation = datacentra_Data[:, 5]
 	dc_idale = datacentra_Data[:, 6]
 	dc_sv_constent = datacentra_Data[:, 7]
 	dc_λ = datacentra_Data[:, 8]
 	dc_μ = datacentra_Data[:, 9]
 
-	tem_computatioinal_task_curves = ones(NT, 1) * 0.25
+	# tem_computatioinal_task_curves = ones(NT, 1) * 0.25
+	data_centra_jobcurve = convert(Array{Float64, 2}, data_centra_jobcurve) ./ 100
 
-	dc_computational_power_tasks = tem_computatioinal_task_curves
+	dc_computational_power_tasks = data_centra_jobcurve
 
 	ND2 = size(dc_index)[1]
 
-	datacentra_data = data_centra(dc_index, dc_locatebus, dc_pmax, dc_pmin, dc_voltage_regulation, dc_idale, dc_sv_constent, dc_λ, dc_μ, dc_computational_power_tasks)
+	datacentra_data = data_centra(dc_index, dc_locatebus, dc_pmax, dc_pmin, dc_voltage_regulation,
+								  dc_idale, dc_sv_constent, dc_λ, dc_μ,
+								  dc_computational_power_tasks)
 
 	println("Step-2: imput data are loaded")
 

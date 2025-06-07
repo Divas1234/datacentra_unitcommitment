@@ -1,4 +1,4 @@
-Flibrary(ggplot2)
+library(ggplot2)
 library(tidyplots)
 data1 <- readr::read_table("D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\bench\\LoadCurve.txt", col_names = FALSE)
 head(data1)
@@ -18,7 +18,7 @@ ggplot(data1, aes(x = X1, y = X2)) +
     )
 
 q <- ggplot(data1, aes(x = X1, y = X2)) +
-    geom_col(fill = "gray60", color = "black", linewidth = 1.0, width = 0.75) +
+    geom_col(fill = "gray60", color = "black", width = 0.75) +
     scale_y_continuous(name = "Power (p.u.)", expand = expansion(mult = c(0, 0.1))) +
     scale_x_continuous(name = "Time (h)", breaks = 1:24) +
     annotate(
@@ -33,4 +33,4 @@ q <- ggplot(data1, aes(x = X1, y = X2)) +
         panel.grid.major.y = element_line(linewidth = 2)
     )
 
-ggsave(plot = q, width = 6, height = 3, dpi = 300, filename = "D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\bench\\loadcurve.pdf")
+ggsave(plot = q, width = 8, height = 3, dpi = 300, filename = "D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\bench\\loadcurve.pdf")

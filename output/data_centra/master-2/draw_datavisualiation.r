@@ -49,3 +49,4 @@ q <- ggplot(data_long, aes(x = time, y = workload, fill = DCC)) +
   )
 # Save the plot to a PDF file
 ggsave(plot = q, width = 8, height = 4, dpi = 300, filename = "d://GithubClonefiles//datacentra_unitcommitment//output//data_centra//stacked_dcc_plot.pdf")
+

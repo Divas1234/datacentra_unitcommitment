@@ -69,11 +69,8 @@ dcc_plots <- list()
 for (dcc in unique(spline.d$DCC)) {
   dcc_data <- spline.d[spline.d$DCC == dcc, ]
   dcc_plots[[dcc]] <- ggplot(dcc_data, aes(x = time, y = workload, color = DCC)) +
-    {
-      print(paste("Plotting DCC:", dcc))
-      geom_line(linewidth = 0.95) +
-        scale_fill_manual(values = dcc_colors[dcc])
-    } +
+    geom_line(linewidth = 0.95) +
+    scale_fill_manual(values = dcc_colors[dcc]) +
     scale_y_continuous(name = "Frequency (p.u.)", expand = expansion(mult = c(0, 0.1))) +
     scale_x_continuous(name = "Time (hours)", breaks = 1:24) +
     coord_cartesian(ylim = c(0, 1)) +
@@ -84,8 +81,8 @@ for (dcc in unique(spline.d$DCC)) {
       legend.text = element_text(size = 10), # Larger legend text
       axis.title.x = element_blank(),
       axis.text.x = element_blank(),
-      axis.title.y = element_text(size = 16, face = "bold"), # Axis titles bigger
-      axis.text = element_text(size = 14), # Axis labels bigger
+      axis.title.y = element_text(size = 12), # Axis titles bigger
+      axis.text = element_text(size = 12), # Axis labels bigger
       legend.background = element_rect(fill = "transparent", color = NA),
       plot.title = element_text(size = 20, face = "bold", hjust = 0.5), # Title size and bold
       panel.grid.major = element_line(linewidth = 0.5, color = "gray90"), # Lighter grid lines
@@ -101,4 +98,4 @@ q <- wrap_plots(dcc_plots, ncol = 1, guides = "collect") +
   labs(y = "Frequency (p.u.)")
 
 # Save the plot to a PDF file
-ggsave(plot = q, width = 8, height = 8, dpi = 300, filename = "d://GithubClonefiles//datacentra_unitcommitment//output//data_centra//stacked_dcc_f_plot.pdf")
+ggsave(plot = q, width = 8, height = 14, dpi = 300, filename = "d://GithubClonefiles//datacentra_unitcommitment//output//data_centra//stacked_dcc_f_plot.pdf")

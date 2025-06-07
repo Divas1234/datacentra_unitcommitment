@@ -66,11 +66,11 @@ if (length(series_names) != length(mylist)) {
 }
 
 series_names <- c(
-  "Thermal Generator",
-  "Wind Farms",
-  "Forced Load Curtailment",
-  "BESS Charging Output",
-  "BESS Discharging Output"
+  "Thermal",
+  "Wind",
+  "Forced Load",
+  "BESS(Charging)",
+  "BESS(Discharging)"
 )
 
 # Create data frame
@@ -92,29 +92,29 @@ df_long <- pivot_longer(
 )
 
 # Make sure the BESS Charging Output is below the 0 line
-df_long$Value <- ifelse(df_long$Series == "BESS Charging Output", -df_long$Value, df_long$Value)
+df_long$Value <- ifelse(df_long$Series == "BESS(Charging)", -df_long$Value, df_long$Value)
 
 
 # Beautify the stacked area plot with y-axis limits from 0 to 3
 q <- ggplot(df_long, aes(x = Time, y = Value, fill = Series)) +
   # Stacked area plot (ggplot will stack the areas automatically)
-  geom_area(alpha = 0.85, color = "black", linewidth = 0.5) +
+  geom_area(alpha = 0.85, color = "white", linewidth = 0.25) +
   scale_fill_manual(values = c(
-    "Thermal Generator" = "brown3", "Wind Farms" = "darkgreen", "Forced Load Curtailment" = "blue",
-    "BESS Charging Output" = "orange", "BESS Discharging Output" = "cyan"
+    "Thermal" = "brown3", "Wind" = "darkgreen", "Load Cut" = "blue",
+    "BESS(Charging)" = "orange", "BESS(Discharging)" = "cyan"
   )) +
   scale_y_continuous(name = "Power (p.u.)", expand = expansion(mult = c(0, 0.1))) +
   scale_x_continuous(name = "Time (h)", breaks = 1:24) +
-  coord_cartesian(ylim = c(-1, 4)) +
+  coord_cartesian(ylim = c(-0.5, 3.5)) +
   theme_bw(base_size = 16) + # Larger base font size
-
   theme(
-    legend.position = c(0.8, 0.85), # Place legend inside the plot (x, y coordinates from 0 to 1)
+    # legend.position = c(0.8, 0.85), # Place legend inside the plot (x, y coordinates from 0 to 1)
+    legend.position = "right",
     legend.title = element_blank(), # Larger legend title
     legend.text = element_text(size = 10), # Larger legend text
     axis.title = element_text(size = 14), # Axis titles bigger
     axis.text = element_text(size = 12), # Axis labels bigger
-    legend.background = element_rect(fill = "transparent", color = NA),
+    # legend.background = element_rect(fill = "transparent", color = NA),
     plot.title = element_text(size = 18, face = "bold"), # Title size and bold
     panel.grid.major = element_line(size = 0.5, color = "gray90"), # Lighter grid lines
     panel.grid.minor = element_blank(), # No minor grid lines
@@ -122,4 +122,4 @@ q <- ggplot(df_long, aes(x = Time, y = Value, fill = Series)) +
     panel.grid.major.y = element_line(linewidth = 1)
   )
 
-ggsave(plot = q, width = 6, height = 5, dpi = 300, filename = "D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\bench\\balanceprocess.pdf")
+ggsave(plot = q, width = 10, height = 5, dpi = 300, filename = "D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\bench\\balanceprocess.pdf")

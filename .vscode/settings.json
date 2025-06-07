@@ -1,7 +1,7 @@
 {
     "editor.wordWrapColumn": 150,
     "editor.wordWrap": "wordWrapColumn",
-    "editor.fontFamily": "Hack, Fira Code, MonoLisa, Monaspace Neon, Roboto Medium, Dubai, Chaparral Pro, Calisto, Helvetic, Fira Code, Geist Mono, JetBrains Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "MonoLisa, Maple Mono, Monaspace Neon, Fira Code, Hack, Monaspace Neon, Roboto Medium, Dubai, Chaparral Pro, Calisto, Helvetic, Fira Code, Geist Mono, JetBrains Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
     "workbench.editor.highlightModifiedTabs": true,
     "terminal.integrated.fontLigatures.enabled": true,
     "CodeGPT.apiKey": "CodeGPT Plus Beta",
@@ -14,10 +14,11 @@
         "latex",
         "plaintext"
     ],
-    "editor.fontSize": 16,
+    "editor.fontSize": 15,
     "cSpell.words": [
         "distributionally",
         "DVFS",
+        "idale",
         "microgrid",
         "microgrids"
     ],
@@ -35,5 +36,151 @@
     "r.linting.maxLineLength": 800,
     "r.linting.nameLength": false,
     "editor.experimental.preferTreeSitter.regex": true,
-    "r.rterm.windows": "D:\\CommonSoftwares\\ProductiveCodingEditors\\R-4.5.0\\bin\\x64\\R.exe"
+    "r.rterm.windows": "D:\\CommonSoftwares\\ProductiveCodingEditors\\R-4.5.0\\bin\\x64\\R.exe",
+    "editor.tokenColorCustomizations": {
+        "[GitHub Light Colorblind (Beta)]": {
+            "textMateRules": [
+                {
+                    "scope": "keyword",
+                    "settings": {
+                        "foreground": "#d73a49",
+                        "fontStyle": "italic"
+                    }
+                },
+                {
+                    "scope": "comment",
+                    "settings": {
+                        "foreground": "#b4c3d2",
+                        "fontStyle": "italic"
+                    }
+                },
+                {
+                    "scope": "string",
+                    "settings": {
+                        "foreground": "#144989"
+                    }
+                },
+                {
+                    "scope": "type",
+                    "settings": {
+                        "foreground": "#618dbf",
+                        "fontStyle": "bold"
+                    }
+                },
+                {
+                    "scope": "function",
+                    "settings": {
+                        "foreground": "#0a0ae5",
+                        "fontStyle": "bold underline"
+                    }
+                },
+                {
+                    "scope": "number",
+                    "settings": {
+                        "foreground": "#c4570e",
+                        "fontStyle": "bold"
+                    }
+                }
+            ]
+        },
+        "[GitHub Sharp]": {
+            "textMateRules": [
+                {
+                    "settings": {
+                        "fontStyle": "bold"
+                    }
+                },
+                {
+                    "scope": "keyword",
+                    "settings": {
+                        "foreground": "#d73a49",
+                        "fontStyle": "italic"
+                    }
+                },
+                {
+                    "scope": "comment",
+                    "settings": {
+                        "foreground": "#b4c3d2",
+                        "fontStyle": "italic"
+                    }
+                },
+                {
+                    "scope": "string",
+                    "settings": {
+                        "foreground": "#144989"
+                    }
+                },
+                {
+                    "scope": "type",
+                    "settings": {
+                        "foreground": "#618dbf",
+                        "fontStyle": "bold"
+                    }
+                },
+                {
+                    "scope": "function",
+                    "settings": {
+                        "foreground": "#0a0ae5",
+                        "fontStyle": "bold"
+                    }
+                },
+                {
+                    "scope": "number",
+                    "settings": {
+                        "foreground": "#c4570e",
+                        "fontStyle": "bold"
+                    }
+                }
+            ]
+        },
+        "[Dainty – City Lights]": {
+            "textMateRules": [
+                {
+                    "scope": "keyword",
+                    "settings": {
+                        "foreground": "#d73a49",
+                        "fontStyle": "italic"
+                    }
+                },
+                {
+                    "scope": "comment",
+                    "settings": {
+                        "foreground": "#213c56",
+                        "fontStyle": "italic"
+                    }
+                },
+                {
+                    "scope": "string",
+                    "settings": {
+                        "foreground": "#59708a"
+                    }
+                },
+                {
+                    "scope": "entity.name.type",
+                    "settings": {
+                        "foreground": "#618dbf",
+                        "fontStyle": "bold"
+                    }
+                },
+                {
+                    "scope": "entity.name.function",
+                    "settings": {
+                        "foreground": "#a59223",
+                        "fontStyle": "bold underline"
+                    }
+                },
+                {
+                    "scope": "number",
+                    "settings": {
+                        "foreground": "#c4570e",
+                        "fontStyle": "bold"
+                    }
+                }
+            ]
+        },
+        "comments": "",
+        "textMateRules": []
+    },
+    "julia-format.flag": "style=SciMLStyle(), indent=4, margin=200, always_for_in=true, for_in_replacement=\"∈\", whitespace_typedefs=true, import_to_using=true, whitespace_in_kwargs=true, align_struct_field=true, align_assignment=true, align_conditional=true, align_pair_arrow=true, normalize_line_endings=\"unix\", align_matrix=true, join_lines_based_on_source=true, indent_submodule=true, surround_whereop_typeparameters=false, yas_style_nesting=true",
+    "github.copilot.chat.scopeSelection": true
 }
