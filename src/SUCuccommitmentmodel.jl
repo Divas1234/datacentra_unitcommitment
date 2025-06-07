@@ -461,14 +461,14 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 					DataCentras.idale .+ DataCentras.sv_constant ./ DataCentras.μ .*
 										 workload_multijob[:, t] .* dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t])
 
-		# @constraint(scuc, [s = 1:NS, t = 1:NT],
-		# 			dc_fv²_plus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²_plus_ub)
-		# @constraint(scuc, [s = 1:NS, t = 1:NT],
-		# 			dc_fv²_plus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²_plus_lb)
-		# @constraint(scuc, [s = 1:NS, t = 1:NT],
-		# 			dc_fv²_minus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²_minus_ub)
-		# @constraint(scuc, [s = 1:NS, t = 1:NT],
-		# 			dc_fv²_minus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²_minus_lb)
+		@constraint(scuc, [s = 1:NS, t = 1:NT],
+					dc_fv²_plus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²_plus_ub)
+		@constraint(scuc, [s = 1:NS, t = 1:NT],
+					dc_fv²_plus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²_plus_lb)
+		@constraint(scuc, [s = 1:NS, t = 1:NT],
+					dc_fv²_minus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²_minus_ub)
+		@constraint(scuc, [s = 1:NS, t = 1:NT],
+					dc_fv²_minus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²_minus_lb)
 
 		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
 					dc_fv²_plus[(s - 1) * ND2 + i, t] ==
@@ -521,6 +521,12 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], sum(weight_fv²λ_plus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos) == 1)
 		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], sum(weight_fv²λ_minus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos) == 1)
 
+		# NEWADDED
+		@constraint(scuc, [s = 1:NS, t = 1:NT],
+					dc_fv²[(s - 1) * ND2 + 1: (s * ND2), t] .<= ones(ND2, 1) * 1.5)
+		@constraint(scuc, [s = 1:NS, t = 1:NT],
+					dc_fv²λ[(s - 1) * ND2 + 1: (s * ND2), t] .<= ones(ND2, 1) * 1.5)
+
 		#NOTE - verison 1: using conventional constinuous constraints
 
 		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .<= DataCentras.p_max)
@@ -542,7 +548,7 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 		# @constraint(scuc, [s = 1:NS, t = 1:NT], 0.6 * ones(ND2, 1) .<= dc_f[((s - 1) * ND2 + 1):(s * ND2), t] .<= 1.5 * ones(ND2, 1))
 		# @constraint(scuc, [s = 1:NS, t = 1:NT], 0.8 * ones(ND2, 1) .<= dc_v²[((s - 1) * ND2 + 1):(s * ND2), t] .<= 1.25 * ones(ND2, 1))
 
-		iter_num = 6
+		iter_num = 1
 		coeff = 0.05
 		iter_block = Int64(round(NT / iter_num))
 		@constraint(scuc, [s = 1:NS, iter = 1:iter_num],

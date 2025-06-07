@@ -41,27 +41,26 @@ res = SUC_scucmodel(NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, DataCen
 # Save the balance results
 savebalance_result(res["p₀"], res["pᵨ"], res["pᵩ"], res["pss_charge_p⁺"], res["pss_charge_p⁻"], 1)
 
-# NOTE - data valiation.
 
-using Plots, PlotThemes
-p1 = Plots.plot(LoadCurve[:, 2]; label = "Load", legend = :topleft)
-Plots.savefig(p1, "./fig/load.pdf")
+# using Plots, PlotThemes
+# p1 = Plots.plot(LoadCurve[:, 2]; label = "Load", legend = :topleft)
+# Plots.savefig(p1, "./fig/load.pdf")
 
-# export_data(LoadCurve, 1)
-function export_data(LoadCurve, flag)
-	if flag == 1
-		filepath = "D:/GithubClonefiles/datacentra_unitcommitment/output/bench/"
-	elseif flag == 2
-		filepath = "D:/GithubClonefiles/datacentre_unitcommitment/output/"
-	else
-		flag == 3
-		filepath = "D:/ieee_tpws/code/littlecase//output/enhance_pros/"
-	end
+# # export_data(LoadCurve, 1)
+# function export_data(LoadCurve, flag)
+# 	if flag == 1
+# 		filepath = "D:/GithubClonefiles/datacentra_unitcommitment/output/bench/"
+# 	elseif flag == 2
+# 		filepath = "D:/GithubClonefiles/datacentre_unitcommitment/output/"
+# 	else
+# 		flag == 3
+# 		filepath = "D:/ieee_tpws/code/littlecase//output/enhance_pros/"
+# 	end
 
-	open(filepath * "LoadCurve.txt", "w") do io
-		# writedlm(io, [" "])
-		return writedlm(io, LoadCurve, '\t')
-	end
-end
+# 	open(filepath * "LoadCurve.txt", "w") do io
+# 		# writedlm(io, [" "])
+# 		return writedlm(io, LoadCurve, '\t')
+# 	end
+# end
 
 run_r_visualizations()
