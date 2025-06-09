@@ -131,25 +131,25 @@ The power consumption of DCCs is primarily influenced by two components: static 
 \vspace{-0.25cm}
 \begin{subequations}
   \begin{align}
-    p_{dcc,i} &= p_{dcc,i}^{idle} + p_{dcc,i}^{dyn},&&\forall i\in\mathcal{I}\\
-    p_{dcc,i}^{idle} &= v_{dcc,i} i_{leak},&&\forall i\in\mathcal{I}\\
-    p_{dcc,i}^{dyn} &= {\left( C_{dcc,i} f_{dcc,i} v_{dcc,i}^{2} \right )}{\lambda_{dcc,i}}{\mu_{dcc,i}^{-1}},&& \forall i\in \mathcal{I}
+    p_{dcc,i,t} &= p_{dcc,i,t}^{idle} + p_{dcc,i,t}^{dyn},&\forall i\in\mathcal{I}\\
+    p_{dcc,i,t}^{idle} &= v_{dcc,i,t} i_{leak},&\forall i\in\mathcal{I}\\
+    p_{dcc,i,t}^{dyn} &= {\left( C_{dcc,i,t} f_{dcc,i} v_{dcc,i,t}^{2} \right )}{\lambda_{dcc,i,t}}{\mu_{dcc,i,t}^{-1}},\!\!\! & \forall i\in \mathcal{I}
   \end{align}
 \end{subequations}
 
 \noindent
-where $i$ and $\mathcal{I}$ represent the index and set of DCCs. $p_{dcc,i}$ denotes the total power consumption of individual DCC $i$. $p_{dcc,i}^{idle}$ and $p_{dcc,i}^{dyn}$ represent the static (idle) and dynamic power consumption of DCC $i$, respectively. $C_{dcc,i}$ defines the constant representing the effective capacitance of DCC $i$. $f_{dcc,i}$ and $v_{dcc,i}$ denote the operational frequency and supply voltage of DCC $i$, respectively.
+where $i$ and $\mathcal{I}$ represent the index and set of DCCs. $p_{dcc,i,t}$ denotes the total power consumption of individual DCC $i$. $p_{dcc,i,t}^{idle}$ and $p_{dcc,i,t}^{dyn}$ represent the static (idle) and dynamic power consumption of DCC $i$, respectively. $C_{dcc,i,t}$ defines the constant representing the effective capacitance of DCC $i$. $f_{dcc,i,t}$ and $v_{dcc,i,t}$ denote the operational frequency and supply voltage of DCC $i$, respectively.
 
 Based on the above physical working principles, the set of associated security constraints representing DCCs workflows can be extended,
 
 \vspace{-0.25cm}
 \begin{subequations}
   \begin{align}
-    p_{dcc,i} & \!\geq\! p_{dcc,i}^{idle} \!+\! p_{dcc,i}^{dyn},&&\forall i\in\mathcal{I}\\
-    p_{dcc,i}^{idle} & \!\geq\! \lfloor {v}_{dcc,i}\rfloor i_{leak},&&\forall i\in\mathcal{I}\\
-    p_{dcc,i}^{idle} & \!\leq\! \lceil {v}_{dcc,i}\rceil i_{leak},&&\forall i \in\mathcal{I} \\
-    p_{dcc,i}^{dyn} & \!\geq\! \lfloor ( C_{dcc,i} f_{dcc,i} v_{dcc,i}^{2} ) \rfloor {\lambda_{dcc,i}}{\mu_{dcc,i}^{-1}},&&\forall i \in\mathcal{I} \\
-    p_{dcc,i}^{dyn} & \!\leq\! \lceil ( C_{dcc,i} f_{dcc,i} v_{dcc,i}^{2} ) \rceil {\lambda_{dcc,i}}{\mu_{dcc,i}^{-1}},&&\forall i \in\mathcal{I}
+    \!\!\!\!p_{dcc,i,t} & \!\geq\! p_{dcc,i,t}^{idle} \!+\! p_{dcc,i,t}^{dyn},&\forall i\in\mathcal{I}\\
+    \!\!\!\!p_{dcc,i,t}^{idle} & \!\geq\! \lfloor {v}_{dcc,i,t}\rfloor i_{leak},&\forall i\in\mathcal{I}\\
+    \!\!\!\!p_{dcc,i,t}^{idle} & \!\leq\! \lceil {v}_{dcc,i,t}\rceil i_{leak},&\forall i \in\mathcal{I} \\
+    \!\!\!\!p_{dcc,i,t}^{dyn} & \!\geq\! \lfloor ( C_{dcc,i,t} f_{dcc,i} v_{dcc,i,t}^{2} ) \rfloor {\lambda_{dcc,i,t}}{\mu_{dcc,i,t}^{-1}},&\forall i \in\mathcal{I} \\
+    \!\!\!\!p_{dcc,i,t}^{dyn} & \!\leq\! \lceil ( C_{dcc,i,t} f_{dcc,i} v_{dcc,i,t}^{2} ) \rceil {\lambda_{dcc,i,t}}{\mu_{dcc,i,t}^{-1}},&\forall i \in\mathcal{I}
     % \phi_{dcc,i}^{dvfs} &= ( C_{dcc,i} f_{dcc,i} v_{dcc,i}^{2} ), \forall i\in \mathcal{I}
   \end{align}
 \end{subequations}
@@ -163,89 +163,99 @@ Next, to demonstrate the benefits of DVFS-controlled DCCs for achieving smooth e
 \vspace{-0.25cm}
 \begin{subequations}
   \begin{align}
-    p_{dcc,i} &\geq p_{dcc,i}^{idle} \!+\! p_{dcc,i}^{dyn} + \varDelta p_{dcc,i}^{bal},&&\forall i\in\mathcal{I}\\
-    \varDelta p_{dcc,i}^{bal} &= \phi_{dcc,i}^{dvfs} {\left ( \lambda_{dcc,i}^{ini} + \varDelta \lambda_{dcc,i}\right )}{\mu_{dcc,i}^{-1}},&& \forall i\in \mathcal{I}\\
-    \phi_{dcc,i}^{dvfs} &= C_{dcc,i} f_{dcc,i} v_{dcc,i}^{2}, &&\forall i\in \mathcal{I} \\
-    \lfloor f_{dcc,i} \rfloor &\leq f_{dcc,i} \leq \lceil f_{dcc,i} \rceil, &&\forall i\in \mathcal{I}\\
-    \lfloor v_{dcc,i} \rfloor &\leq v_{dcc,i} \leq \lceil v_{dcc,i} \rceil, &&\forall i\in \mathcal{I}
+    p_{dcc,i,t} &\geq p_{dcc,i,t}^{idle} \!+\! p_{dcc,i,t}^{dyn} + \varDelta p_{dcc,i,t}^{bal},&&\forall i\in\mathcal{I}\\
+    \varDelta p_{dcc,i,t}^{bal} &= \phi_{dcc,i,t}^{dvfs} {\left ( \lambda_{dcc,i,t}^{ini} \!+\! \varDelta \lambda_{dcc,i,t}\right )}{\mu_{dcc,i}^{-1}},&& \forall i\in \mathcal{I}\\
+    \phi_{dcc,i,t}^{dvfs} &= C_{dcc,i,t} f_{dcc,i,t} v_{dcc,i,t}^{2}, &&\forall i\in \mathcal{I} \\
+    \lfloor f_{dcc,i} \rfloor &\leq f_{dcc,i,t} \leq \lceil f_{dcc,i} \rceil, &&\forall i\in \mathcal{I}\\
+    \lfloor v_{dcc,i} \rfloor &\leq v_{dcc,i,t} \leq \lceil v_{dcc,i} \rceil, &&\forall i\in \mathcal{I}
   \end{align}
 \end{subequations}
 
 \noindent
-where $\varDelta p_{dcc,i}^{bal}$ represents the change in the power consumption for DCC $i$ due to workload balancing, $\lambda_{dcc,i}^{ini}$ represents the initial workload, and $\varDelta \lambda_{dcc,i}$ represents the adjusted workload.
-The term $\phi_{dcc,i}^{dvfs}$ represents the power regulation process for the DCC $i$ through DVFS technique,
+where $\varDelta p_{dcc,i,t}^{bal}$ represents the change in the power consumption for DCC device $i$ due to workload balancing, $\lambda_{dcc,i,t}^{ini}$ represents the initial workload, and $\varDelta \lambda_{dcc,i,t}$ represents the adjusted workload.
+The term $\phi_{dcc,i,t}^{dvfs}$ represents the power regulation process for the DCC device $i$ through DVFS technique,
 By incorporating the workload balancing dynamics defined in (3a)-(3c) into (2b) and (2c), the form of DVFS-controlled DCCs constraints can be established.
 
-The value of $\lambda_{dcc,i}^{bal}$ primarily depends on users' tolerance for computational workload response time. Generally speaking, greater tolerance allows for a higher $\lambda_{dcc,i}^{bal}$, thereby enhancing the workload balancing capability of DCCs and enabling more flexible adjustment of workloads across clusters. As such, the performance of workload balancing processes can be estimated through the metric of average workload queuing delay duration, $i.e.$, $T_{q} = \nicefrac{1}{(v_{dcc,i} - \lambda_{dcc,i})}$. To address this issue, the following lists the relate binding constraints concerning workload balancing processes,
+The value of $\lambda_{dcc,i,t}^{bal}$ primarily depends on users' tolerance for computational workload response time. Generally speaking, greater tolerance allows for a higher $\lambda_{dcc,i,t}^{bal}$, thereby enhancing the workload balancing capability of DCCs and enabling more flexible adjustment of workloads across clusters. As such, the performance of workload balancing processes can be estimated through the metric of average workload queuing delay duration, $i.e.$, $T_{q,t} = \nicefrac{1}{(v_{dcc,i,t} - \lambda_{dcc,i,t})}$. To address this issue, the following lists the relate binding constraints concerning workload balancing processes,
 
 \vspace{-0.25cm}
 \begin{subequations}
   \begin{align}
-    & T_{q} \leq T_{tol}^{-1}:T_{q} =  1/({v_{dcc,i} - \lambda_{dcc,i}}), && \\
-    & \Rightarrow \lambda_{dcc,i}^{ini} + \lambda_{dcc,i}^{dyn} + \varDelta \lambda_{dcc,i}^{bal} \leq v_{dcc,i} - T_{tol}^{-1}, && \forall i\in \mathcal{I} \\
-    & \Rightarrow \varDelta \lambda_{dcc,i}^{bal} \leq v_{dcc,i} \!-\! T_{tol}^{-1} \!-\! (\lambda_{dcc,i}^{ini} + \lambda_{dcc,i}^{dyn}), && \forall i\in \mathcal{I}\\
-    & \varDelta \lambda_{dcc,i}^{bal} \geq 0, \varDelta \lambda_{dcc,i}^{bal}  \in \mathbb{R}, && \forall i\in \mathcal{I}
+    T_{q,t} &\leq T_{tol}^{-1}\Rightarrow &\\
+    \varDelta \lambda_{dcc,i,t}^{bal} &\leq v_{dcc,i,t} \!-\! T_{tol}^{-1} \!-\! (\lambda_{dcc,i,t}^{ini} + \lambda_{dcc,i,t}^{dyn}), \!\!\!\!& \forall i\in \mathcal{I}\\
+    \varDelta \lambda_{dcc,i,t}^{bal} &\geq 0, \varDelta \lambda_{dcc,i,t}^{bal}  \in \mathbb{R}, & \forall i\in \mathcal{I}
   \end{align}
 \end{subequations}
 
 \noindent
 where $T_{tol}$ represents the predefined threshold for the average workload queuing delay duration.
 
-It is worth to noting that constraints (3a)-(3c) remain elusive due to the presence of product terms involving continuous variables, $ie$., $\phi_{dcc,i}^{dvfs}$ and $\varDelta \lambda_{dcc,i}$. To address this, the McCormick envelope method is introduced to linear the constructed constraints mentioned before. More detailed,
-let $\iota_{dcc,i} = \phi_{dcc,i}^{dvfs} \times \varDelta \lambda_{dcc,i}$, and additionally introduce two auxiliary variables $\varsigma_{dcc,i}^{up}, \varsigma_{dcc,i}^{dw}$ where $\varsigma_{dcc,i}^{up} = \nicefrac{1}{2}(\phi_{dcc,i}^{dvfs} + \varDelta \lambda_{dcc,i}) $, $\varsigma_{dcc,i}^{dw} = \nicefrac{1}{2}(\phi_{dcc,i}^{dvfs} - \varDelta \lambda_{dcc,i}) $, accordingly, the constraint (3b) can be reformatted as its approximated linear form as below,
+It is worth to noting that (3a)-(3c) remain elusive due to the presence of product terms involving continuous variables, $ie$., $\phi_{dcc,i,t}^{dvfs}$ and $\varDelta \lambda_{dcc,i,t}$. To address this, the McCormick envelope method is introduced to linear the constructed constraints mentioned before. More detailed,
+let $\iota_{dcc,i,t} = \phi_{dcc,i,t}^{dvfs} \varDelta \lambda_{dcc,i,t}$, and additionally introduce two auxiliary variables $\varsigma_{dcc,i,t}^{up}, \varsigma_{dcc,i,t}^{dw}$ where $\varsigma_{dcc,i,t}^{up} = \nicefrac{1}{2}(\phi_{dcc,i,t}^{dvfs} + \varDelta \lambda_{dcc,i,t}) $, $\varsigma_{dcc,i,t}^{dw} = \nicefrac{1}{2}(\phi_{dcc,i,t}^{dvfs} - \varDelta \lambda_{dcc,i,t}) $, accordingly, the constraint (3b) can be reformatted as its approximated linearized form as below,
 
 \vspace{-0.25cm}
 \begin{subequations}
   \begin{align}
-    \varDelta p_{dcc,i}^{bal} = &\phi_{dcc,i}^{dvfs} \lambda_{dcc,i}^{ini}{\mu_{dcc,i}^{-1}} + \notag \\
-    &\iota_{dcc,i}  {\mu_{dcc,i}^{-1}}, \iota_{dcc,i} \!=\!\phi_{dcc,i}^{dvfs} \varDelta \lambda_{dcc,i}, && \forall i\in \mathcal{I}\\
-    \iota_{dcc,i} \geq &(\varsigma_{dcc,i}^{up})^{2} - (\varsigma_{dcc,i}^{dw})^{2},&& \forall i\in \mathcal{I}\\
-    \varsigma_{dcc,i}^{up} \geq & 0, \varsigma_{dcc,i}^{up} \in \mathbb{R}, \varsigma_{dcc,i}^{dw} \in \mathbb{R},&& \forall i\in \mathcal{I}
+    \varDelta p_{dcc,i,t}^{bal} = &\phi_{dcc,i,t}^{dvfs} \lambda_{dcc,i,t}^{ini}{\mu_{dcc,i,t}^{-1}} +  \\
+    &\iota_{dcc,i,t} {\mu_{dcc,i,t}^{-1}} & \forall i\in \mathcal{I} \notag \\
+    \iota_{dcc,i,t} =&\phi_{dcc,i,t}^{dvfs} \varDelta \lambda_{dcc,i,t}, & \forall i\in \mathcal{I}\\
+    \iota_{dcc,i,t} \geq &(\varsigma_{dcc,i,t}^{up})^{2} - (\varsigma_{dcc,i,t}^{dw})^{2},& \forall i\in \mathcal{I}\\
+    \varsigma_{dcc,i,t}^{up} \geq & 0, \varsigma_{dcc,i,t}^{up} \in \mathbb{R}, \varsigma_{dcc,i,t}^{dw} \in \mathbb{R},& \forall i\in \mathcal{I}
   \end{align}
 \end{subequations}
 
-In (4b), the standard square terms of $\langle \varsigma_{dcc,i}^{up},\varsigma_{dcc,i}^{dw}\rangle $ can be further reshaped as a Special-Ordered-Sets-of-type-2 (SOS2) constraint, which MILP solver could accurately identify and compile them. For simplification, let $\langle \varsigma_{dcc,i,z}^{up}, \varsigma_{dcc,i,z}^{dw}\rangle$, respectively, denote the piecewise block of related continuous variables $\langle \varsigma_{dcc,i}^{up},\varsigma_{dcc,i}^{dw}\rangle$, hence, (4b) can be reformulated as below,
+In (4b), the standard square terms of $\langle \varsigma_{dcc,i,t}^{up},\varsigma_{dcc,i,t}^{dw}\rangle $ can be further reshaped as a Special-Ordered-Sets-of-type-2 (SOS2) constraint, which MILP solver could accurately identify and compile them. For simplification, let $\langle \varsigma_{dcc,i,t,z}^{up}, \varsigma_{dcc,i,t,z}^{dw}\rangle$, respectively, denote the piecewise block of related continuous variables $\langle \varsigma_{dcc,i,t}^{up},\varsigma_{dcc,i,t}^{dw}\rangle$, hence, (4b) can be reformulated as below,
 
 \vspace{-0.25cm}
 \begin{subequations}
 \begin{align}
-   \iota_{dcc,i} \geq & \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,z}^{up}) \varpi_{dcc,i,z}^{up} - \notag \\
-   &\quad\, \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,z}^{dw}) \varpi_{dcc,i,z}^{dw}, & \forall i\in \mathcal{I}\\
-   \varsigma_{dcc,i}^{up} & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,z}^{up} \varpi_{dcc,i,z}^{up}, &\forall i\in \mathcal{I}\\
-   \varsigma_{dcc,i}^{dw} & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,z}^{dw} \varpi_{dcc,i,z}^{dw}, & \forall i\in \mathcal{I}\\
-   \sum\nolimits_{z\in\mathcal{Z}} &\varsigma_{dcc,i,z}^{up} = 1,  \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,z}^{dw} = 1, &\forall i\in \mathcal{I}\\
-    \Im(\varsigma_{dcc,i,z}^{up}) &= (\varsigma_{dcc,i,z}^{up})^2,  \forall z\in \mathcal{Z}, &\forall i\in \mathcal{I}\\
-    \Im(\varsigma_{dcc,i,z}^{dw}) &= (\varsigma_{dcc,i,z}^{dw})^2,  \forall z\in \mathcal{Z}, &\forall i\in \mathcal{I}\\
-   \varsigma_{dcc,i,z}^{up} &\geq 0,\varsigma_{dcc,i,z}^{dw}  \geq 0, \forall z\in \mathcal{Z}, &\forall i\in \mathcal{I}\\
-    \varpi_{dcc,i,z}^{up} &\in\{0,\!1\},\varpi_{dcc,i,z}^{dw}\in\{0,\!1\}, \forall z\in \mathcal{Z}, \!\!\!\! &\forall i\in \mathcal{I}
+   \iota_{dcc,i,t} \geq & \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,t, z}^{up}) \varpi_{dcc,i,t, z}^{up} - \notag \\
+   &\quad\, \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,t, z}^{dw}) \varpi_{dcc,i,t, z}^{dw}, & \forall i\in \mathcal{I}\\
+   \varsigma_{dcc,i,t}^{up} & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,t,z}^{up} \varpi_{dcc,i,t,z}^{up}, &\forall i\in \mathcal{I}\\
+   \varsigma_{dcc,i,t}^{dw} & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,t,z}^{dw} \varpi_{dcc,i,t,z}^{dw}, & \forall i\in \mathcal{I}\\
+   \sum\nolimits_{z\in\mathcal{Z}} &\varsigma_{dcc,i,t,z}^{up} \!=\! 1,  \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,t,z}^{dw} = 1,\!\!&\forall i\in \mathcal{I}\\
+    \Im(\varsigma_{dcc,i,t,z}^{up}) &= (\varsigma_{dcc,i,t,z}^{up})^2,  \forall z\in \mathcal{Z}, &\forall i\in \mathcal{I}\\
+    \Im(\varsigma_{dcc,i,t,z}^{dw}) &= (\varsigma_{dcc,i,t,z}^{dw})^2,  \forall z\in \mathcal{Z}, &\forall i\in \mathcal{I}\\
+   \varsigma_{dcc,i,t,z}^{up} &\geq 0,\varsigma_{dcc,i,t,z}^{dw}  \geq 0, \forall z\in \mathcal{Z}, &\forall i\in \mathcal{I}\\
+    \varpi_{dcc,i,t,z}^{up} &\in\{0,\!1\},\varpi_{dcc,i,t,z}^{dw}\in\{0,\!1\}, & \forall z\in \mathcal{Z}
 \end{align}
 \end{subequations}
 
-Similarly, constraint (3c) can be approximated as a set of SOS2 constraints using the McCormick Envelope method. The detailed mathematical formulations for this approximation are provided in Appendix A. By combining these previously mentioned constraints, a comprehensive set of physical constraints describing workload power consumption can be effectively established.
+It can be observed that, constraint (3b) can be continuously retreated as a product of two continuous variables termed as \(\pi_{dcc,i,t}^{dvfs}\) and \(\varDelta \lambda_{dcc,i,t}\), and it can be also equivalent as a set of SOS1 constraint via the McCormick Envelope method. Specially, the detailed mathematical formulations for this approximation are provided in Appendix A. By combining these previously mentioned constraints, a comprehensive set of physical constraints describing workload power consumption can be effectively established.
 
-\section{Refined workload balancing cosntraints among multiple DCCs}
+\section{workload balancing constraints among multiple DCCs}
 
-As previously discussed, \(\lambda_{dcc,i} \) serves as an indicator for the workload allocation process on individual DCC devices. This process is achieved by regulating the operational frequency and supply voltage parameters of each individual DCC. Nevertheless, the overall workload requirements remain constant, even though the specific workload assigned to individual DCCs might be adjusted (increased or decreased). To reflect this characteristic, the sum of \(\lambda_{dcc,i}\) for all workloads hosted on a specific DCC device must be restricted as follows:
+As previously discussed, \(\lambda_{dcc,i,t} \) serves as an indicator for the workload allocation process, where this process is achieved by regulating the operational frequency and supply voltage parameters of each individual DCC. Nevertheless, the overall workload amount must remain constant, even though the specific workload assigned to individual DCCs might be adjusted (increased or decreased). To reflect this characteristic, the sum of \(\lambda_{dcc,i,t}\) for all workloads hosted on a specific DCC device should be restricted as follows,
 
 \vspace{-0.25cm}
 \begin{subequations}
 \begin{align}
-  \sum\nolimits_{i\in\mathcal{I}} (\varDelta \lambda_{dcc,i} + \lambda_{dcc,i}^{ini} ) &= \sum\nolimits_{i\in\mathcal{I}} \lambda_{dcc,i}^{ini},  &\forall i\in\mathcal{I} \notag\\
-  \Rightarrow \sum\nolimits_{i\in\mathcal{I}} \varDelta \lambda_{dcc,i} &= 0,\varDelta \lambda_{dcc,i} \in\mathbb{R}  &\forall i\in\mathcal{I}
+  \sum\nolimits_{i\in\mathcal{I}} (\varDelta \lambda_{dcc,i,t} + \lambda_{dcc,i,t}^{ini} ) = \sum\nolimits_{i\in\mathcal{I}} \lambda_{dcc,i,t}^{ini},  &\forall i\in\mathcal{I} \notag\\
+  \Rightarrow \sum\nolimits_{i\in\mathcal{I}} \varDelta \lambda_{dcc,i,t} = 0,\varDelta \lambda_{dcc,i,t} \in\mathbb{R}, &\forall i\in\mathcal{I}
 \end{align}
 \end{subequations}
 
-Given that compute workload types differ across DCCs, and not all workloads can be freely transferable to other DCC device, where this transferability is closely dependent on the current workload type (specifically, only $compute$-$intensive$ and $storage$-$intensive$ types are generally transferable, while $network$-$intensive$ type may not). This necessitates evaluating each DCC's potential to engage in workload balancing and establishing the following constraint:
+Given that compute workload types differ across DCCs, and not all workloads can be freely transferable to other DCC device, where this transferability is closely dependent on the current workload type (specifically, only $compute$-$intensive$ and $storage$-$intensive$ types are generally transferable, while $network$-$intensive$ type may not). This necessitates evaluating each DCC's potential to engage in workload balancing and establishing the following constraint,
 
 \vspace{-0.25cm}
 \begin{subequations}
 \begin{align}
-  \lfloor \varDelta \lambda_{dcc,i} \rfloor \leq \varDelta \lambda_{dcc,i} \leq \lceil\varDelta \lambda_{dcc,i} \rceil, \,\,\,\, \forall i\in\mathcal{I}
+  \lfloor \varDelta \lambda_{dcc,i} \rfloor \leq \varDelta \lambda_{dcc,i,t} \leq \lceil\varDelta \lambda_{dcc,i} \rceil, \,\,\,\, \forall i\in\mathcal{I}
 \end{align}
 \end{subequations}
 
 \noindent
 where $\lceil {\varDelta \lambda_{dcc,i}} \rceil$ and $\lfloor {\varDelta \lambda_{dcc,i}} \rfloor$ , respectively, denotes the upper bound and lower bound of available adjustable potential during workload balancing processes.
+Even for these computing workload categories that can actively respond to the grid flexible requirements, it is essential to balance local workload consumptions hosted on DCCs as much as possible at the current period or adjacent scheduling periods, rather than transferring thems over too long a time interval. This is a necessary prerequisite to avoid excessive user waiting time caused by an excessively higher \(\lambda_{dcc,i}\). To reflect this issue, additionally restrictions should be constructed as below,
+
+\vspace{-0.25cm}
+\begin{subequations}
+\begin{align}
+  & \sum\nolimits_{t\in\mathcal{T}_{k}}\sum\nolimits_{i\in\mathcal{I}} \varDelta \lambda_{dcc,i,t} = 0, \notag\\ 
+  & \qquad \qquad \forall i\in \mathcal{I}, t\in\mathcal{T}, k\in\{1,2,3,\ldots, NK\}
+\end{align}
+\end{subequations}
+
 
 \section{Improved unit commitment through DVFS-controlled DCCs}
 
@@ -297,28 +307,28 @@ In order to depict the flexibility potential provided by DDCs during the entire 
 \end{subequations}
 
 In the above formulations,
-The objective function (9a) aims to achieve the economic operation cost of the power systems.
-Constraint (9b) and (9c) enforce the consistency among unit start-up state, shut-down state, and on/off status decisions produced by conventional generators.
-Constraints (9d) and (9e) impose minimum shut-up/shut-down duration restrictions for each conventional generators, ensuring adequate durations between consecutive start-up and shut-down actions.
-Constraint (9f) ensures power balance between generation and demand. The demand side includes both conventional electricity consumers and DCCs.
-Constraint (9g) models the electrical power flow limits on each transmission line.
-Constraints (9h) enforce the upward and downward ramping limits of individual conventional generators.
-Constraints (9i) and (9j) specify the upper and lower bounds of power output for each conventional generator.
-Constraint (9k) restricts the allowable curtailment of wind power, while constraint (9l) accounts for potential forced load curtailment during specific periods.
-Constraints (9m) and (9n) govern the charging and discharging power of BESS.
-Constraint (9o) ensures mutual exclusivity between charging and discharging states of BESS, preventing simultaneous charging and discharging.
-Constraint (9p) tracks the state of charge in BESS, where $\eta_{e}^{ch}$ and $\eta_{e}^{dis}$ denote the charging and discharging efficiencies, respectively.
-Constraints (9q) and (9r) define the ramping limits for battery systems during charging and discharging.
-Constraints (9s) and (9t) represent the physical operating limits of DCCs under DVFS control schemes.
+The objective function (10a) aims to achieve the economic operation cost of the power systems.
+Constraint (10b) and (10c) enforce the consistency among unit start-up state, shut-down state, and on/off status decisions produced by conventional generators.
+Constraints (10d) and (10e) impose minimum shut-up/shut-down duration restrictions for each conventional generators, ensuring adequate durations between consecutive start-up and shut-down actions.
+Constraint (10f) ensures power balance between generation and demand. The demand side includes both conventional electricity consumers and DCCs.
+Constraint (10g) models the electrical power flow limits on each transmission line.
+Constraints (10h) enforce the upward and downward ramping limits of individual conventional generators.
+Constraints (10i) and (10j) specify the upper and lower bounds of power output for each conventional generator.
+Constraint (10k) restricts the allowable curtailment of wind power, while constraint (10l) accounts for potential forced load curtailment during specific periods.
+Constraints (10m) and (10n) govern the charging and discharging power of BESS.
+Constraint (10o) ensures mutual exclusivity between charging and discharging states of BESS, preventing simultaneous charging and discharging.
+Constraint (10p) tracks the state of charge in BESS, where $\eta_{e}^{ch}$ and $\eta_{e}^{dis}$ denote the charging and discharging efficiencies, respectively.
+Constraints (10q) and (10r) define the ramping limits for battery systems during charging and discharging.
+Constraints (10s) and (10t) represent the physical operating limits of DCCs under DVFS control schemes.
 
 \section{Case Studies and Analysis}
 
-To validate the effectiveness of the proposed refined UC model, a data center system comprising multiple DCCs is integrated into the IEEE 6-bus test system. The total workload consumption of all DCCs throughout the scheduling horizon is statisticed in Table.~1. Additionally, two wind farms, each with an installed capacity of $5$ MW, are connected at bus 2 in the power system. The sequential load curves and stochastic wind farm outputs are illustrated in Figure []. All experiments are conducted on a personal Lenovo desktop equipped with a Intel(R) Core i7-13700F CPU @$3.46$GHz and RAM $32$GB. Both the proposed model and the benchmark model are implemented in the Julia/JuMP environment. Data visualization is performed using the ggplot2 package in the R programming language.
+To validate the effectiveness of the proposed refined UC model, a data center system comprising multiple DCCs is integrated into the IEEE 6-bus test system. The total workload consumption throughout the scheduling horizon is statisticed in Table.~1. Additionally, two wind farms, each with an installed capacity of $5$ MW, are connected at bus 2 in the power system. The sequential load curves and stochastic wind farm outputs are illustrated in Figure []. All experiments are conducted on a personal Lenovo desktop equipped with a Intel(R) Core i7-13700F CPU @$3.46$GHz and RAM $32$GB. Both the proposed model and the benchmark model are implemented in the Julia-v11.5/JuMP-v1.26 environment. the data visualization is performed using the ggplot2 package in the R programming language.
 
 In this section, the parameters of DCCs referring to [] are set as follows:
 The idle workload consumption generated by each DCC is set to $10$KW, and $8$ DCC devices are assumed to be equipped to construct the all workload requirements. Other boundary conditions such as DCC peak power, DCC peak power, workload ratio, initial frequency and supply voltage, DVFS regulation regions, etc., are set as shown in Table.~2.
 
-%TODO
+
 
 \begin{table}[]
 \centering
@@ -346,46 +356,64 @@ The idle workload consumption generated by each DCC is set to $10$KW, and $8$ DC
 \end{tabular}
 \end{table}
 
-\begin{figure}
-\includegraphics[width=0.45\textwidth]{./fig/loadcurve.pdf}
+\begin{table}[]
+\centering
+\caption{Both lower-bound and upper-bound of frequency parameters and voltage parameters within DVFS processes} \label{tab:dvfs_params}
+\begin{tabular}{l|cc}
+\hline
+TYPE & lower-bound (p.u)   & upper-bound (p.u.)   \\
+\hline
+\(f_{dcc,i,t}\)    & $0.50$  & $1.50$  \\
+\(v_{dcc,i,t}\)    & $0.85$ & $1.25$ \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{figure}  \raggedright
+\includegraphics[width=0.40\textwidth]{./fig/loadcurve.pdf}
 \caption{Chronological load curve of the IEEE 6-bus system with DCCs.}
 \label{fig:load_curve}
 \end{figure}
 
-\begin{figure}
-\includegraphics[width=0.45\textwidth]{./fig/workload_distribution.pdf}
+\begin{figure}  \raggedright
+\includegraphics[width=0.40\textwidth,height = 5cm]{./fig/windscurve_result.pdf}
+\caption{Chronological stochastic output generated by wind farms.}
+\label{fig:wind_curve}
+\end{figure}
+
+\begin{figure} \raggedright
+\includegraphics[width=0.46\textwidth]{./fig/workload_distribution.pdf}
 \caption{Given workload distribution of the IEEE 6-bus system with DCCs.}
 \label{fig:workload_distribution}
 \end{figure}
 
 
-\begin{figure}
-\includegraphics[width=0.495\textwidth]{./fig/balanceprocess.pdf}
+\begin{figure} \raggedright
+\includegraphics[width=0.51\textwidth,height = 5cm]{./fig/balanceprocess.pdf}
 \caption{Power balance process of the IEEE 6-bus system with DCCs.}
 \label{fig:balance_process}
 \end{figure}
 
-\begin{figure}
-  \includegraphics[width=0.475\textwidth]{./fig/stacked_dcc_plot.pdf}
+\begin{figure} \raggedright
+  \includegraphics[width=0.45\textwidth]{./fig/stacked_dcc_p_plot.pdf}
   \caption{sequential workload consumption generated by DCCs.}
   \label{fig:workload_consumption_plot}
 \end{figure}
 
-
-\begin{figure}
-  \includegraphics[width=0.45\textwidth]{./fig/stacked_dcc_f_plot.pdf}
+\begin{figure}[!h]
+ \raggedright
+  \includegraphics[width=0.45\textwidth, height = 12cm]{./fig/stacked_dc_fv_subplots.pdf}
   \caption{sequential frequency regulations through DVFS in DCCs.}
   \label{fig:stacked_dcc_f_plot}
 \end{figure}
 
-\begin{figure}
-  \includegraphics[width=0.475\textwidth]{./fig/stacked_dcc_λ_plot.pdf}
+\begin{figure}[!h]
+ \raggedright
+  \includegraphics[width=0.45\textwidth, height = 12cm]{./fig/stacked_dc_λ_subplots.pdf}
   \caption{sequential workload balancing through DVFS in DCCs.}
   \label{fig:stacked_dcc_λ_plot}
   \end{figure}
-
-
-
 
 
 
@@ -435,4 +463,4 @@ Next, $\phi_{dcc,i}^{dvfs}$ can be equivalently represented as the product of tw
 \bibliographystyle{IEEEtran}
 \bibliography{IEEEabrv,reference}
 
-\end{document} 
+\end{document}

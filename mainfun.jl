@@ -29,6 +29,17 @@ DataCentras = forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, U
 # Generate wind scenarios
 winds, NW = genscenario(WindsFreqParam, 1)
 
+output_dir = pwd()
+filepath = joinpath(output_dir, "output\\bench", "windsimulation_curve.csv")
+try
+	CSV.write(filepath, DataFrame(winds.scenarios_curve, :auto))
+	println("Successfully wrote to $filepath")
+catch e
+	@error "Failed to write to $filepath" exception=(e, catch_backtrace())
+end
+
+
+
 @assert config_param.is_ConsiderDataCentra == 1
 
 # Apply boundary conditions

@@ -4,73 +4,32 @@ library(ggstream)
 library(areaplot)
 
 # read data
-loadcurve <- readr::read_table(
-  "D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\bench\\LoadCurve.txt",
-  col_names = FALSE
-)
-res_thermalunits <- readr::read_table(
-  "D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\bench\\res_thermalunits.txt",
-  col_names = FALSE
-)
-res_windunits <- readr::read_table(
-  "D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\bench\\res_windunits.txt",
-  col_names = FALSE
-)
-res_forced_load_curtailment <- readr::read_table(
-  paste0(
-    "D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\bench\\",
-    "res_forcedloadcurtailment.txt"
-  ),
-  col_names = FALSE
-)
-res_bess_charging <- readr::read_table(
-  paste0(
-    "D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\bench\\",
-    "res_BESS_charging.txt"
-  ),
-  col_names = FALSE
-)
-res_bess_discharging <- readr::read_table(
-  paste0(
-    "D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\bench\\",
-    "res_BESS_discharging.txt"
-  ),
-  col_names = FALSE
-)
-res_ddc <- readr::read_table(
-  paste0(
-    "D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\bench\\",
-    "res_ddc.txt"
-  ),
-  col_names = FALSE
-)
+loadcurve <- readr::read_table("output/bench/LoadCurve.txt", col_names = FALSE)
+res_thermalunits <- readr::read_table("output/bench/res_thermalunits.txt", col_names = FALSE)
+res_windunits <- readr::read_table("output/bench/res_windunits.txt", col_names = FALSE)
+res_forced_load_curtailment <- readr::read_table("output/bench/res_forcedloadcurtailment.txt", col_names = FALSE)
+res_bess_charging <- readr::read_table("output/bench/res_BESS_charging.txt", col_names = FALSE)
+res_bess_discharging <- readr::read_table("output/bench/res_BESS_discharging.txt", col_names = FALSE)
+res_ddc <- readr::read_table("output/bench/res_ddc.txt", col_names = FALSE)
 
 res_loadcurve <- loadcurve$X2
 
-typeof(loadcurve)
-
-head(loadcurve)
-head(res_thermalunits)
-
-mylist <- list(
-  unlist(res_thermalunits),
-  unlist(res_windunits),
-  unlist(res_forced_load_curtailment),
-  unlist(res_bess_charging),
-  unlist(res_bess_discharging)
+# Define the desired stacking order from bottom to top
+series_names <- c(
+  "Wind",
+  "Thermal",
+  "Load Cutting",
+  "BESS(Discharging)",
+  "BESS(Charging)"
 )
 
-series_names <- factor(series_names, levels = c("Thermal Generator", "Wind Farms", "Forced Load Curtailment", "BESS Charging Power", "BESS Discharging Output"))
-if (length(series_names) != length(mylist)) {
-  stop("The number of series names doesn't match the number of lists.")
-}
-
-series_names <- c(
-  "Thermal",
-  "Wind",
-  "Forced Load",
-  "BESS(Charging)",
-  "BESS(Discharging)"
+# Match the data to the desired order
+mylist <- list(
+  unlist(res_windunits),
+  unlist(res_thermalunits),
+  unlist(res_forced_load_curtailment),
+  unlist(res_bess_discharging),
+  unlist(res_bess_charging)
 )
 
 # Create data frame
@@ -91,35 +50,37 @@ df_long <- pivot_longer(
   values_to = "Value"
 )
 
+# Set the factor levels to the REVERSE of the desired stacking order
+df_long$Series <- factor(df_long$Series, levels = rev(series_names))
+
 # Make sure the BESS Charging Output is below the 0 line
 df_long$Value <- ifelse(df_long$Series == "BESS(Charging)", -df_long$Value, df_long$Value)
 
 
-# Beautify the stacked area plot with y-axis limits from 0 to 3
+# Beautify the stacked area plot
 q <- ggplot(df_long, aes(x = Time, y = Value, fill = Series)) +
-  # Stacked area plot (ggplot will stack the areas automatically)
   geom_area(alpha = 0.85, color = "white", linewidth = 0.25) +
   scale_fill_manual(values = c(
-    "Thermal" = "brown3", "Wind" = "darkgreen", "Load Cut" = "blue",
-    "BESS(Charging)" = "orange", "BESS(Discharging)" = "cyan"
+    "Thermal" = "brown3", "Wind" = "darkgreen", "Load Cutting" = "blue",
+    "BESS(Charging)" = "orange", "BESS(Discharging)" = "#226f6f"
   )) +
   scale_y_continuous(name = "Power (p.u.)", expand = expansion(mult = c(0, 0.1))) +
   scale_x_continuous(name = "Time (h)", breaks = 1:24) +
-  coord_cartesian(ylim = c(-0.5, 3.5)) +
-  theme_bw(base_size = 16) + # Larger base font size
+  coord_cartesian(ylim = c(-0.5, 4)) +
+  theme_bw(base_size = 16) +
   theme(
-    # legend.position = c(0.8, 0.85), # Place legend inside the plot (x, y coordinates from 0 to 1)
-    legend.position = "right",
-    legend.title = element_blank(), # Larger legend title
-    legend.text = element_text(size = 10), # Larger legend text
-    axis.title = element_text(size = 14), # Axis titles bigger
-    axis.text = element_text(size = 12), # Axis labels bigger
-    # legend.background = element_rect(fill = "transparent", color = NA),
-    plot.title = element_text(size = 18, face = "bold"), # Title size and bold
-    panel.grid.major = element_line(size = 0.5, color = "gray90"), # Lighter grid lines
-    panel.grid.minor = element_blank(), # No minor grid lines
-    plot.margin = margin(20, 20, 20, 20), # Add margin around the plot
-    panel.grid.major.y = element_line(linewidth = 1)
+    legend.title = element_blank(),
+    legend.text = element_text(size = 8),
+    axis.title = element_text(size = 8),
+    axis.text = element_text(size = 8),
+    legend.background = element_rect(fill = "transparent", color = NA),
+    plot.title = element_blank(),
+    panel.grid.major = element_line(linewidth = 0.5, color = "gray90"),
+    panel.grid.minor = element_blank(),
+    plot.margin = margin(20, 5, 20, 20),
+    panel.grid.major.y = element_line(linewidth = 1),
+    legend.margin = margin(0, 0, 0, 8),
+    legend.box.spacing = unit(0, "pt")
   )
 
-ggsave(plot = q, width = 10, height = 5, dpi = 300, filename = "D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\bench\\balanceprocess.pdf")
+ggsave(plot = q, width = 6, height = 4, dpi = 300, filename = "output/bench/balanceprocess.pdf")

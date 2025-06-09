@@ -33,7 +33,7 @@ label_data <- data_long %>%
 
 # Create the plot with facets
 p <- ggplot(data_long, aes(x = time, y = workload)) +
-  geom_line(aes(color = DCC), linewidth = 0.95, show.legend = FALSE) +
+  geom_col(aes(fill = DCC), show.legend = FALSE) +
   geom_text(
     data = label_data,
     aes(label = label),
@@ -68,5 +68,4 @@ p <- ggplot(data_long, aes(x = time, y = workload)) +
   )
 
 # Save the plot to a PDF file
-ggsave(plot = p, width = 8, height = 10, dpi = 300, filename = "d:/GithubClonefiles/datacentra_unitcommitment/output/data_centra/stacked_dc_λ_subplots.pdf")
-
+ggsave(plot = p, width = 8, height = 10, dpi = 300, filename = "d:/GithubClonefiles/datacentra_unitcommitment/output/data_centra/master-3(ITER=6)/stacked_dc_λ_subplots.pdf")

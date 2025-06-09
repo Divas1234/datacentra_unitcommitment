@@ -523,9 +523,9 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 
 		# NEWADDED
 		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²[(s - 1) * ND2 + 1: (s * ND2), t] .<= ones(ND2, 1) * 1.5)
+					dc_fv²[((s - 1) * ND2 + 1):(s * ND2), t] .<= ones(ND2, 1) * 1.5)
 		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²λ[(s - 1) * ND2 + 1: (s * ND2), t] .<= ones(ND2, 1) * 1.5)
+					dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t] .<= ones(ND2, 1) * 1.5)
 
 		#NOTE - verison 1: using conventional constinuous constraints
 
@@ -548,8 +548,13 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 		# @constraint(scuc, [s = 1:NS, t = 1:NT], 0.6 * ones(ND2, 1) .<= dc_f[((s - 1) * ND2 + 1):(s * ND2), t] .<= 1.5 * ones(ND2, 1))
 		# @constraint(scuc, [s = 1:NS, t = 1:NT], 0.8 * ones(ND2, 1) .<= dc_v²[((s - 1) * ND2 + 1):(s * ND2), t] .<= 1.25 * ones(ND2, 1))
 
-		iter_num = 1
+		iter_num = 6
 		coeff = 0.05
+
+		@constraint(scuc, [s = 1:NS, t = 1:NT],
+					dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t] .<=
+					dc_fv²[((s - 1) * ND2 + 1):(s * ND2), t] * (1 + 0.5))
+
 		iter_block = Int64(round(NT / iter_num))
 		@constraint(scuc, [s = 1:NS, iter = 1:iter_num],
 					sum(dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), ((iter - 1) * iter_block + 1):(iter * iter_block)]) .<=
