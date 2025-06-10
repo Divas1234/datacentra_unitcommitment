@@ -419,150 +419,160 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 
 	# NOTE - data centra constraints
 	if config_param.is_ConsiderDataCentra == 1
-		dcc_boundries_conditions = get_dcc_boundaries_conditions(num_sos, ND2)
+		enable_active_response_flag = 0
+		if enable_active_response_flag == 0
+			workload_multijob = DataCentras.computational_power_tasks' * 10
+			@constraint(scuc, [s = 1:NS, t = 1:NT],
+						dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .==
+						DataCentras.idale .+ DataCentras.sv_constant ./ DataCentras.μ .*
+											 workload_multijob[:, t])
+		else
+			dcc_boundries_conditions = get_dcc_boundaries_conditions(num_sos, ND2)
 
-		dcc_f_lb          = dcc_boundries_conditions["dcc_f_lb"]
-		dcc_f_ub          = dcc_boundries_conditions["dcc_f_ub"]
-		dcc_v_lb          = dcc_boundries_conditions["dcc_v_lb"]
-		dcc_v_ub          = dcc_boundries_conditions["dcc_v_ub"]
-		dcc_v²_lb        = dcc_boundries_conditions["dcc_v²_lb"]
-		dcc_v²_ub        = dcc_boundries_conditions["dcc_v²_ub"]
-		dcc_fv²_plus_ub  = dcc_boundries_conditions["dcc_fv²_plus_ub"]
-		dcc_fv²_minus_ub = dcc_boundries_conditions["dcc_fv²_minus_ub"]
-		dcc_fv²_plus_lb  = dcc_boundries_conditions["dcc_fv²_plus_lb"]
-		dcc_fv²_minus_lb = dcc_boundries_conditions["dcc_fv²_minus_lb"]
+			dcc_f_lb          = dcc_boundries_conditions["dcc_f_lb"]
+			dcc_f_ub          = dcc_boundries_conditions["dcc_f_ub"]
+			dcc_v_lb          = dcc_boundries_conditions["dcc_v_lb"]
+			dcc_v_ub          = dcc_boundries_conditions["dcc_v_ub"]
+			dcc_v²_lb        = dcc_boundries_conditions["dcc_v²_lb"]
+			dcc_v²_ub        = dcc_boundries_conditions["dcc_v²_ub"]
+			dcc_fv²_plus_ub  = dcc_boundries_conditions["dcc_fv²_plus_ub"]
+			dcc_fv²_minus_ub = dcc_boundries_conditions["dcc_fv²_minus_ub"]
+			dcc_fv²_plus_lb  = dcc_boundries_conditions["dcc_fv²_plus_lb"]
+			dcc_fv²_minus_lb = dcc_boundries_conditions["dcc_fv²_minus_lb"]
 
-		dc_λ_ub            = dcc_boundries_conditions["dc_λ_ub"]
-		dc_λ_lb            = dcc_boundries_conditions["dc_λ_lb"]
-		dcc_fv²λ_plus_ub  = dcc_boundries_conditions["dcc_fv²λ_plus_ub"]
-		dcc_fv²λ_minus_ub = dcc_boundries_conditions["dcc_fv²λ_minus_ub"]
-		dcc_fv²λ_plus_lb  = dcc_boundries_conditions["dcc_fv²λ_plus_lb"]
-		dcc_fv²λ_minus_lb = dcc_boundries_conditions["dcc_fv²λ_minus_lb"]
+			dc_λ_ub            = dcc_boundries_conditions["dc_λ_ub"]
+			dc_λ_lb            = dcc_boundries_conditions["dc_λ_lb"]
+			dcc_fv²λ_plus_ub  = dcc_boundries_conditions["dcc_fv²λ_plus_ub"]
+			dcc_fv²λ_minus_ub = dcc_boundries_conditions["dcc_fv²λ_minus_ub"]
+			dcc_fv²λ_plus_lb  = dcc_boundries_conditions["dcc_fv²λ_plus_lb"]
+			dcc_fv²λ_minus_lb = dcc_boundries_conditions["dcc_fv²λ_minus_lb"]
 
-		dcc_fv²_plus_discrete      = dcc_boundries_conditions["dcc_fv²_plus_discrete"]
-		dcc_fv²_minus_discrete     = dcc_boundries_conditions["dcc_fv²_minus_discrete"]
-		dcc_fv²λ_plus_discrete    = dcc_boundries_conditions["dcc_fv²λ_plus_discrete"]
-		dcc_fv²λ_minus_discrete   = dcc_boundries_conditions["dcc_fv²λ_minus_discrete"]
-		dcc_fv²_2_plus_discrete    = dcc_boundries_conditions["dcc_fv²_2_plus_discrete"]
-		dcc_fv²_2_minus_discrete   = dcc_boundries_conditions["dcc_fv²_2_minus_discrete"]
-		dcc_fv²λ_2_plus_discrete  = dcc_boundries_conditions["dcc_fv²λ_2_plus_discrete"]
-		dcc_fv²λ_2_minus_discrete = dcc_boundries_conditions["dcc_fv²λ_2_minus_discrete"]
-		num_sos                     = dcc_boundries_conditions["num_sos"]
+			dcc_fv²_plus_discrete      = dcc_boundries_conditions["dcc_fv²_plus_discrete"]
+			dcc_fv²_minus_discrete     = dcc_boundries_conditions["dcc_fv²_minus_discrete"]
+			dcc_fv²λ_plus_discrete    = dcc_boundries_conditions["dcc_fv²λ_plus_discrete"]
+			dcc_fv²λ_minus_discrete   = dcc_boundries_conditions["dcc_fv²λ_minus_discrete"]
+			dcc_fv²_2_plus_discrete    = dcc_boundries_conditions["dcc_fv²_2_plus_discrete"]
+			dcc_fv²_2_minus_discrete   = dcc_boundries_conditions["dcc_fv²_2_minus_discrete"]
+			dcc_fv²λ_2_plus_discrete  = dcc_boundries_conditions["dcc_fv²λ_2_plus_discrete"]
+			dcc_fv²λ_2_minus_discrete = dcc_boundries_conditions["dcc_fv²λ_2_minus_discrete"]
+			num_sos                     = dcc_boundries_conditions["num_sos"]
 
-		# TODO data centra primal workload consumputions have not been considered...
-		workload_multijob = DataCentras.computational_power_tasks' * 10
+			# TODO data centra primal workload consumputions have not been considered...
+			workload_multijob = DataCentras.computational_power_tasks' * 10
 
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .<= DataCentras.p_max .* 10)
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .>= DataCentras.p_min .* 0)
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .==
-					DataCentras.idale .+ DataCentras.sv_constant ./ DataCentras.μ .*
-										 workload_multijob[:, t] .* dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t])
+			@constraint(scuc, [s = 1:NS, t = 1:NT],
+						dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .<= DataCentras.p_max .* 10)
+			@constraint(scuc, [s = 1:NS, t = 1:NT],
+						dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .>= DataCentras.p_min .* 0)
+			@constraint(scuc, [s = 1:NS, t = 1:NT],
+						dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .==
+						DataCentras.idale .+ DataCentras.sv_constant ./ DataCentras.μ .*
+											 workload_multijob[:, t] .* dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t])
 
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²_plus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²_plus_ub)
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²_plus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²_plus_lb)
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²_minus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²_minus_ub)
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²_minus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²_minus_lb)
+			@constraint(scuc, [s = 1:NS, t = 1:NT],
+						dc_fv²_plus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²_plus_ub)
+			@constraint(scuc, [s = 1:NS, t = 1:NT],
+						dc_fv²_plus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²_plus_lb)
+			@constraint(scuc, [s = 1:NS, t = 1:NT],
+						dc_fv²_minus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²_minus_ub)
+			@constraint(scuc, [s = 1:NS, t = 1:NT],
+						dc_fv²_minus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²_minus_lb)
 
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²_plus[(s - 1) * ND2 + i, t] ==
-					sum(dcc_fv²_plus_discrete[z] * weight_fv²_plus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos))
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²_2_plus[(s - 1) * ND2 + i, t] ==
-					sum(dcc_fv²_2_plus_discrete[z] * weight_fv²_plus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos))
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²_minus[(s - 1) * ND2 + i, t] ==
-					sum(dcc_fv²_minus_discrete[z] * weight_fv²_minus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos))
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²_2_minus[(s - 1) * ND2 + i, t] ==
-					sum(dcc_fv²_2_minus_discrete[z] * weight_fv²_minus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos))
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
+						dc_fv²_plus[(s - 1) * ND2 + i, t] ==
+						sum(dcc_fv²_plus_discrete[z] * weight_fv²_plus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos))
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
+						dc_fv²_2_plus[(s - 1) * ND2 + i, t] ==
+						sum(dcc_fv²_2_plus_discrete[z] * weight_fv²_plus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos))
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
+						dc_fv²_minus[(s - 1) * ND2 + i, t] ==
+						sum(dcc_fv²_minus_discrete[z] * weight_fv²_minus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos))
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
+						dc_fv²_2_minus[(s - 1) * ND2 + i, t] ==
+						sum(dcc_fv²_2_minus_discrete[z] * weight_fv²_minus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos))
 
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²[(s - 1) * ND2 + i, t] == dc_fv²_2_plus[(s - 1) * ND2 + i, t] - dc_fv²_2_minus[(s - 1) * ND2 + i, t])
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
+						dc_fv²[(s - 1) * ND2 + i, t] == dc_fv²_2_plus[(s - 1) * ND2 + i, t] - dc_fv²_2_minus[(s - 1) * ND2 + i, t])
 
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					sum(weight_fv²_plus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos) == 1)
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					sum(weight_fv²_minus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos) == 1)
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
+						sum(weight_fv²_plus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos) == 1)
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
+						sum(weight_fv²_minus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos) == 1)
 
-		# ----
+			# ----
 
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²λ_plus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²λ_plus_ub)
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²λ_plus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²λ_plus_lb)
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²λ_minus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²λ_minus_ub)
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²λ_minus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²λ_minus_lb)
+			@constraint(scuc, [s = 1:NS, t = 1:NT],
+						dc_fv²λ_plus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²λ_plus_ub)
+			@constraint(scuc, [s = 1:NS, t = 1:NT],
+						dc_fv²λ_plus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²λ_plus_lb)
+			@constraint(scuc, [s = 1:NS, t = 1:NT],
+						dc_fv²λ_minus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²λ_minus_ub)
+			@constraint(scuc, [s = 1:NS, t = 1:NT],
+						dc_fv²λ_minus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²λ_minus_lb)
 
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²λ_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv²λ_plus_discrete[z] *
-															  weight_fv²λ_plus[((s - 1) * ND2 + i), t, z] for z in 1:(num_sos)))
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²λ_2_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv²λ_2_plus_discrete[z] *
-																weight_fv²λ_plus[((s - 1) * ND2 + i), t, z] for z in 1:(num_sos)))
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²λ_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv²λ_minus_discrete[z] *
-															   weight_fv²λ_minus[((s - 1) * ND2 + i), t, z] for z in 1:(num_sos)))
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²λ_2_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv²λ_2_minus_discrete[z] *
-																 weight_fv²λ_minus[((s - 1) * ND2 + i), t, z] for z in 1:(num_sos)))
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
+						dc_fv²λ_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv²λ_plus_discrete[z] *
+																  weight_fv²λ_plus[((s - 1) * ND2 + i), t, z] for z in 1:(num_sos)))
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
+						dc_fv²λ_2_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv²λ_2_plus_discrete[z] *
+																	weight_fv²λ_plus[((s - 1) * ND2 + i), t, z] for z in 1:(num_sos)))
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
+						dc_fv²λ_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv²λ_minus_discrete[z] *
+																   weight_fv²λ_minus[((s - 1) * ND2 + i), t, z] for z in 1:(num_sos)))
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
+						dc_fv²λ_2_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv²λ_2_minus_discrete[z] *
+																	 weight_fv²λ_minus[((s - 1) * ND2 + i), t, z] for z in 1:(num_sos)))
 
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²λ[(s - 1) * ND2 + i, t] == dc_fv²λ_2_plus[(s - 1) * ND2 + i, t] - dc_fv²λ_2_minus[(s - 1) * ND2 + i, t])
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
+						dc_fv²λ[(s - 1) * ND2 + i, t] == dc_fv²λ_2_plus[(s - 1) * ND2 + i, t] - dc_fv²λ_2_minus[(s - 1) * ND2 + i, t])
 
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], sum(weight_fv²λ_plus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos) == 1)
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], sum(weight_fv²λ_minus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos) == 1)
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], sum(weight_fv²λ_plus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos) == 1)
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], sum(weight_fv²λ_minus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos) == 1)
 
-		# NEWADDED
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²[((s - 1) * ND2 + 1):(s * ND2), t] .<= ones(ND2, 1) * 1.5)
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t] .<= ones(ND2, 1) * 1.5)
+			# NEWADDED
+			@constraint(scuc, [s = 1:NS, t = 1:NT],
+						dc_fv²[((s - 1) * ND2 + 1):(s * ND2), t] .<= ones(ND2, 1) * 1.5)
+			@constraint(scuc, [s = 1:NS, t = 1:NT],
+						dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t] .<= ones(ND2, 1) * 1.5)
 
-		#NOTE - verison 1: using conventional constinuous constraints
+			#NOTE - verison 1: using conventional constinuous constraints
 
-		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .<= DataCentras.p_max)
-		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .>= DataCentras.p_min)
-		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .== DataCentras.idale .+ DataCentras.sv_constant .* dc_Δu2[((s - 1) * ND2 + 1):(s * ND2), t] ./ DataCentras.μ)
+			# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .<= DataCentras.p_max)
+			# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .>= DataCentras.p_min)
+			# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .== DataCentras.idale .+ DataCentras.sv_constant .* dc_Δu2[((s - 1) * ND2 + 1):(s * ND2), t] ./ DataCentras.μ)
 
-		# # workload balancing constraints amoung multiple dccs.
-		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu2[((s - 1) * ND2 + 1):(s * ND2), t] .<= dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t])
-		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu2[((s - 1) * ND2 + 1):(s * ND2), t] .<= dc_λ[((s - 1) * ND2 + 1):(s * ND2), t])
-		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu2[((s - 1) * ND2 + 1):(s * ND2), t] .>= dc_λ[((s - 1) * ND2 + 1):(s * ND2), t] .+ dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t] - ones(ND2, 1))
+			# # workload balancing constraints amoung multiple dccs.
+			# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu2[((s - 1) * ND2 + 1):(s * ND2), t] .<= dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t])
+			# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu2[((s - 1) * ND2 + 1):(s * ND2), t] .<= dc_λ[((s - 1) * ND2 + 1):(s * ND2), t])
+			# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu2[((s - 1) * ND2 + 1):(s * ND2), t] .>= dc_λ[((s - 1) * ND2 + 1):(s * ND2), t] .+ dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t] - ones(ND2, 1))
 
-		# # nvfs techinques for dccs.
-		# # TODO - 当两个连续变量不再满足0-1这个限制，所提松弛重构方法没有效果
-		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t] .<= dc_v²[((s - 1) * ND2 + 1):(s * ND2), t])
-		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t] .<= dc_f[((s - 1) * ND2 + 1):(s * ND2), t])
-		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t] .>= dc_v²[((s - 1) * ND2 + 1):(s * ND2), t] .+ dc_f[((s - 1) * ND2 + 1):(s * ND2), t] - ones(ND2, 1))
+			# # nvfs techinques for dccs.
+			# # TODO - 当两个连续变量不再满足0-1这个限制，所提松弛重构方法没有效果
+			# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t] .<= dc_v²[((s - 1) * ND2 + 1):(s * ND2), t])
+			# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t] .<= dc_f[((s - 1) * ND2 + 1):(s * ND2), t])
+			# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_Δu1[((s - 1) * ND2 + 1):(s * ND2), t] .>= dc_v²[((s - 1) * ND2 + 1):(s * ND2), t] .+ dc_f[((s - 1) * ND2 + 1):(s * ND2), t] - ones(ND2, 1))
 
-		# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_λ[((s - 1) * ND2 + 1):(s * ND2), t] .<= 1.0 * ones(ND2, 1))
-		# @constraint(scuc, [s = 1:NS, t = 1:NT], 0.6 * ones(ND2, 1) .<= dc_f[((s - 1) * ND2 + 1):(s * ND2), t] .<= 1.5 * ones(ND2, 1))
-		# @constraint(scuc, [s = 1:NS, t = 1:NT], 0.8 * ones(ND2, 1) .<= dc_v²[((s - 1) * ND2 + 1):(s * ND2), t] .<= 1.25 * ones(ND2, 1))
+			# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_λ[((s - 1) * ND2 + 1):(s * ND2), t] .<= 1.0 * ones(ND2, 1))
+			# @constraint(scuc, [s = 1:NS, t = 1:NT], 0.6 * ones(ND2, 1) .<= dc_f[((s - 1) * ND2 + 1):(s * ND2), t] .<= 1.5 * ones(ND2, 1))
+			# @constraint(scuc, [s = 1:NS, t = 1:NT], 0.8 * ones(ND2, 1) .<= dc_v²[((s - 1) * ND2 + 1):(s * ND2), t] .<= 1.25 * ones(ND2, 1))
 
-		iter_num = 6
-		coeff = 0.05
+			iter_num = 6
+			coeff = 0.05
 
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t] .<=
-					dc_fv²[((s - 1) * ND2 + 1):(s * ND2), t] * (1 + 0.5))
+			@constraint(scuc, [s = 1:NS, t = 1:NT],
+						dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t] .<=
+						dc_fv²[((s - 1) * ND2 + 1):(s * ND2), t] * (1 + 0.5))
 
-		iter_block = Int64(round(NT / iter_num))
-		@constraint(scuc, [s = 1:NS, iter = 1:iter_num],
-					sum(dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), ((iter - 1) * iter_block + 1):(iter * iter_block)]) .<=
-					sum(dc_fv²[((s - 1) * ND2 + 1):(s * ND2), ((iter - 1) * iter_block + 1):(iter * iter_block)]) * (1 + coeff))
+			iter_block = Int64(round(NT / iter_num))
+			@constraint(scuc, [s = 1:NS, iter = 1:iter_num],
+						sum(dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), ((iter - 1) * iter_block + 1):(iter * iter_block)]) .<=
+						sum(dc_fv²[((s - 1) * ND2 + 1):(s * ND2), ((iter - 1) * iter_block + 1):(iter * iter_block)]) * (1 + coeff))
 
-		@constraint(scuc, [s = 1:NS, iter = 1:iter_num],
-					sum(dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), ((iter - 1) * iter_block + 1):(iter * iter_block)]) .>=
-					sum(dc_fv²[((s - 1) * ND2 + 1):(s * ND2), ((iter - 1) * iter_block + 1):(iter * iter_block)]) * (1 - coeff))
+			@constraint(scuc, [s = 1:NS, iter = 1:iter_num],
+						sum(dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), ((iter - 1) * iter_block + 1):(iter * iter_block)]) .>=
+						sum(dc_fv²[((s - 1) * ND2 + 1):(s * ND2), ((iter - 1) * iter_block + 1):(iter * iter_block)]) * (1 - coeff))
+		end
+
 		println("\t constraints: 12) data centra constraints\t\t\t\t done")
 	end
 

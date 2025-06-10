@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.5.27)  9 JUN 2025 22:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.5.27)  10 JUN 2025 22:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -806,83 +806,81 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 pdfTeX warning: pdflatex (file ./fig/framework.pdf): PDF inclusion: found PDF v
 ersion <1.6>, but at most version <1.5> allowed
-<./fig/framework.pdf, id=73, 279.80634pt x 214.51843pt>
+<./fig/framework.pdf, id=77, 279.80634pt x 214.51843pt>
 File: ./fig/framework.pdf Graphic file (type pdf)
 <use ./fig/framework.pdf>
 Package pdftex.def Info: ./fig/framework.pdf  used on input line 122.
 (pdftex.def)             Requested size: 219.30157pt x 168.13545pt.
-[2 <./fig/framework.pdf>] [3]
-Overfull \hbox (1.69624pt too wide) detected at line 306
-[]
- []
-
-[4]
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 333.
-
-
-Overfull \hbox (3.20901pt too wide) in paragraph at lines 336--357
- [][] 
- []
-
-
-LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 359.
-
-<./fig/loadcurve.pdf, id=250, 416.21185pt x 253.47197pt>
+[2 <./fig/framework.pdf>] [3] [4]
+<./fig/loadcurve.pdf, id=256, 416.21185pt x 253.47197pt>
 File: ./fig/loadcurve.pdf Graphic file (type pdf)
 <use ./fig/loadcurve.pdf>
-Package pdftex.def Info: ./fig/loadcurve.pdf  used on input line 374.
-(pdftex.def)             Requested size: 206.39685pt x 125.69527pt.
-<./fig/windscurve_result.pdf, id=251, 417.26639pt x 256.90167pt>
+Package pdftex.def Info: ./fig/loadcurve.pdf  used on input line 331.
+(pdftex.def)             Requested size: 232.19843pt x 141.40959pt.
+<./fig/windscurve_result.pdf, id=257, 417.26639pt x 256.90167pt>
 File: ./fig/windscurve_result.pdf Graphic file (type pdf)
 <use ./fig/windscurve_result.pdf>
-Package pdftex.def Info: ./fig/windscurve_result.pdf  used on input line 380.
-(pdftex.def)             Requested size: 206.40424pt x 142.26851pt.
-<./fig/workload_distribution.pdf, id=252, 415.4205pt x 257.42894pt>
+Package pdftex.def Info: ./fig/windscurve_result.pdf  used on input line 339.
+(pdftex.def)             Requested size: 232.20317pt x 142.26851pt.
+<./fig/workload_distribution.pdf, id=258, 415.4205pt x 257.42894pt>
 File: ./fig/workload_distribution.pdf Graphic file (type pdf)
 <use ./fig/workload_distribution.pdf>
-Package pdftex.def Info: ./fig/workload_distribution.pdf  used on input line 38
+Package pdftex.def Info: ./fig/workload_distribution.pdf  used on input line 34
 6.
-(pdftex.def)             Requested size: 237.36346pt x 147.09346pt.
-<./fig/balanceprocess.pdf, id=253, 409.08975pt x 251.0983pt>
-File: ./fig/balanceprocess.pdf Graphic file (type pdf)
-<use ./fig/balanceprocess.pdf>
-Package pdftex.def Info: ./fig/balanceprocess.pdf  used on input line 393.
-(pdftex.def)             Requested size: 263.17111pt x 142.26543pt.
+(pdftex.def)             Requested size: 258.0081pt x 142.2659pt.
 
-Overfull \hbox (11.17111pt too wide) in paragraph at lines 393--394
+Overfull \hbox (6.0081pt too wide) in paragraph at lines 346--347
 [][]  
  []
 
-<./fig/stacked_dcc_p_plot.pdf, id=254, 420.25577pt x 259.18701pt>
+
+Overfull \hbox (3.20901pt too wide) in paragraph at lines 358--379
+ [][] 
+ []
+
+[5 <./fig/loadcurve.pdf> <./fig/windscurve_result.pdf> <./fig/workload_distribu
+tion.pdf>]
+<./fig/balanceprocess.pdf, id=300, 409.08975pt x 251.0983pt>
+File: ./fig/balanceprocess.pdf Graphic file (type pdf)
+<use ./fig/balanceprocess.pdf>
+Package pdftex.def Info: ./fig/balanceprocess.pdf  used on input line 421.
+(pdftex.def)             Requested size: 283.81406pt x 142.26543pt.
+
+Overfull \hbox (31.81406pt too wide) in paragraph at lines 421--422
+[][]  
+ []
+
+<./fig/stacked_dcc_p_plot.pdf, id=301, 420.25577pt x 259.18701pt>
 File: ./fig/stacked_dcc_p_plot.pdf Graphic file (type pdf)
 <use ./fig/stacked_dcc_p_plot.pdf>
-Package pdftex.def Info: ./fig/stacked_dcc_p_plot.pdf  used on input line 399.
-(pdftex.def)             Requested size: 232.19843pt x 143.20584pt.
-<./fig/stacked_dc_fv_subplots.pdf, id=255, 328.9071pt x 396.95703pt>
-File: ./fig/stacked_dc_fv_subplots.pdf Graphic file (type pdf)
-<use ./fig/stacked_dc_fv_subplots.pdf>
-Package pdftex.def Info: ./fig/stacked_dc_fv_subplots.pdf  used on input line 4
-06.
-(pdftex.def)             Requested size: 232.19571pt x 341.44301pt.
+Package pdftex.def Info: ./fig/stacked_dcc_p_plot.pdf  used on input line 428.
+(pdftex.def)             Requested size: 257.99725pt x 142.26854pt.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+Overfull \hbox (5.99725pt too wide) in paragraph at lines 428--429
+[][]  
+ []
 
-<./fig/stacked_dc_λ_subplots.pdf, id=256, 328.38033pt x 470.54594pt>
+<./fig/stacked_dc_λ_subplots.pdf, id=302, 328.38033pt x 470.54594pt>
 File: ./fig/stacked_dc_λ_subplots.pdf Graphic file (type pdf)
 <use ./fig/stacked_dc_λ_subplots.pdf>
 Package pdftex.def Info: ./fig/stacked_dc_λ_subplots.pdf  used on input line 4
-13.
-(pdftex.def)             Requested size: 232.19963pt x 341.44221pt.
+35.
+(pdftex.def)             Requested size: 232.19963pt x 369.89633pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[5 <./fig/loadcurve.pdf> <./fig/windscurve_result.pdf> <./fig/workload_distribu
-tion.pdf> <./fig/balanceprocess.pdf>] (New_IEEEtran_how-to.bbl [6 <./fig/stacke
-d_dcc_p_plot.pdf> <./fig/stacked_dc_fv_subplots.pdf> <./fig/stacked_dc_λ_subpl
-ots.pdf>]) [7
+<./fig/stacked_dc_fv_subplots.pdf, id=303, 328.9071pt x 396.95703pt>
+File: ./fig/stacked_dc_fv_subplots.pdf Graphic file (type pdf)
+<use ./fig/stacked_dc_fv_subplots.pdf>
+Package pdftex.def Info: ./fig/stacked_dc_fv_subplots.pdf  used on input line 4
+42.
+(pdftex.def)             Requested size: 232.19571pt x 369.89912pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[6 <./fig/balanceprocess.pdf> <./fig/stacked_dcc_p_plot.pdf> <./fig/stacked_dc_
+λ_subplots.pdf>] (New_IEEEtran_how-to.bbl [7 <./fig/stacked_dc_fv_subplots.pdf
+>]) [8
 
 ] (New_IEEEtran_how-to.aux)
  ***********
@@ -890,16 +888,16 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `New_IEEEtran_how-to.out' has not changed.
-(rerunfilecheck)             Checksum: AE5BC5573DCF4E8E82FC83C97DE434FC;1780.
+(rerunfilecheck)             Checksum: BF4927EDBD498FE1CD0E4538D71D54B2;1873.
  ) 
 Here is how much of TeX's memory you used:
- 22516 strings out of 474486
- 419273 string characters out of 5753573
+ 22521 strings out of 474486
+ 419326 string characters out of 5753573
  1971542 words of memory out of 5000000
- 44317 multiletter control sequences out of 15000+600000
+ 44319 multiletter control sequences out of 15000+600000
  657742 words of font info for 135 fonts, out of 8000000 for 9000
  1145 hyphenation exceptions out of 8191
- 83i,12n,93p,1434b,595s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 83i,12n,93p,1434b,591s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Progra
 m Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKT
 eX/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files/MiKTeX/fonts/type
@@ -914,9 +912,9 @@ onts/cm/cmsy7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8
 :/Program Files/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTe
 X/fonts/type1/urw/times/utmbi8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/ti
 mes/utmr8a.pfb><C:/Program Files/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on New_IEEEtran_how-to.pdf (7 pages, 1396890 bytes).
+Output written on New_IEEEtran_how-to.pdf (8 pages, 1407244 bytes).
 PDF statistics:
- 440 PDF objects out of 1000 (max. 8388607)
- 113 named destinations out of 1000 (max. 500000)
- 109 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 465 PDF objects out of 1000 (max. 8388607)
+ 116 named destinations out of 1000 (max. 500000)
+ 117 words of extra memory for PDF output out of 10000 (max. 10000000)
 
