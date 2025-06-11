@@ -27,7 +27,7 @@ DataCentras = forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, U
 							StrogeData, datacentra_Data, data_centra_jobcurve)
 
 # Generate wind scenarios
-winds, NW = genscenario(WindsFreqParam, 1)
+winds, NW = genscenario(WindsFreqParam, 2)
 
 output_dir = pwd()
 filepath = joinpath(output_dir, "output\\bench", "windsimulation_curve.csv")
@@ -38,8 +38,6 @@ catch e
 	@error "Failed to write to $filepath" exception=(e, catch_backtrace())
 end
 
-
-
 @assert config_param.is_ConsiderDataCentra == 1
 
 # Apply boundary conditions
@@ -48,10 +46,8 @@ end
 # Run the SUC-SCUC model
 res = SUC_scucmodel(NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, DataCentras, config_param)
 
-
 # Save the balance results
 savebalance_result(res["p₀"], res["pᵨ"], res["pᵩ"], res["pss_charge_p⁺"], res["pss_charge_p⁻"], 1)
-
 
 # using Plots, PlotThemes
 # p1 = Plots.plot(LoadCurve[:, 2]; label = "Load", legend = :topleft)

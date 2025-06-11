@@ -419,7 +419,7 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 
 	# NOTE - data centra constraints
 	if config_param.is_ConsiderDataCentra == 1
-		enable_active_response_flag = 0
+		enable_active_response_flag = 1
 		if enable_active_response_flag == 0
 			workload_multijob = DataCentras.computational_power_tasks' * 10
 			@constraint(scuc, [s = 1:NS, t = 1:NT],
@@ -741,7 +741,8 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 				  "sd_cost" => sd_cost,
 				  "prod_cost" => prod_cost,
 				  "cr⁺" => cr⁺,
-				  "cr⁻" => cr⁻, "dc_p" => JuMP.value.(dc_p[1:(ND2 * NS), 1:NT]),
+				  "cr⁻" => cr⁻,
+				  "dc_p" => JuMP.value.(dc_p[1:(ND2 * NS), 1:NT]),
 				  "dc_fv²" => JuMP.value.(dc_fv²[1:(ND2 * NS), 1:NT]),
 				  "dc_fv²λ" => JuMP.value.(dc_fv²λ[1:(ND2 * NS), 1:NT]),
 				  "dc_fv²_plus" => JuMP.value.(dc_fv²_plus[1:(ND2 * NS), 1:NT]),

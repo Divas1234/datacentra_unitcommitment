@@ -74,4 +74,4 @@ p <- ggplot(data_long, aes(x = time, y = workload)) +
 
 
 # Save the plot to a PDF file
-ggsave(plot = p, width = 5, height = 6, dpi = 300, filename = "D:\\GithubClonefiles\\datacentra_unitcommitment\\vis\\stacked_dc_fv_subplots.pdf")
+ggsave(plot = p, width = 5, height = 8, dpi = 300, filename = "D:\\GithubClonefiles\\datacentra_unitcommitment\\vis\\stacked_dc_fv_subplots.pdf")

@@ -3,7 +3,7 @@ library(dplyr)
 library(tidyr)
 
 # Read the CSV file
-data <- read.csv("d:/GithubClonefiles/datacentra_unitcommitment/output/data_centra/dc_λ.csv")
+data <- read.csv("./dc_λ.csv")
 
 # Transpose the data
 data_transposed <- t(data)
@@ -71,4 +71,4 @@ p <- ggplot(data_long, aes(x = time, y = workload)) +
   )
 
 # Save the plot to a PDF file
-ggsave(plot = p, width = 5, height = 6, dpi = 300, filename = "./stacked_dc_λ_subplots.pdf")
+ggsave(plot = p, width = 5, height = 8, dpi = 300, filename = "./stacked_dc_λ_subplots.pdf")
