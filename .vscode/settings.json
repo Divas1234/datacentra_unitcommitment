@@ -184,5 +184,8 @@
     "julia-format.flag": "style=SciMLStyle(), indent=4, margin=200, always_for_in=true, for_in_replacement=\"∈\", whitespace_typedefs=true, import_to_using=true, whitespace_in_kwargs=true, align_struct_field=true, align_assignment=true, align_conditional=true, align_pair_arrow=true, normalize_line_endings=\"unix\", align_matrix=true, join_lines_based_on_source=true, indent_submodule=true, surround_whereop_typeparameters=false, yas_style_nesting=true",
     "github.copilot.chat.scopeSelection": true,
     "latex-workshop.view.pdf.external.synctex.command": "C:\\Program Files\\SumatraPDF\\SumatraPDF.exe",
-    "editor.overtypeCursorStyle": "line"
+    "editor.overtypeCursorStyle": "line",
+    "cSpell.enabledFileTypes": {
+        "latex": true
+    }
 }
