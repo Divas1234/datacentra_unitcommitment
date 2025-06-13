@@ -1,7 +1,7 @@
 
 \begin{thenomenclature} 
 \nomgroup{I}
-  \item [{\(b\in\mathcal{B}\)}]\begingroup index and Sets of Buses\nomeqref {0}\nompageref{1}
+  \item [{\(b\in\mathcal{B}\)}]\begingroup Index and Sets of Buses\nomeqref {0}\nompageref{1}
   \item [{\(d\in\mathcal{D}\)}]\begingroup Index and Sets of conventional demands\nomeqref {0}\nompageref{1}
   \item [{\(e\in\mathcal{E}\)}]\begingroup Index and Sets of battery energy storage systems(BESS)\nomeqref {0}\nompageref{1}
   \item [{\(g\in\mathcal{G}\)}]\begingroup Index and Sets of conventional generators\nomeqref {0}\nompageref{1}
@@ -13,13 +13,13 @@
 \nomgroup{P}
   \item [{\(\gamma_{e}^{ch}\)}]\begingroup Charging ramping capability of BESS $e$\nomeqref {0}\nompageref{1}
   \item [{\(\gamma_{e}^{dis}\)}]\begingroup Discharging ramping capability of BESS $e$\nomeqref {0}\nompageref{1}
-  \item [{\(\gamma_{g}^{su/sd}\)}]\begingroup shut-up/shut-down ramping capabilities of conventional generator $g$\nomeqref {0}\nompageref{1}
+  \item [{\(\gamma_{g}^{su/sd}\)}]\begingroup Shut-up/shut-down ramping capabilities of conventional generator $g$\nomeqref {0}\nompageref{1}
   \item [{\(\gamma_{g}^{up/dw}\)}]\begingroup Up/down-forward ramping capabilities of conventional generator $g$\nomeqref {0}\nompageref{1}
-  \item [{\(\iota_{l,b}\)}]\begingroup Generating shifting distribution factor between line $l$ and bus $b$\nomeqref {0}\nompageref{1}
+  \item [{\(\iota_{l,b}\)}]\begingroup Generating shifting distribution factor between transmission line $l$ and bus $b$\nomeqref {0}\nompageref{1}
   \item [{\(\lambda_{dcc,i,t}^{ini}\)}]\begingroup Initial load-rate of DCC $i$ at period $t$\nomeqref {0}\nompageref{1}
   \item [{\(C_{dcc,i}\)}]\begingroup Effective capacitance of DCC $i$\nomeqref {0}\nompageref{1}
   \item [{\(C_{sd}\)}]\begingroup Shut-down cost of conventional generator $g$\nomeqref {0}\nompageref{1}
-  \item [{\(C_{shed,w}\)}]\begingroup Abandoned output cost of wind farm $w$\nomeqref {0}\nompageref{1}
+  \item [{\(C_{shed,w}\)}]\begingroup Power curtailment cost of wind farm $w$\nomeqref {0}\nompageref{1}
   \item [{\(C_{su}\)}]\begingroup Shut-up cost of conventional generator $g$\nomeqref {0}\nompageref{1}
   \item [{\(C_{voll,d}\)}]\begingroup Value of lost load $d$\nomeqref {0}\nompageref{1}
   \item [{\(i_{leak,i}\)}]\begingroup Leakage current of DCC $i$\nomeqref {0}\nompageref{1}
