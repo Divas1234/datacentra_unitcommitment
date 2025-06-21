@@ -187,5 +187,6 @@
     "editor.overtypeCursorStyle": "line",
     "cSpell.enabledFileTypes": {
         "latex": true
-    }
+    },
+    "rewrap.autoWrap.enabled": true
 }
