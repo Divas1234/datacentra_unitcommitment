@@ -24,7 +24,7 @@ datacentra_Data, data_centra_jobcurve = readxlssheet()
 # Form input data for the model
 config_param, units, lines, loads, stroges, NB, NG, NL, ND, NT, NC, ND2,
 DataCentras = forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsFreqParam,
-							StrogeData, datacentra_Data, data_centra_jobcurve)
+    StrogeData, datacentra_Data, data_centra_jobcurve)
 
 # Generate wind scenarios
 winds, NW = genscenario(WindsFreqParam, 2)
@@ -32,10 +32,10 @@ winds, NW = genscenario(WindsFreqParam, 2)
 output_dir = pwd()
 filepath = joinpath(output_dir, "output\\bench", "windsimulation_curve.csv")
 try
-	CSV.write(filepath, DataFrame(winds.scenarios_curve, :auto))
-	println("Successfully wrote to $filepath")
+    CSV.write(filepath, DataFrame(winds.scenarios_curve, :auto))
+    println("Successfully wrote to $filepath")
 catch e
-	@error "Failed to write to $filepath" exception=(e, catch_backtrace())
+    @error "Failed to write to $filepath" exception = (e, catch_backtrace())
 end
 
 @assert config_param.is_ConsiderDataCentra == 1

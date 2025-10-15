@@ -1,12 +1,12 @@
-# using Pkg
-# Pkg.activate("./.pkg")
-# Pkg.add([
-# 	"Revise", "JuMP", "Gurobi", "Test", "DelimitedFiles", "PlotlyJS",
-# 	"LaTeXStrings", "Plots", "JLD", "DataFrames", "Clustering",
-# 	"StatsPlots"
-# ])
+using Pkg
+Pkg.activate("./.pkg")
+Pkg.add([
+	"Revise", "JuMP", "Gurobi", "Test", "DelimitedFiles", "PlotlyJS",
+	"LaTeXStrings", "Plots", "JLD", "DataFrames", "Clustering",
+	"StatsPlots"
+])
 using Revise, JuMP, Gurobi, Test, DelimitedFiles, PlotlyJS, LaTeXStrings, Plots, DataFrames,
-	  Clustering, StatsPlots, CSV
+    Clustering, StatsPlots, CSV
 gr()
 using Random
 Random.seed!(1234)

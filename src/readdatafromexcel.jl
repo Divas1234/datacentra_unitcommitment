@@ -4,8 +4,12 @@ function readxlssheet()
 	println("Step-1: Pkgs and functions are loaded")
 	filepath = pwd()
 	# df = XLSX.readxlsx(filepath * "\\master-2\\case1\\data\\data.xlsx")
-	df = XLSX.readxlsx("D:/GithubClonefiles/datacentra_unitcommitment/data/data.xlsx")
-
+	if Sys.iswindows()
+		df = XLSX.readxlsx("D:/GithubClonefiles/datacentra_unitcommitment/data/data.xlsx")
+	end
+	if Sys.isapple()
+		df = XLSX.readxlsx("/Users/yuanyiping/Documents/GitHub/datacentra_unitcommitment/data/data.xlsx")
+	end
 	# part-1: read frequency data
 	unitsfreqparam = df["units_frequencyparam"]
 	windsfreqparam = df["winds_frequencyparam"]
