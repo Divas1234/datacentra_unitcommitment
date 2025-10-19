@@ -273,7 +273,7 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 					sum(loads.load_curve[:, t] - Δpd[(1 + (s - 1) * ND):(s * ND), t]) +
 					sum(pc⁻[(NC * (s - 1) + 1):(s * NC), t]) -
 					sum(pc⁺[(NC * (s - 1) + 1):(s * NC), t]) -
-					sum(dc_p[(ND2 * (s - 1) + 1):(s * ND2), t])  #TODO -add datacentra
+					sum(dc_p[(ND2 * (s - 1) + 1):(s * ND2), t])
 					.==
 					0)
 	end
@@ -340,8 +340,7 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 							for d in 1:ND) + sum(subGsdf_psses[c] *
 							(pc⁻[(s - 1) * NC + c, t] - pc⁺[(s - 1) * NC + c, t]) for c in 1:NC) -
 						(config_param.is_ConsiderDataCentra == 0 ? 0 :
-						 (sum(subGsdf_dcces[i] * (dc_p[(s - 1) * ND2 + i, t]) for i in 1:ND2)))>=lines.p_min[l,
-																											 1])
+						 (sum(subGsdf_dcces[i] * (dc_p[(s - 1) * ND2 + i, t]) for i in 1:ND2)))>=lines.p_min[l, 1])
 		end
 		println("\t constraints: 10) transmissionline limits for basline\t\t\t done")
 	end
@@ -478,62 +477,51 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 			@constraint(scuc, [s = 1:NS, t = 1:NT],
 						dc_fv²_minus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²_minus_lb)
 
-			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-						dc_fv²_plus[(s - 1) * ND2 + i, t] ==
-						sum(dcc_fv²_plus_discrete[z] * weight_fv²_plus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos))
-			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-						dc_fv²_2_plus[(s - 1) * ND2 + i, t] ==
-						sum(dcc_fv²_2_plus_discrete[z] * weight_fv²_plus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos))
-			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-						dc_fv²_minus[(s - 1) * ND2 + i, t] ==
-						sum(dcc_fv²_minus_discrete[z] * weight_fv²_minus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos))
-			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-						dc_fv²_2_minus[(s - 1) * ND2 + i, t] ==
-						sum(dcc_fv²_2_minus_discrete[z] * weight_fv²_minus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos))
+			"""
+				define v = (dc_fv²_plus - dc_fv²_minus)
+				dc_fv²[(s - 1) * ND2 + i, t] == dc_fv²_2_plus[(s - 1) * ND2 + i, t] - dc_fv²_2_minus[(s - 1) * ND2 + i, t])
+				weight_fv²_plus: SOS1 binary variables for dc_fv²_plus
+				weight_fv²_minus: SOS1 binary variables for dc_fv²_minus
 
+			"""
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], dc_fv²_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv²_plus_discrete[z] * weight_fv²_plus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos))
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], dc_fv²_2_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv²_2_plus_discrete[z] * weight_fv²_plus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos))
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], dc_fv²_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv²_minus_discrete[z] * weight_fv²_minus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos))
 			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-						dc_fv²[(s - 1) * ND2 + i, t] == dc_fv²_2_plus[(s - 1) * ND2 + i, t] - dc_fv²_2_minus[(s - 1) * ND2 + i, t])
+						dc_fv²_2_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv²_2_minus_discrete[z] * weight_fv²_minus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos))
 
-			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-						sum(weight_fv²_plus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos) == 1)
-			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-						sum(weight_fv²_minus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos) == 1)
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], dc_fv²[(s - 1) * ND2 + i, t] == dc_fv²_2_plus[(s - 1) * ND2 + i, t] - dc_fv²_2_minus[(s - 1) * ND2 + i, t])
 
-			# ----
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], sum(weight_fv²_plus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos) == 1)
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], sum(weight_fv²_minus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos) == 1)
 
-			@constraint(scuc, [s = 1:NS, t = 1:NT],
-						dc_fv²λ_plus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²λ_plus_ub)
-			@constraint(scuc, [s = 1:NS, t = 1:NT],
-						dc_fv²λ_plus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²λ_plus_lb)
-			@constraint(scuc, [s = 1:NS, t = 1:NT],
-						dc_fv²λ_minus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²λ_minus_ub)
-			@constraint(scuc, [s = 1:NS, t = 1:NT],
-						dc_fv²λ_minus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²λ_minus_lb)
+			"""
+				define the lower bound and upper boud for each varialbe.
 
-			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-						dc_fv²λ_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv²λ_plus_discrete[z] *
-																  weight_fv²λ_plus[((s - 1) * ND2 + i), t, z] for z in 1:(num_sos)))
-			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-						dc_fv²λ_2_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv²λ_2_plus_discrete[z] *
-																	weight_fv²λ_plus[((s - 1) * ND2 + i), t, z] for z in 1:(num_sos)))
-			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-						dc_fv²λ_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv²λ_minus_discrete[z] *
-																   weight_fv²λ_minus[((s - 1) * ND2 + i), t, z] for z in 1:(num_sos)))
-			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-						dc_fv²λ_2_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv²λ_2_minus_discrete[z] *
-																	 weight_fv²λ_minus[((s - 1) * ND2 + i), t, z] for z in 1:(num_sos)))
+			"""
+			@constraint(scuc, [s = 1:NS, t = 1:NT], dc_fv²λ_plus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²λ_plus_ub)
+			@constraint(scuc, [s = 1:NS, t = 1:NT], dc_fv²λ_plus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²λ_plus_lb)
+			@constraint(scuc, [s = 1:NS, t = 1:NT], dc_fv²λ_minus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²λ_minus_ub)
+			@constraint(scuc, [s = 1:NS, t = 1:NT], dc_fv²λ_minus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²λ_minus_lb)
 
+			#! SOS constraint reformualtion.
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], dc_fv²λ_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv²λ_plus_discrete[z] * weight_fv²λ_plus[((s - 1) * ND2 + i), t, z] for z in 1:(num_sos)))
 			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-						dc_fv²λ[(s - 1) * ND2 + i, t] == dc_fv²λ_2_plus[(s - 1) * ND2 + i, t] - dc_fv²λ_2_minus[(s - 1) * ND2 + i, t])
+						dc_fv²λ_2_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv²λ_2_plus_discrete[z] * weight_fv²λ_plus[((s - 1) * ND2 + i), t, z] for z in 1:(num_sos)))
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
+						dc_fv²λ_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv²λ_minus_discrete[z] * weight_fv²λ_minus[((s - 1) * ND2 + i), t, z] for z in 1:(num_sos)))
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
+						dc_fv²λ_2_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv²λ_2_minus_discrete[z] * weight_fv²λ_minus[((s - 1) * ND2 + i), t, z] for z in 1:(num_sos)))
 
+			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], dc_fv²λ[(s - 1) * ND2 + i, t] == dc_fv²λ_2_plus[(s - 1) * ND2 + i, t] - dc_fv²λ_2_minus[(s - 1) * ND2 + i, t])
+
+			#! define the union-selection of each continous variables.
 			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], sum(weight_fv²λ_plus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos) == 1)
 			@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], sum(weight_fv²λ_minus[((s - 1) * ND2 + i), t, z] for z in 1:num_sos) == 1)
 
-			# NEWADDED
-			@constraint(scuc, [s = 1:NS, t = 1:NT],
-						dc_fv²[((s - 1) * ND2 + 1):(s * ND2), t] .<= ones(ND2, 1) * 1.5)
-			@constraint(scuc, [s = 1:NS, t = 1:NT],
-						dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t] .<= ones(ND2, 1) * 1.5)
+			#! NEWADDED: avoid ultra-adjustable demand consumputions.
+			@constraint(scuc, [s = 1:NS, t = 1:NT], dc_fv²[((s - 1) * ND2 + 1):(s * ND2), t] .<= ones(ND2, 1) * 1.5)
+			@constraint(scuc, [s = 1:NS, t = 1:NT], dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t] .<= ones(ND2, 1) * 1.5)
 
 			#NOTE - verison 1: using conventional constinuous constraints
 
@@ -692,35 +680,37 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 		println("The calculation result has been saved to: $output_file")
 		println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 
-		# Open output file for writing results
-		output_file = joinpath(output_dir, "Bench_datacentra_result.txt")
-		open(output_file, "w") do io
-			writedlm(io, [" "])
-			writedlm(io, ["list 1: dc_p"], '\t')
-			writedlm(io, JuMP.value.(dc_p)[1:(ND2 * 1), 1:NT]', '\t')
-			writedlm(io, [" "])
-			writedlm(io, ["list 2: dc_fv²"])
-			writedlm(io, JuMP.value.(dc_fv²)[1:(ND2 * 1), 1:NT]', '\t')
-			writedlm(io, [" "])
-			writedlm(io, ["list 3: dc_fv²λ"])
-			writedlm(io, JuMP.value.(dc_fv²λ)[1:(ND2 * 1), 1:NT]', '\t')
-			writedlm(io, [" "])
-			writedlm(io, ["list 4: dc_fv²λ"])
-			writedlm(io,
-					 (JuMP.value.(dc_fv²λ)[1:(ND2 * 1), 1:NT] ./
-					  JuMP.value.(dc_fv²)[1:((ND2 * 1)'), 1:NT])', 't')
-			writedlm(io, [" "])
-			writedlm(io, ["list 5: dc_fv²λ_minus"])
-			writedlm(io, (JuMP.value.(dc_fv²λ_minus)[1:(ND2 * 1), 1:NT])', '\t')
-			writedlm(io, [" "])
-			writedlm(io, ["list 6: dc_fv²λ_plus"])
-			writedlm(io, (JuMP.value.(dc_fv²λ_plus)[1:(ND2 * 1), 1:NT])', '\t')
-		end
-		println("The calculation result has been saved to: $output_file")
-		println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+		if config_param.is_ConsiderDataCentra == 1
+			# Open output file for writing results
+			output_file = joinpath(output_dir, "Bench_datacentra_result.txt")
+			open(output_file, "w") do io
+				writedlm(io, [" "])
+				writedlm(io, ["list 1: dc_p"], '\t')
+				writedlm(io, JuMP.value.(dc_p)[1:(ND2 * 1), 1:NT]', '\t')
+				writedlm(io, [" "])
+				writedlm(io, ["list 2: dc_fv²"])
+				writedlm(io, JuMP.value.(dc_fv²)[1:(ND2 * 1), 1:NT]', '\t')
+				writedlm(io, [" "])
+				writedlm(io, ["list 3: dc_fv²λ"])
+				writedlm(io, JuMP.value.(dc_fv²λ)[1:(ND2 * 1), 1:NT]', '\t')
+				writedlm(io, [" "])
+				writedlm(io, ["list 4: dc_fv²λ"])
+				writedlm(io,
+						 (JuMP.value.(dc_fv²λ)[1:(ND2 * 1), 1:NT] ./
+						  JuMP.value.(dc_fv²)[1:((ND2 * 1)'), 1:NT])', 't')
+				writedlm(io, [" "])
+				writedlm(io, ["list 5: dc_fv²λ_minus"])
+				writedlm(io, (JuMP.value.(dc_fv²λ_minus)[1:(ND2 * 1), 1:NT])', '\t')
+				writedlm(io, [" "])
+				writedlm(io, ["list 6: dc_fv²λ_plus"])
+				writedlm(io, (JuMP.value.(dc_fv²λ_plus)[1:(ND2 * 1), 1:NT])', '\t')
+			end
+			println("The calculation result has been saved to: $output_file")
+			println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 
-		# Open output file for csv writing results
-		output_dir = "D:/GithubClonefiles/datacentra_unitcommitment/output/data_centra/"
+			# Open output file for csv writing results
+			output_dir = "D:/GithubClonefiles/datacentra_unitcommitment/output/data_centra/"
+		end
 
 		s = 1
 
@@ -796,22 +786,22 @@ function save_data_centra(res, num_sos, output_dir)
 end
 
 function get_dcc_boundaries_conditions(num_sos, ND2)
-	dcc_f_lb                    = ones(ND2, 1) * 0.50
-	dcc_f_ub                    = ones(ND2, 1) * 1.50
-	dcc_v_lb                    = ones(ND2, 1) * 0.85
-	dcc_v_ub                    = ones(ND2, 1) * 1.50
-	dcc_v²_lb                  = dcc_v_lb .^ 2
-	dcc_v²_ub                  = dcc_v_ub .^ 2
-	dcc_fv²_plus_ub            = (0.50 * (dcc_f_ub + dcc_v²_ub))[:, 1]
-	dcc_fv²_plus_lb            = (0.50 * (dcc_f_lb + dcc_v²_lb))[:, 1]
-	dcc_fv²_minus_ub           = (0.50 * abs.(dcc_f_ub - dcc_v²_ub))[:, 1]
-	dcc_fv²_minus_lb           = (0.50 * abs.(dcc_f_lb - dcc_v²_lb))[:, 1]
-	dcc_fv²_plus_discrete      = collect(range(dcc_fv²_plus_lb[1], dcc_fv²_plus_ub[1]; length = num_sos))
-	dcc_fv²_minus_discrete     = collect(range(dcc_fv²_minus_lb[1], dcc_fv²_minus_ub[1]; length = num_sos))
-	dcc_fv²_2_plus_discrete    = [t^2 for t in dcc_fv²_plus_discrete]
-	dcc_fv²_2_minus_discrete   = [t^2 for t in dcc_fv²_minus_discrete]
-	dc_λ_lb                    = ones(ND2, 1) * 0.5
-	dc_λ_ub                    = ones(ND2, 1) * 1.5
+	dcc_f_lb                  = ones(ND2, 1) * 0.50
+	dcc_f_ub                  = ones(ND2, 1) * 1.50
+	dcc_v_lb                  = ones(ND2, 1) * 0.85
+	dcc_v_ub                  = ones(ND2, 1) * 1.50
+	dcc_v²_lb                 = dcc_v_lb .^ 2
+	dcc_v²_ub                 = dcc_v_ub .^ 2
+	dcc_fv²_plus_ub           = (0.50 * (dcc_f_ub + dcc_v²_ub))[:, 1]
+	dcc_fv²_plus_lb           = (0.50 * (dcc_f_lb + dcc_v²_lb))[:, 1]
+	dcc_fv²_minus_ub          = (0.50 * abs.(dcc_f_ub - dcc_v²_ub))[:, 1]
+	dcc_fv²_minus_lb          = (0.50 * abs.(dcc_f_lb - dcc_v²_lb))[:, 1]
+	dcc_fv²_plus_discrete     = collect(range(dcc_fv²_plus_lb[1], dcc_fv²_plus_ub[1]; length = num_sos))
+	dcc_fv²_minus_discrete    = collect(range(dcc_fv²_minus_lb[1], dcc_fv²_minus_ub[1]; length = num_sos))
+	dcc_fv²_2_plus_discrete   = [t^2 for t in dcc_fv²_plus_discrete]
+	dcc_fv²_2_minus_discrete  = [t^2 for t in dcc_fv²_minus_discrete]
+	dc_λ_lb                   = ones(ND2, 1) * 0.5
+	dc_λ_ub                   = ones(ND2, 1) * 1.5
 	dcc_fv²λ_plus_ub          = (0.50 * (dcc_fv²_plus_ub + dc_λ_ub))[:, 1]
 	dcc_fv²λ_plus_lb          = (0.50 * (dcc_fv²_plus_lb + dc_λ_lb))[:, 1]
 	dcc_fv²λ_minus_ub         = (0.50 * abs.(dcc_fv²_minus_ub - dc_λ_ub))[:, 1]
@@ -846,5 +836,6 @@ function get_dcc_boundaries_conditions(num_sos, ND2)
 									"dcc_fv²λ_2_plus_discrete" => dcc_fv²λ_2_plus_discrete,
 									"dcc_fv²λ_2_minus_discrete" => dcc_fv²λ_2_minus_discrete,
 									"num_sos" => num_sos)
+
 	return dcc_boundries_conditions
 end

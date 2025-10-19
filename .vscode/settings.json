@@ -1,7 +1,7 @@
 {
     "editor.wordWrapColumn": 150,
     "editor.wordWrap": "wordWrapColumn",
-    "editor.fontFamily": "MonoLisa, Maple Mono, Monaspace Neon, Fira Code, Hack, Monaspace Neon, Roboto Medium, Dubai, Chaparral Pro, Calisto, Helvetic, Fira Code, Geist Mono, JetBrains Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "Fira Code, Hack, MonoLisa, Maple Mono, Monaspace Neon, Monaspace Neon, Roboto Medium, Dubai, Chaparral Pro, Calisto, Helvetic, Fira Code, Geist Mono, JetBrains Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
     "workbench.editor.highlightModifiedTabs": true,
     "terminal.integrated.fontLigatures.enabled": true,
     "CodeGPT.apiKey": "CodeGPT Plus Beta",

@@ -1,5 +1,9 @@
 using Pkg
 
+using BenchmarkTools
+
+# @benchmark sort(data) setup=(data=rand(10))
+
 # Activate the project environment
 Pkg.activate("./.pkg")
 # Include necessary modules
@@ -16,17 +20,13 @@ include("src/draw_onlineactivepowerbalance.jl")
 include("src/draw_addditionalpower.jl")
 include("callback.jl")
 
-# Destructure directly from function call for clarity
-# Read data from Excel sheet
-UnitsFreqParam, WindsFreqParam, StrogeData, DataGen, GenCost, DataBranch, LoadCurve, DataLoad,
-datacentra_Data, data_centra_jobcurve = readxlssheet()
+#? Read data from Excel sheet
+UnitsFreqParam, WindsFreqParam, StrogeData, DataGen, GenCost, DataBranch, LoadCurve, DataLoad, datacentra_Data, data_centra_jobcurve = readxlssheet()
 
-# Form input data for the model
-config_param, units, lines, loads, stroges, NB, NG, NL, ND, NT, NC, ND2,
-DataCentras = forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsFreqParam,
-    StrogeData, datacentra_Data, data_centra_jobcurve)
+#? Form input data for the model
+config_param, units, lines, loads, stroges, NB, NG, NL, ND, NT, NC, ND2,DataCentras = forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsFreqParam, StrogeData, datacentra_Data, data_centra_jobcurve)
 
-# Generate wind scenarios
+#? Generate wind scenarios
 winds, NW = genscenario(WindsFreqParam, 2)
 
 output_dir = pwd()
@@ -40,13 +40,17 @@ end
 
 @assert config_param.is_ConsiderDataCentra == 1
 
-# Apply boundary conditions
-# boundrycondition(NB, NL, NG, NT, ND, units, loads, lines, winds, stroges)
+#? Apply boundary conditions
+boundrycondition(NB, NL, NG, NT, ND, units, loads, lines, winds, stroges)
 
-# Run the SUC-SCUC model
-res = SUC_scucmodel(NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, DataCentras, config_param)
+#! Run the SUC-SCUC model (considering data centra)
+@benchmark res = SUC_scucmodel(NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, DataCentras, config_param)
 
-# Save the balance results
+#! Run the benchmark model (without considering data centra)
+config_param.is_ConsiderDataCentra = 0
+@benchmark res = SUC_scucmodel(NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, DataCentras, config_param)
+
+#? Save the balance results
 savebalance_result(res["p₀"], res["pᵨ"], res["pᵩ"], res["pss_charge_p⁺"], res["pss_charge_p⁻"], 1)
 
 # using Plots, PlotThemes

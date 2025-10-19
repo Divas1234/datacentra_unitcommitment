@@ -132,6 +132,7 @@ function forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsF
 	Pss_δₛ = StrogeData[:, 12]
 
 	# renormazied data
+	#ANCHOR - default, the cdata centra is considered in the scheduling process.
 	config_param = config(0, 1, 1, 1, 1, 3, 0.005, 0.005, 1, 1, 1, 1e5, 1e5, 50, 0.01, 1)
 
 	units = unit(Gens_Index, Gens_LocateBus, Gens_Pmax, Gens_Pmin, Gens_RU, Gens_RD,
