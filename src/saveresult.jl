@@ -110,11 +110,15 @@ function savebalance_result(bench_p₀, bench_pᵨ, bench_pᵩ, bench_pss_charge
 	if flag == 1
 		filepath = "D:/GithubClonefiles/datacentra_unitcommitment/output/bench/"
 	elseif flag == 2
-		filepath = "D:/GithubClonefiles/datacentre_unitcommitment/output/"
-	else
-		flag == 3
-		filepath = "D:/ieee_tpws/code/littlecase//output/enhance_pros/"
+		filepath = "D:/GithubClonefiles/datacentra_unitcommitment/output/pros/"
+	elseif flag == 3
+		# filepath = "D:/ieee_tpws/code/littlecase//output/enhance_pros/"
+		filepath = "D:/GithubClonefiles/datacentra_unitcommitment/output/"
 	end
+	if dirname(filepath) != ""
+		isdir(dirname(filepath)) || mkpath(dirname(filepath))
+	end
+
 	open(filepath * "res_thermalunits.txt", "w") do io
 		# writedlm(io, [" "])
 		writedlm(io, thermalunits_output, '\t')

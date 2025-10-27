@@ -731,25 +731,29 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 				  "sd_cost" => sd_cost,
 				  "prod_cost" => prod_cost,
 				  "cr⁺" => cr⁺,
-				  "cr⁻" => cr⁻,
-				  "dc_p" => JuMP.value.(dc_p[1:(ND2 * NS), 1:NT]),
-				  "dc_fv²" => JuMP.value.(dc_fv²[1:(ND2 * NS), 1:NT]),
-				  "dc_fv²λ" => JuMP.value.(dc_fv²λ[1:(ND2 * NS), 1:NT]),
-				  "dc_fv²_plus" => JuMP.value.(dc_fv²_plus[1:(ND2 * NS), 1:NT]),
-				  "dc_fv²_minus" => JuMP.value.(dc_fv²_minus[1:(ND2 * NS), 1:NT]),
-				  "dc_fv²_2_plus" => JuMP.value.(dc_fv²_2_plus[1:(ND2 * NS), 1:NT]),
-				  "dc_fv²_2_minus" => JuMP.value.(dc_fv²_2_minus[1:(ND2 * NS), 1:NT]),
-				  "dc_fv²λ_plus" => JuMP.value.(dc_fv²λ_plus[1:(ND2 * NS), 1:NT]),
-				  "dc_fv²λ_minus" => JuMP.value.(dc_fv²λ_minus[1:(ND2 * NS), 1:NT]),
-				  "dc_fv²λ_2_plus" => JuMP.value.(dc_fv²λ_2_plus[1:(ND2 * NS), 1:NT]),
-				  "dc_fv²λ_2_minus" => JuMP.value.(dc_fv²λ_2_minus[1:(ND2 * NS), 1:NT]),
-				  "weight_fv²_minus" => JuMP.value.(weight_fv²_minus[1:(ND2 * NS), 1:NT, 1:num_sos]),
-				  "weight_fv²_plus" => JuMP.value.(weight_fv²_plus[1:(ND2 * NS), 1:NT, 1:num_sos]),
-				  "weight_fv²λ_minus" => JuMP.value.(weight_fv²λ_minus[1:(ND2 * NS), 1:NT, 1:num_sos]),
-				  "weight_fv²λ_plus" => JuMP.value.(weight_fv²λ_plus[1:(ND2 * NS), 1:NT, 1:num_sos]))
+				  "cr⁻" => cr⁻)
 
 	if config_param.is_ConsiderDataCentra == 1
+		dc_result = Dict("dc_p" => JuMP.value.(dc_p[1:(ND2 * NS), 1:NT]),
+					  "dc_fv²" => JuMP.value.(dc_fv²[1:(ND2 * NS), 1:NT]),
+					  "dc_fv²λ" => JuMP.value.(dc_fv²λ[1:(ND2 * NS), 1:NT]),
+					  "dc_fv²_plus" => JuMP.value.(dc_fv²_plus[1:(ND2 * NS), 1:NT]),
+					  "dc_fv²_minus" => JuMP.value.(dc_fv²_minus[1:(ND2 * NS), 1:NT]),
+					  "dc_fv²_2_plus" => JuMP.value.(dc_fv²_2_plus[1:(ND2 * NS), 1:NT]),
+					  "dc_fv²_2_minus" => JuMP.value.(dc_fv²_2_minus[1:(ND2 * NS), 1:NT]),
+					  "dc_fv²λ_plus" => JuMP.value.(dc_fv²λ_plus[1:(ND2 * NS), 1:NT]),
+					  "dc_fv²λ_minus" => JuMP.value.(dc_fv²λ_minus[1:(ND2 * NS), 1:NT]),
+					  "dc_fv²λ_2_plus" => JuMP.value.(dc_fv²λ_2_plus[1:(ND2 * NS), 1:NT]),
+					  "dc_fv²λ_2_minus" => JuMP.value.(dc_fv²λ_2_minus[1:(ND2 * NS), 1:NT]),
+					  "weight_fv²_minus" => JuMP.value.(weight_fv²_minus[1:(ND2 * NS), 1:NT, 1:num_sos]),
+					  "weight_fv²_plus" => JuMP.value.(weight_fv²_plus[1:(ND2 * NS), 1:NT, 1:num_sos]),
+					  "weight_fv²λ_minus" => JuMP.value.(weight_fv²λ_minus[1:(ND2 * NS), 1:NT, 1:num_sos]),
+					  "weight_fv²λ_plus" => JuMP.value.(weight_fv²λ_plus[1:(ND2 * NS), 1:NT, 1:num_sos]))
+
+		merge!(result, dc_result)
+
 		save_data_centra(result, num_sos, output_dir)
+
 	end
 
 	return result
@@ -786,22 +790,22 @@ function save_data_centra(res, num_sos, output_dir)
 end
 
 function get_dcc_boundaries_conditions(num_sos, ND2)
-	dcc_f_lb                  = ones(ND2, 1) * 0.50
-	dcc_f_ub                  = ones(ND2, 1) * 1.50
-	dcc_v_lb                  = ones(ND2, 1) * 0.85
-	dcc_v_ub                  = ones(ND2, 1) * 1.50
-	dcc_v²_lb                 = dcc_v_lb .^ 2
-	dcc_v²_ub                 = dcc_v_ub .^ 2
-	dcc_fv²_plus_ub           = (0.50 * (dcc_f_ub + dcc_v²_ub))[:, 1]
-	dcc_fv²_plus_lb           = (0.50 * (dcc_f_lb + dcc_v²_lb))[:, 1]
-	dcc_fv²_minus_ub          = (0.50 * abs.(dcc_f_ub - dcc_v²_ub))[:, 1]
-	dcc_fv²_minus_lb          = (0.50 * abs.(dcc_f_lb - dcc_v²_lb))[:, 1]
-	dcc_fv²_plus_discrete     = collect(range(dcc_fv²_plus_lb[1], dcc_fv²_plus_ub[1]; length = num_sos))
-	dcc_fv²_minus_discrete    = collect(range(dcc_fv²_minus_lb[1], dcc_fv²_minus_ub[1]; length = num_sos))
-	dcc_fv²_2_plus_discrete   = [t^2 for t in dcc_fv²_plus_discrete]
-	dcc_fv²_2_minus_discrete  = [t^2 for t in dcc_fv²_minus_discrete]
-	dc_λ_lb                   = ones(ND2, 1) * 0.5
-	dc_λ_ub                   = ones(ND2, 1) * 1.5
+	dcc_f_lb                    = ones(ND2, 1) * 0.50
+	dcc_f_ub                    = ones(ND2, 1) * 1.50
+	dcc_v_lb                    = ones(ND2, 1) * 0.85
+	dcc_v_ub                    = ones(ND2, 1) * 1.50
+	dcc_v²_lb                  = dcc_v_lb .^ 2
+	dcc_v²_ub                  = dcc_v_ub .^ 2
+	dcc_fv²_plus_ub            = (0.50 * (dcc_f_ub + dcc_v²_ub))[:, 1]
+	dcc_fv²_plus_lb            = (0.50 * (dcc_f_lb + dcc_v²_lb))[:, 1]
+	dcc_fv²_minus_ub           = (0.50 * abs.(dcc_f_ub - dcc_v²_ub))[:, 1]
+	dcc_fv²_minus_lb           = (0.50 * abs.(dcc_f_lb - dcc_v²_lb))[:, 1]
+	dcc_fv²_plus_discrete      = collect(range(dcc_fv²_plus_lb[1], dcc_fv²_plus_ub[1]; length = num_sos))
+	dcc_fv²_minus_discrete     = collect(range(dcc_fv²_minus_lb[1], dcc_fv²_minus_ub[1]; length = num_sos))
+	dcc_fv²_2_plus_discrete    = [t^2 for t in dcc_fv²_plus_discrete]
+	dcc_fv²_2_minus_discrete   = [t^2 for t in dcc_fv²_minus_discrete]
+	dc_λ_lb                    = ones(ND2, 1) * 0.5
+	dc_λ_ub                    = ones(ND2, 1) * 1.5
 	dcc_fv²λ_plus_ub          = (0.50 * (dcc_fv²_plus_ub + dc_λ_ub))[:, 1]
 	dcc_fv²λ_plus_lb          = (0.50 * (dcc_fv²_plus_lb + dc_λ_lb))[:, 1]
 	dcc_fv²λ_minus_ub         = (0.50 * abs.(dcc_fv²_minus_ub - dc_λ_ub))[:, 1]

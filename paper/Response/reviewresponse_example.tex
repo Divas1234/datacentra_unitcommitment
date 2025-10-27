@@ -1,0 +1,232 @@
+% Copyright Javier Sánchez-Monedero.
+% Please report bugs and suggestions to (jsanchezm at uco.es)
+%
+% This document is released under a Creative Commons Licence
+% CC-BY-SA (http://creativecommons.org/licenses/by-sa/3.0/)
+%
+% BASIC INSTRUCTIONS:
+% 1. Load and set up proper language packages
+% 2. Complete the paper data commands
+% 3. Use commands \rcomment and \newtext as shown in the example
+
+\documentclass[a4paper,twoside,11pt]{reviewresponse}
+
+% 1. Load and set up proper language packages
+%\usepackage[utf8x]{inputenc}
+\usepackage[latin9]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+
+% 2. Complete the paper data
+\newcommand{\myAuthors}{{John.~Doe$^{\displaystyle 1}$, ~Foo~B.~Bar$^{\displaystyle 2}$, } \\ {~Peter Sanchez$^{\displaystyle 2}$}}
+\newcommand{\myAuthorsShort}{John.~Doe et. al}
+\newcommand{\myEmail}{john@uco.es}
+\newcommand{\myTitle}{My Submited Paper Tittle}
+\newcommand{\myShortTitle}{Response to reviewers}
+\newcommand{\myJournal}{Journal Name}
+\newcommand{\myDept}{{$^{\displaystyle 1}$Department of Computer Science and Numerical Analysis, University of C\'{o}rdoba, C\'{o}rdoba 14074, Spain. \\ \url{http://www.uco.es/ayrna/}}\\
+{$^{\displaystyle 2}$School of Computer Science, The University of XXX. }\\}
+
+
+%\usepackage[linktoc=all]{hyperref}
+\usepackage[linktoc=all,bookmarks,bookmarksopen=true,bookmarksnumbered=true]{hyperref}
+
+\hypersetup{
+pdfauthor = {\myAuthorsShort},
+pdftitle = {\myTitle},
+pdfsubject = {\myJournal\xspace},
+colorlinks = true,
+linkcolor=black!70!green,          % color of internal links
+citecolor=black!70!green,        % color of links to bibliography
+filecolor=magenta,      % color of file links
+urlcolor=black!70!green           % color of external links
+}
+
+\begin{document}
+
+\thispagestyle{plain}
+
+\begin{center}
+	{\LARGE\myTitle} \vspace{0.5cm} \\
+	{\large\myJournal} \vspace{0.5cm} \\
+	\today \vspace{0.5cm} \\
+	\myAuthors \\
+	\url{\myEmail} \vspace{1cm} \\
+	\myDept
+\end{center}
+
+\tableofcontents
+
+\begin{abstract}
+	We thank the anonymous Reviewers for their efforts and feedback.
+\end{abstract}
+
+\section{Reviewer 1}
+
+The manuscript received gives a modified UC that considers the flexibility potential produced by data centers. The DVFS control scheme is extended to address the detailed demand consumption from data centers. The mentioned topic is timely and relevant, my questions are listed below,
+
+\rcomment{
+	1. It is recommended to provide an overall description of the proposed research framework before the discussion of the proposed method.}
+
+\textbf{Response}
+
+Thank you for this wonderful suggestion.
+
+As the review has advised that, a research framework concerning DVFS-controlled Data Center Clusters (DCCs) flexible capabilities is added in the
+revised manuscript, which is also illustrated as below.
+
+\rcomment{
+	2. The contributions to this work should be highlighted and given clearly explanations in the introduction section.
+}
+
+\textbf{Response}
+
+Thank you for this valuable recommendation.
+
+The main contribution in this work lies in the reformulated model describing workload-balancing processes among multi DCCs abd adjustable power
+consumption rescheduling process through DVFS technique. Through this, the flexibility potential produced by DCCs can be released to support the
+intra-day scheduling processes. Furthermore, a McCormick envelope method is applied to linearize the constructed control processes concerning workload reallocation among multi DVFS-controlled DCCs,
+and then, a reshaped SOS-1 type constraints is extended.
+
+To further highlight the significance of this work, the contributions have been rewritten in this round. Thank you for reminding us.
+
+\rcomment{ that the DVFS-controlled behind data center clusters is a novel point in this work. It is recommended to provide more description and discussions about the control logic in the DVFS-controlled data center clusters.
+}
+
+\textbf{Response}
+
+Thank you for this worthful suggestion.
+
+To help reader clearly understand the logic route of this work, both flexibility potential assessment of DVFS-controlled DCCs and its application under scheduling processes is explained before
+deriving relevant control constraints representing DVFS-controlled DCCs. In addition, a overall research framework is provided in the revised manuscript.
+
+\rcomment{
+	4. Figure.8 and figure.11 compares the voltage and power consumption of DCCs under different redistribution intervals. Nevertheless, it is still unclear how the voltage and power consumption of DCCs are affected by the redistribution intervals. It is suggested to provide more detailed explanations in the main text.
+}
+
+\textbf{Response}
+
+Thank you for your suggestion.
+
+Both Figures including figure 8 and figure 11 have been double-checked to improve the revolution in this new round.
+
+\clearpage
+
+\section{Reviewer 2}
+
+Comments to the Author
+
+This paper discusses the application of data center clusters through DVFS-based control in the operation process of power systems. The extended UC model considering DVFS-controlled DCCs is compared with existing literature, and the results seem promising. However, there are several issues that need improvement:
+
+\rcomment{
+	1. Supplementing the running time is suggested to further verify the feasibility of the proposed method in near real-time scheduling.
+}
+
+\textbf{Response}
+
+Thank you for your suggestions.
+
+Both calculation time and memory resources of the proposed methods against baseline models is added in the modified manuscript.
+
+
+\rcomment{
+	1. The McCormick envelops technique is applied to linearize the bilinear terms when modeling the DVFS-controlled DCCs. It is suggested to add the runtime and GPU memory consumption of the proposed method in comparison with benchmark.
+}
+
+\textbf{Response}
+
+% TODO - duplicate comments
+
+Thank you for your suggestions.
+
+Both calculation time and memory resources of the proposed methods against baseline models is added in the modified manuscript.
+
+
+\rcomment{
+	2. In the section. II, please provide a high-level description about SOS-1 constraints before deriving the operations constraints of DVFS-controlled DCCs. Availability, a simplified illustrative example (possibly with a two-variable case or graphical explanation) would significantly improve accessibility for readers.
+}
+
+\textbf{Response}
+
+Thank you for your valuable suggestion.
+
+As you has suggested, we have provided a easy-to-understood case to explain the detailed constraint reformation processes from the original physical constraints to the linearized SOS 1 type.
+
+\rcomment{
+	3. It is suggested to add a detailed description of the workload balancing and DVFS control strategy, the difference between these two physical processes is also suggested to be explained.
+}
+
+\textbf{Response}
+
+Thank you for reminding us.
+
+In the revised manuscript, we provide a high-level academic framework describing the workload reallocation among multi DCCs and adjustable demand consumption hosted on individual DCC device.
+
+\rcomment{
+	4. Some abbreviations (such as "UC" and "BESS") do not provide complete definitions when they first appear in the context (although they are implicitly defined in the abstract). It is suggested to add a complete description of the abbreviations in the nomenclature section.
+}
+
+\textbf{Response}
+
+Thank you for your kindness, we have corrected them in the revised manuscript. In addition, similar grammar issues and spelling problems have be also double-checked in the revised version.
+
+\rcomment{
+	5. The manuscript contains several grammatical and typographical errors (e.g., shut-up/shut-down should be start-up/shut-down). A thorough proofreading or professional English editing service is recommended.
+}
+
+\textbf{Response}
+
+Thank you for your suggestion. we have double-checked potential grammatical issues in this manuscript and corrected them.
+
+\clearpage
+
+\section{Reviewer 3}
+
+Comments to the Author
+
+This manuscript extends a DCC-constrained UC model to analyze the flexible capabilities of large-scale DCCs through DVFS control scheme. The topic is interesting and timely, and the structure of the entire manuscript is well organized, but the settings of case studies need to be improved, and my concerns are listed below.
+
+\rcomment{
+	1.It is recommended to clearly distinguish between the effects of load balancing processes across multi DCCs and the detailed DVFS control scheme hosted within individual DCC in this paper, and a more high-level explanation describing these two processes would be better for enhancing readability.
+}
+
+\textbf{Response}
+
+Thank you for your suggestions.
+
+In the revised manuscript, we provided a research framework to explain the flexibility potential assessment of multi-DCCs and its application under the short-term scheduling process. Also, we added
+related explanation to address the significantly contribution in this work.
+
+\rcomment{
+	2.The contribution should be highlighted, and the significance of this work differs from existing relevant studies be added in the introduction section.
+}
+
+Thank you for your wonderful suggestion.
+
+\textbf{Response}
+
+Thank you for your remarkable comments.
+
+In this corrected version, we
+
+
+\rcomment{
+	3.The coordinate axis labels and unit descriptions in Fig. 8 and Fig. 9, can be further clarified and standardized to ensure accuracy and ease of interpretation.
+}
+
+\textbf{Response}
+
+
+\rcomment{
+	4.The support benefits from DCCs are reflected through power balance and frequency control, the authors are encouraged to elaborate on the role and significance of DCCs in frequency dynamic response. This would better emphasize their practical importance.
+}
+
+\textbf{Response}
+
+% Uncomment in case references are needed
+%\bibliographystyle{apalike}
+%\bibliography{responsereferences}
+
+
+\end{document}

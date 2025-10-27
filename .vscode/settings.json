@@ -1,7 +1,7 @@
 {
-    "editor.wordWrapColumn": 150,
+    "editor.wordWrapColumn": 100,
     "editor.wordWrap": "wordWrapColumn",
-    "editor.fontFamily": "Fira Code, Hack, MonoLisa, Maple Mono, Monaspace Neon, Monaspace Neon, Roboto Medium, Dubai, Chaparral Pro, Calisto, Helvetic, Fira Code, Geist Mono, JetBrains Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "JetBrains Mono, Droid Sans Mono, Fira Code, Hack, MonoLisa, Maple Mono, Monaspace Neon, Monaspace Neon, Roboto Medium, Dubai, Chaparral Pro, Calisto, Helvetic, Fira Code, Geist Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
     "workbench.editor.highlightModifiedTabs": true,
     "terminal.integrated.fontLigatures.enabled": true,
     "CodeGPT.apiKey": "CodeGPT Plus Beta",
@@ -190,5 +190,8 @@
     },
     "rewrap.autoWrap.enabled": true,
     "editor.fontLigatures": true,
-    "workbench.preferredLightColorTheme": "GitHub Light Colorblind (Beta)"
+    "workbench.preferredLightColorTheme": "GitHub Light Colorblind (Beta)",
+    "editor.lineHeight": 24,
+    "editor.allowVariableFontsInAccessibilityMode": true,
+    "workbench.tree.renderIndentGuides": "onHover"
 }
