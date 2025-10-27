@@ -1,7 +1,5 @@
 using Pkg
-
 using BenchmarkTools
-
 # @benchmark sort(data) setup=(data=rand(10))
 
 # Include necessary modules
@@ -44,14 +42,29 @@ boundrycondition(NB, NL, NG, NT, ND, units, loads, lines, winds, stroges)
 
 #! Run the SUC-SCUC model (considering data centra)
 @benchmark res = SUC_scucmodel(NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, DataCentras, config_param)
+config_param.is_ConsiderDataCentra = 1
 res = SUC_scucmodel(NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, DataCentras, config_param)
+@show res
+
 #? Save the balance results
 savebalance_result(res["p₀"], res["pᵨ"], res["pᵩ"], res["pss_charge_p⁺"], res["pss_charge_p⁻"], 2)
+
 
 #! Run the benchmark model (without considering data centra)
 config_param.is_ConsiderDataCentra = 0
 @benchmark res = SUC_scucmodel(NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, DataCentras, config_param)
 res = SUC_scucmodel(NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, DataCentras, config_param)
+
+# ----------------
+tem =  res["dc_fv²"]
+Plots.plot(tem[:,5]; label = "DC FV²", legend = nothing)
+
+tem = res["dc_p"]
+Plots.plot(tem[5,:]; label = "DC P", legend = nothing)
+
+# -----------------
+
+
 
 #? Save the balance results
 savebalance_result(res["p₀"], res["pᵨ"], res["pᵩ"], res["pss_charge_p⁺"], res["pss_charge_p⁻"], 1)

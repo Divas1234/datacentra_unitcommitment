@@ -497,7 +497,6 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 
 			"""
 				define the lower bound and upper boud for each varialbe.
-
 			"""
 			@constraint(scuc, [s = 1:NS, t = 1:NT], dc_fv²λ_plus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv²λ_plus_ub)
 			@constraint(scuc, [s = 1:NS, t = 1:NT], dc_fv²λ_plus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv²λ_plus_lb)
@@ -735,25 +734,24 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 
 	if config_param.is_ConsiderDataCentra == 1
 		dc_result = Dict("dc_p" => JuMP.value.(dc_p[1:(ND2 * NS), 1:NT]),
-					  "dc_fv²" => JuMP.value.(dc_fv²[1:(ND2 * NS), 1:NT]),
-					  "dc_fv²λ" => JuMP.value.(dc_fv²λ[1:(ND2 * NS), 1:NT]),
-					  "dc_fv²_plus" => JuMP.value.(dc_fv²_plus[1:(ND2 * NS), 1:NT]),
-					  "dc_fv²_minus" => JuMP.value.(dc_fv²_minus[1:(ND2 * NS), 1:NT]),
-					  "dc_fv²_2_plus" => JuMP.value.(dc_fv²_2_plus[1:(ND2 * NS), 1:NT]),
-					  "dc_fv²_2_minus" => JuMP.value.(dc_fv²_2_minus[1:(ND2 * NS), 1:NT]),
-					  "dc_fv²λ_plus" => JuMP.value.(dc_fv²λ_plus[1:(ND2 * NS), 1:NT]),
-					  "dc_fv²λ_minus" => JuMP.value.(dc_fv²λ_minus[1:(ND2 * NS), 1:NT]),
-					  "dc_fv²λ_2_plus" => JuMP.value.(dc_fv²λ_2_plus[1:(ND2 * NS), 1:NT]),
-					  "dc_fv²λ_2_minus" => JuMP.value.(dc_fv²λ_2_minus[1:(ND2 * NS), 1:NT]),
-					  "weight_fv²_minus" => JuMP.value.(weight_fv²_minus[1:(ND2 * NS), 1:NT, 1:num_sos]),
-					  "weight_fv²_plus" => JuMP.value.(weight_fv²_plus[1:(ND2 * NS), 1:NT, 1:num_sos]),
-					  "weight_fv²λ_minus" => JuMP.value.(weight_fv²λ_minus[1:(ND2 * NS), 1:NT, 1:num_sos]),
-					  "weight_fv²λ_plus" => JuMP.value.(weight_fv²λ_plus[1:(ND2 * NS), 1:NT, 1:num_sos]))
+						 "dc_fv²" => JuMP.value.(dc_fv²[1:(ND2 * NS), 1:NT]),
+						 "dc_fv²λ" => JuMP.value.(dc_fv²λ[1:(ND2 * NS), 1:NT]),
+						 "dc_fv²_plus" => JuMP.value.(dc_fv²_plus[1:(ND2 * NS), 1:NT]),
+						 "dc_fv²_minus" => JuMP.value.(dc_fv²_minus[1:(ND2 * NS), 1:NT]),
+						 "dc_fv²_2_plus" => JuMP.value.(dc_fv²_2_plus[1:(ND2 * NS), 1:NT]),
+						 "dc_fv²_2_minus" => JuMP.value.(dc_fv²_2_minus[1:(ND2 * NS), 1:NT]),
+						 "dc_fv²λ_plus" => JuMP.value.(dc_fv²λ_plus[1:(ND2 * NS), 1:NT]),
+						 "dc_fv²λ_minus" => JuMP.value.(dc_fv²λ_minus[1:(ND2 * NS), 1:NT]),
+						 "dc_fv²λ_2_plus" => JuMP.value.(dc_fv²λ_2_plus[1:(ND2 * NS), 1:NT]),
+						 "dc_fv²λ_2_minus" => JuMP.value.(dc_fv²λ_2_minus[1:(ND2 * NS), 1:NT]),
+						 "weight_fv²_minus" => JuMP.value.(weight_fv²_minus[1:(ND2 * NS), 1:NT, 1:num_sos]),
+						 "weight_fv²_plus" => JuMP.value.(weight_fv²_plus[1:(ND2 * NS), 1:NT, 1:num_sos]),
+						 "weight_fv²λ_minus" => JuMP.value.(weight_fv²λ_minus[1:(ND2 * NS), 1:NT, 1:num_sos]),
+						 "weight_fv²λ_plus" => JuMP.value.(weight_fv²λ_plus[1:(ND2 * NS), 1:NT, 1:num_sos]))
 
 		merge!(result, dc_result)
 
 		save_data_centra(result, num_sos, output_dir)
-
 	end
 
 	return result
