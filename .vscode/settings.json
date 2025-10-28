@@ -1,7 +1,7 @@
 {
     "editor.wordWrapColumn": 200,
     "editor.wordWrap": "wordWrapColumn",
-    "editor.fontFamily": "JetBrains Mono, Droid Sans Mono, Fira Code, Hack, MonoLisa, Maple Mono, Monaspace Neon, Monaspace Neon, Roboto Medium, Dubai, Chaparral Pro, Calisto, Helvetic, Fira Code, Geist Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontFamily": "Roboto Medium, Farro, JetBrains Mono, Droid Sans Mono, Fira Code, Hack, MonoLisa, Maple Mono, Monaspace Neon, Monaspace Neon, Dubai, Chaparral Pro, Calisto, Helvetic, Fira Code, Geist Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
     "workbench.editor.highlightModifiedTabs": true,
     "terminal.integrated.fontLigatures.enabled": true,
     "CodeGPT.apiKey": "CodeGPT Plus Beta",
@@ -20,7 +20,9 @@
         "DVFS",
         "idale",
         "microgrid",
-        "microgrids"
+        "microgrids",
+        "PSON",
+        "SRTF"
     ],
     "github.copilot.chat.agent.thinkingTool": true,
     "github.copilot.chat.codesearch.enabled": true,

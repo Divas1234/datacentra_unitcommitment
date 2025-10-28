@@ -1,6 +1,6 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.9.23)  19 OCT 2025 15:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.23)  28 OCT 2025 19:41
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
  %&-line parsing enabled.
 **New_IEEEtran_how-to.tex
 (./New_IEEEtran_how-to.tex
@@ -13,35 +13,63 @@ Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
 \@IEEEtrantmpdimenA=\dimen141
 \@IEEEtrantmpdimenB=\dimen142
 \@IEEEtrantmpdimenC=\dimen143
-\@IEEEtrantmpcountA=\count192
-\@IEEEtrantmpcountB=\count193
-\@IEEEtrantmpcountC=\count194
+\@IEEEtrantmpcountA=\count196
+\@IEEEtrantmpcountB=\count197
+\@IEEEtrantmpcountC=\count198
 \@IEEEtrantmptoksA=\toks17
-LaTeX Font Info:    Trying to load font information for TU+ptm on input line 50
-3.
-LaTeX Font Info:    No file TUptm.fd. on input line 503.
+LaTeX Font Info:    Trying to load font information for OT1+ptm on input line 5
+03.
 
-LaTeX Font Warning: Font shape `TU/ptm/m/n' undefined
-(Font)              using `TU/lmr/m/n' instead on input line 503.
-
+(d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/p
+snfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
 -- Using 8.5in x 11in (letter) paper.
--- Using DVI output.
+-- Using PDF output.
 \@IEEEnormalsizeunitybaselineskip=\dimen144
 -- This is a 10 point document.
 \CLASSINFOnormalsizebaselineskip=\dimen145
 \CLASSINFOnormalsizeunitybaselineskip=\dimen146
 \IEEEnormaljot=\dimen147
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1086.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1086.
 
-LaTeX Font Warning: Font shape `TU/ptm/bx/n' undefined
-(Font)              using `TU/ptm/m/n' instead on input line 1086.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1086.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1086.
 
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1086.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1086.
 
-LaTeX Font Warning: Font shape `TU/ptm/m/it' undefined
-(Font)              using `TU/ptm/m/n' instead on input line 1086.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1086.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1086.
 
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1086.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1086.
 
-LaTeX Font Warning: Font shape `TU/ptm/bx/it' undefined
-(Font)              using `TU/ptm/bx/n' instead on input line 1086.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1086.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1086.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1086.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1086.
+
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <18> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1086.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <18> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 1086.
 
 \IEEEquantizedlength=\dimen148
 \IEEEquantizedlengthdiff=\dimen149
@@ -55,27 +83,27 @@ LaTeX Font Warning: Font shape `TU/ptm/bx/it' undefined
 \IEEEiednormlabelsep=\dimen157
 \IEEEiedmathlabelsep=\dimen158
 \IEEEiedtopsep=\skip49
-\c@section=\count195
-\c@subsection=\count196
-\c@subsubsection=\count197
-\c@paragraph=\count198
-\c@IEEEsubequation=\count199
+\c@section=\count199
+\c@subsection=\count266
+\c@subsubsection=\count267
+\c@paragraph=\count268
+\c@IEEEsubequation=\count269
 \abovecaptionskip=\skip50
 \belowcaptionskip=\skip51
-\c@figure=\count266
-\c@table=\count267
-\@IEEEeqnnumcols=\count268
-\@IEEEeqncolcnt=\count269
-\@IEEEsubeqnnumrollback=\count270
+\c@figure=\count270
+\c@table=\count271
+\@IEEEeqnnumcols=\count272
+\@IEEEeqncolcnt=\count273
+\@IEEEsubeqnnumrollback=\count274
 \@IEEEquantizeheightA=\dimen159
 \@IEEEquantizeheightB=\dimen160
 \@IEEEquantizeheightC=\dimen161
 \@IEEEquantizeprevdepth=\dimen162
-\@IEEEquantizemultiple=\count271
+\@IEEEquantizemultiple=\count275
 \@IEEEquantizeboxA=\box52
 \@IEEEtmpitemindent=\dimen163
 \IEEEPARstartletwidth=\dimen164
-\c@IEEEbiography=\count272
+\c@IEEEbiography=\count276
 \@IEEEtranrubishbin=\box53
 )
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/b
@@ -92,7 +120,6 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 msmath/amsmath.sty
 Package: amsmath 2024/11/05 v2.17t AMS math features
 \@mathmargin=\skip52
-
 For additional information on amsmath, use the `?' option.
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/a
@@ -114,14 +141,14 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 msmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count273
+\inf@bad=\count277
 LaTeX Info: Redefining \frac on input line 233.
-\uproot@=\count274
-\leftroot@=\count275
+\uproot@=\count278
+\leftroot@=\count279
 LaTeX Info: Redefining \overline on input line 398.
 LaTeX Info: Redefining \colon on input line 409.
-\classnum@=\count276
-\DOTSCASE@=\count277
+\classnum@=\count280
+\DOTSCASE@=\count281
 LaTeX Info: Redefining \ldots on input line 495.
 LaTeX Info: Redefining \dots on input line 498.
 LaTeX Info: Redefining \cdots on input line 619.
@@ -134,20 +161,20 @@ LaTeX Info: Redefining \Bigg on input line 724.
 \big@size=\dimen167
 LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
-\macc@depth=\count278
+\macc@depth=\count282
 LaTeX Info: Redefining \bmod on input line 904.
 LaTeX Info: Redefining \pmod on input line 909.
 LaTeX Info: Redefining \smash on input line 939.
 LaTeX Info: Redefining \relbar on input line 969.
 LaTeX Info: Redefining \Relbar on input line 970.
-\c@MaxMatrixCols=\count279
+\c@MaxMatrixCols=\count283
 \dotsspace@=\muskip17
-\c@parentequation=\count280
-\dspbrk@lvl=\count281
+\c@parentequation=\count284
+\dspbrk@lvl=\count285
 \tag@help=\toks19
-\row@=\count282
-\column@=\count283
-\maxfields@=\count284
+\row@=\count286
+\column@=\count287
+\maxfields@=\count288
 \andhelp@=\toks20
 \eqnshift@=\dimen168
 \alignsep@=\dimen169
@@ -173,7 +200,6 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 )
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/a
 lgorithms/algorithmic.sty
-Invalid UTF-8 byte or sequence at line 11 replaced by U+FFFD.
 Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/b
@@ -185,10 +211,10 @@ raphics/keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks23
 )
-\c@ALC@unique=\count285
-\c@ALC@line=\count286
-\c@ALC@rem=\count287
-\c@ALC@depth=\count288
+\c@ALC@unique=\count289
+\c@ALC@line=\count290
+\c@ALC@rem=\count291
+\c@ALC@depth=\count292
 \ALC@tlm=\skip55
 \algorithmicindent=\skip56
 )
@@ -232,17 +258,17 @@ ference \hbox to\hsize {\normalfont \footnotesize \hfil \box \@tempboxa \hfil }
 \else \hbox to\hsize {\normalfont \footnotesize \box \@tempboxa \hfil }\fi \fi 
 \fi  on input line 1175.
 )
-\c@KVtest=\count289
+\c@KVtest=\count293
 \sf@farskip=\skip59
 \sf@captopadj=\dimen184
 \sf@capskip=\skip60
 \sf@nearskip=\skip61
-\c@subfigure=\count290
-\c@subfigure@save=\count291
-\c@lofdepth=\count292
-\c@subtable=\count293
-\c@subtable@save=\count294
-\c@lotdepth=\count295
+\c@subfigure=\count294
+\c@subfigure@save=\count295
+\c@lofdepth=\count296
+\c@subtable=\count297
+\c@subtable@save=\count298
+\c@lotdepth=\count299
 \sf@top=\skip62
 \sf@bottom=\skip63
 )
@@ -254,8 +280,8 @@ Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
 ttools/stfloats.sty
 Package: stfloats 2017/03/27 v3.3 Improve float mechanism and baselineskip sett
 ings
-\@dblbotnum=\count296
-\c@dblbotnumber=\count297
+\@dblbotnum=\count300
+\c@dblbotnumber=\count301
 )
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/u
 rl/url.sty
@@ -285,11 +311,11 @@ Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
 raphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: xetex.def on input line 106.
+Package graphics Info: Driver file: pdftex.def on input line 106.
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/g
-raphics-def/xetex.def
-File: xetex.def 2022/09/22 v5.0n Graphics/color driver for xetex
+raphics-def/pdftex.def
+File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen185
 \Gin@req@width=\dimen186
@@ -306,7 +332,6 @@ Package: titlesec 2025/01/04 v2.17 Sectioning titles
 \titlewidth=\dimen189
 \titlewidthlast=\dimen190
 \titlewidthfirst=\dimen191
-
 
 Package titlesec Warning: Non standard sectioning command \subparagraph
 (titlesec)                detected. Using default spacing and no format.
@@ -331,7 +356,7 @@ Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
 \TX@old@col=\dimen195
 \TX@target=\dimen196
 \TX@delta=\dimen197
-\TX@cols=\count298
+\TX@cols=\count302
 \TX@ftn=\toks28
 )
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/u
@@ -346,7 +371,7 @@ LaTeX Info: Redefining \nicefrac on input line 131.
 ultirow/multirow.sty
 Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
 \multirow@colwidth=\skip69
-\multirow@cntb=\count299
+\multirow@cntb=\count303
 \multirow@dima=\skip70
 \bigstrutjot=\dimen198
 )
@@ -365,7 +390,7 @@ Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
 \XKV@toks=\toks29
 \XKV@tempa@toks=\toks30
 )
-\XKV@depth=\count300
+\XKV@depth=\count304
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/k
@@ -462,40 +487,34 @@ Package: pgfsys 2023-01-15 v3.1.10 (3.1.10)
 \pgf@yd=\dimen268
 \w@pgf@writea=\write3
 \r@pgf@reada=\read3
-\c@pgf@counta=\count301
-\c@pgf@countb=\count302
-\c@pgf@countc=\count303
-\c@pgf@countd=\count304
+\c@pgf@counta=\count305
+\c@pgf@countb=\count306
+\c@pgf@countc=\count307
+\c@pgf@countd=\count308
 \t@pgf@toka=\toks35
 \t@pgf@tokb=\toks36
 \t@pgf@tokc=\toks37
-\pgf@sys@id@count=\count305
+\pgf@sys@id@count=\count309
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
 /pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2023-01-15 v3.1.10 (3.1.10)
 )
-Driver file for pgf: pgfsys-xetex.def
+Driver file for pgf: pgfsys-pdftex.def
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
-/pgf/systemlayer/pgfsys-xetex.def
-File: pgfsys-xetex.def 2023-01-15 v3.1.10 (3.1.10)
-
-(d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
-/pgf/systemlayer/pgfsys-dvipdfmx.def
-File: pgfsys-dvipdfmx.def 2023-01-15 v3.1.10 (3.1.10)
+/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2023-01-15 v3.1.10 (3.1.10)
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
 /pgf/systemlayer/pgfsys-common-pdf.def
 File: pgfsys-common-pdf.def 2023-01-15 v3.1.10 (3.1.10)
-)
-\pgfsys@objnum=\count306
 )))
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
 /pgf/systemlayer/pgfsyssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfsyssoftpath@smallbuffer@items=\count307
-\pgfsyssoftpath@bigbuffer@items=\count308
+\pgfsyssoftpath@smallbuffer@items=\count310
+\pgfsyssoftpath@bigbuffer@items=\count311
 )
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
 /pgf/systemlayer/pgfsysprotocol.code.tex
@@ -509,11 +528,12 @@ Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
 raphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
-Package xcolor Info: Driver file: xetex.def on input line 274.
+Package xcolor Info: Driver file: pdftex.def on input line 274.
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/g
 raphics/mathcolor.ltx)
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
 Package xcolor Info: Model `RGB' extended on input line 1365.
 Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
 Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
@@ -533,7 +553,7 @@ Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
 /pgf/math/pgfmathparser.code.tex
 \pgfmath@dimen=\dimen269
-\pgfmath@count=\count309
+\pgfmath@count=\count312
 \pgfmath@box=\box61
 \pgfmath@toks=\toks38
 \pgfmath@stack@operand=\toks39
@@ -561,7 +581,7 @@ Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
 /pgf/math/pgfmathcalc.code.tex)
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
 /pgf/math/pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count310
+\c@pgfmathroundto@lastzeros=\count313
 ))
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
 /pgf/math/pgfint.code.tex)
@@ -601,7 +621,7 @@ File: pgfcorescopes.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \pgfpic=\box62
 \pgf@hbox=\box63
 \pgf@layerbox@main=\box64
-\pgf@picture@serial@count=\count311
+\pgf@picture@serial@count=\count314
 )
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
 /pgf/basiclayer/pgfcoregraphicstate.code.tex
@@ -636,8 +656,8 @@ File: pgfcorearrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
 /pgf/basiclayer/pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \pgf@max=\dimen293
-\pgf@sys@shading@range@num=\count312
-\pgf@shadingcount=\count313
+\pgf@sys@shading@range@num=\count315
+\pgf@shadingcount=\count316
 )
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
 /pgf/basiclayer/pgfcoreimage.code.tex
@@ -708,7 +728,7 @@ Package: tikz 2023-01-15 v3.1.10 (3.1.10)
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
 /pgf/libraries/pgflibraryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@plot@mark@count=\count314
+\pgf@plot@mark@count=\count317
 \pgfplotmarksize=\dimen298
 )
 \tikz@lastx=\dimen299
@@ -723,19 +743,19 @@ File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \tikz@figbox@bg=\box68
 \tikz@tempbox=\box69
 \tikz@tempbox@bg=\box70
-\tikztreelevel=\count315
-\tikznumberofchildren=\count316
-\tikznumberofcurrentchild=\count317
-\tikz@fig@count=\count318
+\tikztreelevel=\count318
+\tikznumberofchildren=\count319
+\tikznumberofcurrentchild=\count320
+\tikz@fig@count=\count321
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
 /pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfmatrixcurrentrow=\count319
-\pgfmatrixcurrentcolumn=\count320
-\pgf@matrix@numberofcolumns=\count321
+\pgfmatrixcurrentrow=\count322
+\pgfmatrixcurrentcolumn=\count323
+\pgf@matrix@numberofcolumns=\count324
 )
-\tikz@expandcount=\count322
+\tikz@expandcount=\count325
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
 /pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
@@ -752,15 +772,15 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/e
 toolbox/etoolbox.sty
 Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count323
+\etb@tempcnta=\count326
 )
 \tcb@titlebox=\box71
 \tcb@upperbox=\box72
 \tcb@lowerbox=\box73
 \tcb@phantombox=\box74
-\c@tcbbreakpart=\count324
-\c@tcblayer=\count325
-\c@tcolorbox@number=\count326
+\c@tcbbreakpart=\count327
+\c@tcblayer=\count328
+\c@tcolorbox@number=\count329
 \l__tcobox_tmpa_box=\box75
 \l__tcobox_tmpa_dim=\dimen307
 \tcb@temp=\box76
@@ -775,8 +795,8 @@ Package: enumitem 2025/02/06 v3.11 Customized lists
 \enit@outerparindent=\dimen308
 \enit@toks=\toks43
 \enit@inbox=\box80
-\enit@count@id=\count327
-\enitdp@description=\count328
+\enit@count@id=\count330
+\enitdp@description=\count331
 )
 \@nomenclaturefile=\write4
 \openout4 = `New_IEEEtran_how-to.nlo'.
@@ -819,7 +839,7 @@ Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode not found.
+Package pdftexcmds Info: \pdfdraftmode found.
 ))
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/h
 ycolor/hycolor.sty
@@ -841,7 +861,7 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 voptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count329
+\c@section@level=\count332
 )
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
 /stringenc/stringenc.sty
@@ -849,22 +869,26 @@ Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
 )
 )
 \@linkdim=\dimen309
-\Hy@linkcounter=\count330
-\Hy@pagecounter=\count331
+\Hy@linkcounter=\count333
+\Hy@pagecounter=\count334
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/h
 yperref/pd1enc.def
 File: pd1enc.def 2024-11-05 v7.01l Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
 )
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
 /intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count332
+\Hy@SavedSpaceFactor=\count335
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/h
 yperref/puenc.def
 File: puenc.def 2024-11-05 v7.01l Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 4040.
 Package hyperref Info: Hyper figures OFF on input line 4157.
@@ -874,7 +898,7 @@ Package hyperref Info: Plain pages OFF on input line 4172.
 Package hyperref Info: Backreferencing OFF on input line 4177.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4424.
-\c@Hy@tempcnt=\count333
+\c@Hy@tempcnt=\count336
 LaTeX Info: Redefining \url on input line 4763.
 \XeTeXLinkMargin=\dimen310
 
@@ -887,7 +911,7 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count334
+\Fld@menulength=\count337
 \Field@Width=\dimen311
 \Fld@charsize=\dimen312
 Package hyperref Info: Hyper figures OFF on input line 6042.
@@ -903,24 +927,15 @@ ase/atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count335
-\c@Item=\count336
-\c@Hfootnote=\count337
+\Hy@abspage=\count338
+\c@Item=\count339
+\c@Hfootnote=\count340
 )
-Package hyperref Info: Driver (autodetected): hxetex.
+Package hyperref Info: Driver (autodetected): hpdftex.
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/h
-yperref/hxetex.def
-File: hxetex.def 2024-11-05 v7.01l Hyperref driver for XeTeX
-\pdfm@box=\box81
-\c@Hy@AnnotLevel=\count338
-\HyField@AnnotCount=\count339
-\Fld@listcount=\count340
-\c@bookmark@seq@number=\count341
-
-(d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/r
-erunfilecheck/rerunfilecheck.sty
-Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+yperref/hpdftex.def
+File: hpdftex.def 2024-11-05 v7.01l Hyperref driver for pdfTeX
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/b
 ase/atveryend-ltx.sty
@@ -928,6 +943,13 @@ Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
 kage
 with kernel methods
 )
+\Fld@listcount=\count341
+\c@bookmark@seq@number=\count342
+
+(d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/r
+erunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/generic
 /uniquecounter/uniquecounter.sty
 Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
@@ -938,12 +960,10 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 \Hy@SectionHShift=\skip74
 ) (./nomenclatures.tex)
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/l
-3backend/l3backend-xetex.def
-File: l3backend-xetex.def 2024-05-08 L3 backend support: XeTeX
-\g__graphics_track_int=\count342
-\l__pdf_internal_box=\box82
-\g__pdf_backend_annotation_int=\count343
-\g__pdf_backend_link_int=\count344
+3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count343
+\l__pdf_internal_box=\box81
 )
 
 LaTeX Warning: Unused global option(s):
@@ -962,8 +982,6 @@ LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
 LaTeX Font Info:    ... okay on input line 58.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 58.
 LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
 LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
 LaTeX Font Info:    ... okay on input line 58.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
@@ -972,19 +990,41 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
 LaTeX Font Info:    ... okay on input line 58.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 58.
 LaTeX Font Info:    ... okay on input line 58.
-
 -- Lines per column: 58 (exact).
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
+
+(d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/context
+/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count344
+\scratchdimen=\dimen313
+\scratchbox=\box82
+\nofMPsegments=\count345
+\nofMParguments=\count346
+\everyMPshowfont=\toks44
+\MPscratchCnt=\count347
+\MPscratchDim=\dimen314
+\MPnumerator=\count348
+\makeMPintoPDFobject=\count349
+\everyMPtoPDFconversion=\toks45
+)
+(d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/e
+pstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/l
+atexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 Package hyperref Info: Link coloring ON on input line 58.
 (./New_IEEEtran_how-to.out) (./New_IEEEtran_how-to.out)
 \@outlinefile=\write5
 \openout5 = `New_IEEEtran_how-to.out'.
-
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 (./New_IEEEtran_how-to.nls
 LaTeX Font Info:    Trying to load font information for U+msa on input line 4.
@@ -1002,7 +1042,9 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 )
 
-[1
+[1{d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-var/fonts/map/
+pdftex/updmap/pdftex.map}{d:/CommonSoftwares/ProductiveCodingEditors/texlive/20
+25/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
 
 ]
@@ -1010,34 +1052,53 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 [2]
+<./fig/proposed_framework.pdf, id=91, 351.80031pt x 300.59302pt>
 File: ./fig/proposed_framework.pdf Graphic file (type pdf)
 <use ./fig/proposed_framework.pdf>
+Package pdftex.def Info: ./fig/proposed_framework.pdf  used on input line 149.
+(pdftex.def)             Requested size: 206.39685pt x 176.35303pt.
 
 
+<./fig/dvfs_heatmap.pdf, id=99, 281.98949pt x 115.80705pt>
 File: ./fig/dvfs_heatmap.pdf Graphic file (type pdf)
 <use ./fig/dvfs_heatmap.pdf>
+Package pdftex.def Info: ./fig/dvfs_heatmap.pdf  used on input line 191.
+(pdftex.def)             Requested size: 232.19843pt x 95.35997pt.
 
 
-[3]
+[3 <./fig/proposed_framework.pdf> <./fig/dvfs_heatmap.pdf>]
+<./fig/Qos.pdf, id=322, 389.726pt x 219.46992pt>
 File: ./fig/Qos.pdf Graphic file (type pdf)
 <use ./fig/Qos.pdf>
+Package pdftex.def Info: ./fig/Qos.pdf  used on input line 227.
+(pdftex.def)             Requested size: 245.10315pt x 138.029pt.
 
 
 
 
-[4]
+[4 <./fig/Qos.pdf>]
 
+<./fig/workload_distribution.pdf, id=391, 415.4205pt x 257.42894pt>
 File: ./fig/workload_distribution.pdf Graphic file (type pdf)
 <use ./fig/workload_distribution.pdf>
+Package pdftex.def Info: ./fig/workload_distribution.pdf  used on input line 37
+4.
+(pdftex.def)             Requested size: 258.0081pt x 156.49327pt.
 
-Overfull \hbox (6.00809pt too wide) in paragraph at lines 374--375
+Overfull \hbox (6.0081pt too wide) in paragraph at lines 374--375
 [][]  
  []
 
+<./fig/loadcurve.pdf, id=392, 416.21185pt x 253.47197pt>
 File: ./fig/loadcurve.pdf Graphic file (type pdf)
 <use ./fig/loadcurve.pdf>
+Package pdftex.def Info: ./fig/loadcurve.pdf  used on input line 382.
+(pdftex.def)             Requested size: 219.30157pt x 133.55435pt.
+<./fig/windscurve_result.pdf, id=393, 417.26639pt x 256.90167pt>
 File: ./fig/windscurve_result.pdf Graphic file (type pdf)
 <use ./fig/windscurve_result.pdf>
+Package pdftex.def Info: ./fig/windscurve_result.pdf  used on input line 390.
+(pdftex.def)             Requested size: 219.30371pt x 142.26851pt.
 
 Overfull \hbox (3.20901pt too wide) in paragraph at lines 401--422
  [][] 
@@ -1047,38 +1108,63 @@ Overfull \hbox (3.20901pt too wide) in paragraph at lines 401--422
 
 [5]
 
+<./fig/balanceprocess.pdf, id=435, 409.08975pt x 251.0983pt>
 File: ./fig/balanceprocess.pdf Graphic file (type pdf)
 <use ./fig/balanceprocess.pdf>
+Package pdftex.def Info: ./fig/balanceprocess.pdf  used on input line 465.
+(pdftex.def)             Requested size: 283.81406pt x 142.26543pt.
 
 Overfull \hbox (31.81406pt too wide) in paragraph at lines 465--466
 [][]  
  []
 
+<./fig/stacked_dc_λ_subplots.pdf, id=436, 328.98409pt x 574.61275pt>
 File: ./fig/stacked_dc_λ_subplots.pdf Graphic file (type pdf)
 <use ./fig/stacked_dc_λ_subplots.pdf>
+Package pdftex.def Info: ./fig/stacked_dc_λ_subplots.pdf  used on input line 4
+72.
+(pdftex.def)             Requested size: 232.19843pt x 405.5755pt.
+<./fig/stacked_dc_fv_subplots.pdf, id=437, 330.7567pt x 576.83002pt>
 File: ./fig/stacked_dc_fv_subplots.pdf Graphic file (type pdf)
 <use ./fig/stacked_dc_fv_subplots.pdf>
+Package pdftex.def Info: ./fig/stacked_dc_fv_subplots.pdf  used on input line 4
+79.
+(pdftex.def)             Requested size: 232.19843pt x 404.94888pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[6]
+[6 <./fig/workload_distribution.pdf> <./fig/loadcurve.pdf> <./fig/windscurve_re
+sult.pdf>]
 
 
 
-[7]
+[7 <./fig/balanceprocess.pdf> <./fig/stacked_dc_λ_subplots.pdf> <./fig/stacked
+_dc_fv_subplots.pdf
+
+pdfTeX warning: pdflatex.exe (file ./fig/stacked_dc_fv_subplots.pdf): PDF inclu
+sion: multiple pdfs with page group included in a single page
+>]
+<./fig/stacked_dcc_p6_plot.pdf, id=576, 420.25577pt x 259.18701pt>
 File: ./fig/stacked_dcc_p6_plot.pdf Graphic file (type pdf)
 <use ./fig/stacked_dcc_p6_plot.pdf>
+Package pdftex.def Info: ./fig/stacked_dcc_p6_plot.pdf  used on input line 495.
 
-Overfull \hbox (5.99727pt too wide) in paragraph at lines 495--496
+(pdftex.def)             Requested size: 257.99725pt x 142.26854pt.
+
+Overfull \hbox (5.99725pt too wide) in paragraph at lines 495--496
 [][]  
  []
 
+<./fig/stacked_dcc_p4_plot.pdf, id=577, 417.11636pt x 257.37856pt>
 File: ./fig/stacked_dcc_p4_plot.pdf Graphic file (type pdf)
 <use ./fig/stacked_dcc_p4_plot.pdf>
+Package pdftex.def Info: ./fig/stacked_dcc_p4_plot.pdf  used on input line 502.
 
-Overfull \hbox (6.01117pt too wide) in paragraph at lines 502--503
+(pdftex.def)             Requested size: 258.01118pt x 142.26161pt.
+
+Overfull \hbox (6.01118pt too wide) in paragraph at lines 502--503
 [][]  
  []
 
@@ -1086,9 +1172,8 @@ Overfull \hbox (6.01117pt too wide) in paragraph at lines 502--503
 
 
 
-[8] (./New_IEEEtran_how-to.bbl
-Missing character: There is no ’ ("2019) in font ptmr8t!
-
+[8 <./fig/stacked_dcc_p6_plot.pdf> <./fig/stacked_dcc_p4_plot.pdf>] (./New_IEEE
+tran_how-to.bbl
 
 )
 
@@ -1097,23 +1182,46 @@ Missing character: There is no ’ ("2019) in font ptmr8t!
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `New_IEEEtran_how-to.out' has not changed.
 (rerunfilecheck)             Checksum: AF5CA7AC48D6D5CDF32B551D5D0C382D;2027.
  ) 
 Here is how much of TeX's memory you used:
- 25816 strings out of 473832
- 511905 string characters out of 5714798
- 958990 words of memory out of 5000000
- 48442 multiletter control sequences out of 15000+600000
- 631164 words of font info for 102 fonts, out of 8000000 for 9000
- 1352 hyphenation exceptions out of 8191
- 110i,12n,107p,1483b,372s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 26358 strings out of 473190
+ 519125 string characters out of 5699139
+ 973974 words of memory out of 5000000
+ 49031 multiletter control sequences out of 15000+600000
+ 661831 words of font info for 138 fonts, out of 8000000 for 9000
+ 1145 hyphenation exceptions out of 8191
+ 110i,12n,107p,1483b,487s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmex10.pfb><d:/CommonSoftwares/ProductiveCodingEditors/te
+xlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/CommonSoftw
+ares/ProductiveCodingEditors/texlive/2025/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi5.pfb><d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><d:/CommonSoftwares/ProductiveCodi
+ngEditors/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/
+CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi8.pfb><d:/CommonSoftwares/ProductiveCodingEditors/texlive/2
+025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/CommonSoftwares/Pro
+ductiveCodingEditors/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+6.pfb><d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmr7.pfb><d:/CommonSoftwares/ProductiveCodingEditors/
+texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><d:/CommonSoftw
+ares/ProductiveCodingEditors/texlive/2025/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmsy10.pfb><d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><d:/CommonSoftwares/ProductiveCod
+ingEditors/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><d:
+/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/fonts/type1/pu
+blic/amsfonts/symbols/msbm10.pfb><d:/CommonSoftwares/ProductiveCodingEditors/te
+xlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><d:/CommonSoftwares/Prod
+uctiveCodingEditors/texlive/2025/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><
+d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/fonts/type1/
+urw/times/utmr8a.pfb><d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/t
+exmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on New_IEEEtran_how-to.pdf (9 pages, 2012619 bytes).
+PDF statistics:
+ 729 PDF objects out of 1000 (max. 8388607)
+ 546 compressed objects within 6 object streams
+ 135 named destinations out of 1000 (max. 500000)
+ 132 words of extra memory for PDF output out of 10000 (max. 10000000)
 
-Output written on New_IEEEtran_how-to.pdf (9 pages).

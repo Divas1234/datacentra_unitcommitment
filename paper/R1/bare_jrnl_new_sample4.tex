@@ -33,7 +33,7 @@
 \maketitle
 
 \begin{abstract}
-This document describes the most common article elements and how to use the IEEEtran class with \LaTeX \ to produce files that are suitable for submission to the IEEE.  IEEEtran can produce conference, journal, and technical note (correspondence) papers with a suitable choice of class options. 
+This document describes the most common article elements and how to use the IEEEtran class with \LaTeX \ to produce files that are suitable for submission to the IEEE.  IEEEtran can produce conference, journal, and technical note (correspondence) papers with a suitable choice of class options.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -51,7 +51,7 @@ The templates are intended to {\bf{approximate the final look and page length of
 \section{Where to Get \LaTeX \ Help --- User Groups}
 The following online groups are helpful to beginning and experienced \LaTeX\ users. A search through their archives can provide many answers to common questions.
 \begin{list}{}{}
-\item{\url{http://www.latex-community.org/}} 
+\item{\url{http://www.latex-community.org/}}
 \item{\url{https://tex.stackexchange.com/} }
 \end{list}
 
@@ -83,10 +83,10 @@ Alis nime volorempera perferi sitio denim repudae pre ducilit atatet volecte ssi
 
 \section{Some Common Elements}
 \subsection{Sections and Subsections}
-Enumeration of section headings is desirable, but not required. When numbered, please be consistent throughout the article, that is, all headings and all levels of section headings in the article should be enumerated. Primary headings are designated with Roman numerals, secondary with capital letters, tertiary with Arabic numbers; and quaternary with lowercase letters. Reference and Acknowledgment headings are unlike all other section headings in text. They are never enumerated. They are simply primary headings without labels, regardless of whether the other headings in the article are enumerated. 
+Enumeration of section headings is desirable, but not required. When numbered, please be consistent throughout the article, that is, all headings and all levels of section headings in the article should be enumerated. Primary headings are designated with Roman numerals, secondary with capital letters, tertiary with Arabic numbers; and quaternary with lowercase letters. Reference and Acknowledgment headings are unlike all other section headings in text. They are never enumerated. They are simply primary headings without labels, regardless of whether the other headings in the article are enumerated.
 
 \subsection{Citations to the Bibliography}
-The coding for the citations is made with the \LaTeX\ $\backslash${\tt{cite}} command. 
+The coding for the citations is made with the \LaTeX\ $\backslash${\tt{cite}} command.
 This will display as: see \cite{ref1}.
 
 For multiple citations code as follows: {\tt{$\backslash$cite\{ref1,ref2,ref3\}}}
@@ -121,9 +121,6 @@ In this section, we will consider three types of lists: simple unnumbered, numbe
 \item{bare\_conf\_compsoc.tex}
 \item{bare\_jrnl\_comsoc.tex}
 \end{itemize}
-
-
-
 
 
 \subsection{Figures}
@@ -164,14 +161,14 @@ Note that often IEEE papers with multi-part figures do not place the labels with
  e.g.,$\backslash${\tt{subfloat}}[].
 
 
- 
+
 
 \section{Tables}
 Note that, for IEEE-style tables, the
  $\backslash${\tt{caption}} command should come BEFORE the table. Table captions use title case. Articles (a, an, the), coordinating conjunctions (and, but, for, or, nor), and most short prepositions are lowercase unless they are the first or last word. Table text will default to $\backslash${\tt{footnotesize}} as
  the IEEE normally uses this smaller font for tables.
  The $\backslash${\tt{label}} must come after $\backslash${\tt{caption}} as always.
- 
+
 \begin{table}[!t]
 \caption{An Example of a Table\label{tab:table1}}
 \centering
@@ -190,7 +187,7 @@ Algorithms should be numbered and include a short title. They are set off from t
 \begin{algorithm}[H]
 \caption{Weighted Tanimoto ELM.}\label{alg:alg1}
 \begin{algorithmic}
-\STATE 
+\STATE
 \STATE {\textsc{TRAIN}}$(\mathbf{X} \mathbf{T})$
 \STATE \hspace{0.5cm}$ \textbf{select randomly } W \subset \mathbf{X}  $
 \STATE \hspace{0.5cm}$ N_\mathbf{t} \gets | \{ i : \mathbf{t}_i = \mathbf{t} \} | $ \textbf{ for } $ \mathbf{t}= -1,+1 $
@@ -198,7 +195,7 @@ Algorithms should be numbered and include a short title. They are set off from t
 \STATE \hspace{0.5cm}$ \hat{\mathbf{H}} \gets  B \cdot (\mathbf{X}^T\textbf{W})/( \mathbb{1}\mathbf{X} + \mathbb{1}\textbf{W} - \mathbf{X}^T\textbf{W} ) $
 \STATE \hspace{0.5cm}$ \beta \gets \left ( I/C + \hat{\mathbf{H}}^T\hat{\mathbf{H}} \right )^{-1}(\hat{\mathbf{H}}^T B\cdot \mathbf{T})  $
 \STATE \hspace{0.5cm}\textbf{return}  $\textbf{W},  \beta $
-\STATE 
+\STATE
 \STATE {\textsc{PREDICT}}$(\mathbf{X} )$
 \STATE \hspace{0.5cm}$ \mathbf{H} \gets  (\mathbf{X}^T\textbf{W} )/( \mathbb{1}\mathbf{X}  + \mathbb{1}\textbf{W}- \mathbf{X}^T\textbf{W}  ) $
 \STATE \hspace{0.5cm}\textbf{return}  $\textsc{sign}( \mathbf{H} \beta )$
@@ -206,12 +203,12 @@ Algorithms should be numbered and include a short title. They are set off from t
 \label{alg1}
 \end{algorithm}
 
-Que sunt eum lam eos si dic to estist, culluptium quid qui nestrum nobis reiumquiatur minimus minctem. Ro moluptat fuga. Itatquiam ut laborpo rersped exceres vollandi repudaerem. Ulparci sunt, qui doluptaquis sumquia ndestiu sapient iorepella sunti veribus. Ro moluptat fuga. Itatquiam ut laborpo rersped exceres vollandi repudaerem. 
+Que sunt eum lam eos si dic to estist, culluptium quid qui nestrum nobis reiumquiatur minimus minctem. Ro moluptat fuga. Itatquiam ut laborpo rersped exceres vollandi repudaerem. Ulparci sunt, qui doluptaquis sumquia ndestiu sapient iorepella sunti veribus. Ro moluptat fuga. Itatquiam ut laborpo rersped exceres vollandi repudaerem.
 \section{Mathematical Typography \\ and Why It Matters}
 
 Typographical conventions for mathematical formulas have been developed to {\bf provide uniformity and clarity of presentation across mathematical texts}. This enables the readers of those texts to both understand the author's ideas and to grasp new concepts quickly. While software such as \LaTeX \ and MathType\textsuperscript{\textregistered} can produce aesthetically pleasing math when used properly, it is also very easy to misuse the software, potentially resulting in incorrect math display.
 
-IEEE aims to provide authors with the proper guidance on mathematical typesetting style and assist them in writing the best possible article. As such, IEEE has assembled a set of examples of good and bad mathematical typesetting \cite{ref1,ref2,ref3,ref4,ref5}. 
+IEEE aims to provide authors with the proper guidance on mathematical typesetting style and assist them in writing the best possible article. As such, IEEE has assembled a set of examples of good and bad mathematical typesetting \cite{ref1,ref2,ref3,ref4,ref5}.
 
 Further examples can be found at \url{http://journals.ieeeauthorcenter.ieee.org/wp-content/uploads/sites/7/IEEE-Math-Typesetting-Guide-for-LaTeX-Users.pdf}
 
@@ -230,7 +227,7 @@ x = \sum_{i=0}^{n} 2{i} Q.
 \end{equation}
 \end{verbatim}
 
-To reference this equation in the text use the $\backslash${\tt{ref}} macro. 
+To reference this equation in the text use the $\backslash${\tt{ref}} macro.
 Please see (\ref{deqn_ex1})\\
 \noindent is coded as follows:
 \begin{verbatim}
@@ -323,13 +320,13 @@ There are several useful matrix environments that can save you some keystrokes. 
 
 \noindent {\bf{A simple matrix:}}
 \begin{equation}
-\begin{matrix}  0 &  1 \\ 
+\begin{matrix}  0 &  1 \\
 1 &  0 \end{matrix}
 \end{equation}
 is coded as:
 \begin{verbatim}
 \begin{equation}
-\begin{matrix}  0 &  1 \\ 
+\begin{matrix}  0 &  1 \\
 1 &  0 \end{matrix}
 \end{equation}
 \end{verbatim}
@@ -349,50 +346,50 @@ is coded as:
 
 \noindent {\bf{A matrix with square brackets}}
 \begin{equation}
-\begin{bmatrix} 0 & -1 \\ 
+\begin{bmatrix} 0 & -1 \\
 1 &  0 \end{bmatrix}
 \end{equation}
 is coded as:
 \begin{verbatim}
 \begin{equation}
-\begin{bmatrix} 0 & -1 \\ 
+\begin{bmatrix} 0 & -1 \\
 1 &  0 \end{bmatrix}
 \end{equation}
 \end{verbatim}
 
 \noindent {\bf{A matrix with curly braces}}
 \begin{equation}
-\begin{Bmatrix} 1 &  0 \\ 
+\begin{Bmatrix} 1 &  0 \\
 0 & -1 \end{Bmatrix}
 \end{equation}
 is coded as:
 \begin{verbatim}
 \begin{equation}
-\begin{Bmatrix} 1 &  0 \\ 
+\begin{Bmatrix} 1 &  0 \\
 0 & -1 \end{Bmatrix}
 \end{equation}\end{verbatim}
 
 \noindent {\bf{A matrix with single verticals}}
 \begin{equation}
-\begin{vmatrix} a &  b \\ 
+\begin{vmatrix} a &  b \\
 c &  d \end{vmatrix}
 \end{equation}
 is coded as:
 \begin{verbatim}
 \begin{equation}
-\begin{vmatrix} a &  b \\ 
+\begin{vmatrix} a &  b \\
 c &  d \end{vmatrix}
 \end{equation}\end{verbatim}
 
 \noindent {\bf{A matrix with double verticals}}
 \begin{equation}
-\begin{Vmatrix} i &  0 \\ 
+\begin{Vmatrix} i &  0 \\
 0 & -i \end{Vmatrix}
 \end{equation}
 is coded as:
 \begin{verbatim}
 \begin{equation}
-\begin{Vmatrix} i &  0 \\ 
+\begin{Vmatrix} i &  0 \\
 0 & -i \end{Vmatrix}
 \end{equation}\end{verbatim}
 
@@ -461,17 +458,17 @@ Note the argument now has the pipe "$\vert$" included to indicate the placement 
 Many times cases can be miscoded using the wrong environment, i.e., {\tt{array}}. Using the {\tt{cases}} environment will save keystrokes (from not having to type the $\backslash${\tt{left}}$\backslash${\tt{lbrace}}) and automatically provide the correct column alignment.
 \begin{equation*}
 {z_m(t)} = \begin{cases}
-1,&{\text{if}}\ {\beta }_m(t) \\ 
-{0,}&{\text{otherwise.}} 
+1,&{\text{if}}\ {\beta }_m(t) \\
+{0,}&{\text{otherwise.}}
 \end{cases}
 \end{equation*}
 \noindent is coded as follows:
 \begin{verbatim}
 \begin{equation*}
-{z_m(t)} = 
+{z_m(t)} =
 \begin{cases}
-1,&{\text{if}}\ {\beta }_m(t),\\ 
-{0,}&{\text{otherwise.}} 
+1,&{\text{if}}\ {\beta }_m(t),\\
+{0,}&{\text{otherwise.}}
 \end{cases}
 \end{equation*}
 \end{verbatim}
@@ -480,14 +477,14 @@ Many times cases can be miscoded using the wrong environment, i.e., {\tt{array}}
 \subsection{Function Formatting in Equations}
 Often, there is an easy way to properly format most common functions. Use of the $\backslash$ in front of the function name will in most cases, provide the correct formatting. When this does not work, the following example provides a solution using the $\backslash${\tt{text}} macro:
 
-\begin{equation*} 
+\begin{equation*}
   d_{R}^{KM} = \underset {d_{l}^{KM}} {\text{arg min}} \{ d_{1}^{KM},\ldots,d_{6}^{KM}\}.
 \end{equation*}
 
 \noindent is coded as follows:
 \begin{verbatim}
-\begin{equation*} 
- d_{R}^{KM} = \underset {d_{l}^{KM}} 
+\begin{equation*}
+ d_{R}^{KM} = \underset {d_{l}^{KM}}
  {\text{arg min}} \{ d_{1}^{KM},
  \ldots,d_{6}^{KM}\}.
 \end{equation*}
@@ -540,7 +537,7 @@ You can use a bibliography generated by BibTeX as a .bbl file.
  http://mirror.ctan.org/biblio/bibtex/contrib/doc/
  The IEEEtran BibTeX style support page is:
  http://www.michaelshell.org/tex/ieeetran/bibtex/
- 
+
  % argument is your BibTeX string definitions and bibliography database(s)
 %\bibliography{IEEEabrv,../bib/paper}
 %
@@ -591,7 +588,7 @@ If you have an EPS/PDF photo (graphicx package needed), extra braces are
  $\backslash${\tt{includegraphics}} command within an optional argument. (You can create
  your own custom macro containing the $\backslash${\tt{includegraphics}} command to make things
  simpler here.)
- 
+
 \vspace{11pt}
 
 \bf{If you include a photo:}\vspace{-33pt}
