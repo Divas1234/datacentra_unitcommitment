@@ -38,7 +38,7 @@ function readxlssheet()
 	Sheet6_list = string("A2", ":", "E", string(size(linedata[:], 1)))
 	linedata = convert(Array{Float64, 2}, linedata[Sheet6_list])
 
-    loadcurve = df["load_curve"]
+	loadcurve = df["load_curve"]
 	Sheet7_list = string("A2", ":", "B", string(size(loadcurve[:], 1)))
 	loadcurve = convert(Array{Float64, 2}, loadcurve[Sheet7_list])
 

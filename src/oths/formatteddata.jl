@@ -53,8 +53,10 @@ struct unit
 	Tg::Vector{Float64} # time constant
 	Rg::Vector{Float64} # Droop grain of conventional units
 
-	function unit(index, locatebus, p_max, p_min, ramp_up, ramp_down, shut_up, shut_down, min_shutup_time, min_shutdown_time, x_0, t_0, p_0, coffi_a, coffi_b, coffi_c, coffi_cold_shutup_1, coffi_cold_shutup_2, coffi_cold_shutdown_1, coffi_cold_shutdown_2, Hg, Dg, Kg, Fg, Tg, Rg)
-		return new(index, locatebus, p_max, p_min, ramp_up, ramp_down, shut_up, shut_down, min_shutup_time, min_shutdown_time, x_0, t_0, p_0, coffi_a, coffi_b, coffi_c, coffi_cold_shutup_1, coffi_cold_shutup_2, coffi_cold_shutdown_1, coffi_cold_shutdown_2, Hg, Dg, Kg, Fg, Tg, Rg)
+	function unit(index, locatebus, p_max, p_min, ramp_up, ramp_down, shut_up, shut_down, min_shutup_time, min_shutdown_time, x_0, t_0, p_0, coffi_a, coffi_b, coffi_c, coffi_cold_shutup_1,
+				  coffi_cold_shutup_2, coffi_cold_shutdown_1, coffi_cold_shutdown_2, Hg, Dg, Kg, Fg, Tg, Rg)
+		return new(index, locatebus, p_max, p_min, ramp_up, ramp_down, shut_up, shut_down, min_shutup_time, min_shutdown_time, x_0, t_0, p_0, coffi_a, coffi_b, coffi_c, coffi_cold_shutup_1,
+				   coffi_cold_shutup_2, coffi_cold_shutdown_1, coffi_cold_shutdown_2, Hg, Dg, Kg, Fg, Tg, Rg)
 	end
 
 	# units(Hg,Dg,Kg,Fg,Tg,Rg) = new(Hg,Dg,Kg,Fg,Tg,Rg)
@@ -108,7 +110,6 @@ struct pss
 	end
 end
 
-# TODO
 struct data_centra
 	index::Vector{Int64}
 	locatebus::Vector{Int64}

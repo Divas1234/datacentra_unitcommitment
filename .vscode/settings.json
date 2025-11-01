@@ -1,7 +1,7 @@
 {
-    "editor.wordWrapColumn": 200,
-    "editor.wordWrap": "wordWrapColumn",
-    "editor.fontFamily": "Roboto Medium, Farro, JetBrains Mono, Droid Sans Mono, Fira Code, Hack, MonoLisa, Maple Mono, Monaspace Neon, Monaspace Neon, Dubai, Chaparral Pro, Calisto, Helvetic, Fira Code, Geist Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
+    "editor.wordWrapColumn": 150,
+    "editor.wordWrap": "bounded",
+    "editor.fontFamily": "JuliaMono, Fira Code, JetBrains Mono, Droid Sans Mono, Hack, MonoLisa, Maple Mono, Monaspace Neon, Monaspace Neon, Dubai, Chaparral Pro, Calisto, Helvetic, Fira Code, Geist Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
     "workbench.editor.highlightModifiedTabs": true,
     "terminal.integrated.fontLigatures.enabled": true,
     "CodeGPT.apiKey": "CodeGPT Plus Beta",
@@ -29,7 +29,7 @@
     "window.autoDetectColorScheme": true,
     "latex-workshop.bibtex-format.sort.enabled": true,
     "latex-workshop.formatting.latex": "latexindent",
-    "terminal.integrated.fontFamily": "Fira Code, Hack Nerd Font, Geist Mono",
+    "terminal.integrated.fontFamily": "JuliaMono,Fira Code, Hack Nerd Font, Geist Mono",
     "javascript.suggest.completeFunctionCalls": true,
     "search.experimental.closedNotebookRichContentResults": true,
     "search.quickOpen.includeSymbols": true,
@@ -198,5 +198,39 @@
     "workbench.tree.renderIndentGuides": "onHover",
     "editor.wrapOnEscapedLineFeeds": true,
     "workbench.editor.wrapTabs": true,
-    "notebook.output.wordWrap": true
+    "notebook.output.wordWrap": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.mouseWheelZoom": true,
+    "terminal.integrated.lineHeight": 1,
+    "terminal.integrated.fontSize": 13,
+    "chat.mcp.serverSampling": {
+        "dcc_project/.vscode/mcp.json: github": {
+            "allowedModels": [
+                "copilot/gpt-4.1",
+                "copilot/auto",
+                "copilot/claude-haiku-4.5",
+                "copilot/claude-3.5-sonnet",
+                "copilot/claude-sonnet-4",
+                "copilot/claude-sonnet-4.5",
+                "copilot/gemini-2.5-pro",
+                "copilot/gpt-4o",
+                "copilot/gpt-5",
+                "copilot/gpt-5-mini",
+                "copilot/gpt-5-codex",
+                "copilot/grok-code-fast-1"
+            ]
+        }
+    },
+    "github.copilot.chat.agent.autoFix": true,
+    "github.copilot.chat.alternateGptPrompt.enabled": true,
+    "github.copilot.chat.anthropic.thinking.enabled": true,
+    "github.copilot.chat.anthropic.webSearchTool.enabled": true,
+    "github.copilot.chat.editor.temporalContext.enabled": true,
+    "github.copilot.chat.generateTests.codeLens": true,
+    "github.copilot.chat.edits.temporalContext.enabled": true,
+    "github.copilot.chat.languageContext.fix.typescript.enabled": true,
+    "github.copilot.chat.languageContext.inline.typescript.enabled": true,
+    "github.copilot.chat.languageContext.typescript.includeDocumentation": true,
+    "github.copilot.chat.languageContext.typescript.enabled": true
 }
