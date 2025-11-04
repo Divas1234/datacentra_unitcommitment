@@ -13,6 +13,34 @@ figure_type="evenvelope"
 config_param.is_ConsiderDataCentra = 1
 res = SUC_scucmodel(NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, ess, DataCentras, config_param)
 
+#save results as csv files.
+# save res["dc_fv²"] as CSV
+filepath_dc_fv = "D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\dc_fv.csv"
+filepath_dc_fv²λ = "D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\dc_fv_lambda.csv"
+mkpath(dirname(filepath_dc_fv))
+mkpath(dirname(filepath_dc_fv²λ))
+try
+	using DelimitedFiles
+	dc_fv_data = res["dc_fv²"]
+	dc_fv_lambda_data = res["dc_fv²λ"]
+	# coerce to a plain matrix if possible
+	mat = try
+		Array(dc_fv_data)
+	catch
+		collect(dc_fv_data)
+	end
+	writedlm(filepath_dc_fv, mat, ',')
+
+	mat = try
+		Array(dc_fv_lambda_data)
+	catch
+		collect(dc_fv_lambda_data)
+	end
+	writedlm(filepath_dc_fv²λ, mat, ',')
+catch err
+	@warn "Failed to save res[\"dc_fv²\"] or res[\"dc_fv²λ\"] to CSV: $err"
+end
+
 dc_p_p1, dc_p_p2, dc_p_p3, dc_p_p4, dc_p_p5,
 dc_fv²_p1, dc_fv²_p2, dc_fv²_p3, dc_fv²_p4, dc_fv²_p5,
 dc_fv²λ_p1, dc_fv²λ_p2, dc_fv²λ_p3, dc_fv²λ_p4, dc_fv²λ_p5 = draw_dcc_power_dvfs_subfigures(res)

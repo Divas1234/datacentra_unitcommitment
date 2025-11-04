@@ -51,15 +51,71 @@ function draw_workload_envelope(NT, ND2, workload_dis, figure_type)
 		p = Plots.plot!(t, env_min; color = :blue, lw = 1, markercolor = :red, markersize = 4, marker = :circle, ls = :solid, label = "")
 	end
 
+	# if figure_type == "simple_fv²"
+	# 	p = Plots.plot(t, workload_dis[:, 1]; seriestype = :line, ylims = (0.23, 0.28), xlims = (0, 25), legend = :topright, xlabel = L"t\ (h)", ylabel = L"fv^{2} (p.u.)",
+	# 				   label = "DCC 1",
+	# 				   grid = :y,
+	# 				   framestyle = :box, alpha = 0.95, lw = 3, marker = :none,
+	# 				   #    legend_background_color = :transparent,
+	# 				   legend_background_alpha = 0.0)
+	# 	for i in 2:ND2
+	# 		p = Plots.plot!(t, workload_dis[:, i]; seriestype = :line, label = "DCC $i", alpha = 0.95, lw = 3, marker = :none)
+	# 	end
+	# end
+
+	# if figure_type == "simple_fv²λ"
+	# 	p = Plots.plot(t, workload_dis[:, 1]; seriestype = :line, xlims = (0, 25), legend = :topright,
+	# 				   xlabel = L"t\ (h)", ylabel = L"fv^{2} \times \lambda (p.u.)", label = "DCC 1", grid = :y,
+	# 				   framestyle = :box, alpha = 0.95, lw = 3, marker = :none,
+	# 				   legend_background_alpha = 0.0)
+	# 	for i in 2:ND2
+	# 		p = Plots.plot!(t, workload_dis[:, i]; seriestype = :line, label = "DCC $i", alpha = 0.95, lw = 3, marker = :none)
+	# 	end
+	# end
+
 	if figure_type == "simple_fv²"
-		p = Plots.plot(t, workload_dis[:, 1]; seriestype = :line, ylims = (0.23, 0.28), xlims = (0, 25), legend = :topright, xlabel = L"t\ (h)", ylabel = L"fv^{2} (p.u.)",
-					   label = "DCC 1",
-					   grid = :y,
-					   framestyle = :box, alpha = 0.95, lw = 3, marker = :none,
-					   #    legend_background_color = :transparent,
-					   legend_background_alpha = 0.0)
+
+		# markers and colors to cycle through
+		markers = [:circle, :square, :diamond, :star5, :utriangle, :dtriangle, :cross, :xcross, :hexagon, :pentagon]
+		colors = [:blue, :red, :green, :orange, :purple, :brown, :pink, :gray, :cyan, :magenta]
+
+		# base (first) series with nicer aesthetics
+		p = Plots.plot(t, workload_dis[:, 1];
+			seriestype = :line,
+			ylims = (0.23, 0.28), xlims = (0, 25),
+			legend = :topright,
+			xlabel = L"t\ (h)", ylabel = L"fv^{2} (p.u.)",
+			title = L"Workload\ (\textit{fv}^{2})",
+			label = "DCC 1",
+			color = colors[1],
+			marker = markers[1],
+			markersize = 6,
+			markerstrokecolor = :black,
+			markerstrokewidth = 0.6,
+			lw = 2.5,
+			grid = :y,
+			framestyle = :box,
+			background_color = :white,
+			legend_background_alpha = 0.0,
+			legendfontsize = 9,
+			tickfontsize = 8,
+			guidefontsize = 10
+		)
+
+		# remaining series: different marker + matching color, slightly thinner lines
 		for i in 2:ND2
-			p = Plots.plot!(t, workload_dis[:, i]; seriestype = :line, label = "DCC $i", alpha = 0.95, lw = 3, marker = :none)
+			idx = ((i - 1) % length(markers)) + 1
+			p = Plots.plot!(t, workload_dis[:, i];
+				seriestype = :line,
+				label = "DCC $i",
+				color = colors[idx],
+				marker = markers[idx],
+				markersize = 6,
+				markerstrokecolor = :black,
+				markerstrokewidth = 0.6,
+				lw = 2.0,
+				alpha = 0.95
+			)
 		end
 	end
 
@@ -130,6 +186,35 @@ function draw_dcc_power_dvfs_subfigures(res)
 	dc_fv²λ_plots, dc_fv²λ_ncols, dc_fv²λ_chunk, dc_fv²λ_maxplots = get_subfigures(dc_fv²λ, figure_type)
 	dc_fv²λ_p1, dc_fv²λ_p2, dc_fv²λ_p3, dc_fv²λ_p4, dc_fv²λ_p5 = dc_fv²λ_plots
 	@show dc_fv²λ_ncols, dc_fv²λ_chunk, dc_fv²λ_maxplots
+
+	#save results as csv files.
+	# save res["dc_fv²"] as CSV
+	filepath_dc_fv = "D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\dc_fv.csv"
+	filepath_dc_fv²λ = "D:\\GithubClonefiles\\datacentra_unitcommitment\\output\\dc_fv_lambda.csv"
+	mkpath(dirname(filepath_dc_fv))
+	mkpath(dirname(filepath_dc_fv²λ))
+	try
+		using DelimitedFiles
+		dc_fv_data = res["dc_fv²"]
+		dc_fv_lambda_data = res["dc_fv²λ"]
+		# coerce to a plain matrix if possible
+		mat = try
+			Array(dc_fv_data)
+		catch
+			collect(dc_fv_data)
+		end
+		writedlm(filepath_dc_fv, mat, ',')
+
+		mat = try
+			Array(dc_fv_lambda_data)
+		catch
+			collect(dc_fv_lambda_data)
+		end
+		writedlm(filepath_dc_fv²λ, mat, ',')
+	catch err
+		@warn "Failed to save res[\"dc_fv²\"] or res[\"dc_fv²λ\"] to CSV: $err"
+	end
+
 
 	return dc_p_p1, dc_p_p2, dc_p_p3, dc_p_p4, dc_p_p5,
 		   dc_fv²_p1, dc_fv²_p2, dc_fv²_p3, dc_fv²_p4, dc_fv²_p5,

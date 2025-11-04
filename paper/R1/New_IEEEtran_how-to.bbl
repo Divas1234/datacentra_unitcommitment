@@ -7,7 +7,8 @@
 \providecommand{\BIBentrySTDinterwordspacing}{\spaceskip=0pt\relax}
 \providecommand{\BIBentryALTinterwordstretchfactor}{4}
 \providecommand{\BIBentryALTinterwordspacing}{\spaceskip=\fontdimen2\font plus
-\BIBentryALTinterwordstretchfactor\fontdimen3\font minus \fontdimen4\font\relax}
+\BIBentryALTinterwordstretchfactor\fontdimen3\font minus
+  \fontdimen4\font\relax}
 \providecommand{\BIBforeignlanguage}[2]{{%
 \expandafter\ifx\csname l@#1\endcsname\relax
 \typeout{** WARNING: IEEEtran.bst: No hyphenation pattern has been}%
@@ -21,87 +22,150 @@
 \BIBdecl
 
 \bibitem{zhou2025data}
-Y.~Zhou, F.~Wei, S.~Li, Z.~Wang, J.~Liu, and D.~Yu, ``Data center load modeling through optimal energy consumption characteristics: A path to simultaneously enhance energy efficiency and demand response quality,'' \emph{Appl. Energy}, vol. 393, p. 126095, 2025.
+Y.~Zhou, F.~Wei, S.~Li, Z.~Wang, J.~Liu, and D.~Yu, ``Data center load modeling
+  through optimal energy consumption characteristics: A path to simultaneously
+  enhance energy efficiency and demand response quality,'' \emph{Appl. Energy},
+  vol. 393, p. 126095, 2025.
 
 \bibitem{10874152}
-A.~Tsiligkaridis, P.~Andrianesis, A.~K. Coskun, M.~C. Caramanis, and I.~C. Paschalidis, ``Distributed economic dispatch in power networks incorporating data center flexibility,'' \emph{IEEE Trans. Sustain. Comput.}, pp. 1--15, 2025.
+A.~Tsiligkaridis, P.~Andrianesis, A.~K. Coskun, M.~C. Caramanis, and I.~C.
+  Paschalidis, ``Distributed economic dispatch in power networks incorporating
+  data center flexibility,'' \emph{IEEE Trans. Sustain. Comput.}, pp. 1--15,
+  2025.
 
 \bibitem{6041050}
-J.~Li, Z.~Li, K.~Ren, and X.~Liu, ``Towards optimal electric demand management for internet data centers,'' \emph{IEEE Trans. Smart Grid}, vol.~3, no.~1, pp. 183--192, 2012.
+J.~Li, Z.~Li, K.~Ren, and X.~Liu, ``Towards optimal electric demand management
+  for internet data centers,'' \emph{IEEE Trans. Smart Grid}, vol.~3, no.~1,
+  pp. 183--192, 2012.
 
 \bibitem{7039172}
-A.~Wierman, Z.~Liu, I.~Liu, and H.~Mohsenian-Rad, ``Opportunities and challenges for data center demand response,'' in \emph{International Green Computing Conference}, 2014, pp. 1--10.
+A.~Wierman, Z.~Liu, I.~Liu, and H.~Mohsenian-Rad, ``Opportunities and
+  challenges for data center demand response,'' in \emph{International Green
+  Computing Conference}, 2014, pp. 1--10.
 
 \bibitem{10806734}
-J.~Duan, Y.~Li, Y.~Li, P.~Yang, and Z.~Zeng, ``Statistical feasibility robust optimization with polyhedron uncertainty set for hydrogen-data center microgrid operations,'' \emph{IEEE Trans. Autom. Sci. Eng.}, vol.~22, pp. 9884--9902, 2025.
+J.~Duan, Y.~Li, Y.~Li, P.~Yang, and Z.~Zeng, ``Statistical feasibility robust
+  optimization with polyhedron uncertainty set for hydrogen-data center
+  microgrid operations,'' \emph{IEEE Trans. Autom. Sci. Eng.}, vol.~22, pp.
+  9884--9902, 2025.
 
 \bibitem{doi:10.1049/icp.2025.0664}
-X.~Wen, J.~Zhu, and H.~Dong, ``Carbon emission-aware coordinated dispatch of multi-regional microgrids with data centers,'' \emph{IET Conf. Proc.}, vol. 2024, pp. 1014--1019, 2025.
+X.~Wen, J.~Zhu, and H.~Dong, ``Carbon emission-aware coordinated dispatch of
+  multi-regional microgrids with data centers,'' \emph{IET Conf. Proc.}, vol.
+  2024, pp. 1014--1019, 2025.
 
 \bibitem{wangClusterFrameworksEfficient2018}
-K.~Wang, Q.~Zhou, S.~Guo, and J.~Luo, ``Cluster {{Frameworks}} for {{Efficient Scheduling}} and {{Resource Allocation}} in {{Data Center Networks}}: {{A Survey}},'' vol.~20, pp. 3560--3580.
+K.~Wang, Q.~Zhou, S.~Guo, and J.~Luo, ``Cluster {{Frameworks}} for {{Efficient
+  Scheduling}} and {{Resource Allocation}} in {{Data Center Networks}}: {{A
+  Survey}},'' vol.~20, pp. 3560--3580.
 
 \bibitem{yu2023demand}
-H.~Yu, Y.~Wang, J.~Li, W.~Wei, and L.~Fan, ``Demand-responsive data center energy supply optimized scheduling,'' in \emph{2023 IEEE 7th Conference on Energy Internet and Energy System Integration (EI2)}.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2023, pp. 4494--4499.
+H.~Yu, Y.~Wang, J.~Li, W.~Wei, and L.~Fan, ``Demand-responsive data center
+  energy supply optimized scheduling,'' in \emph{2023 IEEE 7th Conference on
+  Energy Internet and Energy System Integration (EI2)}.\hskip 1em plus 0.5em
+  minus 0.4em\relax IEEE, 2023, pp. 4494--4499.
 
 \bibitem{wang2020flexible}
-P.~Wang, Y.~Cao, and Z.~Ding, ``Flexible multi-energy scheduling scheme for data center to facilitate wind power integration,'' \emph{IEEE Access}, vol.~8, pp. 88\,876--88\,891, 2020.
+P.~Wang, Y.~Cao, and Z.~Ding, ``Flexible multi-energy scheduling scheme for
+  data center to facilitate wind power integration,'' \emph{IEEE Access},
+  vol.~8, pp. 88\,876--88\,891, 2020.
 
 \bibitem{kuehnDVFSpowerManagementPerformance2019}
-P.~J. Kuehn and M.~Mashaly, ``{{DVFS-power}} management and performance engineering of data center server clusters,'' in \emph{2019 15th {{Annual Conference}} on {{Wireless On-demand Network Systems}} and {{Services}} ({{WONS}})}.\hskip 1em plus 0.5em minus 0.4em\relax Wengen, Switzerland: IEEE, 2019, pp. 91--98.
+P.~J. Kuehn and M.~Mashaly, ``{{DVFS-power}} management and performance
+  engineering of data center server clusters,'' in \emph{2019 15th {{Annual
+  Conference}} on {{Wireless On-demand Network Systems}} and {{Services}}
+  ({{WONS}})}.\hskip 1em plus 0.5em minus 0.4em\relax Wengen, Switzerland:
+  IEEE, 2019, pp. 91--98.
 
 \bibitem{hanDualtimeScaleCollaborative2025}
-J.~Han, Y.~Yan, Y.~Wang, K.~Han, Y.~Han, and J.~Lin, ``Dual-time scale collaborative optimization of data center energy system: Considering multi-task response mechanism and hybrid hydrogen-battery energy storage,'' \emph{J. Energy Storage}, vol. 119, p. 116244, May 2025.
+J.~Han, Y.~Yan, Y.~Wang, K.~Han, Y.~Han, and J.~Lin, ``Dual-time scale
+  collaborative optimization of data center energy system: Considering
+  multi-task response mechanism and hybrid hydrogen-battery energy storage,''
+  \emph{J. Energy Storage}, vol. 119, p. 116244, May 2025.
 
 \bibitem{dingEmissionawareStochasticResource2018}
-Z.~Ding, L.~Xie, Y.~Lu, P.~Wang, and S.~Xia, ``Emission-aware stochastic resource planning scheme for data center microgrid considering batch workload scheduling and risk management,'' \emph{IEEE Trans. Ind. Appl.}, vol.~54, no.~6, pp. 5599--5608, Nov. 2018.
+Z.~Ding, L.~Xie, Y.~Lu, P.~Wang, and S.~Xia, ``Emission-aware stochastic
+  resource planning scheme for data center microgrid considering batch workload
+  scheduling and risk management,'' \emph{IEEE Trans. Ind. Appl.}, vol.~54,
+  no.~6, pp. 5599--5608, Nov. 2018.
 
 \bibitem{hanDatadrivenDistributionallyRobust2025}
-J.~Han, K.~Han, T.~Han, Y.~Wang, Y.~Han, and J.~Lin, ``Data-driven distributionally robust optimization of low-carbon data center energy systems considering multi-task response and renewable energy uncertainty,'' vol. 102, p. 111937.
+J.~Han, K.~Han, T.~Han, Y.~Wang, Y.~Han, and J.~Lin, ``Data-driven
+  distributionally robust optimization of low-carbon data center energy systems
+  considering multi-task response and renewable energy uncertainty,'' vol. 102,
+  p. 111937.
 
 \bibitem{lin2023workload}
-C.~Lin, K.~Wang, Z.~Li, and Y.~Pu, ``A workload-aware dvfs robust to concurrent tasks for mobile devices,'' in \emph{Proceedings of the 29th Annual International Conference on Mobile Computing and Networking}, 2023, pp. 1--16.
+C.~Lin, K.~Wang, Z.~Li, and Y.~Pu, ``A workload-aware dvfs robust to concurrent
+  tasks for mobile devices,'' in \emph{Proceedings of the 29th Annual
+  International Conference on Mobile Computing and Networking}, 2023, pp.
+  1--16.
 
 \bibitem{8520806}
-C.~Gao, V.~C. Lee, and K.~Li, ``D-srtf: Distributed shortest remaining time first scheduling for data center networks,'' \emph{IEEE Trans. Cloud Comput.}, vol.~9, no.~2, pp. 562--575, 2021.
+C.~Gao, V.~C. Lee, and K.~Li, ``D-srtf: Distributed shortest remaining time
+  first scheduling for data center networks,'' \emph{IEEE Trans. Cloud
+  Comput.}, vol.~9, no.~2, pp. 562--575, 2021.
 
 \bibitem{wangSchedulingMachineLearningBasedFlow2018}
-L.~Wang, X.~Wang, M.~Tornatore, K.~Kim, S.~M. Kim, D.~Kim, K.~Han, and B.~Mukherjee, ``Scheduling with {{Machine-Learning-Based Flow Detection}} for {{Packet-Switched Optical Data Center Networks}},'' \emph{J. Opt. Commun. Networking}, vol.~10, pp. 365--375, 2018.
+L.~Wang, X.~Wang, M.~Tornatore, K.~Kim, S.~M. Kim, D.~Kim, K.~Han, and
+  B.~Mukherjee, ``Scheduling with {{Machine-Learning-Based Flow Detection}} for
+  {{Packet-Switched Optical Data Center Networks}},'' \emph{J. Opt. Commun.
+  Networking}, vol.~10, pp. 365--375, 2018.
 
 \bibitem{wang2017dvfs}
-S.~Wang, Z.~Qian, J.~Yuan, and I.~You, ``A dvfs based energy-efficient tasks scheduling in a data center,'' \emph{IEEE Access}, vol.~5, pp. 13\,090--13\,102, 2017.
+S.~Wang, Z.~Qian, J.~Yuan, and I.~You, ``A dvfs based energy-efficient tasks
+  scheduling in a data center,'' \emph{IEEE Access}, vol.~5, pp.
+  13\,090--13\,102, 2017.
 
 \bibitem{hanumaiah2012energy}
-V.~Hanumaiah and S.~Vrudhula, ``Energy-efficient operation of multicore processors by dvfs, task migration, and active cooling,'' \emph{IEEE Trans. Comput.}, vol.~63, no.~2, pp. 349--360, 2012.
+V.~Hanumaiah and S.~Vrudhula, ``Energy-efficient operation of multicore
+  processors by dvfs, task migration, and active cooling,'' \emph{IEEE Trans.
+  Comput.}, vol.~63, no.~2, pp. 349--360, 2012.
 
 \bibitem{gu2014optimal}
-L.~Gu, D.~Zeng, A.~Barnawi, S.~Guo, and I.~Stojmenovic, ``Optimal task placement with qos constraints in geo-distributed data centers using dvfs,'' \emph{IEEE Trans. Comput.}, vol.~64, no.~7, pp. 2049--2059, 2014.
+L.~Gu, D.~Zeng, A.~Barnawi, S.~Guo, and I.~Stojmenovic, ``Optimal task
+  placement with qos constraints in geo-distributed data centers using dvfs,''
+  \emph{IEEE Trans. Comput.}, vol.~64, no.~7, pp. 2049--2059, 2014.
 
 \bibitem{bani2017scalability}
-S.~Bani-Ahmad, S.~Sa’adeh \emph{et~al.}, ``Scalability of the dvfs power management technique as applied to 3-tier data center architecture in cloud computing,'' \emph{J. Comput. Commun.}, vol.~5, no.~01, p.~69, 2017.
+S.~Bani-Ahmad, S.~Sa’adeh \emph{et~al.}, ``Scalability of the dvfs power
+  management technique as applied to 3-tier data center architecture in cloud
+  computing,'' \emph{J. Comput. Commun.}, vol.~5, no.~01, p.~69, 2017.
 
 \bibitem{hussain2022deadline}
-M.~Hussain, L.-F. Wei, A.~Rehman, F.~Abbas, A.~Hussain, and M.~Ali, ``Deadline-constrained energy-aware workflow scheduling in geographically distributed cloud data centers,'' \emph{Future Gener. Comput. Syst.}, vol. 132, pp. 211--222, 2022.
+M.~Hussain, L.-F. Wei, A.~Rehman, F.~Abbas, A.~Hussain, and M.~Ali,
+  ``Deadline-constrained energy-aware workflow scheduling in geographically
+  distributed cloud data centers,'' \emph{Future Gener. Comput. Syst.}, vol.
+  132, pp. 211--222, 2022.
 
 \bibitem{dayarathna2015data}
-M.~Dayarathna, Y.~Wen, and R.~Fan, ``Data center energy consumption modeling: A survey,'' \emph{IEEE Commun. Surv. Tutorials}, vol.~18, no.~1, pp. 732--794, 2015.
+M.~Dayarathna, Y.~Wen, and R.~Fan, ``Data center energy consumption modeling: A
+  survey,'' \emph{IEEE Commun. Surv. Tutorials}, vol.~18, no.~1, pp. 732--794,
+  2015.
 
 \bibitem{wang2015proactive}
-H.~Wang, J.~Huang, X.~Lin, and H.~Mohsenian-Rad, ``Proactive demand response for data centers: A win-win solution,'' \emph{IEEE Trans. Smart Grid}, vol.~7, no.~3, pp. 1584--1596, 2015.
+H.~Wang, J.~Huang, X.~Lin, and H.~Mohsenian-Rad, ``Proactive demand response
+  for data centers: A win-win solution,'' \emph{IEEE Trans. Smart Grid},
+  vol.~7, no.~3, pp. 1584--1596, 2015.
 
 \bibitem{leyffer2025mccormick}
-S.~Leyffer and P.~Manns, ``Mccormick envelopes in mixed-integer pde-constrained optimization,'' \emph{Math. Program.}, pp. 1--46, 2025.
-
-\bibitem{wilson2005algorithm}
-J.~M. Wilson, ``An algorithm for the generalized assignment problem with special ordered sets,'' \emph{J. Heuristics}, vol.~11, pp. 337--350, 2005.
+S.~Leyffer and P.~Manns, ``Mccormick envelopes in mixed-integer pde-constrained
+  optimization,'' \emph{Math. Program.}, pp. 1--46, 2025.
 
 \bibitem{zhang2017chance}
-Y.~Zhang, J.~Wang, B.~Zeng, and Z.~Hu, ``Chance-constrained two-stage unit commitment under uncertain load and wind power output using bilinear benders decomposition,'' \emph{IEEE Trans. Power Syst.}, vol.~32, no.~5, pp. 3637--3647, 2017.
+Y.~Zhang, J.~Wang, B.~Zeng, and Z.~Hu, ``Chance-constrained two-stage unit
+  commitment under uncertain load and wind power output using bilinear benders
+  decomposition,'' \emph{IEEE Trans. Power Syst.}, vol.~32, no.~5, pp.
+  3637--3647, 2017.
 
 \bibitem{8939187}
-S.~Peyghami, P.~Davari, M.~Fotuhi-Firuzabad, and F.~Blaabjerg, ``Standard test systems for modern power system analysis: An overview,'' \emph{IEEE Ind. Electron. Mag.}, vol.~13, no.~4, pp. 86--105, 2019.
+S.~Peyghami, P.~Davari, M.~Fotuhi-Firuzabad, and F.~Blaabjerg, ``Standard test
+  systems for modern power system analysis: An overview,'' \emph{IEEE Ind.
+  Electron. Mag.}, vol.~13, no.~4, pp. 86--105, 2019.
 
 \bibitem{Lubin2023}
-M.~Lubin, O.~Dowson, J.~{Dias Garcia}, J.~Huchette, B.~Legat, and J.~P. Vielma, ``{JuMP} 1.0: {R}ecent improvements to a modeling language for mathematical optimization,'' \emph{Math. Program. Comput.}, 2023.
+M.~Lubin, O.~Dowson, J.~{Dias Garcia}, J.~Huchette, B.~Legat, and J.~P. Vielma,
+  ``{JuMP} 1.0: {R}ecent improvements to a modeling language for mathematical
+  optimization,'' \emph{Math. Program. Comput.}, 2023.
 
 \end{thebibliography}

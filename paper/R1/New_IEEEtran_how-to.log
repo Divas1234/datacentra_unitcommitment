@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.23)  4 NOV 2025 22:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.23)  4 NOV 2025 22:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -120,7 +120,6 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 msmath/amsmath.sty
 Package: amsmath 2024/11/05 v2.17t AMS math features
 \@mathmargin=\skip52
-
 For additional information on amsmath, use the `?' option.
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/a
@@ -333,7 +332,6 @@ Package: titlesec 2025/01/04 v2.17 Sectioning titles
 \titlewidth=\dimen189
 \titlewidthlast=\dimen190
 \titlewidthfirst=\dimen191
-
 
 Package titlesec Warning: Non standard sectioning command \subparagraph
 (titlesec)                detected. Using default spacing and no format.
@@ -992,7 +990,6 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
 LaTeX Font Info:    ... okay on input line 58.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 58.
 LaTeX Font Info:    ... okay on input line 58.
-
 -- Lines per column: 58 (exact).
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
@@ -1025,12 +1022,11 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 Package hyperref Info: Link coloring ON on input line 58.
- (./New_IEEEtran_how-to.out)
-(./New_IEEEtran_how-to.out)
+(./New_IEEEtran_how-to.out) (./New_IEEEtran_how-to.out)
 \@outlinefile=\write5
 \openout5 = `New_IEEEtran_how-to.out'.
 
- (./New_IEEEtran_how-to.nls
+(./New_IEEEtran_how-to.nls
 LaTeX Font Info:    Trying to load font information for U+msa on input line 4.
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/a
@@ -1198,10 +1194,10 @@ Package rerunfilecheck Info: File `New_IEEEtran_how-to.out' has not changed.
 (rerunfilecheck)             Checksum: 961813E797E0C5EA15240594FF418A41;2027.
  ) 
 Here is how much of TeX's memory you used:
- 26383 strings out of 473190
- 519601 string characters out of 5699139
- 963628 words of memory out of 5000000
- 49048 multiletter control sequences out of 15000+600000
+ 26381 strings out of 473190
+ 519556 string characters out of 5699139
+ 963586 words of memory out of 5000000
+ 49047 multiletter control sequences out of 15000+600000
  662938 words of font info for 139 fonts, out of 8000000 for 9000
  1145 hyphenation exceptions out of 8191
  110i,12n,107p,1483b,599s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1230,10 +1226,10 @@ uctiveCodingEditors/texlive/2025/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><
 d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/fonts/type1/
 urw/times/utmr8a.pfb><d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/t
 exmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on New_IEEEtran_how-to.pdf (11 pages, 4593410 bytes).
+Output written on New_IEEEtran_how-to.pdf (11 pages, 4593099 bytes).
 PDF statistics:
- 1418 PDF objects out of 1440 (max. 8388607)
- 893 compressed objects within 9 object streams
- 142 named destinations out of 1000 (max. 500000)
+ 1417 PDF objects out of 1440 (max. 8388607)
+ 892 compressed objects within 9 object streams
+ 141 named destinations out of 1000 (max. 500000)
  137 words of extra memory for PDF output out of 10000 (max. 10000000)
 
