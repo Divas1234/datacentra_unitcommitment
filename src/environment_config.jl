@@ -1,13 +1,14 @@
 using Pkg
 Pkg.activate("./.pkg")
-Pkg.add([
-			"Revise", "JuMP", "Gurobi", "Test", "DelimitedFiles", "PlotlyJS",
-			"LaTeXStrings", "Plots", "JLD", "DataFrames", "Clustering",
-			"StatsPlots", "CSV", "BenchmarkTools"
-		])
+# Pkg.add([
+# 			"Revise", "JuMP", "Gurobi", "Test", "DelimitedFiles", "PlotlyJS",
+# 			"LaTeXStrings", "Plots", "JLD", "DataFrames", "Clustering",
+# 			"StatsPlots", "CSV", "BenchmarkTools"
+# 		])
 using Revise, JuMP, Gurobi, Test, DelimitedFiles, PlotlyJS, LaTeXStrings, Plots, DataFrames, Clustering, StatsPlots, CSV, BenchmarkTools
 gr()
 using Random
+using DataFrames
 Random.seed!(1234)
 # using BenchmarkTools
 
@@ -36,3 +37,5 @@ include("./oths/SUCuccommitmentmodel.jl")
 include("./oths/casesploting.jl")
 include("./oths/saveresult.jl")
 # include(joinpath(@__DIR__, "..", "callback.jl"))
+
+include("./draws/dcc_workload_dis.jl")

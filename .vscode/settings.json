@@ -1,236 +1,236 @@
 {
-    "editor.wordWrapColumn": 150,
-    "editor.wordWrap": "bounded",
-    "editor.fontFamily": "JuliaMono, Fira Code, JetBrains Mono, Droid Sans Mono, Hack, MonoLisa, Maple Mono, Monaspace Neon, Monaspace Neon, Dubai, Chaparral Pro, Calisto, Helvetic, Fira Code, Geist Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
-    "workbench.editor.highlightModifiedTabs": true,
-    "terminal.integrated.fontLigatures.enabled": true,
-    "CodeGPT.apiKey": "CodeGPT Plus Beta",
-    "bookmarks.sideBar.expanded": true,
-    "spellright.language": [
-        "en"
-    ],
-    "spellright.documentTypes": [
-        "markdown",
-        "latex",
-        "plaintext"
-    ],
-    "editor.fontSize": 15,
-    "cSpell.words": [
-        "distributionally",
-        "DVFS",
-        "idale",
-        "microgrid",
-        "microgrids",
-        "PSON",
-        "SRTF"
-    ],
-    "github.copilot.chat.agent.thinkingTool": true,
-    "github.copilot.chat.codesearch.enabled": true,
-    "window.autoDetectColorScheme": true,
-    "latex-workshop.bibtex-format.sort.enabled": true,
-    "latex-workshop.formatting.latex": "latexindent",
-    "terminal.integrated.fontFamily": "JuliaMono,Fira Code, Hack Nerd Font, Geist Mono",
-    "javascript.suggest.completeFunctionCalls": true,
-    "search.experimental.closedNotebookRichContentResults": true,
-    "search.quickOpen.includeSymbols": true,
-    "task.quickOpen.showAll": true,
-    "git.supportCancellation": true,
-    "r.linting.maxLineLength": 800,
-    "r.linting.nameLength": false,
-    "editor.experimental.preferTreeSitter.regex": true,
-    "r.rterm.windows": "D:\\CommonSoftwares\\ProductiveCodingEditors\\R-4.5.0\\bin\\x64\\R.exe",
-    "editor.tokenColorCustomizations": {
-        "[GitHub Light Colorblind (Beta)]": {
-            "textMateRules": [
-                {
-                    "scope": "keyword",
-                    "settings": {
-                        "foreground": "#d73a49",
-                        "fontStyle": "italic"
-                    }
-                },
-                {
-                    "scope": "comment",
-                    "settings": {
-                        "foreground": "#b4c3d2",
-                        "fontStyle": "italic"
-                    }
-                },
-                {
-                    "scope": "string",
-                    "settings": {
-                        "foreground": "#144989"
-                    }
-                },
-                {
-                    "scope": "type",
-                    "settings": {
-                        "foreground": "#618dbf",
-                        "fontStyle": "bold"
-                    }
-                },
-                {
-                    "scope": "function",
-                    "settings": {
-                        "foreground": "#0a0ae5",
-                        "fontStyle": "bold underline"
-                    }
-                },
-                {
-                    "scope": "number",
-                    "settings": {
-                        "foreground": "#c4570e",
-                        "fontStyle": "bold"
-                    }
-                }
-            ]
+  "editor.wordWrapColumn": 150,
+  "editor.wordWrap": "bounded",
+  "editor.fontFamily": "JuliaMono, Fira Code, JetBrains Mono, Droid Sans Mono, Hack, MonoLisa, Maple Mono, Monaspace Neon, Monaspace Neon, Dubai, Chaparral Pro, Calisto, Helvetic, Fira Code, Geist Mono, Maple Mono, Maison Mono, Droid Sans Mono, Apercu Mono Pro, Menlo, Monaco, 'Courier New', monospace",
+  "workbench.editor.highlightModifiedTabs": true,
+  "terminal.integrated.fontLigatures.enabled": true,
+  "CodeGPT.apiKey": "CodeGPT Plus Beta",
+  "bookmarks.sideBar.expanded": true,
+  "spellright.language": ["en"],
+  "spellright.documentTypes": ["markdown", "latex", "plaintext"],
+  "editor.fontSize": 15,
+  "cSpell.words": [
+    "distributionally",
+    "DVFS",
+    "idale",
+    "linearization",
+    "microgrid",
+    "microgrids",
+    "PSON",
+    "SRTF"
+  ],
+  "github.copilot.chat.agent.thinkingTool": true,
+  "github.copilot.chat.codesearch.enabled": true,
+  "window.autoDetectColorScheme": true,
+  "latex-workshop.bibtex-format.sort.enabled": true,
+  "latex-workshop.formatting.latex": "latexindent",
+  "terminal.integrated.fontFamily": "JuliaMono,Fira Code, Hack Nerd Font, Geist Mono",
+  "javascript.suggest.completeFunctionCalls": true,
+  "search.experimental.closedNotebookRichContentResults": true,
+  "search.quickOpen.includeSymbols": true,
+  "task.quickOpen.showAll": true,
+  "git.supportCancellation": true,
+  "r.linting.maxLineLength": 800,
+  "r.linting.nameLength": false,
+  "editor.experimental.preferTreeSitter.regex": true,
+  "r.rterm.windows": "D:\\CommonSoftwares\\ProductiveCodingEditors\\R-4.5.0\\bin\\x64\\R.exe",
+  "editor.tokenColorCustomizations": {
+    "[GitHub Light Colorblind (Beta)]": {
+      "textMateRules": [
+        {
+          "scope": "keyword",
+          "settings": {
+            "foreground": "#d73a49",
+            "fontStyle": "italic"
+          }
         },
-        "[GitHub Sharp]": {
-            "textMateRules": [
-                {
-                    "settings": {
-                        "fontStyle": "bold"
-                    }
-                },
-                {
-                    "scope": "keyword",
-                    "settings": {
-                        "foreground": "#d73a49",
-                        "fontStyle": "italic"
-                    }
-                },
-                {
-                    "scope": "comment",
-                    "settings": {
-                        "foreground": "#b4c3d2",
-                        "fontStyle": "italic"
-                    }
-                },
-                {
-                    "scope": "string",
-                    "settings": {
-                        "foreground": "#144989"
-                    }
-                },
-                {
-                    "scope": "type",
-                    "settings": {
-                        "foreground": "#618dbf",
-                        "fontStyle": "bold"
-                    }
-                },
-                {
-                    "scope": "function",
-                    "settings": {
-                        "foreground": "#0a0ae5",
-                        "fontStyle": "bold"
-                    }
-                },
-                {
-                    "scope": "number",
-                    "settings": {
-                        "foreground": "#c4570e",
-                        "fontStyle": "bold"
-                    }
-                }
-            ]
+        {
+          "scope": "comment",
+          "settings": {
+            "foreground": "#b4c3d2",
+            "fontStyle": "italic"
+          }
         },
-        "[Dainty – City Lights]": {
-            "textMateRules": [
-                {
-                    "scope": "keyword",
-                    "settings": {
-                        "foreground": "#d73a49",
-                        "fontStyle": "italic"
-                    }
-                },
-                {
-                    "scope": "comment",
-                    "settings": {
-                        "foreground": "#213c56",
-                        "fontStyle": "italic"
-                    }
-                },
-                {
-                    "scope": "string",
-                    "settings": {
-                        "foreground": "#59708a"
-                    }
-                },
-                {
-                    "scope": "entity.name.type",
-                    "settings": {
-                        "foreground": "#618dbf",
-                        "fontStyle": "bold"
-                    }
-                },
-                {
-                    "scope": "entity.name.function",
-                    "settings": {
-                        "foreground": "#a59223",
-                        "fontStyle": "bold underline"
-                    }
-                },
-                {
-                    "scope": "number",
-                    "settings": {
-                        "foreground": "#c4570e",
-                        "fontStyle": "bold"
-                    }
-                }
-            ]
+        {
+          "scope": "string",
+          "settings": {
+            "foreground": "#144989"
+          }
         },
-        "comments": "",
-        "textMateRules": []
-    },
-    "julia-format.flag": "style=SciMLStyle(), indent=4, margin=200, always_for_in=true, for_in_replacement=\"∈\", whitespace_typedefs=true, import_to_using=true, whitespace_in_kwargs=true, align_struct_field=true, align_assignment=true, align_conditional=true, align_pair_arrow=true, normalize_line_endings=\"unix\", align_matrix=true, join_lines_based_on_source=true, indent_submodule=true, surround_whereop_typeparameters=false, yas_style_nesting=true",
-    "github.copilot.chat.scopeSelection": true,
-    "latex-workshop.view.pdf.external.synctex.command": "C:\\Program Files\\SumatraPDF\\SumatraPDF.exe",
-    "editor.overtypeCursorStyle": "line",
-    "cSpell.enabledFileTypes": {
-        "latex": true
-    },
-    "rewrap.autoWrap.enabled": true,
-    "editor.fontLigatures": true,
-    "workbench.preferredLightColorTheme": "GitHub Light Default",
-    "editor.lineHeight": 24,
-    "editor.allowVariableFontsInAccessibilityMode": true,
-    "workbench.tree.renderIndentGuides": "onHover",
-    "editor.wrapOnEscapedLineFeeds": true,
-    "workbench.editor.wrapTabs": true,
-    "notebook.output.wordWrap": true,
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true,
-    "editor.mouseWheelZoom": true,
-    "terminal.integrated.lineHeight": 1,
-    "terminal.integrated.fontSize": 13,
-    "chat.mcp.serverSampling": {
-        "dcc_project/.vscode/mcp.json: github": {
-            "allowedModels": [
-                "copilot/gpt-4.1",
-                "copilot/auto",
-                "copilot/claude-haiku-4.5",
-                "copilot/claude-3.5-sonnet",
-                "copilot/claude-sonnet-4",
-                "copilot/claude-sonnet-4.5",
-                "copilot/gemini-2.5-pro",
-                "copilot/gpt-4o",
-                "copilot/gpt-5",
-                "copilot/gpt-5-mini",
-                "copilot/gpt-5-codex",
-                "copilot/grok-code-fast-1"
-            ]
+        {
+          "scope": "type",
+          "settings": {
+            "foreground": "#618dbf",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "function",
+          "settings": {
+            "foreground": "#0a0ae5",
+            "fontStyle": "bold underline"
+          }
+        },
+        {
+          "scope": "number",
+          "settings": {
+            "foreground": "#c4570e",
+            "fontStyle": "bold"
+          }
         }
+      ]
     },
-    "github.copilot.chat.agent.autoFix": true,
-    "github.copilot.chat.alternateGptPrompt.enabled": true,
-    "github.copilot.chat.anthropic.thinking.enabled": true,
-    "github.copilot.chat.anthropic.webSearchTool.enabled": true,
-    "github.copilot.chat.editor.temporalContext.enabled": true,
-    "github.copilot.chat.generateTests.codeLens": true,
-    "github.copilot.chat.edits.temporalContext.enabled": true,
-    "github.copilot.chat.languageContext.fix.typescript.enabled": true,
-    "github.copilot.chat.languageContext.inline.typescript.enabled": true,
-    "github.copilot.chat.languageContext.typescript.includeDocumentation": true,
-    "github.copilot.chat.languageContext.typescript.enabled": true
+    "[GitHub Sharp]": {
+      "textMateRules": [
+        {
+          "settings": {
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "keyword",
+          "settings": {
+            "foreground": "#d73a49",
+            "fontStyle": "italic"
+          }
+        },
+        {
+          "scope": "comment",
+          "settings": {
+            "foreground": "#b4c3d2",
+            "fontStyle": "italic"
+          }
+        },
+        {
+          "scope": "string",
+          "settings": {
+            "foreground": "#144989"
+          }
+        },
+        {
+          "scope": "type",
+          "settings": {
+            "foreground": "#618dbf",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "function",
+          "settings": {
+            "foreground": "#0a0ae5",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "number",
+          "settings": {
+            "foreground": "#c4570e",
+            "fontStyle": "bold"
+          }
+        }
+      ]
+    },
+    "[Dainty – City Lights]": {
+      "textMateRules": [
+        {
+          "scope": "keyword",
+          "settings": {
+            "foreground": "#d73a49",
+            "fontStyle": "italic"
+          }
+        },
+        {
+          "scope": "comment",
+          "settings": {
+            "foreground": "#213c56",
+            "fontStyle": "italic"
+          }
+        },
+        {
+          "scope": "string",
+          "settings": {
+            "foreground": "#59708a"
+          }
+        },
+        {
+          "scope": "entity.name.type",
+          "settings": {
+            "foreground": "#618dbf",
+            "fontStyle": "bold"
+          }
+        },
+        {
+          "scope": "entity.name.function",
+          "settings": {
+            "foreground": "#a59223",
+            "fontStyle": "bold underline"
+          }
+        },
+        {
+          "scope": "number",
+          "settings": {
+            "foreground": "#c4570e",
+            "fontStyle": "bold"
+          }
+        }
+      ]
+    },
+    "comments": "",
+    "textMateRules": []
+  },
+  "julia-format.flag": "style=SciMLStyle(), indent=4, margin=200, always_for_in=true, for_in_replacement=\"∈\", whitespace_typedefs=true, import_to_using=true, whitespace_in_kwargs=true, align_struct_field=true, align_assignment=true, align_conditional=true, align_pair_arrow=true, normalize_line_endings=\"unix\", align_matrix=true, join_lines_based_on_source=true, indent_submodule=true, surround_whereop_typeparameters=false, yas_style_nesting=true",
+  "github.copilot.chat.scopeSelection": true,
+  "latex-workshop.view.pdf.external.synctex.command": "C:\\Program Files\\SumatraPDF\\SumatraPDF.exe",
+  "editor.overtypeCursorStyle": "line",
+  "cSpell.enabledFileTypes": {
+    "latex": true
+  },
+  "rewrap.autoWrap.enabled": true,
+  "editor.fontLigatures": true,
+  "workbench.preferredLightColorTheme": "GitHub Light Default",
+  "editor.lineHeight": 24,
+  "editor.allowVariableFontsInAccessibilityMode": true,
+  "workbench.tree.renderIndentGuides": "onHover",
+  "editor.wrapOnEscapedLineFeeds": true,
+  "workbench.editor.wrapTabs": true,
+  "notebook.output.wordWrap": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.mouseWheelZoom": true,
+  "terminal.integrated.lineHeight": 1,
+  "terminal.integrated.fontSize": 13,
+  "chat.mcp.serverSampling": {
+    "dcc_project/.vscode/mcp.json: github": {
+      "allowedModels": [
+        "copilot/gpt-4.1",
+        "copilot/auto",
+        "copilot/claude-haiku-4.5",
+        "copilot/claude-3.5-sonnet",
+        "copilot/claude-sonnet-4",
+        "copilot/claude-sonnet-4.5",
+        "copilot/gemini-2.5-pro",
+        "copilot/gpt-4o",
+        "copilot/gpt-5",
+        "copilot/gpt-5-mini",
+        "copilot/gpt-5-codex",
+        "copilot/grok-code-fast-1"
+      ]
+    }
+  },
+  "github.copilot.chat.agent.autoFix": true,
+  "github.copilot.chat.alternateGptPrompt.enabled": true,
+  "github.copilot.chat.anthropic.thinking.enabled": true,
+  "github.copilot.chat.anthropic.webSearchTool.enabled": true,
+  "github.copilot.chat.editor.temporalContext.enabled": true,
+  "github.copilot.chat.generateTests.codeLens": true,
+  "github.copilot.chat.edits.temporalContext.enabled": true,
+  "github.copilot.chat.languageContext.fix.typescript.enabled": true,
+  "github.copilot.chat.languageContext.inline.typescript.enabled": true,
+  "github.copilot.chat.languageContext.typescript.includeDocumentation": true,
+  "github.copilot.chat.languageContext.typescript.enabled": true,
+  "github.copilot.chat.tools.memory.enabled": true,
+  "github.copilot.chat.notebook.enhancedNextEditSuggestions.enabled": true,
+  "github.copilot.chat.notebook.followCellExecution.enabled": true,
+  "github.copilot.chat.newWorkspace.useContext7": true,
+  "github.copilot.chat.anthropic.tools.websearch.enabled": true
 }

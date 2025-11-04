@@ -69,13 +69,13 @@
 \maketitle
 
 \begin{abstract}
-  Data center clusters (DCCs) have become recognized as significant energy consumers in electrical power system operations. Workload reallocation processes for multiple DCCs, implemented by dynamic voltage and frequency scaling (DVFS) control schemes, can provide flexibility potential capabilities and contribute to maintaining the security of power systems operations through Unit Commitment (UC). To achieve this,
-The flexibility potential of workload reallocation hosted by multiple DCCs is analyzed. Building on this analysis, an interval-based workload reallocation strategy is extended to depict flexibility potential from workload response while avoiding service-time latency. Then, an innovation set of physical security constraints representing DVFS-controlled DCCs is developed, and related special-ordered sets-of-type-1 ~(SOS1) linearized constraints are derived through the McCormick Envelopes method. Furthermore, these intractable constraints are incorporated into UC, and an enhanced UC model, which considers the flexibility potential offered by DVFS-controlled DCCs, is developed. Several experiments are conducted on the IEEE 6 buses test systems to assess the validity and scalability of the proposed models.
+	Data center clusters (DCCs) have become recognized as significant energy consumers in electrical power system operations. Workload reallocation processes for multiple DCCs, implemented by dynamic voltage and frequency scaling (DVFS) control schemes, can provide flexibility potential capabilities and contribute to maintaining the security of power systems operations through Unit Commitment (UC). To achieve this,
+	The flexibility potential of workload reallocation hosted by multiple DCCs is analyzed. Building on this analysis, an interval-based workload reallocation strategy is extended to depict flexibility potential from workload response while avoiding service-time latency. Then, an innovation set of physical security constraints representing DVFS-controlled DCCs is developed, and related special-ordered sets-of-type-1 ~(SOS1) linearized constraints are derived through the McCormick Envelopes method. Furthermore, these intractable constraints are incorporated into UC, and an enhanced UC model, which considers the flexibility potential offered by DVFS-controlled DCCs, is developed. Several experiments are conducted on the IEEE 6 buses test systems to assess the validity and scalability of the proposed models.
 
 \end{abstract}
 
 \begin{IEEEkeywords}
-  Data center clusters, flexibility capability, workload reallocation, dynamic voltage and frequency scaling, unit commitment, McCormick envelopes
+	Data center clusters, flexibility capability, workload reallocation, dynamic voltage and frequency scaling, unit commitment, McCormick envelopes
 \end{IEEEkeywords}
 
 %\vspace{-0.5cm}
@@ -98,15 +98,15 @@ Ref.~\cite{10806734} explored the coupling relationship between DCCs and hydroge
 Ref.~\cite{doi:10.1049/icp.2025.0664} analyses the flexibility potential of DCCs while concurrently reducing carbon emissions, culminating in an emission-aware coordinated dispatch model for multi-regional microgrids.
 While these studies highlight the flexibility of DCCs within power systems, the intricate physical security characteristics associated with DCCs were not detailed.
 
-The workloads in DCCs can be broadly categorized into three types,~\cite{6041050},~$i$) $compute$-$intensive$ $workloads$, which include high-performance computing, machine learning model training, and commercial application services. $ii$) $storage$-$intensive$ $workloads$, which are employed for such activities such as regular file backups, archival systems, and relational database applications. $iii$) $network$-$intensive$ $workloads$, these jobs encompass activities like website hosting, content delivery networks, and network traffic management. 
-Notably, compute-intensive and storage-intensive workloads dominate DCCs, collectively accounting for approximately $70$\% of the total workload amount,~\cite{wangClusterFrameworksEfficient2018}. 
+The workloads in DCCs can be broadly categorized into three types,~\cite{6041050},~$i$) $compute$-$intensive$ $workloads$, which include high-performance computing, machine learning model training, and commercial application services. $ii$) $storage$-$intensive$ $workloads$, which are employed for such activities such as regular file backups, archival systems, and relational database applications. $iii$) $network$-$intensive$ $workloads$, these jobs encompass activities like website hosting, content delivery networks, and network traffic management.
+Notably, compute-intensive and storage-intensive workloads dominate DCCs, collectively accounting for approximately $70$\% of the total workload amount,~\cite{wangClusterFrameworksEfficient2018}.
 Among these, compute-intensive and storage-intensive workloads dominate the overall DCC operations, collectively accounting for approximately 70\% of the total workload~\cite{wangClusterFrameworksEfficient2018}. The increasing demand for high-performance computing and data-driven applications further reinforces this dominance. In contrast, network-intensive workloads are typically more volatile and time-sensitive, requiring immediate processing to maintain seamless service performance.
 Because compute-intensive and storage-intensive workloads are relatively predictable and flexible, they can be strategically shifted or reallocated to reduce peak power consumption. Techniques such as
 dynamic voltage and frequency scaling (DVFS) enable temporal or spatial workload adjustments and controlled response delays, thereby improving workload balancing and enhancing the overall energy
 efficiency of DCC operations.
 
 
-In addition to possible power management in DCCs through DVFS, it is essential to consider DCCs' physical security constraints related to job size and service-time latency. These factors directly impact the feasibility of workload reallocation and shifting processes between multiple DCC servers,~\cite{yu2023demand,wang2020flexible}. 
+In addition to possible power management in DCCs through DVFS, it is essential to consider DCCs' physical security constraints related to job size and service-time latency. These factors directly impact the feasibility of workload reallocation and shifting processes between multiple DCC servers,~\cite{yu2023demand,wang2020flexible}.
 For instance, excessively shifting time-sensitive workloads between DCCs may lead to data congestion and latency risks. To reflect on this issue,
 Ref.~\cite{kuehnDVFSpowerManagementPerformance2019} investigated a cloud-based DCCs queuing model using DVFS load-dependent strategies.
 Ref.~\cite{hanDualtimeScaleCollaborative2025} analyzed the response characteristics of various time-tolerant (workload) jobs concerning service time and total energy consumption, proposing a dual-timescale collaborative optimization model for multi-DCC systems.
@@ -116,35 +116,33 @@ Ref.~\cite{wangClusterFrameworksEfficient2018} provided a comprehensive survey o
 Ref.~\cite{lin2023workload} proposed a workload-aware robust DVFS technique, Gear-DVFS, to address concurrency challenges in mobile-driven workloads.
 Ref.~\cite{8520806} proposed a distributed shortest remaining time first (SRTF) scheduling model for DCCs workload reallocation, designed to minimize flow completion time while ensuring flow-size availability.
 Ref.~\cite{wangSchedulingMachineLearningBasedFlow2018} constructed a machine-learning-based scheduling flow detection and packet-switched optical network (PSON) architecture for intra-DCC connectivity and bath workload allocation.
-These studies thoroughly examine workload reallocation processes through DVFS across different DCCs. Nevertheless, the impact of flexibility potential provided by these workloads hosted on DVFS-enabled DCCs remains unexplored.
+These studies thoroughly examine workload reallocation processes through DVFS across different DCCs. Nevertheless, the impact of flexibility potential
+provided by these workloads hosted on DVFS-enabled DCCs remains unexplored.
 
-Driven by this motivation mentioned before, this work analyses the flexible potential offered by DVFS-controlled DCCs and integrates this flexibility capability into the power system scheduling
-framework. A key aspect of this work is the physical modeling of the workload balancing reallocation hosted on multi-DCCs and the refined power consumption behavior of individual DCC managed by DVFS mechanism. Building upon this foundation, additional restrictions such as frequency and voltage regulation limitations through DVFS techniques and time-delay requirements for various workload
-types are reshaped into corresponding physical constraints. Then, these nonlinear constraints are reshaped into a series of linearized constraints through the McCormick Envelopes method.
-In contrast to previous studies focusing on workload shifting strategies or energy consumption reduction, this research comprehensively analyzes multiple DCC workload reallocations and DCC sever-self
-workload regulation through DVFS, offering a more holistic viewpoint for system-level flexibility enhancement.
+\textcolor{blue!75}{Driven by this motivation mentioned before, this work analyzes the flexible potential offered by DVFS-controlled DCCs and integrates this flexibility capability into the power system scheduling framework. A key aspect of this work is the physical modeling of workload-balancing reallocation across multiple DCCs and the refined power-consumption behavior of individual DCCs managed by the DVFS mechanism. Building upon this foundation, additional restrictions such as frequency and voltage regulation limitations through DVFS techniques and time-delay requirements for various workload types are reshaped into corresponding physical constraints. Then, these nonlinear constraints are linearized using the McCormick Envelopes method. In contrast to previous studies focusing on workload shifting strategies or energy consumption reduction, this research comprehensively analyzes multiple DCC workload reallocations and DCC server self workload regulation via DVFS, offering a more holistic perspective for enhancing system-level flexibility.}
 
 % To summarize, the main contributions of this paper are outlined below:
 % $i$) A set of physical security constraints representing DCCs controlled by DVFS is developed. The proposed constraints are also linearized using McCormick Envelopes to improve computational feasibility in UC problems.
-% $ii$) An interval-based workload reallocation management strategy and DVFS configurations for multiple DCC servers are extended. 
-% $iii$) A refined UC is formulated considering additional flexibility potential from DVFS-controlled DCCs through workload reallocation processes. 
+% $ii$) An interval-based workload reallocation management strategy and DVFS configurations for multiple DCC servers are extended.
+% $iii$) A refined UC is formulated considering additional flexibility potential from DVFS-controlled DCCs through workload reallocation processes.
 
-In all, the contributions of this work are summarized as below,
+\textcolor{blue!75}{The contributions of this work are summarized as below,
+	\begin{itemize}
+		\item[-] A set of reformulated physical operation constraints is developed to characterize intel-DCC level workload reallocation processes and intra-DCC level workload power consumption regulation processes governed by the DVFS mechanism. These DCC‑related constraints are linearized using the McCormick envelope technique to ensure computational tractability in large‑scale scheduling formulations. The reformulated constraints can
+		      also be extended to power system planning problems to explicitly consider DCC flexibility.
+		\item[-] A refined DVFS-controlled DCC‑constrained unit commitment (UC) model is formulated to accurately capture the flexibility potential of DVFS‑controlled DCCs. Through this model, the available flexibility contributions from both DCCs and battery energy storage systems (BESSs) can be effectively quantified and coordinated within system operations.
+		\item[-] The effectiveness of the proposed DCC constraints embedded within the UC framework is validated using a modified IEEE 30‑bus test system. The case study quantitatively evaluates reallocated power distributions across multiple DCCs, the detailed power consumption profiles of individual DCCs
+		      managed via DVFS, and compares computational performance (memory usage and solving efficiency) before and after incorporating multiple DCC flexibility.
+	\end{itemize}
+}
 
-(i) A set of physical security constraints is developed to characterize the multi-DCC workload reallocation process and the refined power consumption adjustment of individual DCCs governed by the DVFS mechanism. These proposed DCC-related constraints are subsequently linearized using the McCormick envelope technique to ensure computational tractability in large-scale scheduling formulations. It is worth emphasizing that the reformulated physical constraints can also be extended to power system planning problems, where the flexibility contribution of DCCs is explicitly considered.
+The remainder of this paper is organized as follows:
 
-(ii) A refined DCC-constrained unit commitment (UC) model is formulated to accurately capture the flexibility potential provided by DVFS-controlled DCCs. Through this model, the available flexibility contributions from both DCCs and battery energy storage systems (BESSs) can be effectively quantified and coordinated within system operations.
-
-(iii) The effectiveness of the proposed DCC-related constraints embedded within the UC framework is validated using a modified IEEE 30-bus test system. In this case study, the reallocated power
-distributions across multiple DCCs and the detailed power consumption profiles of individual DCCs managed through the DVFS mechanism are quantitatively evaluated. Furthermore, the computational
-performance, including memory usage and overall solving efficiency,  is compared and analyzed before and after incorporating the flexibility potential offered by multi-DCCs.
-
-The remainder of this paper is organized as follows.
-Section II develops a new set of physical constraints to model DCC workload shifting and local energy consumption requirements. The McCormick Envelope method is also employed to linearize the nonlinear constraints, enabling the estimation of DCC flexibility potential.
+Section II constructs a new set of reformulated physical operation constraints to model DCC workload shifting and local energy consumption requirements.
 Section III introduces an interval-based workload reallocation strategy for multiple DCC servers, which integrates the flexibility potential of DVFS-controlled DCCs while ensuring pre-selected service time latency.
-Section IV incorporates the flexibility potential of DVFS-controlled DCCs into UC and formulates the proposed scheduled model in detail.
+Section IV leverages the flexibility of DVFS-controlled DCCs to enhance UC and formulates the proposed scheduling model in detail.
 Section V presents numerical experiments conducted on benchmark test systems to validate the effectiveness of the proposed model.
-Finally, Section VI summarizes the key findings and insights from the case studies.
+Section VI summarizes the key findings and insights from the case studies.
 
 % \vspace{-0.25cm}
 % \section{The proposed Scheduling Framework}
@@ -154,16 +152,22 @@ Finally, Section VI summarizes the key findings and insights from the case studi
 
 This section introduces a coordinated scheduling framework designed to integrate the flexible response capabilities produced by DCCs into power system operations. Fig.~\ref{fig:sfr} further details the system architecture and scheduled power management facilitated by DVFS-controlled DCCs.
 
+\textcolor{blue!75}{
+In Fig.~\ref{fig:sfr}, the proposed workload management process consists of: intel-level DCC workload reallocation and balancing processes, and the
+intra-level DCC workload power consumption regulation processes. The significant difference between the workload reallocation and balancing process and the workload-adjustable power consumption regulation process through DVFS lies in the distinct power control objects and control mechanisms. The former processes occur across multiple DCC devices, and this is an inter-DCC-level workload reallocation behavior. During this process, the system reallocates computational workload among geographically distributed DCCs to maintain power balance and optimize system-wide consumption. In addition, suitable time latency requirements should be reconsidered during workload reallocation processes.
+In contrast, the latter workload consumption processes occur at the individual DCC device level and constitute an intra-DCC-level workload power consumption regulation stage. Each DCC further refines its power usage through DVFS-based adjustment on individual computing devices, enabling fine-grained, rapid, and controllable demand response. During this process, suitable frequency parameters and voltage parameters are essential when applying DVFS techniques.
+}
+
 % Recognizing the difference in scheduling timescales (hourly for grid-side operations versus seconds for DCCs workload management), the framework is structured into two interconnected parts. PART-1 encompasses the grid-side scheduling model, while PART-2 represents the DCCs workload management model.
 
 %Part-1 optimizes the power system's generation schedule, and Part-2 optimizes workload shifting within DCCs.
 
 
-\begin{figure}[!h]
-\centering
-\includegraphics[width=0.4\textwidth]{./fig/proposed_framework.pdf}
-\caption{The scheduled power management through DVFS-controlled DCCs.}
-\label{fig:sfr}
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=0.4\textwidth]{./fig/proposed_framework.pdf}
+	\caption{The scheduled power management through DVFS-controlled DCCs.}
+	\label{fig:sfr}
 \end{figure}
 
 %\vspace{-0.25cm}
@@ -172,11 +176,11 @@ The power consumption of DCCs is primarily influenced by two components: static 
 
 \vspace{-0.25cm}
 \begin{subequations}
-  \begin{align}
-    \!\!\!\!p_{dcc,i,t} &= p_{dcc,i,t}^{idle} + p_{dcc,i,t}^{dyn},&\forall i\in\mathcal{I}\\
-    \!\!\!\!p_{dcc,i,t}^{idle} &= v_{dcc,i,t} i_{leak,i},&\forall i\in\mathcal{I}\\
-    \!\!\!\!p_{dcc,i,t}^{dyn} &= {\left( C_{dcc,i} f_{dcc,i} v_{dcc,i,t}^{2} \right )}{\lambda_{dcc,i,t}}{\mu_{dcc,i,t}^{-1}},\!\!\! & \forall i\in \mathcal{I}
-  \end{align}
+	\begin{align}
+		\!\!\!\!p_{dcc,i,t}        & = p_{dcc,i,t}^{idle} + p_{dcc,i,t}^{dyn},                                                             & \forall i\in\mathcal{I}  \\
+		\!\!\!\!p_{dcc,i,t}^{idle} & = v_{dcc,i,t} i_{leak,i},                                                                             & \forall i\in\mathcal{I}  \\
+		\!\!\!\!p_{dcc,i,t}^{dyn}  & = {\left( C_{dcc,i} f_{dcc,i} v_{dcc,i,t}^{2} \right )}{\lambda_{dcc,i,t}}{\mu_{dcc,i,t}^{-1}},\!\!\! & \forall i\in \mathcal{I}
+	\end{align}
 \end{subequations}
 
 \noindent
@@ -186,39 +190,60 @@ Based on the physical working principles above, the associated set of security c
 
 \vspace{-0.25cm}
 \begin{subequations}
-  \begin{align}
-    \!\!\!\!p_{dcc,i,t} & \!\geq\! p_{dcc,i,t}^{idle} \!+\! p_{dcc,i,t}^{dyn},&\forall i\in\mathcal{I}\\
-    \!\!\!\!p_{dcc,i,t}^{idle} & \!\geq\! \lfloor {v}_{dcc,i,t}\rfloor i_{leak,i},&\forall i\in\mathcal{I}\\
-    \!\!\!\!p_{dcc,i,t}^{idle} & \!\leq\! \lceil {v}_{dcc,i,t}\rceil i_{leak,i},&\forall i \in\mathcal{I} \\
-    \!\!\!\!p_{dcc,i,t}^{dyn} & \!\geq\! \lfloor ( C_{dcc,i,t} f_{dcc,i} v_{dcc,i,t}^{2} ) \rfloor {\lambda_{dcc,i,t}}{\mu_{dcc,i,t}^{-1}},&\forall i \in\mathcal{I} \\
-    \!\!\!\!p_{dcc,i,t}^{dyn} & \!\leq\! \lceil ( C_{dcc,i,t} f_{dcc,i} v_{dcc,i,t}^{2} ) \rceil {\lambda_{dcc,i,t}}{\mu_{dcc,i,t}^{-1}},&\forall i \in\mathcal{I}
-    % \phi_{dcc,i}^{dvfs} &= ( C_{dcc,i} f_{dcc,i} v_{dcc,i}^{2} ), \forall i\in \mathcal{I}
-  \end{align}
+	\begin{align}
+		\!\!\!\!p_{dcc,i,t}        & \!\geq\! p_{dcc,i,t}^{idle} \!+\! p_{dcc,i,t}^{dyn},                                                        & \forall i\in\mathcal{I}  \\
+		\!\!\!\!p_{dcc,i,t}^{idle} & \!\geq\! \lfloor {v}_{dcc,i,t}\rfloor i_{leak,i},                                                           & \forall i\in\mathcal{I}  \\
+		\!\!\!\!p_{dcc,i,t}^{idle} & \!\leq\! \lceil {v}_{dcc,i,t}\rceil i_{leak,i},                                                             & \forall i \in\mathcal{I} \\
+		\!\!\!\!p_{dcc,i,t}^{dyn}  & \!\geq\! \lfloor ( C_{dcc,i,t} f_{dcc,i} v_{dcc,i,t}^{2} ) \rfloor {\lambda_{dcc,i,t}}{\mu_{dcc,i,t}^{-1}}, & \forall i \in\mathcal{I} \\
+		\!\!\!\!p_{dcc,i,t}^{dyn}  & \!\leq\! \lceil ( C_{dcc,i,t} f_{dcc,i} v_{dcc,i,t}^{2} ) \rceil {\lambda_{dcc,i,t}}{\mu_{dcc,i,t}^{-1}},   & \forall i \in\mathcal{I}
+		% \phi_{dcc,i}^{dvfs} &= ( C_{dcc,i} f_{dcc,i} v_{dcc,i}^{2} ), \forall i\in \mathcal{I}
+	\end{align}
 \end{subequations}
 
 \noindent
 where $\lceil {\circ} \rceil$ and $\lfloor {\circ} \rfloor$ represent predetermined upper and lower bounds for the decision variable $\circ$.
-% $\lambda_{dcc,i}$ describes the workload balancing process for the DCC $i$. 
+% $\lambda_{dcc,i}$ describes the workload balancing process for the DCC $i$.
 The feasibility of workload balancing for compute-intensive and storage-intensive workloads hinges on users' latency tolerance for batch workloads and the capacity to shift workloads among multi-DCCs,~\cite{gu2014optimal,hussain2022deadline}. When users accept and tolerate higher latency, the execution of workloads can be dynamically adjusted across multi-DCCs. By optimizing these workload execution patterns, the overall energy consumption of DCCs can be reduced, thereby enhancing their demand response capabilities for power system operations. More detailed, Fig.~\ref{fig:dvfs} illustrates the scheduled workload consumption generated by DCC servers with different support voltage and frequency parameter settings.
 
 \begin{figure}[!t]
-\centering
-\includegraphics[width=0.45\textwidth]{./fig/dvfs_heatmap.pdf}
-\caption{The impact of power consumption hosted by DCC servers with various frequency/voltage parameters through DVFS techniques.}\vspace{-0.025cm}
-\label{fig:dvfs}
+	\centering
+	\includegraphics[width=0.475\textwidth]{./fig/dcc_types.pdf}
+	\caption{The impact of power consumption hosted by DCC servers with various frequency/voltage parameters through DVFS techniques.}\vspace{-0.025cm}
+	\label{fig:dvfs}
 \end{figure}
 
+\begin{table}[!thbp]
+	\centering
+	\caption{Parameter comparison table for intra-level DCC operating states}
+	\label{tab:cpu_states}
+	\begin{tabular}{c|cccr}
+		\hline
+		\textbf{State} & \textbf{Frequency} & \textbf{Voltage} & \textbf{Power Ratio} & \textbf{Scenarios} \\
+		               & {(GHz)}            & {(V)}            &                      &                    \\
+		\hline
+		P0             & 3.5                & 1.20             & 100\%                & High Load Tasks    \\
+		P1             & 3.0                & 1.10             & 85\%                 & Medium-High Load   \\
+		P2             & 2.5                & 1.00             & 70\%                 & Medium Load        \\
+		P3             & 2.0                & 0.90             & 55\%                 & Medium-Low Load    \\
+		P4             & 1.5                & 0.85             & 40\%                 & Low Load           \\
+		P5             & 1.0                & 0.80             & 25\%                 & Idle/Light Load    \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\textcolor{blue!75}{Furthermore, this work introduces the DVFS mechanism to enhance intra-DCC level energy efficiency and computational flexibility. By dynamically adjusting the processor's operating voltage and frequency to match real-time workload demands, DVFS enables an effective trade-off between performance and power consumption (see figure 1). Since chip power consumption is approximately proportional to the square of the voltage and linearly proportional to the frequency, DVFS can significantly reduce both energy use and heat generation during low-load periods, while restoring high-frequency operation under heavy workloads. This dynamic adjustment allows DCCs to maintain computing reliability and performance while achieving suitable workload tasks and low time-instant requirement.}
 To estimate the benefits of DVFS-controlled DCCs in achieving smooth energy demand and proactive workload response, additional concise constraints regarding workload balancing processes among multiple DCCs are established,
+
 
 \vspace{-0.25cm}
 \begin{subequations}
-  \begin{align}
-    \!\!\!\!p_{dcc,i,t} &\geq p_{dcc,i,t}^{idle} \!+\! p_{dcc,i,t}^{dyn} + \varDelta p_{dcc,i,t}^{bal},&&\forall i\in\mathcal{I}\\
-    \!\!\!\!\varDelta p_{dcc,i,t}^{bal} &= \phi_{dcc,i,t}^{dvfs} {\left ( \lambda_{dcc,i,t}^{ini} \!+\! \varDelta \lambda_{dcc,i,t}\right )}{\mu_{dcc,i}^{-1}},&& \forall i\in \mathcal{I}\\
-    \!\!\!\!\phi_{dcc,i,t}^{dvfs} &= C_{dcc,i,t} f_{dcc,i,t} v_{dcc,i,t}^{2}, &&\forall i\in \mathcal{I} \\
-    \!\!\!\!\lfloor f_{dcc,i} \rfloor &\leq f_{dcc,i,t} \leq \lceil f_{dcc,i} \rceil, &&\forall i\in \mathcal{I}\\
-    \!\!\!\!\lfloor v_{dcc,i} \rfloor &\leq v_{dcc,i,t} \leq \lceil v_{dcc,i} \rceil, &&\forall i\in \mathcal{I}
-  \end{align}
+	\begin{align}
+		\!\!\!\!p_{dcc,i,t}                 & \geq p_{dcc,i,t}^{idle} \!+\! p_{dcc,i,t}^{dyn} + \varDelta p_{dcc,i,t}^{bal},                                         &  & \forall i\in\mathcal{I}  \\
+		\!\!\!\!\varDelta p_{dcc,i,t}^{bal} & = \phi_{dcc,i,t}^{dvfs} {\left ( \lambda_{dcc,i,t}^{ini} \!+\! \varDelta \lambda_{dcc,i,t}\right )}{\mu_{dcc,i}^{-1}}, &  & \forall i\in \mathcal{I} \\
+		\!\!\!\!\phi_{dcc,i,t}^{dvfs}       & = C_{dcc,i,t} f_{dcc,i,t} v_{dcc,i,t}^{2},                                                                             &  & \forall i\in \mathcal{I} \\
+		\!\!\!\!\lfloor f_{dcc,i} \rfloor   & \leq f_{dcc,i,t} \leq \lceil f_{dcc,i} \rceil,                                                                         &  & \forall i\in \mathcal{I} \\
+		\!\!\!\!\lfloor v_{dcc,i} \rfloor   & \leq v_{dcc,i,t} \leq \lceil v_{dcc,i} \rceil,                                                                         &  & \forall i\in \mathcal{I}
+	\end{align}
 \end{subequations}
 
 % \noindent
@@ -230,18 +255,18 @@ In (3a), $\lambda_{dcc, i,t}^{bal}$ primarily depends on the risk of service tim
 
 \vspace{-0.25cm}
 \begin{subequations}
-  \begin{align}
-    \!\!\!\!T_{q,t} &\leq T_{tol}^{-1}\Rightarrow &\\
-    \!\!\!\!\varDelta \lambda_{dcc,i,t}^{bal} &\leq v_{dcc,i,t} \!-\! T_{tol}^{-1} \!-\! (\lambda_{dcc,i,t}^{ini} + \lambda_{dcc,i,t}^{dyn}), \!\!\!\!& \forall i\in \mathcal{I}\\
-    \!\!\!\!\varDelta \lambda_{dcc,i,t}^{bal} &\geq 0, \varDelta \lambda_{dcc,i,t}^{bal}  \in \mathbb{R}, & \forall i\in \mathcal{I}
-  \end{align}
+	\begin{align}
+		\!\!\!\!T_{q,t}                           & \leq T_{tol}^{-1}\Rightarrow                                                                            &                          \\
+		\!\!\!\!\varDelta \lambda_{dcc,i,t}^{bal} & \leq v_{dcc,i,t} \!-\! T_{tol}^{-1} \!-\! (\lambda_{dcc,i,t}^{ini} + \lambda_{dcc,i,t}^{dyn}), \!\!\!\! & \forall i\in \mathcal{I} \\
+		\!\!\!\!\varDelta \lambda_{dcc,i,t}^{bal} & \geq 0, \varDelta \lambda_{dcc,i,t}^{bal}  \in \mathbb{R},                                              & \forall i\in \mathcal{I}
+	\end{align}
 \end{subequations}
 
 \begin{figure}[!t]
-\centering
-\includegraphics[width=0.475\textwidth]{./fig/Qos.pdf}
-\caption{The variability in service time latency during workload reallocation with different interval configurations.}\vspace{-0.25cm}
-\label{fig:Qos}
+	\centering
+	\includegraphics[width=0.475\textwidth]{./fig/Qos.pdf}
+	\caption{The variability in service time latency during workload reallocation with different interval configurations.}\vspace{-0.25cm}
+	\label{fig:Qos}
 \end{figure}
 
 
@@ -252,29 +277,68 @@ Notably, (3a)-(3c) remain intractable due to product terms involving continuous 
 
 \vspace{-0.25cm}
 \begin{subequations}
-  \begin{align}
-    \!\!\!\!\!\!\!\!\varDelta p_{dcc,i,t}^{bal} = &\phi_{dcc,i,t}^{dvfs} \lambda_{dcc,i,t}^{ini}{\mu_{dcc,i,t}^{-1}} + \iota_{dcc,i,t} {\mu_{dcc,i,t}^{-1}} & \forall i\in \mathcal{I} \\
-    \!\!\!\!\!\!\!\!\iota_{dcc,i,t} =&\phi_{dcc,i,t}^{dvfs} \varDelta \lambda_{dcc,i,t}, & \forall i\in \mathcal{I}\\
-    \!\!\!\!\!\!\!\!\iota_{dcc,i,t} \geq &(\varsigma_{dcc,i,t}^{up})^{2} - (\varsigma_{dcc,i,t}^{dw})^{2},& \forall i\in \mathcal{I}\\
-    \!\!\!\!\!\!\!\!\varsigma_{dcc,i,t}^{up} \geq & 0, \varsigma_{dcc,i,t}^{up} \in \mathbb{R}, \varsigma_{dcc,i,t}^{dw} \in \mathbb{R},& \forall i\in \mathcal{I}
-  \end{align}
+	\begin{align}
+		\!\!\!\!\!\!\!\!\varDelta p_{dcc,i,t}^{bal} = & \phi_{dcc,i,t}^{dvfs} \lambda_{dcc,i,t}^{ini}{\mu_{dcc,i,t}^{-1}} + \iota_{dcc,i,t} {\mu_{dcc,i,t}^{-1}} & \forall i\in \mathcal{I} \\
+		\!\!\!\!\!\!\!\!\iota_{dcc,i,t} =             & \phi_{dcc,i,t}^{dvfs} \varDelta \lambda_{dcc,i,t},                                                       & \forall i\in \mathcal{I} \\
+		\!\!\!\!\!\!\!\!\iota_{dcc,i,t} \geq          & (\varsigma_{dcc,i,t}^{up})^{2} - (\varsigma_{dcc,i,t}^{dw})^{2},                                         & \forall i\in \mathcal{I} \\
+		\!\!\!\!\!\!\!\!\varsigma_{dcc,i,t}^{up} \geq & 0, \varsigma_{dcc,i,t}^{up} \in \mathbb{R}, \varsigma_{dcc,i,t}^{dw} \in \mathbb{R},                     & \forall i\in \mathcal{I}
+	\end{align}
 \end{subequations}
 
-In (4b), the standard square terms of $\langle \varsigma_{dcc,i,t}^{up},\varsigma_{dcc,i,t}^{dw}\rangle $ can be further reshaped as a Special-Ordered-Sets-of-type-1 (SOS1) constraint,~\cite{wilson2005algorithm}, which mix-integer-programming (MIP) solver could accurately identify and compile them. For simplification, let $\langle \varsigma_{dcc,i,t,z}^{up}, \varsigma_{dcc,i,t,z}^{dw}\rangle$, respectively, denote the piece-wise block of related continuous variables $\langle \varsigma_{dcc,i,t}^{up},\varsigma_{dcc,i,t}^{dw}\rangle$, hence, (4b) can be reformulated as below,
+% In (4b), the standard square terms of $\langle \varsigma_{dcc,i,t}^{up},\varsigma_{dcc,i,t}^{dw}\rangle $ can be further reshaped as a
+% Special-Ordered-Sets-of-type-1 (SOS1) constraint,~\cite{wilson2005algorithm}, which mix-integer-programming (MIP) solver could accurately identify
+% and compile them.
+
+\textcolor{blue!75}{For an individual DVFS-controlled DCC, its workload power consumption can be derived as constraint (3c). Since both the frequency parameter and
+	the voltage parameter in (3c) are continuous variable, and the adjusted bound for \(f_{dcc, i}\) can be assumed as $(0.5, 1.5)$, and the bound for
+	\(v_{dcc,i}\) remains as $(0.8, 1.25)$, then constraint (3c) can be directly transformed into the constraint (5c). The advantage of this conversation through
+	constraints (3c) is that \(f_{dcc, i}\) and \(v_{dcc, i}\) themselves are non-convex and nonlinear, which cannot be identified through the shed-on-off
+	solvers. However, both \(\varsigma_{dcc,i,t}^{up}\) and \(\varsigma_{dcc,i,t}^{dw}\) in (5c) keep convex quadratic term. Through this transformation,
+	the original non-convex optimization problem can be converted into a convex constrained problem.
+	In the next step, we need to perform differential linearization on \(\varsigma_{dcc, i,t}^{up}\) and \(\varsigma_{dcc, i,t}^{dw}\) and incorporate their differential form into the above constraints. That is,
+}
 
 \vspace{-0.25cm}
 \begin{subequations}
-\begin{align}
-   \!\!\!\!\iota_{dcc,i,t} \geq & \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,t, z}^{up}) \varpi_{dcc,i,t, z}^{up} - \notag \\
-   &\quad\, \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,t, z}^{dw}) \varpi_{dcc,i,t, z}^{dw}, & \forall i\in \mathcal{I}\\
-   \!\!\!\!\varsigma_{dcc,i,t}^{up} & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,t,z}^{up} \varpi_{dcc,i,t,z}^{up}, &\forall i\in \mathcal{I}\\
-   \!\!\!\!\varsigma_{dcc,i,t}^{dw} & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,t,z}^{dw} \varpi_{dcc,i,t,z}^{dw}, & \forall i\in \mathcal{I}\\
-   \!\!\!\!\sum\nolimits_{z\in\mathcal{Z}} &\varsigma_{dcc,i,t,z}^{up} \!=\! 1,  \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,t,z}^{dw} = 1,\!\!&\forall i\in \mathcal{I}\\
-   \!\!\!\!\Im(\varsigma_{dcc,i,t,z}^{up}) &= (\varsigma_{dcc,i,t,z}^{up})^2,  \forall z\in \mathcal{Z}, &\forall i\in \mathcal{I}\\
-   \!\!\!\!\Im(\varsigma_{dcc,i,t,z}^{dw}) &= (\varsigma_{dcc,i,t,z}^{dw})^2,  \forall z\in \mathcal{Z}, &\forall i\in \mathcal{I}\\
-   \!\!\!\!\varsigma_{dcc,i,t,z}^{up} &\geq 0,\varsigma_{dcc,i,t,z}^{dw}  \geq 0, \forall z\in \mathcal{Z}, &\forall i\in \mathcal{I}\\
-   \!\!\!\!\varpi_{dcc,i,t,z}^{up} &\in\{0,\!1\},\varpi_{dcc,i,t,z}^{dw}\in\{0,\!1\}, & \forall z\in \mathcal{Z}
-\end{align}
+	\begin{align}
+		\varsigma_{dcc,i}^{up} & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,z}^{up} \varpi_{dcc,i,z}^{up}, &  & \forall z\in\mathcal{Z} \label{eq:6a} \\
+		\varsigma_{dcc,i}^{dw} & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,z}^{dw} \varpi_{dcc,i,z}^{dw}, &  & \forall z\in\mathcal{Z} \label{eq:6b}
+	\end{align}
+\end{subequations}
+
+\noindent
+\textcolor{blue!75}{
+	where \(\varsigma_{dcc,i,z}^{up}\) and \(\varsigma_{dcc,i,z}^{dw}\) actually represent the discrete differential values of $\varsigma_{dcc,i}^{up}$ and
+	$\varsigma_{dcc,i}^{dw}$ respectively. Here, the value of \(\varsigma_{dcc, i}^{up}\) determined by selecting the current actual discrete value \(\varsigma_{dcc, i,z}^{up}\) at the $z$-th block, with all other discrete terms remain inactive, analogously, the value of \(\varsigma_{dcc,i,z}^{dw}\) is determined
+	in the same manner. From this viewpoint, additional indicator variables \(\varpi_{dcc, i}^{up}\), \(\varpi_{dcc, i}^{dw}\) can thus be introduced to
+	characterize whether to adopt the current value. On this basis, to restrict the uniqueness of $\varsigma_{dcc,i}^{up}$ and
+	$\varsigma_{dcc, i}^{dw}$ within their discretized differential value intervals, it is obviously necessary to add the SOS-1 constraint, i.e., \(\sum\nolimits_{z\in\mathcal{Z}} \varpi_{dcc, i,z}^{up}=1\), \(\sum\nolimits_{z\in\mathcal{Z}} \varpi_{dcc,i,z}^{dw}=1\). By integrating the operations mentioned before, the product terms among the
+	aforementioned variables can be decomposed into a combination of convex-type constraints through ingenious constraint transformation and SOS-1 reformulation.
+	The degree of approximation between the reformulated (5c), \eqref{eq:6a},\eqref{eq:6b} and the original constraints (3c) depends on the
+	setting of z: the larger in the number of $z$ is, The more cutting planes formed by such reformulated constraints, the better the approximation effect. In this work, \(z = 5\) in default. Fig.~\ref{fig:sos1_relaxed} illustrates the correspondence between the solution derived using SOS-1 and the original constraints, it can be observed that the adopted constraint reformulation process is capable of accurately depicting the structure of the original constraints.}
+
+\begin{figure*}[!t]
+	\centering
+	\includegraphics[width=0.875\textwidth]{./fig/sos1_relaxed.pdf}
+	\caption{The nonlinear constraint (3c) consisting of a product of two continuous variables corresponds to the decision variables \(f_{dcc,i,t}\) and \(v_{dcc,i,t}\), as well as the linearization reformulation process: (a) the original constraints structure, (b) the SOS1-type discretized reformulated constraint, and (c) the difference between original constraints and reformulated constraints.}\vspace{-0.25cm}
+	\label{fig:sos1_relaxed}
+\end{figure*}
+
+For simplification, let $\langle \varsigma_{dcc,i,t,z}^{up}, \varsigma_{dcc,i,t,z}^{dw}\rangle$, respectively, denote the piece-wise block of related continuous variables $\langle \varsigma_{dcc,i,t}^{up},\varsigma_{dcc,i,t}^{dw}\rangle$, hence, (4b) can be reformulated as below,
+
+\vspace{-0.25cm}
+\begin{subequations}
+	\begin{align}
+		\!\!\!\!\iota_{dcc,i,t} \geq            & \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,t, z}^{up}) \varpi_{dcc,i,t, z}^{up} - \notag                                  \\
+		                                        & \quad\, \sum\nolimits_{z\in\mathcal{Z}} \Im(\varsigma_{dcc,i,t, z}^{dw}) \varpi_{dcc,i,t, z}^{dw},       & \forall i\in \mathcal{I} \\
+		\!\!\!\!\varsigma_{dcc,i,t}^{up}        & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,t,z}^{up} \varpi_{dcc,i,t,z}^{up},                    & \forall i\in \mathcal{I} \\
+		\!\!\!\!\varsigma_{dcc,i,t}^{dw}        & = \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,t,z}^{dw} \varpi_{dcc,i,t,z}^{dw},                    & \forall i\in \mathcal{I} \\
+		\!\!\!\!\sum\nolimits_{z\in\mathcal{Z}} & \varsigma_{dcc,i,t,z}^{up} \!=\! 1,  \sum\nolimits_{z\in\mathcal{Z}} \varsigma_{dcc,i,t,z}^{dw} = 1,\!\! & \forall i\in \mathcal{I} \\
+		\!\!\!\!\Im(\varsigma_{dcc,i,t,z}^{up}) & = (\varsigma_{dcc,i,t,z}^{up})^2,  \forall z\in \mathcal{Z},                                             & \forall i\in \mathcal{I} \\
+		\!\!\!\!\Im(\varsigma_{dcc,i,t,z}^{dw}) & = (\varsigma_{dcc,i,t,z}^{dw})^2,  \forall z\in \mathcal{Z},                                             & \forall i\in \mathcal{I} \\
+		\!\!\!\!\varsigma_{dcc,i,t,z}^{up}      & \geq 0,\varsigma_{dcc,i,t,z}^{dw}  \geq 0, \forall z\in \mathcal{Z},                                     & \forall i\in \mathcal{I} \\
+		\!\!\!\!\varpi_{dcc,i,t,z}^{up}         & \in\{0,\!1\},\varpi_{dcc,i,t,z}^{dw}\in\{0,\!1\},                                                        & \forall z\in \mathcal{Z}
+	\end{align}
 \end{subequations}
 
 It can be observed that constraint (3b) can continuously retreat as a product of two continuous variables termed as \(\pi_{dcc,i,t}^{dvfs}\) and \(\varDelta \lambda_{dcc,i,t}\), and it can also be equivalent as a set of SOS1 constraint through the McCormick Envelope method. The detailed mathematical formulations for this approximation are provided in Appendix A. By combining these previously mentioned constraints, a comprehensive set of physical constraints describing workload power consumption can be effectively established.
@@ -285,19 +349,19 @@ As previously discussed, \(\lambda_{dcc,i,t} \) serves as an indicator for the w
 
 \vspace{-0.25cm}
 \begin{subequations}
-\begin{align}
-  \sum\nolimits_{i\in\mathcal{I}} (\varDelta \lambda_{dcc,i,t} + \lambda_{dcc,i,t}^{ini} ) = \sum\nolimits_{i\in\mathcal{I}} \lambda_{dcc,i,t}^{ini},  &\forall i\in\mathcal{I} \notag\\
-  \Rightarrow \sum\nolimits_{i\in\mathcal{I}} \varDelta \lambda_{dcc,i,t} = 0,\varDelta \lambda_{dcc,i,t} \in\mathbb{R}, &\forall i\in\mathcal{I}
-\end{align}
+	\begin{align}
+		\sum\nolimits_{i\in\mathcal{I}} (\varDelta \lambda_{dcc,i,t} + \lambda_{dcc,i,t}^{ini} ) = \sum\nolimits_{i\in\mathcal{I}} \lambda_{dcc,i,t}^{ini}, & \forall i\in\mathcal{I} \notag \\
+		\Rightarrow \sum\nolimits_{i\in\mathcal{I}} \varDelta \lambda_{dcc,i,t} = 0,\varDelta \lambda_{dcc,i,t} \in\mathbb{R},                              & \forall i\in\mathcal{I}
+	\end{align}
 \end{subequations}
 
 Given that compute workload types differ across DCCs, and not all workloads can be freely transferable to other DCC servers, where this transferability is closely dependent on the current workload type. Specifically, only compute-intensive and storage-intensive types are generally transferable, while network-intensive types may not be. This necessitates an evaluation of each DCC flexibility potential capability to participate in workload reallocation and the establishment of the following constraints.
 
 \vspace{-0.25cm}
 \begin{subequations}
-\begin{align}
-  \lfloor \varDelta \lambda_{dcc,i} \rfloor \leq \varDelta \lambda_{dcc,i,t} \leq \lceil\varDelta \lambda_{dcc,i} \rceil, \,\,\,\, \forall i\in\mathcal{I}
-\end{align}
+	\begin{align}
+		\lfloor \varDelta \lambda_{dcc,i} \rfloor \leq \varDelta \lambda_{dcc,i,t} \leq \lceil\varDelta \lambda_{dcc,i} \rceil, \,\,\,\, \forall i\in\mathcal{I}
+	\end{align}
 \end{subequations}
 
 \noindent
@@ -306,10 +370,10 @@ For these workload categories that can actively respond to the grid's flexible r
 
 \vspace{-0.25cm}
 \begin{subequations}
-\begin{align}
-  & \sum\nolimits_{t\in\mathcal{T}_{k}}\sum\nolimits_{i\in\mathcal{I}} \varDelta \lambda_{dcc,i,t} = 0, \notag\\ 
-  & \qquad \qquad \forall i\in \mathcal{I}, t\in\mathcal{T}, k\in\{1,2,3,\ldots, NK\}
-\end{align}
+	\begin{align}
+		 & \sum\nolimits_{t\in\mathcal{T}_{k}}\sum\nolimits_{i\in\mathcal{I}} \varDelta \lambda_{dcc,i,t} = 0, \notag \\
+		 & \qquad \qquad \forall i\in \mathcal{I}, t\in\mathcal{T}, k\in\{1,2,3,\ldots, NK\}
+	\end{align}
 \end{subequations}
 
 
@@ -323,44 +387,44 @@ To depict the flexibility potential provided by DCCs,~\cite{zhang2017chance}, a 
 
 \vspace{-0.5cm}
 \begin{subequations}
-\begin{align}
-  &\!\!\!\! \sum\nolimits_{t\in\mathcal{T}} \sum\nolimits_{g\in\mathcal{G}} [C_{su, g} u_{g,t} + C_{sd,g} v_{g,t}] + \\
-  &\!\!\!\! \sum\nolimits_{s\in\mathcal{S}} \sum\nolimits_{t\in\mathcal{T}}\biggl [ \sum\nolimits_{g\in\mathcal{G}} \left( \sum\nolimits_{z\in\{1,2,3\}} \!\!\alpha_{g}^{(z)} p_{g,s,t}^{(z)} \!+\! x_{g,t} \beta_{g}^{(z)} \right) + \notag\\
-    & \qquad \qquad \qquad \left. \sum\nolimits_{w\in\mathcal{W}} C_{shed,w} \varDelta p_{w,s,t} +\right. \notag\\
-    & \qquad \qquad \qquad \left. \sum\nolimits_{d\in\mathcal{D}} C_{voll,d} \varDelta p_{d,s,t} \right. \biggr ] \notag\\
-    & s.t., u_{g,t} \,-\, v_{g,t} \,=\, x_{g,t-1}\, -\, x_{g,t},\quad \forall g\in\mathcal{G},\forall t\in\mathcal{T}\\
-    & \qquad x_{g,t} - x_{g,t-1} \leq u_{g,t}, \,\,\,\quad\quad\qquad \forall g\in\mathcal{G},\forall t\in\mathcal{T}\\
-    & \sum\nolimits_{m\in\mathcal{M}(\omega_g^{dt} - 1,t)} (1 - u_{g,m}) \geq \omega_{g}^{dt} (u_{g,t} - u_{g,t-1}), \notag\\
-    & \qquad\qquad\qquad\qquad\qquad\qquad\qquad\,\,\,\,  \forall g\in\mathcal{G},\forall t\in\mathcal{T}\\
-    & \sum\nolimits_{m\in\mathcal{M}(\omega_g^{ut} - 1,t)} u_{g,m} \geq \omega_{g}^{ut} (u_{g,t-1} - u_{g,t}), \notag\\
-    & \qquad\qquad\qquad\qquad\qquad\qquad\qquad\,\,\,\,  \forall g\in\mathcal{G},\forall t\in\mathcal{T}\\
-    & \left(\sum\nolimits_{d\in\mathcal{D}} p_{d,t,s} - \sum\nolimits_{d\in\mathcal{D}} \varDelta p_{d,t,s}\right) + \sum\nolimits_{i\in\mathcal{I}_{b}} p_{add, i,t,s}  = \notag\\
-    & \sum\nolimits_{g\in\mathcal{G}} p_{g,s,t} +  \left(\sum\nolimits_{w\in\mathcal{W}} p_{w,t,s} - \sum\nolimits_{w\in\mathcal{W}} p_{w,t,s}\right) + \notag \\
-    & \qquad\quad\quad\qquad\,\,\, \left(\sum\nolimits_{e\in\mathcal{E}} p_{e,t,s}^{dis} - \sum\nolimits_{e\in\mathcal{E}} p_{e,t,s}^{ch} \right), \notag \\
-    & \qquad\qquad \forall g\in\mathcal{G},\forall w\in\mathcal{W},\forall e\in\mathcal{E},\forall t\in\mathcal{T},\forall s\in\mathcal{S} \\
-    & \biggl | \sum\nolimits_{b\in\mathcal{B}_{l}} \iota_{l,b} \left[ \sum\nolimits_{g\in\mathcal{G}_{b}} p_{g,t,s} - \sum\nolimits_{i\in\mathcal{I}_{b}} p_{add, i,t,s} + \right. \notag \\
-    & \qquad\quad\, \left(\sum\nolimits_{e\in\mathcal{E}_{b}} p_{e,t,s}^{dis} - \sum\nolimits_{e\in\mathcal{E}_{b}} p_{e,t,s}^{ch} \right) + \notag\\
-    & \qquad\quad\,\,\left(\sum\nolimits_{w\in\mathcal{W}_b} p_{w,t,s} - \sum\nolimits_{w\in\mathcal{W}_b} \varDelta p_{w,t,s} \right) -\notag \\
-    & \qquad\quad \left. \left( \sum\nolimits_{d\in\mathcal{D}_b} \varDelta p_{d,t,s} - \sum\nolimits_{d\in\mathcal{D}_b} p_{d,t,s}\right) \right] \biggr |  \leq \lceil p_{l} \rceil , \notag \\
-    & \qquad\qquad\qquad\qquad\qquad\,\,\,\, \forall l\in\mathcal{L},\forall t\in\mathcal{T},\forall s\in\mathcal{S} \\
-    & p_{g,t+1,s} - p_{g,t,s} \leq x_{g,t} \gamma_{g}^{up} + \left( u_{g,t} - x_{g,t} \right) \gamma_{g}^{su}\notag \\
-    & \qquad\qquad\qquad\qquad\qquad\,\,\,\, \forall g\in\mathcal{G},\forall t\in\mathcal{T},\forall s\in\mathcal{S} \\
-    & p_{g,t,s} - p_{g,t+1,s} \leq x_{g,t} \gamma_{g}^{dw} + \left( v_{g,t} - x_{g,t} \right) \gamma_{g}^{sd} \notag \\
-    & \qquad\qquad\qquad\qquad\qquad\,\,\,\, \forall g\in\mathcal{G},\forall t\in\mathcal{T},\forall s\in\mathcal{S} \\
-    & \lfloor p_{g} \rfloor x_{g,t} \!\leq\! p_{g,t,s} \!\leq\! \lceil p_{g} \rceil x_{g,t}, \forall g\in\mathcal{G}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}\\
-    & 0 \leq \varDelta p_{w,t,s} \leq p_{w,t,s}, \quad\quad \forall w\in\mathcal{W}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}\\
-    & 0 \leq \varDelta p_{d,t,s} \leq p_{d,t}, \quad\quad\quad \forall d\in\mathcal{D}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S} \\
-    & 0 \leq p_{e,t,s}^{ch} \leq \lceil p_{e}^{ch} \rceil  \varepsilon_{e,s,t}^{ch}, \,\quad \forall e\in\mathcal{E},\forall t\in\mathcal{T}, \forall s\in\mathcal{S}\\
-    & 0 \leq p_{e,t,s}^{dis} \leq \lceil p_{e}^{dis} \rceil \varepsilon_{e,s,t}^{dis}, \,\quad \forall e\in\mathcal{E}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S} \\
-    & \varepsilon_{e,t,s}^{ch}+ \varepsilon_{e,t,s}^{dis}\leq 1, \quad\quad\qquad \forall e\in\mathcal{E}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}\\
-    & q_{e,t,s} = q_{e,t-1,s} + \sum\nolimits_{t\in\mathcal{T}} \left[\eta_{e}^{ch} p_{e,t,s}^{ch} - (1-\eta_{dis}) p_{e,t,s}^{dis}\right],\notag\\
-    & \,\,\,\quad\qquad\qquad\qquad \qquad\qquad \forall e\in\mathcal{E}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}\\
-    & q_{e,t,s} - q_{e,t-1,s} \leq \gamma_{e}^{ch} \varepsilon_{e,t,s}^{ch},\forall e\in\mathcal{E}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}\\
-    & q_{e,t-1,s} - q_{e,t,s} \leq \gamma_{e}^{dis} \varepsilon_{e,t,s}^{dis},\forall e\in\mathcal{E}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}\\
-    & cons.(2b)-(2e), cons.(3d)-(3e), cons.(5a)-(5c), \notag\\
-    & cons.(6a)-(6h), \qquad\qquad\,\, \forall i\in\mathcal{I}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S} \\
-    & con.(7a), and, con.(8a), \quad\quad \forall i\in\mathcal{I}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}
-\end{align}
+	\begin{align}
+		 & \!\!\!\! \sum\nolimits_{t\in\mathcal{T}} \sum\nolimits_{g\in\mathcal{G}} [C_{su, g} u_{g,t} + C_{sd,g} v_{g,t}] +                                                                                                                         \\
+		 & \!\!\!\! \sum\nolimits_{s\in\mathcal{S}} \sum\nolimits_{t\in\mathcal{T}}\biggl [ \sum\nolimits_{g\in\mathcal{G}} \left( \sum\nolimits_{z\in\{1,2,3\}} \!\!\alpha_{g}^{(z)} p_{g,s,t}^{(z)} \!+\! x_{g,t} \beta_{g}^{(z)} \right) + \notag \\
+		 & \qquad \qquad \qquad \left. \sum\nolimits_{w\in\mathcal{W}} C_{shed,w} \varDelta p_{w,s,t} +\right. \notag                                                                                                                                \\
+		 & \qquad \qquad \qquad \left. \sum\nolimits_{d\in\mathcal{D}} C_{voll,d} \varDelta p_{d,s,t} \right. \biggr ] \notag                                                                                                                        \\
+		 & s.t., u_{g,t} \,-\, v_{g,t} \,=\, x_{g,t-1}\, -\, x_{g,t},\quad \forall g\in\mathcal{G},\forall t\in\mathcal{T}                                                                                                                           \\
+		 & \qquad x_{g,t} - x_{g,t-1} \leq u_{g,t}, \,\,\,\quad\quad\qquad \forall g\in\mathcal{G},\forall t\in\mathcal{T}                                                                                                                           \\
+		 & \sum\nolimits_{m\in\mathcal{M}(\omega_g^{dt} - 1,t)} (1 - u_{g,m}) \geq \omega_{g}^{dt} (u_{g,t} - u_{g,t-1}), \notag                                                                                                                     \\
+		 & \qquad\qquad\qquad\qquad\qquad\qquad\qquad\,\,\,\,  \forall g\in\mathcal{G},\forall t\in\mathcal{T}                                                                                                                                       \\
+		 & \sum\nolimits_{m\in\mathcal{M}(\omega_g^{ut} - 1,t)} u_{g,m} \geq \omega_{g}^{ut} (u_{g,t-1} - u_{g,t}), \notag                                                                                                                           \\
+		 & \qquad\qquad\qquad\qquad\qquad\qquad\qquad\,\,\,\,  \forall g\in\mathcal{G},\forall t\in\mathcal{T}                                                                                                                                       \\
+		 & \left(\sum\nolimits_{d\in\mathcal{D}} p_{d,t,s} - \sum\nolimits_{d\in\mathcal{D}} \varDelta p_{d,t,s}\right) + \sum\nolimits_{i\in\mathcal{I}_{b}} p_{add, i,t,s}  = \notag                                                               \\
+		 & \sum\nolimits_{g\in\mathcal{G}} p_{g,s,t} +  \left(\sum\nolimits_{w\in\mathcal{W}} p_{w,t,s} - \sum\nolimits_{w\in\mathcal{W}} p_{w,t,s}\right) + \notag                                                                                  \\
+		 & \qquad\quad\quad\qquad\,\,\, \left(\sum\nolimits_{e\in\mathcal{E}} p_{e,t,s}^{dis} - \sum\nolimits_{e\in\mathcal{E}} p_{e,t,s}^{ch} \right), \notag                                                                                       \\
+		 & \qquad\qquad \forall g\in\mathcal{G},\forall w\in\mathcal{W},\forall e\in\mathcal{E},\forall t\in\mathcal{T},\forall s\in\mathcal{S}                                                                                                      \\
+		 & \biggl | \sum\nolimits_{b\in\mathcal{B}_{l}} \iota_{l,b} \left[ \sum\nolimits_{g\in\mathcal{G}_{b}} p_{g,t,s} - \sum\nolimits_{i\in\mathcal{I}_{b}} p_{add, i,t,s} + \right. \notag                                                       \\
+		 & \qquad\quad\, \left(\sum\nolimits_{e\in\mathcal{E}_{b}} p_{e,t,s}^{dis} - \sum\nolimits_{e\in\mathcal{E}_{b}} p_{e,t,s}^{ch} \right) + \notag                                                                                             \\
+		 & \qquad\quad\,\,\left(\sum\nolimits_{w\in\mathcal{W}_b} p_{w,t,s} - \sum\nolimits_{w\in\mathcal{W}_b} \varDelta p_{w,t,s} \right) -\notag                                                                                                  \\
+		 & \qquad\quad \left. \left( \sum\nolimits_{d\in\mathcal{D}_b} \varDelta p_{d,t,s} - \sum\nolimits_{d\in\mathcal{D}_b} p_{d,t,s}\right) \right] \biggr |  \leq \lceil p_{l} \rceil , \notag                                                  \\
+		 & \qquad\qquad\qquad\qquad\qquad\,\,\,\, \forall l\in\mathcal{L},\forall t\in\mathcal{T},\forall s\in\mathcal{S}                                                                                                                            \\
+		 & p_{g,t+1,s} - p_{g,t,s} \leq x_{g,t} \gamma_{g}^{up} + \left( u_{g,t} - x_{g,t} \right) \gamma_{g}^{su}\notag                                                                                                                             \\
+		 & \qquad\qquad\qquad\qquad\qquad\,\,\,\, \forall g\in\mathcal{G},\forall t\in\mathcal{T},\forall s\in\mathcal{S}                                                                                                                            \\
+		 & p_{g,t,s} - p_{g,t+1,s} \leq x_{g,t} \gamma_{g}^{dw} + \left( v_{g,t} - x_{g,t} \right) \gamma_{g}^{sd} \notag                                                                                                                            \\
+		 & \qquad\qquad\qquad\qquad\qquad\,\,\,\, \forall g\in\mathcal{G},\forall t\in\mathcal{T},\forall s\in\mathcal{S}                                                                                                                            \\
+		 & \lfloor p_{g} \rfloor x_{g,t} \!\leq\! p_{g,t,s} \!\leq\! \lceil p_{g} \rceil x_{g,t}, \forall g\in\mathcal{G}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}                                                                          \\
+		 & 0 \leq \varDelta p_{w,t,s} \leq p_{w,t,s}, \quad\quad \forall w\in\mathcal{W}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}                                                                                                           \\
+		 & 0 \leq \varDelta p_{d,t,s} \leq p_{d,t}, \quad\quad\quad \forall d\in\mathcal{D}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}                                                                                                        \\
+		 & 0 \leq p_{e,t,s}^{ch} \leq \lceil p_{e}^{ch} \rceil  \varepsilon_{e,s,t}^{ch}, \,\quad \forall e\in\mathcal{E},\forall t\in\mathcal{T}, \forall s\in\mathcal{S}                                                                           \\
+		 & 0 \leq p_{e,t,s}^{dis} \leq \lceil p_{e}^{dis} \rceil \varepsilon_{e,s,t}^{dis}, \,\quad \forall e\in\mathcal{E}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}                                                                        \\
+		 & \varepsilon_{e,t,s}^{ch}+ \varepsilon_{e,t,s}^{dis}\leq 1, \quad\quad\qquad \forall e\in\mathcal{E}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}                                                                                     \\
+		 & q_{e,t,s} = q_{e,t-1,s} + \sum\nolimits_{t\in\mathcal{T}} \left[\eta_{e}^{ch} p_{e,t,s}^{ch} - (1-\eta_{dis}) p_{e,t,s}^{dis}\right],\notag                                                                                               \\
+		 & \,\,\,\quad\qquad\qquad\qquad \qquad\qquad \forall e\in\mathcal{E}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}                                                                                                                      \\
+		 & q_{e,t,s} - q_{e,t-1,s} \leq \gamma_{e}^{ch} \varepsilon_{e,t,s}^{ch},\forall e\in\mathcal{E}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}                                                                                           \\
+		 & q_{e,t-1,s} - q_{e,t,s} \leq \gamma_{e}^{dis} \varepsilon_{e,t,s}^{dis},\forall e\in\mathcal{E}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}                                                                                         \\
+		 & cons.(2b)-(2e), cons.(3d)-(3e), cons.(5a)-(5c), \notag                                                                                                                                                                                    \\
+		 & cons.(6a)-(6h), \qquad\qquad\,\, \forall i\in\mathcal{I}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}                                                                                                                                \\
+		 & con.(7a), and, con.(8a), \quad\quad \forall i\in\mathcal{I}, \forall t\in\mathcal{T}, \forall s\in\mathcal{S}
+	\end{align}
 \end{subequations}
 
 In the above formulations,
@@ -385,73 +449,73 @@ To validate the effectiveness of the proposed refined UC model, a data center sy
 
 
 \begin{figure}[!t]
-\raggedright
-\includegraphics[width=0.50\textwidth, height = 5.5cm]{./fig/workload_distribution.pdf}\vspace{-0.025cm}
-\caption{Results of Workload consumption hosted by multiple DCC servers.}
-\label{fig:workload_distribution}\vspace{-0.25cm}
+	\raggedright
+	\includegraphics[width=0.50\textwidth, height = 5.5cm]{./fig/workload_distribution.pdf}\vspace{-0.025cm}
+	\caption{Results of Workload consumption hosted by multiple DCC servers.}
+	\label{fig:workload_distribution}\vspace{-0.25cm}
 \end{figure}
 % \vspace{-0.25cm}
 
 \begin{figure}[!t]
-\raggedright
-\includegraphics[width=0.4250\textwidth]{./fig/loadcurve.pdf}\vspace{-0.025cm}
-\caption{Chronological load curve of the IEEE 6-bus system.}
-\label{fig:load_curve}
+	\raggedright
+	\includegraphics[width=0.4250\textwidth]{./fig/loadcurve.pdf}\vspace{-0.025cm}
+	\caption{Chronological load curve of the IEEE 6-bus system.}
+	\label{fig:load_curve}
 \end{figure}
 % \vspace{-0.25cm}
 
 \begin{figure}[!t]
-\raggedright
-\includegraphics[width=0.4250\textwidth,height = 5cm]{./fig/windscurve_result.pdf}\vspace{-0.025cm}
-\caption{Chronological stochastic output generated by wind farms.}
-\label{fig:wind_curve}\vspace{-0.25cm}
+	\raggedright
+	\includegraphics[width=0.4250\textwidth,height = 5cm]{./fig/windscurve_result.pdf}\vspace{-0.025cm}
+	\caption{Chronological stochastic output generated by wind farms.}
+	\label{fig:wind_curve}\vspace{-0.25cm}
 \end{figure}
 
 The parameters concerning DCCs referring to \cite{dingEmissionawareStochasticResource2018} are configured as follows:
 The idle workload consumption generated by each DCC server is $10$~kW, and $8$~DCC servers are equipped to construct all workload requirements. Other boundary conditions consisting of DCC server peak demand, workload ratio, initial frequency and supply voltage, DVFS regulation regions, etc., are detailed in Table.~\ref{tab:dcc_params}. The adjustable ranges for DCC frequency parameter and voltage parameters during DVFS processes are [$0.50$ p.u., $1.50$.p.u.], and [$0.85$ p.u., $1.25$ p.u.], respectively. Table.~\ref{tab:dvfs_params} summarizes the upper/lower bounds of \(f_{dcc,i,t}\) and \(v_{dcc,i,t}\), accordingly.
 
 \begin{table}[!t]
-\centering
-\caption{Boundary parameters of DVFS-controlled DCCs} \label{tab:dcc_params}
-\begin{tabular}{c | c c c c c c c c}
-\hline
-{NO.} &
-  {Bus} &
-  $\lfloor p_{dcc,i} \rfloor$ &
-  $\lceil p_{dcc,i} \rceil$ &
-  $\lambda_{dcc,i}^{ini}$ &
-  $C_{sv}$ &
-  $\lambda_{dcc,i}^{dyn}$ &
-  $\mu_{dcc,i}$ \\
-\hline
-1 & 1 & 0.5 & 0.10 & 0.05 & 0.30 & 0.50  & 1.0 \\
-2 & 2 & 0.8 & 0.16 & 0.05 & 0.30 & 0.75  & 1.0 \\
-3 & 6 & 0.4 & 0.08 & 0.05 & 0.30 & 0.80  & 1.0 \\
-4 & 2 & 0.6 & 0.12 & 0.05 & 0.30 & 0.30  & 1.0 \\
-5 & 6 & 0.5 & 0.10 & 0.05 & 0.30 & 0.40  & 1.0 \\
-6 & 2 & 0.7 & 0.14 & 0.05 & 0.30 & 0.40  & 1.0 \\
-7 & 2 & 0.8 & 0.16 & 0.05 & 0.30 & 0.60  & 1.0 \\
-8 & 1 & 0.5 & 0.10 & 0.05 & 0.30 & 0.20  & 1.0 \\
-\hline
-\end{tabular}\vspace{-0.25cm}
+	\centering
+	\caption{Boundary parameters of DVFS-controlled DCCs} \label{tab:dcc_params}
+	\begin{tabular}{c | c c c c c c c c}
+		\hline
+		{NO.}                       &
+		{Bus}                       &
+		$\lfloor p_{dcc,i} \rfloor$ &
+		$\lceil p_{dcc,i} \rceil$   &
+		$\lambda_{dcc,i}^{ini}$     &
+		$C_{sv}$                    &
+		$\lambda_{dcc,i}^{dyn}$     &
+		$\mu_{dcc,i}$                                                           \\
+		\hline
+		1                           & 1 & 0.5 & 0.10 & 0.05 & 0.30 & 0.50 & 1.0 \\
+		2                           & 2 & 0.8 & 0.16 & 0.05 & 0.30 & 0.75 & 1.0 \\
+		3                           & 6 & 0.4 & 0.08 & 0.05 & 0.30 & 0.80 & 1.0 \\
+		4                           & 2 & 0.6 & 0.12 & 0.05 & 0.30 & 0.30 & 1.0 \\
+		5                           & 6 & 0.5 & 0.10 & 0.05 & 0.30 & 0.40 & 1.0 \\
+		6                           & 2 & 0.7 & 0.14 & 0.05 & 0.30 & 0.40 & 1.0 \\
+		7                           & 2 & 0.8 & 0.16 & 0.05 & 0.30 & 0.60 & 1.0 \\
+		8                           & 1 & 0.5 & 0.10 & 0.05 & 0.30 & 0.20 & 1.0 \\
+		\hline
+	\end{tabular}\vspace{-0.25cm}
 \end{table}
 
 
 \begin{table}[!t]
-\centering
-\caption{The upper/lower bounds of frequency parameter and voltage parameter generated by DVFS-controlled DCC servers.} \label{tab:dvfs_params}
-\begin{tabular}{l|cc}
-\hline
-Parameter type & Lower-bound (p.u)  & Upper-bound (p.u.)   \\
-\hline
-\(f_{dcc,i,t}\)    & $0.50$  & $1.50$\\
-\(v_{dcc,i,t}\)    & $0.85$ & $1.25$ \\
-\hline
-\end{tabular}\vspace{-0.05cm}
+	\centering
+	\caption{The upper/lower bounds of frequency parameter and voltage parameter generated by DVFS-controlled DCC servers.} \label{tab:dvfs_params}
+	\begin{tabular}{l|cc}
+		\hline
+		Parameter type  & Lower-bound (p.u) & Upper-bound (p.u.) \\
+		\hline
+		\(f_{dcc,i,t}\) & $0.50$            & $1.50$             \\
+		\(v_{dcc,i,t}\) & $0.85$            & $1.25$             \\
+		\hline
+	\end{tabular}\vspace{-0.05cm}
 \end{table}
 
 
-To investigate the influence of DCCs in providing flexibility during the entire scheduling process, two models are employed: 
+To investigate the influence of DCCs in providing flexibility during the entire scheduling process, two models are employed:
 $i$) the traditional UC model that considers DCCs consumption (benchmark), the workload generated by DCC servers is retreated as a standard electrical demand. The comprehensive formulation of this model is available in \cite{doi:10.1049/icp.2025.0664}.
 $ii$) the proposed UC model considering flexible characteristic generated by DCCs, where the flexibility potential of DCCs is analyzed through $(2b)-(2e), (3d)-(3e), (5a)-(5c)$, and $(6a)-(6h)$. The detailed formulation of this proposed model can be found in $(10a)-(10t)$.
 A comparative analysis of the scheduling results from both UC models is presented in Fig.~\ref{tab:scheduling_res}. Additionally, Fig.~\ref{fig:balance_process} illustrates the power balance between activated generators and demand, while also taking DVFS-controlled DCCS into account. Furthermore, Fig.~\ref{fig:workload_consumption_plot6} depicts the stacked workload consumption using DVFS techniques.
@@ -462,42 +526,42 @@ Fig.~\ref{fig:stacked_dcc_λ_plot} shows the workload reallocation and correspon
 
 \vspace{-0.025cm}
 \begin{table}[!t]
-\centering
-\caption{Scheduling results of different UC models with/without considering flexibility potential from workload response.} \label{tab:scheduling_res}
-\begin{tabular}{l|cccc}
-\hline
-{Method} & On~/~Off cost  & Operation cost & Total cost \\
-       & (\(~\times 10^4 ~\$~\))  &(\( ~\times 10^4 ~\$~\)) &(\( ~\times 10^4 ~\$~\))\\
-\hline
-Benchmark    & $1.17$  & $15.23$ & $16.40$  \\
-The proposed model & $0.91 $ & $10.27$ & $11.18$ \\
-\hline
-\end{tabular}
+	\centering
+	\caption{Scheduling results of different UC models with/without considering flexibility potential from workload response.} \label{tab:scheduling_res}
+	\begin{tabular}{l|cccc}
+		\hline
+		{Method}           & On~/~Off cost           & Operation cost           & Total cost               \\
+		                   & (\(~\times 10^4 ~\$~\)) & (\( ~\times 10^4 ~\$~\)) & (\( ~\times 10^4 ~\$~\)) \\
+		\hline
+		Benchmark          & $1.17$                  & $15.23$                  & $16.40$                  \\
+		The proposed model & $0.91 $                 & $10.27$                  & $11.18$                  \\
+		\hline
+	\end{tabular}
 \end{table}
 
 \begin{figure}[!t]
- \raggedright
-\includegraphics[width=0.55\textwidth,height = 5cm]{./fig/balanceprocess.pdf}\vspace{-0.025cm}
-\caption{Power balance process of the IEEE 6-bus system considering workload consumptions hosted by DCCs.}
-\label{fig:balance_process}
+	\raggedright
+	\includegraphics[width=0.55\textwidth,height = 5cm]{./fig/balanceprocess.pdf}\vspace{-0.025cm}
+	\caption{Power balance process of the IEEE 6-bus system considering workload consumptions hosted by DCCs.}
+	\label{fig:balance_process}
 \end{figure}
 
 \begin{figure}[!t]
- \raggedright
-  \includegraphics[width=0.45\textwidth]{./fig/stacked_dc_λ_subplots.pdf}\vspace{-0.025cm}
-  \caption{Results of interval-based workload reallocation across multiple DCCs servers (interval = $6$h).}
-  \label{fig:stacked_dcc_λ_plot}
-  \end{figure}
+	\raggedright
+	\includegraphics[width=0.45\textwidth]{./fig/stacked_dc_λ_subplots.pdf}\vspace{-0.025cm}
+	\caption{Results of interval-based workload reallocation across multiple DCCs servers (interval = $6$h).}
+	\label{fig:stacked_dcc_λ_plot}
+\end{figure}
 
 \begin{figure}[!h]
- \raggedright
-  \includegraphics[width=0.45\textwidth]{./fig/stacked_dc_fv_subplots.pdf}\vspace{-0.025cm}
-  \caption{Results of voltage and frequency regulation parameters for individual DCC servers using the DVFS technique.}
-  \label{fig:stacked_dcc_f_plot}
+	\raggedright
+	\includegraphics[width=0.45\textwidth]{./fig/stacked_dc_fv_subplots.pdf}\vspace{-0.025cm}
+	\caption{Results of voltage and frequency regulation parameters for individual DCC servers using the DVFS technique.}
+	\label{fig:stacked_dcc_f_plot}
 \end{figure}
 
 Besides, the scheduled workload fluctuations exhibit significant synchronous (see Fig.~\ref{fig:stacked_dcc_λ_plot}). By taking DCC7 and DCC8 as a case, both workload rates of these two DCC servers keep a synchronized upward trend during periods $1$h-$4$h, while both remain relatively stable during $5$h-$8$h intervals. This consistent phenomenon is primarily attributed to the predefined service-time constraints denoted by (9a).
-Furthermore, constraint (9a) denotes a functional but straightforward interval-based workload allocation and division strategy. Using this strategy, the entire scheduling horizon ($24$h) is segmented into a series of independent intervals such as $0$h-$6$h,$7$h-$12$h,$13$h-$18$h,$19$h-$24$h. Under each independent scheduling interval, the workload reallocation across multiple DCCs is permitted to achieve workload balancing optimization. Conversely, cross-interval workload reallocation between adjacent scheduling intervals would be prohibited to maintain system efficiency and minimize inter-dependencies. 
+Furthermore, constraint (9a) denotes a functional but straightforward interval-based workload allocation and division strategy. Using this strategy, the entire scheduling horizon ($24$h) is segmented into a series of independent intervals such as $0$h-$6$h,$7$h-$12$h,$13$h-$18$h,$19$h-$24$h. Under each independent scheduling interval, the workload reallocation across multiple DCCs is permitted to achieve workload balancing optimization. Conversely, cross-interval workload reallocation between adjacent scheduling intervals would be prohibited to maintain system efficiency and minimize inter-dependencies.
 Hence, the system would leverage workload flexibility with maximum efficiency and ensure the minimization of service times by confining workload balancing operations to designated time intervals.
 
 Moreover, a similar synchronous adjustment characteristic in \(f_{dcc, I,t} v_{dcc, I,t}^2\) in Fig.~\ref{fig:stacked_dcc_f_plot} can also be observed. Specifically, all DCC servers other than DCC3~/~DCC6 simultaneously initiated their CPU frequency parameter and voltage parameters through DVFS mechanisms, exhibiting a highly consistent adjustment trend. Similarly, DCC5 and DCC8 also implemented DVFS regulation synchronously during the period $12$h. This phenomenon indicates a close synergistic relationship between workload-balancing processes among DCCs and the intrinsic DVFS processes. Both workload reallocations (across multiple DCCs) and instant frequency/voltage parameter regulations (hosted on individual DCC servers) maintain synchronicity in the temporal dimension and keep unidirectional adjustment in their regulation directions.
@@ -505,18 +569,18 @@ Moreover, a similar synchronous adjustment characteristic in \(f_{dcc, I,t} v_{d
 Despite observing synchronous trends, the fluctuations between \(f_{dcc,i,t} v_{dcc,i,t}^2\) (in Fig.~\ref{fig:stacked_dcc_f_plot}) and \(\lambda_{dcc,i,t}\) (in Fig.~\ref{fig:stacked_dcc_λ_plot}) are not entirely identical. The difference in this discrepancy lies in the varying load-rate levels of various DCCs and possible adjustable difficulties in migrating workload from heavily loaded DCC servers to lightly loaded ones.
 this disparity is reflected in the distinct distributions of the \(\lambda_{dcc,i,t}\) curve and the \(f_{dcc,i,t} v_{dcc,i,t}^2\) curve.
 
-\begin{figure}[!t]
- \raggedright
-  \includegraphics[width=0.50\textwidth,height = 5cm]{./fig/stacked_dcc_p6_plot.pdf}\vspace{-0.025cm}
-  \caption{Sequential workload consumption generated by multiple DCCs reallocation (intervals = $6$h).}
-  \label{fig:workload_consumption_plot6}
-\end{figure}
+\begin{figure*}[!t]
+	\centering
+	\includegraphics[width=0.850\textwidth,height = 16cm]{./fig/res_dcc_power_plots.pdf}\vspace{-0.025cm}
+	\caption{Sequential workload consumption generated by multiple DCCs reallocation (intervals = $6$h).}
+	\label{fig:workload_consumption_plot6}
+\end{figure*}
 
 \begin{figure}[!t]
- \raggedright
-  \includegraphics[width=0.50\textwidth,height = 5cm]{./fig/stacked_dcc_p4_plot.pdf}\vspace{-0.025cm}
-  \caption{Sequential workload consumption generated by multiple DCCs reallocation (intervals = $4$h).}
-  \label{fig:workload_consumption_plot4}
+	\raggedright
+	\includegraphics[width=0.50\textwidth,height = 5cm]{./fig/stacked_dcc_p4_plot.pdf}\vspace{-0.025cm}
+	\caption{Sequential workload consumption generated by multiple DCCs reallocation (intervals = $4$h).}
+	\label{fig:workload_consumption_plot4}
 \end{figure}
 
 
@@ -534,29 +598,29 @@ Let $\gamma_{dcc,i}$ denotes the square value of \(v_{dcc,i}^{2}\), $i.e.$, \(\g
 
 \vspace{-0.25cm}
 \begin{subequations}
-\begin{align}
-  & \lfloor v_{dcc,i} \rfloor \leq v_{dcc,i} \leq \lceil v_{dcc,i} \rceil, & \forall i \in \mathcal{I}\\
-  \Rightarrow \quad & (\lfloor v_{dcc,i} \rfloor )^2 \leq \gamma_{dcc,i}  \leq (\lceil v_{dcc,i} \rceil)^2, &\forall i \in \mathcal{I}
-\end{align}
+	\begin{align}
+		                  & \lfloor v_{dcc,i} \rfloor \leq v_{dcc,i} \leq \lceil v_{dcc,i} \rceil,                & \forall i \in \mathcal{I} \\
+		\Rightarrow \quad & (\lfloor v_{dcc,i} \rfloor )^2 \leq \gamma_{dcc,i}  \leq (\lceil v_{dcc,i} \rceil)^2, & \forall i \in \mathcal{I}
+	\end{align}
 \end{subequations}
 
 Next, $\phi_{dcc,i}^{dvfs}$ can be equivalently represented as the product of two continuous variables $\gamma_{dcc,i}$ and $f_{dcc,i}$. By utilizing the McCormick Envelope method, a reformulated, linearized approximation of this product, and thus of $\phi_{dcc,i}^{dvfs}$ can be constructed as,
 
 \vspace{-0.25cm}
 \begin{subequations}
-\begin{align}
-\kappa_{dcc,i}^{up} &= \nicefrac{1}{2}(\gamma_{dcc,i} + f_{dcc,i}), &&\forall i\in\mathcal{I}\\
-\kappa_{dcc,i}^{dw} &= \nicefrac{1}{2}(\gamma_{dcc,i} - f_{dcc,i}), &&\forall i\in\mathcal{I}\\
-\phi_{dcc,i}^{dvfs} &\geq \sum\nolimits_{z\in\mathcal{Z}} \Im(\kappa_{dcc,i,z}^{up})\vartheta_{dcc,i,z}^{up} -&& \\
-&\quad\, \sum\nolimits_{z\in\mathcal{Z}} \Im(\kappa_{dcc,i,z}^{dw})\vartheta_{dcc,i,z}^{dw},&&\forall i\in\mathcal{I}\\
-\kappa_{dcc,i}^{up} &= \sum\nolimits_{z\in\mathcal{Z}} \kappa_{dcc,i,z}^{up}\vartheta_{dcc,i,z}^{up},&&\forall i\in\mathcal{I}\\
-\kappa_{dcc,i}^{dw} &= \sum\nolimits_{z\in\mathcal{Z}} \kappa_{dcc,i,z}^{dw}\vartheta_{dcc,i,z}^{dw},&&\forall i\in\mathcal{I}\\
-\sum\nolimits_{z\in\mathcal{Z}} &\vartheta_{dcc,i,z}^{up} = 1, &&\forall i\in\mathcal{I}\\
-\sum\nolimits_{z\in\mathcal{Z}} &\vartheta_{dcc,i,z}^{dw} = 1, &&\forall i\in\mathcal{I}\\
-\Im(\kappa_{dcc,i,z}^{up}) &= (\kappa_{dcc,i,z}^{up})^2, \forall z\in\mathcal{Z}, &&\forall i\in\mathcal{I}\\
-\Im(\kappa_{dcc,i,z}^{dw}) &= (\kappa_{dcc,i,z}^{dw})^2, \forall z\in\mathcal{Z}, &&\forall i\in\mathcal{I}\\
-\kappa_{dcc,i,z}^{up} &\geq 0, \kappa_{dcc,i,z}^{dw} \geq 0,\forall z\in\mathcal{Z}, &&\forall i\in\mathcal{I}
-\end{align}
+	\begin{align}
+		\kappa_{dcc,i}^{up}             & = \nicefrac{1}{2}(\gamma_{dcc,i} + f_{dcc,i}),                                              &  & \forall i\in\mathcal{I} \\
+		\kappa_{dcc,i}^{dw}             & = \nicefrac{1}{2}(\gamma_{dcc,i} - f_{dcc,i}),                                              &  & \forall i\in\mathcal{I} \\
+		\phi_{dcc,i}^{dvfs}             & \geq \sum\nolimits_{z\in\mathcal{Z}} \Im(\kappa_{dcc,i,z}^{up})\vartheta_{dcc,i,z}^{up} -   &  &                         \\
+		                                & \quad\, \sum\nolimits_{z\in\mathcal{Z}} \Im(\kappa_{dcc,i,z}^{dw})\vartheta_{dcc,i,z}^{dw}, &  & \forall i\in\mathcal{I} \\
+		\kappa_{dcc,i}^{up}             & = \sum\nolimits_{z\in\mathcal{Z}} \kappa_{dcc,i,z}^{up}\vartheta_{dcc,i,z}^{up},            &  & \forall i\in\mathcal{I} \\
+		\kappa_{dcc,i}^{dw}             & = \sum\nolimits_{z\in\mathcal{Z}} \kappa_{dcc,i,z}^{dw}\vartheta_{dcc,i,z}^{dw},            &  & \forall i\in\mathcal{I} \\
+		\sum\nolimits_{z\in\mathcal{Z}} & \vartheta_{dcc,i,z}^{up} = 1,                                                               &  & \forall i\in\mathcal{I} \\
+		\sum\nolimits_{z\in\mathcal{Z}} & \vartheta_{dcc,i,z}^{dw} = 1,                                                               &  & \forall i\in\mathcal{I} \\
+		\Im(\kappa_{dcc,i,z}^{up})      & = (\kappa_{dcc,i,z}^{up})^2, \forall z\in\mathcal{Z},                                       &  & \forall i\in\mathcal{I} \\
+		\Im(\kappa_{dcc,i,z}^{dw})      & = (\kappa_{dcc,i,z}^{dw})^2, \forall z\in\mathcal{Z},                                       &  & \forall i\in\mathcal{I} \\
+		\kappa_{dcc,i,z}^{up}           & \geq 0, \kappa_{dcc,i,z}^{dw} \geq 0,\forall z\in\mathcal{Z},                               &  & \forall i\in\mathcal{I}
+	\end{align}
 \end{subequations}
 
 % extended and then integrated into UC studies. On this basis, an union form of EUC considering DVFS-controlled DDCs is listed below,

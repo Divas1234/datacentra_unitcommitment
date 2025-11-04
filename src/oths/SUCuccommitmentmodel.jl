@@ -420,9 +420,11 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 	println("\t constraints: 11) ess system constraints limits\t\t\t\t done")
 
 	# add_dcc_constraints!
-	add_dcc_constraints!(scuc, DataCentras, config_param, NS::Int, NT::Int, ND2::Int, num_sos::Int, dc_p,
-						 dc_fv², dc_fv²λ, dc_fv²_plus, dc_fv²_minus, dc_fv²_2_plus, dc_fv²_2_minus, dc_fv²λ_plus, dc_fv²λ_minus, dc_fv²λ_2_plus, dc_fv²λ_2_minus, weight_fv²_minus, weight_fv²_plus,
-						 weight_fv²λ_minus, weight_fv²λ_plus)
+	if config_param.is_ConsiderDataCentra == 1
+		add_dcc_constraints!(scuc, DataCentras, config_param, NS::Int, NT::Int, ND2::Int, num_sos::Int, dc_p,
+							 dc_fv², dc_fv²λ, dc_fv²_plus, dc_fv²_minus, dc_fv²_2_plus, dc_fv²_2_minus, dc_fv²λ_plus, dc_fv²λ_minus, dc_fv²λ_2_plus, dc_fv²λ_2_minus, weight_fv²_minus, weight_fv²_plus,
+							 weight_fv²λ_minus, weight_fv²λ_plus)
+	end
 
 	# println("\n")
 	println("Model has been loaded")

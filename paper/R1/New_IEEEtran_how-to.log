@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.23)  28 OCT 2025 19:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.23)  4 NOV 2025 22:17
 entering extended mode
- \write18 enabled.
+ restricted \write18 enabled.
  %&-line parsing enabled.
 **New_IEEEtran_how-to.tex
 (./New_IEEEtran_how-to.tex
@@ -120,6 +120,7 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 msmath/amsmath.sty
 Package: amsmath 2024/11/05 v2.17t AMS math features
 \@mathmargin=\skip52
+
 For additional information on amsmath, use the `?' option.
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/a
@@ -332,6 +333,7 @@ Package: titlesec 2025/01/04 v2.17 Sectioning titles
 \titlewidth=\dimen189
 \titlewidthlast=\dimen190
 \titlewidthfirst=\dimen191
+
 
 Package titlesec Warning: Non standard sectioning command \subparagraph
 (titlesec)                detected. Using default spacing and no format.
@@ -990,6 +992,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
 LaTeX Font Info:    ... okay on input line 58.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 58.
 LaTeX Font Info:    ... okay on input line 58.
+
 -- Lines per column: 58 (exact).
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
@@ -1022,11 +1025,12 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 Package hyperref Info: Link coloring ON on input line 58.
-(./New_IEEEtran_how-to.out) (./New_IEEEtran_how-to.out)
+ (./New_IEEEtran_how-to.out)
+(./New_IEEEtran_how-to.out)
 \@outlinefile=\write5
 \openout5 = `New_IEEEtran_how-to.out'.
 
-(./New_IEEEtran_how-to.nls
+ (./New_IEEEtran_how-to.nls
 LaTeX Font Info:    Trying to load font information for U+msa on input line 4.
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/a
@@ -1052,119 +1056,120 @@ pdftex/updmap/pdftex.map}{d:/CommonSoftwares/ProductiveCodingEditors/texlive/20
 
 
 [2]
-<./fig/proposed_framework.pdf, id=91, 351.80031pt x 300.59302pt>
+
+<./fig/proposed_framework.pdf, id=93, 351.80031pt x 300.59302pt>
 File: ./fig/proposed_framework.pdf Graphic file (type pdf)
 <use ./fig/proposed_framework.pdf>
-Package pdftex.def Info: ./fig/proposed_framework.pdf  used on input line 149.
+Package pdftex.def Info: ./fig/proposed_framework.pdf  used on input line 168.
 (pdftex.def)             Requested size: 206.39685pt x 176.35303pt.
 
 
-<./fig/dvfs_heatmap.pdf, id=99, 281.98949pt x 115.80705pt>
-File: ./fig/dvfs_heatmap.pdf Graphic file (type pdf)
-<use ./fig/dvfs_heatmap.pdf>
-Package pdftex.def Info: ./fig/dvfs_heatmap.pdf  used on input line 191.
-(pdftex.def)             Requested size: 232.19843pt x 95.35997pt.
+[3 <./fig/proposed_framework.pdf>]
+<./fig/dcc_types.pdf, id=300, 332.10475pt x 167.89125pt>
+File: ./fig/dcc_types.pdf Graphic file (type pdf)
+<use ./fig/dcc_types.pdf>
+Package pdftex.def Info: ./fig/dcc_types.pdf  used on input line 210.
+(pdftex.def)             Requested size: 245.10315pt x 123.91222pt.
 
 
-[3 <./fig/proposed_framework.pdf> <./fig/dvfs_heatmap.pdf>]
-<./fig/Qos.pdf, id=322, 389.726pt x 219.46992pt>
+<./fig/Qos.pdf, id=305, 389.726pt x 219.46992pt>
 File: ./fig/Qos.pdf Graphic file (type pdf)
 <use ./fig/Qos.pdf>
-Package pdftex.def Info: ./fig/Qos.pdf  used on input line 227.
+Package pdftex.def Info: ./fig/Qos.pdf  used on input line 267.
 (pdftex.def)             Requested size: 245.10315pt x 138.029pt.
 
 
+[4 <./fig/dcc_types.pdf> <./fig/Qos.pdf>]
+<./fig/sos1_relaxed.pdf, id=380, 614.295pt x 213.95735pt>
+File: ./fig/sos1_relaxed.pdf Graphic file (type pdf)
+<use ./fig/sos1_relaxed.pdf>
+Package pdftex.def Info: ./fig/sos1_relaxed.pdf  used on input line 322.
+(pdftex.def)             Requested size: 451.5pt x 157.25838pt.
 
 
-[4 <./fig/Qos.pdf>]
 
-<./fig/workload_distribution.pdf, id=391, 415.4205pt x 257.42894pt>
+
+[5 <./fig/sos1_relaxed.pdf>]
+
+
+
+[6]
+<./fig/workload_distribution.pdf, id=466, 415.4205pt x 257.42894pt>
 File: ./fig/workload_distribution.pdf Graphic file (type pdf)
 <use ./fig/workload_distribution.pdf>
-Package pdftex.def Info: ./fig/workload_distribution.pdf  used on input line 37
-4.
+Package pdftex.def Info: ./fig/workload_distribution.pdf  used on input line 45
+3.
 (pdftex.def)             Requested size: 258.0081pt x 156.49327pt.
 
-Overfull \hbox (6.0081pt too wide) in paragraph at lines 374--375
+Overfull \hbox (6.0081pt too wide) in paragraph at lines 453--454
 [][]  
  []
 
-<./fig/loadcurve.pdf, id=392, 416.21185pt x 253.47197pt>
+<./fig/loadcurve.pdf, id=467, 416.21185pt x 253.47197pt>
 File: ./fig/loadcurve.pdf Graphic file (type pdf)
 <use ./fig/loadcurve.pdf>
-Package pdftex.def Info: ./fig/loadcurve.pdf  used on input line 382.
+Package pdftex.def Info: ./fig/loadcurve.pdf  used on input line 461.
 (pdftex.def)             Requested size: 219.30157pt x 133.55435pt.
-<./fig/windscurve_result.pdf, id=393, 417.26639pt x 256.90167pt>
+<./fig/windscurve_result.pdf, id=468, 417.26639pt x 256.90167pt>
 File: ./fig/windscurve_result.pdf Graphic file (type pdf)
 <use ./fig/windscurve_result.pdf>
-Package pdftex.def Info: ./fig/windscurve_result.pdf  used on input line 390.
+Package pdftex.def Info: ./fig/windscurve_result.pdf  used on input line 469.
 (pdftex.def)             Requested size: 219.30371pt x 142.26851pt.
 
-Overfull \hbox (3.20901pt too wide) in paragraph at lines 401--422
+Overfull \hbox (3.20901pt too wide) in paragraph at lines 480--501
  [][] 
  []
 
 
 
-[5]
 
-<./fig/balanceprocess.pdf, id=435, 409.08975pt x 251.0983pt>
+
+[7 <./fig/workload_distribution.pdf> <./fig/loadcurve.pdf> <./fig/windscurve_re
+sult.pdf>]
+<./fig/balanceprocess.pdf, id=514, 409.08975pt x 251.0983pt>
 File: ./fig/balanceprocess.pdf Graphic file (type pdf)
 <use ./fig/balanceprocess.pdf>
-Package pdftex.def Info: ./fig/balanceprocess.pdf  used on input line 465.
+Package pdftex.def Info: ./fig/balanceprocess.pdf  used on input line 544.
 (pdftex.def)             Requested size: 283.81406pt x 142.26543pt.
 
-Overfull \hbox (31.81406pt too wide) in paragraph at lines 465--466
+Overfull \hbox (31.81406pt too wide) in paragraph at lines 544--545
 [][]  
  []
 
-<./fig/stacked_dc_λ_subplots.pdf, id=436, 328.98409pt x 574.61275pt>
+<./fig/stacked_dc_λ_subplots.pdf, id=515, 328.98409pt x 574.61275pt>
 File: ./fig/stacked_dc_λ_subplots.pdf Graphic file (type pdf)
 <use ./fig/stacked_dc_λ_subplots.pdf>
-Package pdftex.def Info: ./fig/stacked_dc_λ_subplots.pdf  used on input line 4
-72.
+Package pdftex.def Info: ./fig/stacked_dc_λ_subplots.pdf  used on input line 5
+51.
 (pdftex.def)             Requested size: 232.19843pt x 405.5755pt.
-<./fig/stacked_dc_fv_subplots.pdf, id=437, 330.7567pt x 576.83002pt>
+<./fig/stacked_dc_fv_subplots.pdf, id=516, 330.7567pt x 576.83002pt>
 File: ./fig/stacked_dc_fv_subplots.pdf Graphic file (type pdf)
 <use ./fig/stacked_dc_fv_subplots.pdf>
-Package pdftex.def Info: ./fig/stacked_dc_fv_subplots.pdf  used on input line 4
-79.
+Package pdftex.def Info: ./fig/stacked_dc_fv_subplots.pdf  used on input line 5
+58.
 (pdftex.def)             Requested size: 232.19843pt x 404.94888pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 
-[6 <./fig/workload_distribution.pdf> <./fig/loadcurve.pdf> <./fig/windscurve_re
-sult.pdf>]
 
 
+[8 <./fig/balanceprocess.pdf> <./fig/stacked_dc_λ_subplots.pdf>]
+<./fig/res_dcc_power_plots.pdf, id=580, 803.0pt x 806.94075pt>
+File: ./fig/res_dcc_power_plots.pdf Graphic file (type pdf)
+<use ./fig/res_dcc_power_plots.pdf>
+Package pdftex.def Info: ./fig/res_dcc_power_plots.pdf  used on input line 574.
 
-[7 <./fig/balanceprocess.pdf> <./fig/stacked_dc_λ_subplots.pdf> <./fig/stacked
-_dc_fv_subplots.pdf
-
-pdfTeX warning: pdflatex.exe (file ./fig/stacked_dc_fv_subplots.pdf): PDF inclu
-sion: multiple pdfs with page group included in a single page
->]
-<./fig/stacked_dcc_p6_plot.pdf, id=576, 420.25577pt x 259.18701pt>
-File: ./fig/stacked_dcc_p6_plot.pdf Graphic file (type pdf)
-<use ./fig/stacked_dcc_p6_plot.pdf>
-Package pdftex.def Info: ./fig/stacked_dcc_p6_plot.pdf  used on input line 495.
-
-(pdftex.def)             Requested size: 257.99725pt x 142.26854pt.
-
-Overfull \hbox (5.99725pt too wide) in paragraph at lines 495--496
-[][]  
- []
-
-<./fig/stacked_dcc_p4_plot.pdf, id=577, 417.11636pt x 257.37856pt>
+(pdftex.def)             Requested size: 438.61269pt x 455.23285pt.
+<./fig/stacked_dcc_p4_plot.pdf, id=581, 417.11636pt x 257.37856pt>
 File: ./fig/stacked_dcc_p4_plot.pdf Graphic file (type pdf)
 <use ./fig/stacked_dcc_p4_plot.pdf>
-Package pdftex.def Info: ./fig/stacked_dcc_p4_plot.pdf  used on input line 502.
+Package pdftex.def Info: ./fig/stacked_dcc_p4_plot.pdf  used on input line 581.
 
 (pdftex.def)             Requested size: 258.01118pt x 142.26161pt.
 
-Overfull \hbox (6.01118pt too wide) in paragraph at lines 502--503
+Overfull \hbox (6.01118pt too wide) in paragraph at lines 581--582
 [][]  
  []
 
@@ -1172,27 +1177,34 @@ Overfull \hbox (6.01118pt too wide) in paragraph at lines 502--503
 
 
 
-[8 <./fig/stacked_dcc_p6_plot.pdf> <./fig/stacked_dcc_p4_plot.pdf>] (./New_IEEE
-tran_how-to.bbl
+[9 <./fig/stacked_dc_fv_subplots.pdf>]
+
+LaTeX Warning: Text page 10 contains only floats.
+
+
+
+(./New_IEEEtran_how-to.bbl
+
+[10 <./fig/res_dcc_power_plots.pdf> <./fig/stacked_dcc_p4_plot.pdf>]
 
 )
 
-[9] (./New_IEEEtran_how-to.aux)
+[11] (./New_IEEEtran_how-to.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `New_IEEEtran_how-to.out' has not changed.
-(rerunfilecheck)             Checksum: AF5CA7AC48D6D5CDF32B551D5D0C382D;2027.
+(rerunfilecheck)             Checksum: 961813E797E0C5EA15240594FF418A41;2027.
  ) 
 Here is how much of TeX's memory you used:
- 26358 strings out of 473190
- 519125 string characters out of 5699139
- 973974 words of memory out of 5000000
- 49031 multiletter control sequences out of 15000+600000
- 661831 words of font info for 138 fonts, out of 8000000 for 9000
+ 26383 strings out of 473190
+ 519601 string characters out of 5699139
+ 963628 words of memory out of 5000000
+ 49048 multiletter control sequences out of 15000+600000
+ 662938 words of font info for 139 fonts, out of 8000000 for 9000
  1145 hyphenation exceptions out of 8191
- 110i,12n,107p,1483b,487s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 110i,12n,107p,1483b,599s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmex10.pfb><d:/CommonSoftwares/ProductiveCodingEditors/te
 xlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/CommonSoftw
@@ -1218,10 +1230,10 @@ uctiveCodingEditors/texlive/2025/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><
 d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/fonts/type1/
 urw/times/utmr8a.pfb><d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/t
 exmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on New_IEEEtran_how-to.pdf (9 pages, 2012619 bytes).
+Output written on New_IEEEtran_how-to.pdf (11 pages, 4593410 bytes).
 PDF statistics:
- 729 PDF objects out of 1000 (max. 8388607)
- 546 compressed objects within 6 object streams
- 135 named destinations out of 1000 (max. 500000)
- 132 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1418 PDF objects out of 1440 (max. 8388607)
+ 893 compressed objects within 9 object streams
+ 142 named destinations out of 1000 (max. 500000)
+ 137 words of extra memory for PDF output out of 10000 (max. 10000000)
 

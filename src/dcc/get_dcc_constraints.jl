@@ -22,6 +22,8 @@ function add_dcc_constraints!(scuc, DataCentras, config_param, NS::Int, NT::Int,
 		return num_sos
 	end
 
+	test_dcc_configuations(DataCentras, NT, ND2)
+
 	enable_active_response_flag = 1
 	if enable_active_response_flag == 0
 		workload_multijob = DataCentras.computational_power_tasks' * 10
@@ -43,70 +45,47 @@ function add_dcc_constraints!(scuc, DataCentras, config_param, NS::Int, NT::Int,
 		workload_multijob = DataCentras.computational_power_tasks' * 10
 
 		# bounds and basic relationship
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .<= DataCentras.p_max .* 1)
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .>= DataCentras.p_min .* 0)
 		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .<= DataCentras.p_max .* 10)
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .>= DataCentras.p_min .* 0)
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .==
-					DataCentras.idale .+ DataCentras.sv_constant ./ DataCentras.μ .* workload_multijob[:, t] .* dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t])
+					dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .== DataCentras.idale .+ DataCentras.sv_constant ./ DataCentras.μ .* workload_multijob[:, t] .* dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t])
 
 		# fv^2 plus/minus bounds
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²_plus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv2_plus_ub)
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²_plus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv2_plus_lb)
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²_minus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv2_minus_ub)
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²_minus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv2_minus_lb)
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_fv²_plus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv2_plus_ub)
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_fv²_plus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv2_plus_lb)
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_fv²_minus[((s - 1) * ND2 + 1):(s * ND2), t] .<= dcc_fv2_minus_ub)
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_fv²_minus[((s - 1) * ND2 + 1):(s * ND2), t] .>= dcc_fv2_minus_lb)
 
 		# SOS1 linear combinations (reformulated as convex combinations over discrete points)
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv2_plus_discrete[z] * weight_fv²_plus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos))
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²_2_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv2_2_plus_discrete[z] * weight_fv²_plus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos))
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv2_minus_discrete[z] * weight_fv²_minus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos))
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²_2_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv2_2_minus_discrete[z] * weight_fv²_minus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos))
+		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], dc_fv²[(s - 1) * ND2 + i, t] == dc_fv²_2_plus[(s - 1) * ND2 + i, t] - dc_fv²_2_minus[(s - 1) * ND2 + i, t])
+		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], dc_fv²_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv2_plus_discrete[z] * weight_fv²_plus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos))
+		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], dc_fv²_2_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv2_2_plus_discrete[z] * weight_fv²_plus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos))
+		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], dc_fv²_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv2_minus_discrete[z] * weight_fv²_minus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos))
+		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], dc_fv²_2_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv2_2_minus_discrete[z] * weight_fv²_minus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos))
 
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²[(s - 1) * ND2 + i, t] == dc_fv²_2_plus[(s - 1) * ND2 + i, t] - dc_fv²_2_minus[(s - 1) * ND2 + i, t])
+		# @constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], dc_fv²[(s - 1) * ND2 + i, t] == dc_fv²_2_plus[(s - 1) * ND2 + i, t] - dc_fv²_2_minus[(s - 1) * ND2 + i, t])
 
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					sum(weight_fv²_plus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos) == 1)
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					sum(weight_fv²_minus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos) == 1)
+		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], sum(weight_fv²_plus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos) == 1)
+		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], sum(weight_fv²_minus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos) == 1)
 
 		# lambda SOS1 and relations
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t] .<= ones(ND2, 1) * 1.5)
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²[((s - 1) * ND2 + 1):(s * ND2), t] .<= ones(ND2, 1) * 1.5)
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t] .<= ones(ND2, 1) * 1.5)
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_fv²[((s - 1) * ND2 + 1):(s * ND2), t] .<= ones(ND2, 1) * 1.5)
 
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²λ_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv2lambda_plus_discrete[z] * weight_fv²λ_plus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos))
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²λ_2_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv2lambda_2_plus_discrete[z] * weight_fv²λ_plus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos))
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²λ_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv2lambda_minus_discrete[z] * weight_fv²λ_minus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos))
+		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], dc_fv²λ[(s - 1) * ND2 + i, t] == dc_fv²λ_2_plus[(s - 1) * ND2 + i, t] - dc_fv²λ_2_minus[(s - 1) * ND2 + i, t])
+		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], dc_fv²λ_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv2lambda_plus_discrete[z] * weight_fv²λ_plus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos))
+		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], dc_fv²λ_2_plus[(s - 1) * ND2 + i, t] == sum(dcc_fv2lambda_2_plus_discrete[z] * weight_fv²λ_plus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos))
+		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], dc_fv²λ_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv2lambda_minus_discrete[z] * weight_fv²λ_minus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos))
 		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
 					dc_fv²λ_2_minus[(s - 1) * ND2 + i, t] == sum(dcc_fv2lambda_2_minus_discrete[z] * weight_fv²λ_minus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos))
 
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					dc_fv²λ[(s - 1) * ND2 + i, t] == dc_fv²λ_2_plus[(s - 1) * ND2 + i, t] - dc_fv²λ_2_minus[(s - 1) * ND2 + i, t])
-
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					sum(weight_fv²λ_plus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos) == 1)
-		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2],
-					sum(weight_fv²λ_minus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos) == 1)
+		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], sum(weight_fv²λ_plus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos) == 1)
+		@constraint(scuc, [s = 1:NS, t = 1:NT, i = 1:ND2], sum(weight_fv²λ_minus[(s - 1) * ND2 + i, t, z] for z in 1:num_sos) == 1)
 
 		# time-block aggregate constraints
 		iter_num = 6
 		coeff = 0.05
-		@constraint(scuc, [s = 1:NS, t = 1:NT],
-					dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t] .<= dc_fv²[((s - 1) * ND2 + 1):(s * ND2), t] * (1 + 0.5))
+		@constraint(scuc, [s = 1:NS, t = 1:NT], dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t] .<= dc_fv²[((s - 1) * ND2 + 1):(s * ND2), t] * (1 + 0.05))
 
 		iter_block = Int(max(1, round(NT / iter_num)))
 		@constraint(scuc, [s = 1:NS, iter = 1:iter_num],
@@ -123,3 +102,29 @@ function add_dcc_constraints!(scuc, DataCentras, config_param, NS::Int, NT::Int,
 end
 
 # end # module
+function test_dcc_configuations(DataCentras, NT, ND2)
+
+	workload_multijob = DataCentras.computational_power_tasks' * 10
+
+
+
+	dcc_workload_consumption = zeros(ND2, NT)
+	for t in 1:NT
+		dcc_workload_consumption[:, t] = DataCentras.idale .+ DataCentras.sv_constant ./ DataCentras.μ .* workload_multijob[:, t]
+	end
+
+	# convert matrix (ND2 x NT) into DataFrame where each column is a time step (t1..tNT)
+	df_dcc_workload_consumption = DataFrame(dcc_workload_consumption, :auto)
+	# row-wise maxima (one value per task / row)
+	row_max_dcc = vec(maximum(dcc_workload_consumption, dims = 2))
+	rename!(df_dcc_workload_consumption, Symbol.("t" .* string.(1:size(dcc_workload_consumption, 2))))
+	# add a task_id column for row identification
+	insertcols!(df_dcc_workload_consumption, 1, :task_id => collect(1:size(dcc_workload_consumption, 1)))
+
+	@info "test dcc dcc_boundary_configurations"
+	if all(DataCentras.p_max .>= row_max_dcc)
+		@info "test passed: all DataCentras.p_max >= row_max_dcc"
+	else
+		@warn "test failed: some DataCentras.p_max < row_max_dcc"
+	end
+end
