@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.23)  4 NOV 2025 22:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.23)  5 NOV 2025 15:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -120,6 +120,7 @@ File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 msmath/amsmath.sty
 Package: amsmath 2024/11/05 v2.17t AMS math features
 \@mathmargin=\skip52
+
 For additional information on amsmath, use the `?' option.
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/a
@@ -332,6 +333,7 @@ Package: titlesec 2025/01/04 v2.17 Sectioning titles
 \titlewidth=\dimen189
 \titlewidthlast=\dimen190
 \titlewidthfirst=\dimen191
+
 
 Package titlesec Warning: Non standard sectioning command \subparagraph
 (titlesec)                detected. Using default spacing and no format.
@@ -802,7 +804,7 @@ Package: enumitem 2025/02/06 v3.11 Customized lists
 \openout4 = `New_IEEEtran_how-to.nlo'.
 
 Package nomencl Info: Writing nomenclature file New_IEEEtran_how-to.nlo on inpu
-t line 49.
+t line 59.
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/h
 yperref/hyperref.sty
@@ -972,24 +974,25 @@ LaTeX Warning: Unused global option(s):
 (./New_IEEEtran_how-to.aux)
 \openout1 = `New_IEEEtran_how-to.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 58.
-LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+
 -- Lines per column: 58 (exact).
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
@@ -1021,12 +1024,13 @@ atexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring ON on input line 58.
-(./New_IEEEtran_how-to.out) (./New_IEEEtran_how-to.out)
+Package hyperref Info: Link coloring ON on input line 68.
+ (./New_IEEEtran_how-to.out)
+(./New_IEEEtran_how-to.out)
 \@outlinefile=\write5
 \openout5 = `New_IEEEtran_how-to.out'.
 
-(./New_IEEEtran_how-to.nls
+ (./New_IEEEtran_how-to.nls
 LaTeX Font Info:    Trying to load font information for U+msa on input line 4.
 
 (d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/tex/latex/a
@@ -1040,7 +1044,28 @@ msfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
-)
+
+Underfull \hbox (badness 5460) in paragraph at lines 40--41
+[]\T1/ptm/m/n/10 Discharging ramp-ing ca-pa-bil-ity of BESS $\OML/cmm/m/it/10 e
+$
+ []
+
+
+Underfull \hbox (badness 1558) in paragraph at lines 41--42
+[]\T1/ptm/m/n/10 Downward ramp-ing ca-pa-bil-ity of gen-er-a-tor $\OML/cmm/m/it
+/10 g$
+ []
+
+
+Underfull \hbox (badness 1675) in paragraph at lines 42--43
+[]\T1/ptm/m/n/10 Shut-down ramp-ing ca-pa-bil-ity of gen-er-a-tor $\OML/cmm/m/i
+t/10 g$
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 
 [1{d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-var/fonts/map/
 pdftex/updmap/pdftex.map}{d:/CommonSoftwares/ProductiveCodingEditors/texlive/20
@@ -1048,144 +1073,146 @@ pdftex/updmap/pdftex.map}{d:/CommonSoftwares/ProductiveCodingEditors/texlive/20
 
 
 ]
+Underfull \hbox (badness 2635) in paragraph at lines 59--60
+[]\T1/ptm/m/n/10 Workload shed-ding penalty cost for DCC $\OML/cmm/m/it/10 i$
+ []
 
 
+Underfull \hbox (badness 4543) in paragraph at lines 61--62
+[]\T1/ptm/m/n/10 Curtailment penalty cost for wind farm $\OML/cmm/m/it/10 w$
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+)
 
 [2]
 
-<./fig/proposed_framework.pdf, id=93, 351.80031pt x 300.59302pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[3]
+<./fig/framework.pdf, id=102, 222.13087pt x 204.67165pt>
+File: ./fig/framework.pdf Graphic file (type pdf)
+<use ./fig/framework.pdf>
+Package pdftex.def Info: ./fig/framework.pdf  used on input line 181.
+(pdftex.def)             Requested size: 180.60315pt x 166.41084pt.
+<./fig/proposed_framework.pdf, id=103, 351.80031pt x 300.59302pt>
 File: ./fig/proposed_framework.pdf Graphic file (type pdf)
 <use ./fig/proposed_framework.pdf>
-Package pdftex.def Info: ./fig/proposed_framework.pdf  used on input line 168.
-(pdftex.def)             Requested size: 206.39685pt x 176.35303pt.
+Package pdftex.def Info: ./fig/proposed_framework.pdf  used on input line 189.
+(pdftex.def)             Requested size: 180.60315pt x 154.31406pt.
 
 
-[3 <./fig/proposed_framework.pdf>]
-<./fig/dcc_types.pdf, id=300, 332.10475pt x 167.89125pt>
+<./fig/dcc_types.pdf, id=111, 332.10475pt x 167.89125pt>
 File: ./fig/dcc_types.pdf Graphic file (type pdf)
 <use ./fig/dcc_types.pdf>
-Package pdftex.def Info: ./fig/dcc_types.pdf  used on input line 210.
+Package pdftex.def Info: ./fig/dcc_types.pdf  used on input line 231.
 (pdftex.def)             Requested size: 245.10315pt x 123.91222pt.
 
 
-<./fig/Qos.pdf, id=305, 389.726pt x 219.46992pt>
+[4 <./fig/framework.pdf> <./fig/proposed_framework.pdf
+
+pdfTeX warning: pdflatex.exe (file ./fig/proposed_framework.pdf): PDF inclusion
+: multiple pdfs with page group included in a single page
+>]
+
+<./fig/Qos.pdf, id=414, 389.726pt x 219.46992pt>
 File: ./fig/Qos.pdf Graphic file (type pdf)
 <use ./fig/Qos.pdf>
-Package pdftex.def Info: ./fig/Qos.pdf  used on input line 267.
+Package pdftex.def Info: ./fig/Qos.pdf  used on input line 293.
 (pdftex.def)             Requested size: 245.10315pt x 138.029pt.
 
 
-[4 <./fig/dcc_types.pdf> <./fig/Qos.pdf>]
-<./fig/sos1_relaxed.pdf, id=380, 614.295pt x 213.95735pt>
+[5 <./fig/dcc_types.pdf> <./fig/Qos.pdf>]
+<./fig/sos1_relaxed.pdf, id=490, 614.295pt x 213.95735pt>
 File: ./fig/sos1_relaxed.pdf Graphic file (type pdf)
 <use ./fig/sos1_relaxed.pdf>
-Package pdftex.def Info: ./fig/sos1_relaxed.pdf  used on input line 322.
-(pdftex.def)             Requested size: 451.5pt x 157.25838pt.
+Package pdftex.def Info: ./fig/sos1_relaxed.pdf  used on input line 342.
+(pdftex.def)             Requested size: 503.10315pt x 175.23068pt.
 
 
 
 
-[5 <./fig/sos1_relaxed.pdf>]
+[6 <./fig/sos1_relaxed.pdf>]
 
 
 
-[6]
-<./fig/workload_distribution.pdf, id=466, 415.4205pt x 257.42894pt>
+[7]
+<./fig/workload_distribution.pdf, id=577, 433.62pt x 289.08pt>
 File: ./fig/workload_distribution.pdf Graphic file (type pdf)
 <use ./fig/workload_distribution.pdf>
-Package pdftex.def Info: ./fig/workload_distribution.pdf  used on input line 45
+Package pdftex.def Info: ./fig/workload_distribution.pdf  used on input line 47
 3.
-(pdftex.def)             Requested size: 258.0081pt x 156.49327pt.
-
-Overfull \hbox (6.0081pt too wide) in paragraph at lines 453--454
-[][]  
- []
-
-<./fig/loadcurve.pdf, id=467, 416.21185pt x 253.47197pt>
+(pdftex.def)             Requested size: 208.98215pt x 128.03368pt.
+<./fig/loadcurve.pdf, id=578, 408.20001pt x 255.67921pt>
 File: ./fig/loadcurve.pdf Graphic file (type pdf)
 <use ./fig/loadcurve.pdf>
-Package pdftex.def Info: ./fig/loadcurve.pdf  used on input line 461.
-(pdftex.def)             Requested size: 219.30157pt x 133.55435pt.
-<./fig/windscurve_result.pdf, id=468, 417.26639pt x 256.90167pt>
+Package pdftex.def Info: ./fig/loadcurve.pdf  used on input line 481.
+(pdftex.def)             Requested size: 208.97937pt x 130.89793pt.
+<./fig/windscurve_result.pdf, id=579, 417.26639pt x 256.90167pt>
 File: ./fig/windscurve_result.pdf Graphic file (type pdf)
 <use ./fig/windscurve_result.pdf>
-Package pdftex.def Info: ./fig/windscurve_result.pdf  used on input line 469.
-(pdftex.def)             Requested size: 219.30371pt x 142.26851pt.
+Package pdftex.def Info: ./fig/windscurve_result.pdf  used on input line 489.
+(pdftex.def)             Requested size: 208.98286pt x 142.26851pt.
 
-Overfull \hbox (3.20901pt too wide) in paragraph at lines 480--501
+
+
+Overfull \hbox (3.20901pt too wide) in paragraph at lines 500--521
  [][] 
  []
 
 
 
-
-
-[7 <./fig/workload_distribution.pdf> <./fig/loadcurve.pdf> <./fig/windscurve_re
+[8 <./fig/workload_distribution.pdf> <./fig/loadcurve.pdf> <./fig/windscurve_re
 sult.pdf>]
-<./fig/balanceprocess.pdf, id=514, 409.08975pt x 251.0983pt>
+<./fig/balanceprocess.pdf, id=639, 409.08975pt x 251.0983pt>
 File: ./fig/balanceprocess.pdf Graphic file (type pdf)
 <use ./fig/balanceprocess.pdf>
-Package pdftex.def Info: ./fig/balanceprocess.pdf  used on input line 544.
-(pdftex.def)             Requested size: 283.81406pt x 142.26543pt.
-
-Overfull \hbox (31.81406pt too wide) in paragraph at lines 544--545
-[][]  
- []
-
-<./fig/stacked_dc_λ_subplots.pdf, id=515, 328.98409pt x 574.61275pt>
-File: ./fig/stacked_dc_λ_subplots.pdf Graphic file (type pdf)
-<use ./fig/stacked_dc_λ_subplots.pdf>
-Package pdftex.def Info: ./fig/stacked_dc_λ_subplots.pdf  used on input line 5
-51.
-(pdftex.def)             Requested size: 232.19843pt x 405.5755pt.
-<./fig/stacked_dc_fv_subplots.pdf, id=516, 330.7567pt x 576.83002pt>
-File: ./fig/stacked_dc_fv_subplots.pdf Graphic file (type pdf)
-<use ./fig/stacked_dc_fv_subplots.pdf>
-Package pdftex.def Info: ./fig/stacked_dc_fv_subplots.pdf  used on input line 5
-58.
-(pdftex.def)             Requested size: 232.19843pt x 404.94888pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-
-
-
-[8 <./fig/balanceprocess.pdf> <./fig/stacked_dc_λ_subplots.pdf>]
-<./fig/res_dcc_power_plots.pdf, id=580, 803.0pt x 806.94075pt>
+Package pdftex.def Info: ./fig/balanceprocess.pdf  used on input line 567.
+(pdftex.def)             Requested size: 232.20355pt x 142.26543pt.
+<./fig/dcc_dvfs_workloadreallocation.pdf, id=640, 257.27318pt x 454.5542pt>
+File: ./fig/dcc_dvfs_workloadreallocation.pdf Graphic file (type pdf)
+<use ./fig/dcc_dvfs_workloadreallocation.pdf>
+Package pdftex.def Info: ./fig/dcc_dvfs_workloadreallocation.pdf  used on input
+ line 574.
+(pdftex.def)             Requested size: 193.5pt x 341.88583pt.
+<./fig/res_dcc_power_plots.pdf, id=641, 803.0pt x 806.94075pt>
 File: ./fig/res_dcc_power_plots.pdf Graphic file (type pdf)
 <use ./fig/res_dcc_power_plots.pdf>
-Package pdftex.def Info: ./fig/res_dcc_power_plots.pdf  used on input line 574.
+Package pdftex.def Info: ./fig/res_dcc_power_plots.pdf  used on input line 588.
 
-(pdftex.def)             Requested size: 438.61269pt x 455.23285pt.
-<./fig/stacked_dcc_p4_plot.pdf, id=581, 417.11636pt x 257.37856pt>
-File: ./fig/stacked_dcc_p4_plot.pdf Graphic file (type pdf)
-<use ./fig/stacked_dcc_p4_plot.pdf>
-Package pdftex.def Info: ./fig/stacked_dcc_p4_plot.pdf  used on input line 581.
-
-(pdftex.def)             Requested size: 258.01118pt x 142.26161pt.
-
-Overfull \hbox (6.01118pt too wide) in paragraph at lines 581--582
-[][]  
- []
+(pdftex.def)             Requested size: 469.56189pt x 471.8799pt.
 
 
 
 
-
-[9 <./fig/stacked_dc_fv_subplots.pdf>]
-
-LaTeX Warning: Text page 10 contains only floats.
+[9 <./fig/balanceprocess.pdf> <./fig/dcc_dvfs_workloadreallocation.pdf>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+
+[10 <./fig/res_dcc_power_plots.pdf>]
 
 (./New_IEEEtran_how-to.bbl
 
-[10 <./fig/res_dcc_power_plots.pdf> <./fig/stacked_dcc_p4_plot.pdf>]
+[11])
 
-)
 
-[11] (./New_IEEEtran_how-to.aux)
+
+[12
+
+] (./New_IEEEtran_how-to.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -1194,13 +1221,13 @@ Package rerunfilecheck Info: File `New_IEEEtran_how-to.out' has not changed.
 (rerunfilecheck)             Checksum: 961813E797E0C5EA15240594FF418A41;2027.
  ) 
 Here is how much of TeX's memory you used:
- 26381 strings out of 473190
- 519556 string characters out of 5699139
- 963586 words of memory out of 5000000
- 49047 multiletter control sequences out of 15000+600000
+ 26370 strings out of 473190
+ 519181 string characters out of 5699139
+ 970791 words of memory out of 5000000
+ 49035 multiletter control sequences out of 15000+600000
  662938 words of font info for 139 fonts, out of 8000000 for 9000
  1145 hyphenation exceptions out of 8191
- 110i,12n,107p,1483b,599s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 110i,12n,107p,1194b,583s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmex10.pfb><d:/CommonSoftwares/ProductiveCodingEditors/te
 xlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/CommonSoftw
@@ -1226,10 +1253,10 @@ uctiveCodingEditors/texlive/2025/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><
 d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/fonts/type1/
 urw/times/utmr8a.pfb><d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/t
 exmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on New_IEEEtran_how-to.pdf (11 pages, 4593099 bytes).
+Output written on New_IEEEtran_how-to.pdf (12 pages, 7051039 bytes).
 PDF statistics:
- 1417 PDF objects out of 1440 (max. 8388607)
- 892 compressed objects within 9 object streams
- 141 named destinations out of 1000 (max. 500000)
- 137 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1477 PDF objects out of 1728 (max. 8388607)
+ 901 compressed objects within 10 object streams
+ 142 named destinations out of 1000 (max. 500000)
+ 132 words of extra memory for PDF output out of 10000 (max. 10000000)
 

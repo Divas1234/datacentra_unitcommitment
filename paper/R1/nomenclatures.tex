@@ -1,52 +1,117 @@
-\nomenclature[I]{\(i\in\mathcal{I}\)}{Index and Sets of DCC servers}
-\nomenclature[I]{\(g\in\mathcal{G}\)}{Index and Sets of conventional generators}
-\nomenclature[I]{\(w\in\mathcal{W}\)}{Index and Sets of wind farms}
-\nomenclature[I]{\(e\in\mathcal{E}\)}{Index and Sets of battery energy storage systems(BESS)}
-\nomenclature[I]{\(b\in\mathcal{B}\)}{Index and Sets of Buses}
-\nomenclature[I]{\(l\in\mathcal{L}\)}{Index and Sets of transmission lines}
-\nomenclature[I]{\(d\in\mathcal{D}\)}{Index and Sets of conventional demands}
-\nomenclature[I]{\(t\in\mathcal{T}\)}{Index and Sets of time periods}
-\nomenclature[I]{\(s\in\mathcal{S}\)}{Index and Sets of scenarios}
+% ===== INDICES AND SETS =====
+\nomenclature[I]{\(i\in\mathcal{I}\)}{Index and set of DCCs}
+\nomenclature[I]{\(g\in\mathcal{G}\)}{Index and set of thermal generators}
+\nomenclature[I]{\(w\in\mathcal{W}\)}{Index and set of wind farms}
+\nomenclature[I]{\(e\in\mathcal{E}\)}{Index and set of BESSs}
+\nomenclature[I]{\(b\in\mathcal{B}\)}{Index and set of buses}
+\nomenclature[I]{\(l\in\mathcal{L}\)}{Index and set of transmission lines}
+\nomenclature[I]{\(d\in\mathcal{D}\)}{Index and set of electrical demands}
+\nomenclature[I]{\(t\in\mathcal{T}\)}{Index and set of time periods}
+\nomenclature[I]{\(s\in\mathcal{S}\)}{Index and set of uncertainty scenarios}
+\nomenclature[I]{\(z\in\mathcal{Z}\)}{Index and set of piecewise linearization segments}
+\nomenclature[I]{\(k\in\mathcal{K}\)}{Index and set of workload balancing time intervals}
+\nomenclature[I]{\(\mathcal{M}(\omega_g^{dt} - 1,t)\)}{Set of time periods for minimum down time constraint of generator $g$}
+\nomenclature[I]{\(\mathcal{M}(\omega_g^{ut} - 1,t)\)}{Set of time periods for minimum up time constraint of generator $g$}
+\nomenclature[I]{\(\mathcal{T}_{k}\)}{Set of time periods within workload balancing interval $k$}
+\nomenclature[I]{\(\mathcal{G}_{b}\)}{Set of thermal generators connected to bus $b$}
+\nomenclature[I]{\(\mathcal{I}_{b}\)}{Set of DCC connected to bus $b$}
+\nomenclature[I]{\(\mathcal{E}_{b}\)}{Set of BESS units connected to bus $b$}
+\nomenclature[I]{\(\mathcal{W}_{b}\)}{Set of wind farms connected to bus $b$}
+\nomenclature[I]{\(\mathcal{D}_{b}\)}{Set of demands connected to bus $b$}
+\nomenclature[I]{\(\mathcal{B}_{l}\)}{Set of buses connected to line $l$}
 
 
-\nomenclature[P]{\(p_{dcc,i,t}^{idle}\)}{Static workload of DCC $i$ at period $t$}
-\nomenclature[P]{\(p_{dcc,i,t}^{dyn}\)}{Dynamic workload of DCC $i$ at period $t$}
-\nomenclature[P]{\(C_{dcc,i}\)}{Effective capacitance of DCC $i$}
-\nomenclature[P]{\(i_{leak,i}\)}{Leakage current of DCC $i$}
-\nomenclature[P]{\(\lambda_{dcc,i,t}^{ini}\)}{Initial load-rate of DCC $i$ at period $t$}
-\nomenclature[P]{\(T_{tol}\)}{Latency threshold for workload processing delays}
-\nomenclature[P]{\(C_{su}\)}{Shut-up cost of conventional generator $g$}
-\nomenclature[P]{\(C_{sd}\)}{Shut-down cost of conventional generator $g$}
-\nomenclature[P]{\(C_{shed,w}\)}{Power curtailment cost of wind farm $w$}
-\nomenclature[P]{\(C_{voll,d}\)}{Value of lost load $d$}
-\nomenclature[P]{\(\gamma_{e}^{ch}\)}{Charging ramping capability of BESS $e$}
-\nomenclature[P]{\(\gamma_{e}^{dis}\)}{Discharging ramping capability of BESS $e$}
-\nomenclature[P]{\(\iota_{l,b}\)}{Generating shifting distribution factor between transmission line $l$ and bus $b$}
-\nomenclature[P]{\(p_l\)}{Power of transmission line $l$}
-\nomenclature[P]{\(\gamma_{g}^{up/dw}\)}{Up/down-forward ramping capabilities of conventional generator $g$}
-\nomenclature[P]{\(\gamma_{g}^{su/sd}\)}{Shut-up/shut-down ramping capabilities of conventional generator $g$}
+% ===== PARAMETERS =====
+\nomenclature[P]{\(p_{dcc,i,t}^{idle}\)}{Static (idle) power consumption of DCC $i$ at period $t$ (MW)}
+\nomenclature[P]{\(p_{dcc,i,t}^{dyn}\)}{Dynamic workload power demand of DCC $i$ at period $t$ (MW)}
+\nomenclature[P]{\(C_{dcc,i}\)}{Capacitance parameter of DCC $i$ servers (F)}
+\nomenclature[P]{\(i_{leak,i}\)}{Leakage current parameter of DCC $i$ (A)}
+\nomenclature[P]{\(\lambda_{dcc,i,t}^{ini}\)}{Initial workload arrival rate of DCC $i$ at period $t$ (tasks/h)}
+\nomenclature[P]{\(\lambda_{dcc,i,t}^{dyn}\)}{Dynamic workload arrival rate of DCC $i$ at period $t$ (tasks/h)}
+\nomenclature[P]{\(\mu_{dcc,i,t}\)}{Service processing rate of DCC $i$ at period $t$ (tasks/h)}
+\nomenclature[P]{\(T_{tol}\)}{Maximum tolerable latency threshold for workload processing (h)}
+\nomenclature[P]{\(T_{q,t}\)}{Average workload queuing delay at period $t$ (h)}
+\nomenclature[P]{\(C_{su,g}\)}{Start-up cost of thermal generator $g$ (\$)}
+\nomenclature[P]{\(C_{sd,g}\)}{Shut-down cost of thermal generator $g$ (\$)}
+\nomenclature[P]{\(C_{shed,w}\)}{Curtailment penalty cost for wind farm $w$ (\$/MWh)}
+\nomenclature[P]{\(C_{voll,d}\)}{Value of lost load for demand $d$ (\$/MWh)}
+\nomenclature[P]{\(C_{dcc,i}^{pen}\)}{Workload shedding penalty cost for DCC $i$ (\$/MWh)}
+\nomenclature[P]{\(\gamma_{e}^{ch}\)}{Charging ramping capability of BESS $e$ (MW/h)}
+\nomenclature[P]{\(\gamma_{e}^{dis}\)}{Discharging ramping capability of BESS $e$ (MW/h)}
+\nomenclature[P]{\(\gamma_{g}^{up}\)}{Upward ramping capability of generator $g$ (MW/h)}
+\nomenclature[P]{\(\gamma_{g}^{dw}\)}{Downward ramping capability of generator $g$ (MW/h)}
+\nomenclature[P]{\(\gamma_{g}^{su}\)}{Start-up ramping capability of generator $g$ (MW/h)}
+\nomenclature[P]{\(\gamma_{g}^{sd}\)}{Shut-down ramping capability of generator $g$ (MW/h)}
+\nomenclature[P]{\(\iota_{l,b}\)}{GSDF between line $l$ and bus $b$}
+\nomenclature[P]{\(\overline{p}_{l}\)}{Maximum power flow capacity of line $l$ (MW)}
+\nomenclature[P]{\(\overline{p}_{g}\)}{Maximum power output of thermal generator $g$ (MW)}
+\nomenclature[P]{\(\underline{p}_{g}\)}{Minimum power output of thermal generator $g$ (MW)}
+\nomenclature[P]{\(\overline{p}_{e}^{ch}\)}{Maximum charging power of BESS $e$ (MW)}
+\nomenclature[P]{\(\overline{p}_{e}^{dis}\)}{Maximum discharging power of BESS $e$ (MW)}
+\nomenclature[P]{\(\overline{e}_{e}\)}{Maximum energy storage capacity of BESS $e$ (MWh)}
+\nomenclature[P]{\(\underline{e}_{e}\)}{Minimum energy storage capacity of BESS $e$ (MWh)}
+\nomenclature[P]{\(\eta_{e}^{ch}\)}{Charging efficiency of BESS $e$ (p.u.)}
+\nomenclature[P]{\(\eta_{e}^{dis}\)}{Discharging efficiency of BESS $e$ (p.u.)}
+\nomenclature[P]{\(\omega_{g}^{ut}\)}{Minimum up time requirement of generator $g$ (h)}
+\nomenclature[P]{\(\omega_{g}^{dt}\)}{Minimum down time requirement of generator $g$ (h)}
+\nomenclature[P]{\(f_{dcc,i}^{max}\)}{Maximum operating frequency of DCC $i$ (GHz)}
+\nomenclature[P]{\(f_{dcc,i}^{min}\)}{Minimum operating frequency of DCC $i$ (GHz)}
+\nomenclature[P]{\(v_{dcc,i}^{max}\)}{Maximum supply voltage of DCC $i$ (V)}
+\nomenclature[P]{\(v_{dcc,i}^{min}\)}{Minimum supply voltage of DCC $i$ (V)}
+\nomenclature[P]{\(\alpha_{i}\)}{Workload processing efficiency coefficient of DCC $i$ (tasks/GHz/h)}
+\nomenclature[P]{\(\beta_{i}\)}{Voltage-frequency relationship coefficient for DCC $i$}
+\nomenclature[P]{\(W_{dcc,i,t}\)}{Total workload assigned to DCC $i$ at period $t$ (tasks)}
+
+% ===== VARIABLES =====
+\nomenclature[V]{\(p_{dcc,i,t}\)}{Total power consumption of DCC $i$ at period $t$ (MW)}
+\nomenclature[V]{\(f_{dcc,i,t}\)}{Operating frequency of DCC $i$ servers at period $t$ (GHz)}
+\nomenclature[V]{\(v_{dcc,i,t}\)}{Supply voltage of DCC $i$ servers at period $t$ (V)}
+\nomenclature[V]{\(\lambda_{dcc,i,t}\)}{Actual workload processing rate of DCC $i$ at period $t$ (tasks/h)}
+\nomenclature[V]{\(\varDelta p_{dcc,i,t}^{bal}\)}{Workload shifting power adjustment of DCC $i$ at period $t$ (MW)}
+\nomenclature[V]{\(\varDelta \lambda_{dcc,i,t}^{bal}\)}{Workload shifting rate adjustment of DCC $i$ at period $t$ (tasks/h)}
+\nomenclature[V]{\(p_{g,t}\)}{Output of thermal generator $g$ at period $t$ (MW)}
+\nomenclature[V]{\(u_{g,t}\)}{Commitment status of generator $g$ at period $t$}
+\nomenclature[V]{\(y_{g,t}^{su}\)}{Start-up decision of generator $g$ at period $t$}
+\nomenclature[V]{\(y_{g,t}^{sd}\)}{Shut-down decision of generator $g$ at period $t$}
+\nomenclature[V]{\(p_{w,t}\)}{Output of wind farm $w$ at period $t$ (MW)}
+\nomenclature[V]{\(p_{w,t}^{shed}\)}{Power curtailment of wind farm $w$ at period $t$ (MW)}
+\nomenclature[V]{\(p_{e,t}^{ch}\)}{Charging power of BESS $e$ at period $t$ (MW)}
+\nomenclature[V]{\(p_{e,t}^{dis}\)}{Discharging power of BESS $e$ at period $t$ (MW)}
+\nomenclature[V]{\(e_{e,t}\)}{Energy storage level of BESS $e$ at period $t$ (MWh)}
+\nomenclature[V]{\(u_{e,t}^{ch}\)}{Charging status of BESS $e$ at period $t$}
+\nomenclature[V]{\(u_{e,t}^{dis}\)}{Discharging status of BESS $e$ at period $t$}
+\nomenclature[V]{\(p_{d,t}^{shed}\)}{Load shedding of demand $d$ at period $t$ (MW)}
+\nomenclature[V]{\(p_{l,t}\)}{Power flow on line $l$ at period $t$ (MW)}
+\nomenclature[V]{\(\theta_{b,t}\)}{Voltage angle at bus $b$ at period $t$ (rad)}
+\nomenclature[V]{\(\delta_{i,t}^{shed}\)}{Workload shedding indicator for DCC $i$ at period $t$}
+\nomenclature[V]{\(\xi_{i,z,t}\)}{Variable for piecewise linearization segment $z$ of DCC $i$ at period $t$}
+\nomenclature[V]{\(\zeta_{i,z,t}\)}{Continuous weight for piecewise linearization segment $z$ of DCC $i$ at period $t$}
+\nomenclature[V]{\(Q_{i,t}\)}{Workload queue length of DCC $i$ at period $t$ (tasks)}
+\nomenclature[V]{\(T_{wait,i,t}\)}{Average waiting time for workloads in DCC $i$ at period $t$ (h)}
 
 
-\nomenclature[V]{\(p_{dcc,i,t}\)}{Workload consumption of DCC $i$ at period $t$}
-\nomenclature[V]{\(f_{dcc,i,t}\)}{Operational frequency of DCC $i$ at period $t$}
-\nomenclature[V]{\(v_{dcc,i,t}\)}{Supply voltage of DCC $i$ at period $t$}
-\nomenclature[V]{\(\lambda_{dcc,i,t}\)}{Workload rate of DCC $i$ at period $t$}
-\nomenclature[V]{\(\varDelta p_{dcc,i,t}^{bal}\)}{Shifted workload of DCC $i$ at period $t$}
-\nomenclature[V]{\(\varDelta \lambda_{dcc,i,t}\)}{Adjusted load-rate of DCC $i$ at period $t$}
-\nomenclature[V]{\(\phi_{dcc,i,t}^{dvfs}\)}{Power regulation of DCC $i$ via DVFS technique}
-\nomenclature[V]{\(\varDelta p_{w,t,s}\)}{Abandoned output of wind farm $w$ at period $t$ under scenario $s$}
-\nomenclature[V]{\(\varDelta p_{d,t,s}\)}{Shedded load $d$ at period $t$ under scenario $s$ }
-\nomenclature[V]{\(p_{w,t,s}\)}{Stochastic output of wind farm $w$ at period $t$ under scenario $s$}
-\nomenclature[V]{\(p_{g,t,s}\)}{Output of conventional generator $g$ at period $t$ under scenario $s$}
-\nomenclature[V]{\(p_{e,t,s}^{dis}\)}{Discharging power of BESS $e$ at period $t$ under scenario $s$}
-\nomenclature[V]{\(p_{e,t,s}^{ch}\)}{Charging power of BESS $e$ at period $t$ under scenario $s$}
-\nomenclature[V]{\(x_{g,t}\)}{Operation state of conventional generator $g$ at period $t$}
-\nomenclature[V]{\(u_{g,t}\)}{Shut-down decision of conventional generator $g$ at period $t$}
-\nomenclature[V]{\(v_{g,t}\)}{Shut-up decision of conventional generator $g$ at period $t$}
-\nomenclature[V]{\(\omega_{g}^{dt}\)}{Min shut-down duration of conventional generator $g$}
-\nomenclature[V]{\(\omega_{g}^{ut}\)}{Min shut-up duration of conventional generator $g$}
-\nomenclature[V]{\(p_{d,t,s}\)}{Power of demand $d$ at period $t$ under scenario $s$}
-\nomenclature[V]{\(p_{add,i, t,s}\)}{workload of DCC $i$ at period $t$ under scenario $s$}
-\nomenclature[V]{\(\varepsilon_{e,t,s}^{ch}\)}{Charging state decision of BESS $e$ at period $t$ under scenario $s$}
-\nomenclature[V]{\(\varepsilon_{e,t,s}^{dis}\)}{Discharging state decision of BESS $e$ at period $t$ under scenario $s$}
+% ===== ABBREVIATIONS AND TERMINOLOGY =====
+\nomenclature[A]{\(DCC\)}{Data Center Cluster}
+\nomenclature[A]{\(DVFS\)}{Dynamic Voltage and Frequency Scaling}
+\nomenclature[A]{\(UC\)}{Unit Commitment}
+\nomenclature[A]{\(BESS\)}{Battery Energy Storage System}
+\nomenclature[A]{\(SOS1\)}{Special Ordered Set of type 1}
+\nomenclature[A]{\(IBR\)}{Inverter-based Resource}
+\nomenclature[A]{\(QoS\)}{Quality of Service}
+\nomenclature[A]{\(SCUC\)}{Security-Constrained Unit Commitment}
+\nomenclature[A]{\(GSDF\)}{Generation shift distribution factor}
+% \nomenclature[A]{\(DR\)}{Demand Response}
+% \nomenclature[A]{\(VPP\)}{Virtual Power Plant}
+% \nomenclature[A]{\(CPU\)}{Central Processing Unit}
+% \nomenclature[A]{\(MILP\)}{Mixed-Integer Linear Programming}
+% \nomenclature[A]{\(MINLP\)}{Mixed-Integer Nonlinear Programming}
+% \nomenclature[A]{\(IEEE\)}{Institute of Electrical and Electronics Engineers}
+% \nomenclature[A]{p.u.}{Per Unit}
+% \nomenclature[A]{\(RES\)}{Renewable Energy Sources}
+% \nomenclature[A]{\(TSO\)}{Transmission System Operator}
+% \nomenclature[A]{\(ISO\)}{Independent System Operator}
+% \nomenclature[A]{\(MW\)}{Megawatt (power unit)}
+% \nomenclature[A]{\(MWh\)}{Megawatt-hour (energy unit)}
+% \nomenclature[A]{\(GHz\)}{Gigahertz (frequency unit)}
+% \nomenclature[A]{\(IT\)}{Information Technology}
 

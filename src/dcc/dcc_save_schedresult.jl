@@ -20,10 +20,10 @@ function save_data_centra(res, num_sos, output_dir)
 	for (filename, data) in data_to_write
 		filepath = joinpath(output_dir, filename)
 		try
-            if !isdir(dirname(filepath))
-                mkdir(dirname(filepath))
-            end
-			CSV.write(filepath, DataFrame(data, :auto),writeargs=(append=false,))
+			if !isdir(dirname(filepath))
+				mkdir(dirname(filepath))
+			end
+			CSV.write(filepath, DataFrame(data, :auto), writeargs = (append = false,))
 			println("→ Successfully wrote to $filepath")
 		catch e
 			@error "Failed to write to $filepath" exception=(e, catch_backtrace())

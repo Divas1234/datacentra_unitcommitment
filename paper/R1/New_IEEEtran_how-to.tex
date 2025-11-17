@@ -23,6 +23,8 @@
 \usepackage{nomencl}
 %\usepackage[style=ieee, sorting=none]{biblatex}  % sorting=none表示按引用顺序
 %\usepackage{natbib}
+%\usepackage{makeidx}
+%\makeindex
 
 \hyphenpenalty=10
 \tolerance=100000
@@ -35,16 +37,24 @@
 
 \usepackage{etoolbox}
 \renewcommand\nomgroup[1]{%
-	\item[\bfseries
-	\ifstrequal{#1}{I}{Index and Sets}{%
+	\ifstrequal{#1}{A}{\vspace{0.25cm}}{}%
+	\ifstrequal{#1}{I}{\vspace{0.25cm}}{}%
+	\ifstrequal{#1}{P}{\vspace{0.25cm}}{}%
+	\ifstrequal{#1}{V}{\vspace{0.25cm}}{}%
+	\item[\bfseries%
+		\ifstrequal{#1}{A}{Terminology \& Abbreviations}{%
+		\ifstrequal{#1}{I}{Indices and Sets}{%
 		\ifstrequal{#1}{P}{Parameters}{%
-			\ifstrequal{#1}{V}{Variables}{}}}%
-	]}
+		\ifstrequal{#1}{V}{Variables}{#1}%
+		}% P
+		}% I
+		}% A
+	]%
+}%
 
 \makeatletter
 \patchcmd{\@makechapterhead}{\cleardoublepage}{}{}{}
 \makeatother
-
 
 \makenomenclature
 
@@ -81,14 +91,14 @@
 %\vspace{-0.5cm}
 
 \setlength{\nomlabelwidth}{1.50cm} % 调整标签宽度
+\setlength{\nomitemsep}{0.025cm} % 术语项间距较小
 \printnomenclature
-
 
 \section{Introduction}
 
 \IEEEPARstart{A}{s} the increase in the penetration of various inverter-based resources (IBRs) such as wind farms, photovoltaic stations, data centers etc., the operation of modern power systems become increasingly
 diverse and less controllable. this trend poses significant challenges in providing sufficient flexible adjustment resources to address emergence disturbances and operational uncertainties~\cite{zhou2025data}. In such circumstances, additional
-flexible mechanisms, such as demand response (DR), virtual power plant (VPP), and battery energy storage systems (BESS), need to be prioritized. Among these, data centres clusters (DCCs), as significant energy consumers, have not been fully explored or utilized for their potential flexibility contributions. Therefore, it is essential to investigate the flexible adjustment characteristic of DCCs and quantify their flexibility potential to hance the economic efficiency and reliability of power system operations.
+flexible mechanisms, such as demand response (DR), virtual power plant (VPP), and battery energy storage systems (BESS), need to be prioritized. Among these, DCCs, as significant energy consumers, have not been fully explored or utilized for their potential flexibility contributions. Therefore, it is essential to investigate the flexible adjustment characteristic of DCCs and quantify their flexibility potential to hance the economic efficiency and reliability of power system operations.
 
 Recent research has reported considerable advancements in understanding the potential of DCCs to enhance flexibility under electrical power system operation processes. Specially,
 Ref.~\cite{10874152} carried out a quality-of-service-based cost function to describe the workload shifting and server utilization of DCCs, This study is further extended a distributed dispatch framework to integrate DCCs flexibility.
@@ -102,20 +112,25 @@ The workloads in DCCs can be broadly categorized into three types,~\cite{6041050
 Notably, compute-intensive and storage-intensive workloads dominate DCCs, collectively accounting for approximately $70$\% of the total workload amount,~\cite{wangClusterFrameworksEfficient2018}.
 Among these, compute-intensive and storage-intensive workloads dominate the overall DCC operations, collectively accounting for approximately 70\% of the total workload~\cite{wangClusterFrameworksEfficient2018}. The increasing demand for high-performance computing and data-driven applications further reinforces this dominance. In contrast, network-intensive workloads are typically more volatile and time-sensitive, requiring immediate processing to maintain seamless service performance.
 Because compute-intensive and storage-intensive workloads are relatively predictable and flexible, they can be strategically shifted or reallocated to reduce peak power consumption. Techniques such as
-dynamic voltage and frequency scaling (DVFS) enable temporal or spatial workload adjustments and controlled response delays, thereby improving workload balancing and enhancing the overall energy
+DVFS mechanism enable temporal or spatial workload adjustments and controlled response delays, thereby improving workload balancing and enhancing the overall energy
 efficiency of DCC operations.
 
-
-In addition to possible power management in DCCs through DVFS, it is essential to consider DCCs' physical security constraints related to job size and service-time latency. These factors directly impact the feasibility of workload reallocation and shifting processes between multiple DCC servers,~\cite{yu2023demand,wang2020flexible}.
+In addition to possible power management in DCCs through DVFS, it is essential to consider DCCs' physical security constraints related to job size and service-time latency. These factors directly impact the feasibility of workload reallocation and shifting processes between multiple DCC servers,~\cite{wang2020flexible}.
 For instance, excessively shifting time-sensitive workloads between DCCs may lead to data congestion and latency risks. To reflect on this issue,
 Ref.~\cite{kuehnDVFSpowerManagementPerformance2019} investigated a cloud-based DCCs queuing model using DVFS load-dependent strategies.
-Ref.~\cite{hanDualtimeScaleCollaborative2025} analyzed the response characteristics of various time-tolerant (workload) jobs concerning service time and total energy consumption, proposing a dual-timescale collaborative optimization model for multi-DCC systems.
+Ref.~\cite{hanDualtimeScaleCollaborative2025} analyzed the response characteristics of various time-tolerant (workload) jobs concerning service time and total energy consumption, proposing a dual-timescale collaborative optimization model for multiple DCCs.
 Ref.~\cite{dingEmissionawareStochasticResource2018} developed an emission-aware stochastic optimization model for microgrid system planning considering batch workload scheduling processes.
 Ref.~\cite{hanDatadrivenDistributionallyRobust2025} extended a data-driven distributionally robust optimization model for low-carbon DCC systems, addressing multi-tasking responses and uncertainties in renewable energy integration.
 Ref.~\cite{wangClusterFrameworksEfficient2018} provided a comprehensive survey of efficient task scheduling and resource allocation methodologies in multi-DCC networks.
 Ref.~\cite{lin2023workload} proposed a workload-aware robust DVFS technique, Gear-DVFS, to address concurrency challenges in mobile-driven workloads.
 Ref.~\cite{8520806} proposed a distributed shortest remaining time first (SRTF) scheduling model for DCCs workload reallocation, designed to minimize flow completion time while ensuring flow-size availability.
 Ref.~\cite{wangSchedulingMachineLearningBasedFlow2018} constructed a machine-learning-based scheduling flow detection and packet-switched optical network (PSON) architecture for intra-DCC connectivity and bath workload allocation.
+\textcolor{blue!75}{Ref.~\cite{yu2023demand} constructed a refined demand-responsive scheduling model that considers possible frequency dynamic
+	support provided by multiple DCCs.
+	Ref.~\cite{Yu2024EnablingEnergyEfficientDataCenter} investigates the qualification and participation procedures for DCC in frequency regulation
+	ancillary service markets such as hourly bidding and real-time market operations.
+	Ref.~\cite{zhang2024data} analyzes the interactive relations between DCC and electrical load aggregators, and extends a union electricity demand
+	response model to optimize the total energy consumption of multiple DCCs.}
 These studies thoroughly examine workload reallocation processes through DVFS across different DCCs. Nevertheless, the impact of flexibility potential
 provided by these workloads hosted on DVFS-enabled DCCs remains unexplored.
 
@@ -150,22 +165,28 @@ Section VI summarizes the key findings and insights from the case studies.
 
 % This section presents a coordinated scheduling framework to integrate the flexible response capabilities of DCCs into electrical power system operations. The system architecture and scheduled power management through DVFS-controlled DCCs are detailed in Fig.~\ref{fig:sfr}
 
-This section introduces a coordinated scheduling framework designed to integrate the flexible response capabilities produced by DCCs into power system operations. Fig.~\ref{fig:sfr} further details the system architecture and scheduled power management facilitated by DVFS-controlled DCCs.
+\textcolor{blue!75}{This section introduces a coordinated scheduling framework designed to integrate the flexible response capabilities produced by DCCs into power system operations, as shown in Fig.~\ref{fig:framework}. Specifically, Fig.~\ref{fig:sfr} provides further details on the system architecture and scheduled power management facilitated by DVFS-controlled DCCs.}
 
 \textcolor{blue!75}{
-In Fig.~\ref{fig:sfr}, the proposed workload management process consists of: intel-level DCC workload reallocation and balancing processes, and the
-intra-level DCC workload power consumption regulation processes. The significant difference between the workload reallocation and balancing process and the workload-adjustable power consumption regulation process through DVFS lies in the distinct power control objects and control mechanisms. The former processes occur across multiple DCC devices, and this is an inter-DCC-level workload reallocation behavior. During this process, the system reallocates computational workload among geographically distributed DCCs to maintain power balance and optimize system-wide consumption. In addition, suitable time latency requirements should be reconsidered during workload reallocation processes.
-In contrast, the latter workload consumption processes occur at the individual DCC device level and constitute an intra-DCC-level workload power consumption regulation stage. Each DCC further refines its power usage through DVFS-based adjustment on individual computing devices, enabling fine-grained, rapid, and controllable demand response. During this process, suitable frequency parameters and voltage parameters are essential when applying DVFS techniques.
+	In Fig.~\ref{fig:sfr}, the proposed workload management process consists of: intel-level DCC workload reallocation and balancing processes, and the
+	intra-level DCC workload power consumption regulation processes. The significant difference between the workload reallocation and balancing process and the workload-adjustable power consumption regulation process through DVFS lies in the distinct power control objects and control mechanisms. The former processes occur across multiple DCC devices, and this is an inter-DCC-level workload reallocation behavior. During this process, the system reallocates computational workload among geographically distributed DCCs to maintain power balance and optimize system-wide consumption. In addition, suitable time latency requirements should be reconsidered during workload reallocation processes.
+	In contrast, the latter workload consumption processes occur at the individual DCC device level and constitute an intra-DCC-level workload power consumption regulation stage. Each DCC further refines its power usage through DVFS-based adjustment on individual computing devices, enabling fine-grained, rapid, and controllable demand response. During this process, suitable frequency parameters and voltage parameters are essential when applying DVFS techniques.
 }
 
 % Recognizing the difference in scheduling timescales (hourly for grid-side operations versus seconds for DCCs workload management), the framework is structured into two interconnected parts. PART-1 encompasses the grid-side scheduling model, while PART-2 represents the DCCs workload management model.
 
 %Part-1 optimizes the power system's generation schedule, and Part-2 optimizes workload shifting within DCCs.
+\begin{figure}[!t]
+	\centering
+	\includegraphics[width=0.35\textwidth]{./fig/framework.pdf}
+	\caption{The grid-interactive relations between electrical power grid and DVFS-controlled DCCs.}
+	\label{fig:framework}
+\end{figure}
 
 
 \begin{figure}[!t]
 	\centering
-	\includegraphics[width=0.4\textwidth]{./fig/proposed_framework.pdf}
+	\includegraphics[width=0.35\textwidth]{./fig/proposed_framework.pdf}
 	\caption{The scheduled power management through DVFS-controlled DCCs.}
 	\label{fig:sfr}
 \end{figure}
@@ -231,7 +252,12 @@ The feasibility of workload balancing for compute-intensive and storage-intensiv
 	\end{tabular}
 \end{table}
 
-\textcolor{blue!75}{Furthermore, this work introduces the DVFS mechanism to enhance intra-DCC level energy efficiency and computational flexibility. By dynamically adjusting the processor's operating voltage and frequency to match real-time workload demands, DVFS enables an effective trade-off between performance and power consumption (see figure 1). Since chip power consumption is approximately proportional to the square of the voltage and linearly proportional to the frequency, DVFS can significantly reduce both energy use and heat generation during low-load periods, while restoring high-frequency operation under heavy workloads. This dynamic adjustment allows DCCs to maintain computing reliability and performance while achieving suitable workload tasks and low time-instant requirement.}
+\textcolor{blue!75}{Furthermore, this work introduces the DVFS mechanism to enhance intra-level DCC energy efficiency and computational flexibility.
+By dynamically adjusting the processor's operating voltage and frequency to match real-time workload demands, DVFS enables an effective trade-off
+between performance and power consumption (see Fig.~\ref{fig:dvfs}). Since chip power consumption is approximately proportional to the square of the
+voltage and linearly proportional to the frequency, DVFS can significantly reduce both energy use and heat generation during low-load periods, while
+restoring high-frequency operation under heavy workloads. Table.~\ref{tab:cpu_states} provides a comprehensive comparison of DCC operating states and their corresponding power ratios.
+This dynamic adjustment mechanism allows DCCs to maintain computing reliability and performance while achieving suitable workload tasks and low time-instant requirement.}
 To estimate the benefits of DVFS-controlled DCCs in achieving smooth energy demand and proactive workload response, additional concise constraints regarding workload balancing processes among multiple DCCs are established,
 
 
@@ -280,7 +306,7 @@ Notably, (3a)-(3c) remain intractable due to product terms involving continuous 
 	\begin{align}
 		\!\!\!\!\!\!\!\!\varDelta p_{dcc,i,t}^{bal} = & \phi_{dcc,i,t}^{dvfs} \lambda_{dcc,i,t}^{ini}{\mu_{dcc,i,t}^{-1}} + \iota_{dcc,i,t} {\mu_{dcc,i,t}^{-1}} & \forall i\in \mathcal{I} \\
 		\!\!\!\!\!\!\!\!\iota_{dcc,i,t} =             & \phi_{dcc,i,t}^{dvfs} \varDelta \lambda_{dcc,i,t},                                                       & \forall i\in \mathcal{I} \\
-		\!\!\!\!\!\!\!\!\iota_{dcc,i,t} \geq          & (\varsigma_{dcc,i,t}^{up})^{2} - (\varsigma_{dcc,i,t}^{dw})^{2},                                         & \forall i\in \mathcal{I} \\
+		\!\!\!\!\!\!\!\!\iota_{dcc,i,t} \geq          & (\varsigma_{dcc,i,t}^{up})^{2} - (\varsigma_{dcc,i,t}^{dw})^{2},                                         & \forall i\in \mathcal{I} \label{eq:5c}\\
 		\!\!\!\!\!\!\!\!\varsigma_{dcc,i,t}^{up} \geq & 0, \varsigma_{dcc,i,t}^{up} \in \mathbb{R}, \varsigma_{dcc,i,t}^{dw} \in \mathbb{R},                     & \forall i\in \mathcal{I}
 	\end{align}
 \end{subequations}
@@ -289,13 +315,7 @@ Notably, (3a)-(3c) remain intractable due to product terms involving continuous 
 % Special-Ordered-Sets-of-type-1 (SOS1) constraint,~\cite{wilson2005algorithm}, which mix-integer-programming (MIP) solver could accurately identify
 % and compile them.
 
-\textcolor{blue!75}{For an individual DVFS-controlled DCC, its workload power consumption can be derived as constraint (3c). Since both the frequency parameter and
-	the voltage parameter in (3c) are continuous variable, and the adjusted bound for \(f_{dcc, i}\) can be assumed as $(0.5, 1.5)$, and the bound for
-	\(v_{dcc,i}\) remains as $(0.8, 1.25)$, then constraint (3c) can be directly transformed into the constraint (5c). The advantage of this conversation through
-	constraints (3c) is that \(f_{dcc, i}\) and \(v_{dcc, i}\) themselves are non-convex and nonlinear, which cannot be identified through the shed-on-off
-	solvers. However, both \(\varsigma_{dcc,i,t}^{up}\) and \(\varsigma_{dcc,i,t}^{dw}\) in (5c) keep convex quadratic term. Through this transformation,
-	the original non-convex optimization problem can be converted into a convex constrained problem.
-	In the next step, we need to perform differential linearization on \(\varsigma_{dcc, i,t}^{up}\) and \(\varsigma_{dcc, i,t}^{dw}\) and incorporate their differential form into the above constraints. That is,
+\textcolor{blue!75}{In terms of individual DVFS-controlled DCC, its workload power consumption can be derived as constraint (3c). Since both the frequency parameter and the voltage parameter in (3c) are continuous variable, and the adjusted bound for \(f_{dcc, i}\) can be assumed as $(0.5, 1.5)$, and the bound for	\(v_{dcc, i}\) remains as $(0.8, 1.25)$, then constraint (3c) can be directly transformed into the constraint (5c). The advantage of this conversation through constraints (3c) is that \(f_{dcc, i}\) and \(v_{dcc, i}\) themselves are non-convex and nonlinear, which cannot be identified through the shed-on-off solvers. However, both \(\varsigma_{dcc,i,t}^{up}\) and \(\varsigma_{dcc,i,t}^{dw}\) in (5c) keep convex quadratic term. Through this transformation,	the original non-convex optimization problem can be converted into a convex constrained problem.	In the next step, we need to perform differential linearization on \(\varsigma_{dcc, i,t}^{up}\) and \(\varsigma_{dcc, i,t}^{dw}\) and incorporate their differential form into the above constraints. That is,
 }
 
 \vspace{-0.25cm}
@@ -314,17 +334,17 @@ Notably, (3a)-(3c) remain intractable due to product terms involving continuous 
 	characterize whether to adopt the current value. On this basis, to restrict the uniqueness of $\varsigma_{dcc,i}^{up}$ and
 	$\varsigma_{dcc, i}^{dw}$ within their discretized differential value intervals, it is obviously necessary to add the SOS-1 constraint, i.e., \(\sum\nolimits_{z\in\mathcal{Z}} \varpi_{dcc, i,z}^{up}=1\), \(\sum\nolimits_{z\in\mathcal{Z}} \varpi_{dcc,i,z}^{dw}=1\). By integrating the operations mentioned before, the product terms among the
 	aforementioned variables can be decomposed into a combination of convex-type constraints through ingenious constraint transformation and SOS-1 reformulation.
-	The degree of approximation between the reformulated (5c), \eqref{eq:6a},\eqref{eq:6b} and the original constraints (3c) depends on the
+	The degree of approximation between the reformulated \eqref{eq:5c}, \eqref{eq:6a}, \eqref{eq:6b} and the original constraints (3c) depends on the
 	setting of z: the larger in the number of $z$ is, The more cutting planes formed by such reformulated constraints, the better the approximation effect. In this work, \(z = 5\) in default. Fig.~\ref{fig:sos1_relaxed} illustrates the correspondence between the solution derived using SOS-1 and the original constraints, it can be observed that the adopted constraint reformulation process is capable of accurately depicting the structure of the original constraints.}
 
 \begin{figure*}[!t]
 	\centering
-	\includegraphics[width=0.875\textwidth]{./fig/sos1_relaxed.pdf}
+	\includegraphics[width=0.975\textwidth]{./fig/sos1_relaxed.pdf}
 	\caption{The nonlinear constraint (3c) consisting of a product of two continuous variables corresponds to the decision variables \(f_{dcc,i,t}\) and \(v_{dcc,i,t}\), as well as the linearization reformulation process: (a) the original constraints structure, (b) the SOS1-type discretized reformulated constraint, and (c) the difference between original constraints and reformulated constraints.}\vspace{-0.25cm}
 	\label{fig:sos1_relaxed}
 \end{figure*}
 
-For simplification, let $\langle \varsigma_{dcc,i,t,z}^{up}, \varsigma_{dcc,i,t,z}^{dw}\rangle$, respectively, denote the piece-wise block of related continuous variables $\langle \varsigma_{dcc,i,t}^{up},\varsigma_{dcc,i,t}^{dw}\rangle$, hence, (4b) can be reformulated as below,
+For simplification, let $\langle \varsigma_{dcc,i,t,z}^{up}, \varsigma_{dcc,i,t,z}^{dw}\rangle$ denote the piece-wise block of $\langle \varsigma_{dcc,i,t}^{up},\varsigma_{dcc,i,t}^{dw}\rangle$, respectively, hence, constraint (4b) can be reformulated as below,
 
 \vspace{-0.25cm}
 \begin{subequations}
@@ -430,7 +450,7 @@ To depict the flexibility potential provided by DCCs,~\cite{zhang2017chance}, a 
 In the above formulations,
 The objective function (10a) aims to achieve the economic operation cost of the power systems.
 Constraints (10b) and (10c) enforce the consistency among unit start-up state, shut-down state, and On/Off status decisions produced by conventional generators.
-Constraints (10d) and (10e) impose minimum shut-up/shut-down duration restrictions for each conventional generator, ensuring adequate duration between consecutive start-up and shut-down actions.
+Constraints (10d) and (10e) impose minimum start-up/shut-down duration restrictions for each conventional generator, ensuring adequate duration between consecutive start-up and shut-down actions.
 Constraint (10f) ensures a power balance between generation and demand. The demand side includes both conventional electricity consumers and DCCs.
 Constraint (10g) describes the power flow limits of each transmission line.
 Constraints (10h) enforce the upward and downward ramping limitations of individual conventional generators.
@@ -445,28 +465,28 @@ Constraints (10s) and (10t) represent the physical operating limits of DVFS-cont
 
 \section{Case Studies and Analysis}
 
-To validate the effectiveness of the proposed refined UC model, a data center system comprising $8$ DCC servers is integrated into the IEEE 6-bus test system,~\cite{8939187}. The total workload consumption throughout the scheduling horizon is described in Fig.~\ref{fig:workload_distribution}. Additionally, two wind farms, each with an installed capacity of $5$ MW, are connected at bus 2 in the power system. The sequential load curves and stochastic wind farm outputs are illustrated in Fig.~\ref{fig:load_curve} and Fig.~\ref{fig:wind_curve}, respectively. All experiments are conducted on a personal Lenovo desktop with an Intel(R) Core i7-$13700$~F CPU~@$3.46$~GHz and RAM $32$~GB. The proposed and benchmark models are implemented in the Julia-v11.5/JuMP-v1.26,~\cite{Lubin2023}, environment.
+To validate the effectiveness of the proposed refined UC model, a data center system comprising $8$ DCC servers is integrated into the IEEE 6-bus test system,~\cite{zhang2017chance}. The total workload consumption throughout the scheduling horizon is described in Fig.~\ref{fig:workload_distribution}. Additionally, two wind farms, each with an installed capacity of $5$ MW, are connected at bus 2 in the power system. The sequential load curves and stochastic wind farm outputs are illustrated in Fig.~\ref{fig:load_curve} and Fig.~\ref{fig:wind_curve}, respectively. All experiments are conducted on a personal Lenovo desktop with an Intel(R) Core i7-$13700$~F CPU~@$3.46$~GHz and RAM $32$~GB. The proposed and benchmark models are implemented in the Julia-v11.5/JuMP-v1.26,~\cite{Lubin2023}, environment.
 
 
 \begin{figure}[!t]
-	\raggedright
-	\includegraphics[width=0.50\textwidth, height = 5.5cm]{./fig/workload_distribution.pdf}\vspace{-0.025cm}
-	\caption{Results of Workload consumption hosted by multiple DCC servers.}
+	\centering
+	\includegraphics[width=0.4050\textwidth, height = 4.5cm]{./fig/workload_distribution.pdf}\vspace{-0.025cm}
+	\caption{Results of workload consumption hosted by multiple DCC servers.}
 	\label{fig:workload_distribution}\vspace{-0.25cm}
 \end{figure}
 % \vspace{-0.25cm}
 
 \begin{figure}[!t]
-	\raggedright
-	\includegraphics[width=0.4250\textwidth]{./fig/loadcurve.pdf}\vspace{-0.025cm}
+	\centering
+	\includegraphics[width=0.4050\textwidth]{./fig/loadcurve.pdf}\vspace{-0.025cm}
 	\caption{Chronological load curve of the IEEE 6-bus system.}
 	\label{fig:load_curve}
 \end{figure}
 % \vspace{-0.25cm}
 
 \begin{figure}[!t]
-	\raggedright
-	\includegraphics[width=0.4250\textwidth,height = 5cm]{./fig/windscurve_result.pdf}\vspace{-0.025cm}
+	\centering
+	\includegraphics[width=0.4050\textwidth,height = 5cm]{./fig/windscurve_result.pdf}\vspace{-0.025cm}
 	\caption{Chronological stochastic output generated by wind farms.}
 	\label{fig:wind_curve}\vspace{-0.25cm}
 \end{figure}
@@ -514,13 +534,16 @@ The idle workload consumption generated by each DCC server is $10$~kW, and $8$~D
 	\end{tabular}\vspace{-0.05cm}
 \end{table}
 
-
 To investigate the influence of DCCs in providing flexibility during the entire scheduling process, two models are employed:
 $i$) the traditional UC model that considers DCCs consumption (benchmark), the workload generated by DCC servers is retreated as a standard electrical demand. The comprehensive formulation of this model is available in \cite{doi:10.1049/icp.2025.0664}.
 $ii$) the proposed UC model considering flexible characteristic generated by DCCs, where the flexibility potential of DCCs is analyzed through $(2b)-(2e), (3d)-(3e), (5a)-(5c)$, and $(6a)-(6h)$. The detailed formulation of this proposed model can be found in $(10a)-(10t)$.
 A comparative analysis of the scheduling results from both UC models is presented in Fig.~\ref{tab:scheduling_res}. Additionally, Fig.~\ref{fig:balance_process} illustrates the power balance between activated generators and demand, while also taking DVFS-controlled DCCS into account. Furthermore, Fig.~\ref{fig:workload_consumption_plot6} depicts the stacked workload consumption using DVFS techniques.
 
 Table~\ref{tab:scheduling_res} demonstrates that the scheduling costs from the proposed UC model are lower than those from the traditional UC model. This improvement stems from the additional flexible adjustment capabilities provided by DCCs through DVFS techniques in the proposed UC framework. Compared to the benchmark model, the proposed UC model reduces the decorating operations of thermal generators, which are typically caused by their frequent tracking of load fluctuations and wind power uncertainties. This allows thermal generators to maintain a more economical operating state. Thus, the calculated scheduling results show that the proposed model is more economical. This highlights the critical role of DCC flexibility in enhancing both system economics and operational adjustable capabilities.
+
+\textcolor{blue!75}{
+	According to the proposed methodology, the runtime of the refined UC studies considering the potential flexibility from multi-DCCs is 193.62 MiB, while the one using the benchmark is 26.067 MiB. By further comparing memory consumption between the proposed model and the benchmark, the proposed method runs in 282.547 seconds, while the benchmark runs in 0.831 seconds. Therefore, adopting the constraint reconstruction strategy proposed in this paper has a limited impact on overall solution time and CPU memory usage. From this point, the proposed model can be used to refine the description of DCC contribution in terms of active response and provision of regulatory reserve capacity.
+}
 
 Fig.~\ref{fig:stacked_dcc_λ_plot} shows the workload reallocation and corresponding voltage and frequency adjustments for balancing loads across multiple DCC servers. Significant workload transfers occur during periods $4$h and $13$h, where the output from wind farms and thermal generators is sufficient. Specially, the workload is increased on lightly loaded servers (DCC1, DCC2, DCC4, DCC5, DCC7, and DCC8) at period $4$h. This preemptively reduces the workload on heavily loaded servers (DCC3 and DCC6) in the subsequent periods $5$h and $6$h. This reallocation allows thermal generators to operate more smoothly and maintain a higher but more economical operation state, facilitating economic efficiency improvement and reducing the need for system flexibility under periods $5$h-$6$h.
 
@@ -540,58 +563,71 @@ Fig.~\ref{fig:stacked_dcc_λ_plot} shows the workload reallocation and correspon
 \end{table}
 
 \begin{figure}[!t]
-	\raggedright
-	\includegraphics[width=0.55\textwidth,height = 5cm]{./fig/balanceprocess.pdf}\vspace{-0.025cm}
+	\centering
+	\includegraphics[width=0.45\textwidth,height = 5cm]{./fig/balanceprocess.pdf}\vspace{-0.025cm}
 	\caption{Power balance process of the IEEE 6-bus system considering workload consumptions hosted by DCCs.}
 	\label{fig:balance_process}
 \end{figure}
 
 \begin{figure}[!t]
-	\raggedright
-	\includegraphics[width=0.45\textwidth]{./fig/stacked_dc_λ_subplots.pdf}\vspace{-0.025cm}
-	\caption{Results of interval-based workload reallocation across multiple DCCs servers (interval = $6$h).}
+	\centering
+	\includegraphics[width=0.375\textwidth]{./fig/dcc_dvfs_workloadreallocation.pdf}\vspace{-0.025cm}
+	\caption{Results of workload reallocation among multiple DCCs and detailed regulated voltage and frequency parameters for each individual DCC: (a) the result of \(fv^2\) for the DVFS-controlled DCC using the DVFS technique, and (b) the result of \(fv^2 \times \lambda\) for multiple DVFS-controlled DCCs during workload reallocation processes.}
 	\label{fig:stacked_dcc_λ_plot}
 \end{figure}
 
-\begin{figure}[!h]
-	\raggedright
-	\includegraphics[width=0.45\textwidth]{./fig/stacked_dc_fv_subplots.pdf}\vspace{-0.025cm}
-	\caption{Results of voltage and frequency regulation parameters for individual DCC servers using the DVFS technique.}
-	\label{fig:stacked_dcc_f_plot}
-\end{figure}
-
-Besides, the scheduled workload fluctuations exhibit significant synchronous (see Fig.~\ref{fig:stacked_dcc_λ_plot}). By taking DCC7 and DCC8 as a case, both workload rates of these two DCC servers keep a synchronized upward trend during periods $1$h-$4$h, while both remain relatively stable during $5$h-$8$h intervals. This consistent phenomenon is primarily attributed to the predefined service-time constraints denoted by (9a).
-Furthermore, constraint (9a) denotes a functional but straightforward interval-based workload allocation and division strategy. Using this strategy, the entire scheduling horizon ($24$h) is segmented into a series of independent intervals such as $0$h-$6$h,$7$h-$12$h,$13$h-$18$h,$19$h-$24$h. Under each independent scheduling interval, the workload reallocation across multiple DCCs is permitted to achieve workload balancing optimization. Conversely, cross-interval workload reallocation between adjacent scheduling intervals would be prohibited to maintain system efficiency and minimize inter-dependencies.
-Hence, the system would leverage workload flexibility with maximum efficiency and ensure the minimization of service times by confining workload balancing operations to designated time intervals.
-
-Moreover, a similar synchronous adjustment characteristic in \(f_{dcc, I,t} v_{dcc, I,t}^2\) in Fig.~\ref{fig:stacked_dcc_f_plot} can also be observed. Specifically, all DCC servers other than DCC3~/~DCC6 simultaneously initiated their CPU frequency parameter and voltage parameters through DVFS mechanisms, exhibiting a highly consistent adjustment trend. Similarly, DCC5 and DCC8 also implemented DVFS regulation synchronously during the period $12$h. This phenomenon indicates a close synergistic relationship between workload-balancing processes among DCCs and the intrinsic DVFS processes. Both workload reallocations (across multiple DCCs) and instant frequency/voltage parameter regulations (hosted on individual DCC servers) maintain synchronicity in the temporal dimension and keep unidirectional adjustment in their regulation directions.
-
-Despite observing synchronous trends, the fluctuations between \(f_{dcc,i,t} v_{dcc,i,t}^2\) (in Fig.~\ref{fig:stacked_dcc_f_plot}) and \(\lambda_{dcc,i,t}\) (in Fig.~\ref{fig:stacked_dcc_λ_plot}) are not entirely identical. The difference in this discrepancy lies in the varying load-rate levels of various DCCs and possible adjustable difficulties in migrating workload from heavily loaded DCC servers to lightly loaded ones.
-this disparity is reflected in the distinct distributions of the \(\lambda_{dcc,i,t}\) curve and the \(f_{dcc,i,t} v_{dcc,i,t}^2\) curve.
+% \begin{figure}[!h]
+% 	\raggedright
+% 	\includegraphics[width=0.45\textwidth]{./fig/stacked_dc_fv_subplots.pdf}\vspace{-0.025cm}
+% 	\caption{Results of voltage and frequency regulation parameters for individual DCC servers using the DVFS technique.}
+% 	\label{fig:stacked_dcc_f_plot}
+% \end{figure}
 
 \begin{figure*}[!t]
 	\centering
-	\includegraphics[width=0.850\textwidth,height = 16cm]{./fig/res_dcc_power_plots.pdf}\vspace{-0.025cm}
-	\caption{Sequential workload consumption generated by multiple DCCs reallocation (intervals = $6$h).}
+	\includegraphics[width=0.910\textwidth]{./fig/res_dcc_power_plots.pdf}\vspace{-0.025cm}
+	\caption{Workload power consumption of individual DCC device through the proposed model: (a) initial pre-defined workload consumption for each DCC, and (b)-(f) reallocated workload power consumption for each DCC device.}
 	\label{fig:workload_consumption_plot6}
 \end{figure*}
 
-\begin{figure}[!t]
-	\raggedright
-	\includegraphics[width=0.50\textwidth,height = 5cm]{./fig/stacked_dcc_p4_plot.pdf}\vspace{-0.025cm}
-	\caption{Sequential workload consumption generated by multiple DCCs reallocation (intervals = $4$h).}
-	\label{fig:workload_consumption_plot4}
-\end{figure}
+
+Besides, the scheduled workload fluctuations exhibit significant synchrony. By taking DCC7 and DCC8 as a case, both workload rates of these two DCC servers keep a synchronized upward trend during periods $1$h-$4$h, while both remain relatively stable during $5$h-$8$h intervals. This consistent phenomenon is primarily attributed to the predefined service-time constraints denoted by (9a).
+Furthermore, constraint (9a) denotes a functional but straightforward interval-based workload allocation and division strategy. Using this strategy, the entire scheduling horizon ($24$h) is segmented into a series of independent intervals such as $0$h-$6$h,\,$7$h-$12$h,\,$13$h-$18$h,\,$19$h-$24$h. Within each independent scheduling interval, workload reallocation across multiple DCCs is permitted to achieve optimal workload balancing. Conversely, cross-interval workload reallocation between adjacent scheduling intervals would be prohibited to maintain system efficiency and minimize inter-dependencies.
+Hence, the system would leverage workload flexibility with maximum efficiency and ensure the minimization of service times by confining workload balancing operations to designated time intervals.
+
+Moreover, a similar synchronous adjustment characteristic in \(f_{dcc, I,t} v_{dcc, I,t}^2\) in Fig.~\ref{fig:stacked_dcc_λ_plot} can also be observed. Specifically, all DCC servers other than DCC3~/~DCC6 simultaneously initiated their CPU frequency parameter and voltage parameters through DVFS mechanisms, exhibiting a highly consistent adjustment trend. Similarly, DCC5 and DCC8 also implemented DVFS regulation synchronously during the period $12$h. This phenomenon indicates a close synergistic relationship between workload-balancing processes among DCCs and the intrinsic DVFS processes. Both workload reallocations (across multiple DCCs) and instant frequency/voltage parameter regulations (hosted on individual DCC servers) maintain synchronicity in the temporal dimension and keep unidirectional adjustment in their regulation directions.
+
+Despite observing synchronous trends, the fluctuations between \(f_{dcc,i,t} v_{dcc,i,t}^2\) are not entirely identical. The difference in this discrepancy lies in the varying load-rate levels of various DCCs and possible adjustable difficulties in migrating workload from heavily loaded DCC servers to lightly loaded ones.
+this disparity is reflected in the distinct distributions of the \(\lambda_{dcc,i,t}\) curve and the \(f_{dcc,i,t} v_{dcc,i,t}^2\) curve.
 
 
-To comprehensively compare workload consumption and flexibility potential across different balancing intervals, Fig.~\ref{fig:workload_consumption_plot4} and Fig.~\ref{fig:workload_consumption_plot6} illustrate the sequential workload consumption after multiple DCC reallocation during $4$h and $6$h intervals, respectively in comparison with the original workload consumption amount $14.93$ p.u. Without workload-balancing management, the reallocated workload consumption through multiple DCCs balancing processes and DVFS processes is $13.94$ MW, where the reduction of workload consumption is about $0.99$ MW. When the interval-based workload reallocation period is extended to $6$h, the overall workload consumption requirement drops to $13.51$MW, a decrease of $1.42$MW compared to the unbalanced case. The reduction of workload consumption through multiple DVFS-controlled DCC balancing processes directly demonstrates the validity of this work. It can be concluded that appropriately lengthening the workload balancing interval leads to better energy optimization and reduced total workload consumption, thereby improving the power system's operational economy. However, it is crucial to acknowledge that excessively prolonging the pres-elected interval for workload reallocation will increase service latency. Therefore, considering the trade-offs between workload consumption and service latency is still essential.
+% \begin{figure}[!t]
+% 	\raggedright
+% 	\includegraphics[width=0.50\textwidth,height = 5cm]{./fig/stacked_dcc_p4_plot.pdf}\vspace{-0.025cm}
+% 	\caption{Sequential workload consumption generated by multiple DCCs reallocation (intervals = $4$h).}
+% 	\label{fig:workload_consumption_plot4}
+% \end{figure}
+
+To comprehensively compare workload consumption and flexibility potential across different balancing intervals,
+Fig.~\ref{fig:workload_consumption_plot6} illustrate the sequential workload consumption after multiple DCC reallocation at each stochastic scenarios over the entire scheduling
+horizon, respectively. It should be noted that DCCs highlighted in light red denote heavy-loaded cases, while those in light green indicate light-loaded cases. These two operational modes are classified as Type 1 and Type 2 in Fig.~\ref{fig:workload_consumption_plot6}.
+Specifically, without workload-balancing management, the reallocated workload consumption through multiple DCCs balancing
+processes and DVFS processes is $0.1394$ MW at the 4th time, where the reduction of
+workload consumption is about $0.010$ MW. When the interval-based workload reallocation period is extended to the $6$th interval, the overall workload consumption
+requirement drops to $0.1351$MW, a decrease of
+$0.0142$ MW compared to the unbalanced case. The reduction of workload consumption through multiple DVFS-controlled DCC balancing processes directly
+demonstrates the validity of this work. It can be concluded that appropriately lengthening the workload balancing interval leads to better energy
+optimization and reduced total workload consumption, thereby improving the operational economy of the power system. However, it is crucial to
+acknowledge that excessively prolonging the pre-election interval for workload reallocation will increase service latency. Therefore, considering the
+trade-offs, the relationship between workload consumption and service latency remains essential.
 
 \section{Conclusion}
 
-This paper proposes a refined UC model that incorporates the flexibility capabilities of DCCs through DVFS techniques. Specifically, the flexibility potential gained from reallocating workloads across multiple DCC servers and the real-time adjustments of frequency and voltage parameters for individual DCC servers is investigated. Building on this, a set of physical security constraints representing these processes is extended. Furthermore, these constraints are reshaped as SOS1-derived linearized constraints and subsequently integrated into the scheduling framework.
+This paper proposes a refined UC model that incorporates the flexibility capabilities of DCCs through DVFS techniques. Specifically, the potential for flexibility gained by reallocating workloads across multiple DCC servers and the real-time adjustments of frequency and voltage parameters for individual DCC servers are investigated. Building on this, a set of physical security constraints representing these processes is extended. Furthermore, these constraints are reshaped as SOS1-derived linearized constraints and subsequently integrated into the scheduling framework.
+Several findings in case studies suggested that: the flexibility potential of workloads hosted by DVFS-controlled DCCs could be effectively exploited by adjusting the interval duration during which DCCs participate in workload reallocation. This work can reduce the overall operation cost of power systems without excessively delaying the service latency of workload response.
 
-Several findings in case studies suggested that the flexibility potential of workloads hosted by DVFS-controlled DCCs could be effectively exploited by adjusting the interval duration during which DCCs participate in workload reallocation. This work can reduce the overall operation cost of power systems without excessively delaying the service latency of workload response.
-
+\textcolor{blue!75}{
+Future work may focus on analyzing how DCCs provide adequate support for system frequency dynamic and control, as well as their impacts when participating in ancillary frequency regulation markets.}
 
 \section{Appendix A: Reformulation of constraints (3c) through McCormick Envelope Method}
 Let $\gamma_{dcc,i}$ denotes the square value of \(v_{dcc,i}^{2}\), $i.e.$, \(\gamma_{dcc,i} = v_{dcc,i}^{2}\), the lower/upper bound of $\gamma_{dcc,i}$ can be obtained through estimating bindings parameters \((\lfloor v_{dcc,i} \rfloor)^2\) and \((\lceil v_{dcc,i} \rceil)^2\), respectively. This process holds because of the monotonic increasing property of the quadratic function. Accordingly, the constraints representing the lower/upper bounds of \(\gamma_{dcc,i}\)  can be derived as below,
@@ -636,7 +672,7 @@ Next, $\phi_{dcc,i}^{dvfs}$ can be equivalently represented as the product of tw
 %   \end{align}
 % \end{subequations}
 
-\bibliographystyle{IEEEtran}
-\bibliography{IEEEabrv,reference_abbr}
+\bibliographystyle{unsrt}
+\bibliography{reference}
 
 \end{document}

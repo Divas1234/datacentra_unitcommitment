@@ -1,54 +1,101 @@
 
 \begin{thenomenclature} 
+\nomgroup{A}
+  \item [{\(BESS\)}]\begingroup Battery Energy Storage System\nomeqref {0}\nompageref{1}
+  \item [{\(DCC\)}]\begingroup Data Center Cluster\nomeqref {0}\nompageref{1}
+  \item [{\(DVFS\)}]\begingroup Dynamic Voltage and Frequency Scaling\nomeqref {0}\nompageref{1}
+  \item [{\(GSDF\)}]\begingroup Generation shift distribution factor\nomeqref {0}\nompageref{1}
+  \item [{\(IBR\)}]\begingroup Inverter-based Resource\nomeqref {0}\nompageref{1}
+  \item [{\(QoS\)}]\begingroup Quality of Service\nomeqref {0}\nompageref{1}
+  \item [{\(SCUC\)}]\begingroup Security-Constrained Unit Commitment\nomeqref {0}\nompageref{1}
+  \item [{\(SOS1\)}]\begingroup Special Ordered Set of type 1\nomeqref {0}\nompageref{1}
+  \item [{\(UC\)}]\begingroup Unit Commitment\nomeqref {0}\nompageref{1}
 \nomgroup{I}
-  \item [{\(b\in\mathcal{B}\)}]\begingroup Index and Sets of Buses\nomeqref {0}\nompageref{1}
-  \item [{\(d\in\mathcal{D}\)}]\begingroup Index and Sets of conventional demands\nomeqref {0}\nompageref{1}
-  \item [{\(e\in\mathcal{E}\)}]\begingroup Index and Sets of battery energy storage systems(BESS)\nomeqref {0}\nompageref{1}
-  \item [{\(g\in\mathcal{G}\)}]\begingroup Index and Sets of conventional generators\nomeqref {0}\nompageref{1}
-  \item [{\(i\in\mathcal{I}\)}]\begingroup Index and Sets of DCC servers\nomeqref {0}\nompageref{1}
-  \item [{\(l\in\mathcal{L}\)}]\begingroup Index and Sets of transmission lines\nomeqref {0}\nompageref{1}
-  \item [{\(s\in\mathcal{S}\)}]\begingroup Index and Sets of scenarios\nomeqref {0}\nompageref{1}
-  \item [{\(t\in\mathcal{T}\)}]\begingroup Index and Sets of time periods\nomeqref {0}\nompageref{1}
-  \item [{\(w\in\mathcal{W}\)}]\begingroup Index and Sets of wind farms\nomeqref {0}\nompageref{1}
+  \item [{\(\mathcal{B}_{l}\)}]\begingroup Set of buses connected to line $l$\nomeqref {0}\nompageref{1}
+  \item [{\(\mathcal{D}_{b}\)}]\begingroup Set of demands connected to bus $b$\nomeqref {0}\nompageref{1}
+  \item [{\(\mathcal{E}_{b}\)}]\begingroup Set of BESS units connected to bus $b$\nomeqref {0}\nompageref{1}
+  \item [{\(\mathcal{G}_{b}\)}]\begingroup Set of thermal generators connected to bus $b$\nomeqref {0}\nompageref{1}
+  \item [{\(\mathcal{I}_{b}\)}]\begingroup Set of DCC connected to bus $b$\nomeqref {0}\nompageref{1}
+  \item [{\(\mathcal{M}(\omega_g^{dt} - 1,t)\)}]\begingroup Set of time periods for minimum down time constraint of generator $g$\nomeqref {0}\nompageref{1}
+  \item [{\(\mathcal{M}(\omega_g^{ut} - 1,t)\)}]\begingroup Set of time periods for minimum up time constraint of generator $g$\nomeqref {0}\nompageref{1}
+  \item [{\(\mathcal{T}_{k}\)}]\begingroup Set of time periods within workload balancing interval $k$\nomeqref {0}\nompageref{1}
+  \item [{\(\mathcal{W}_{b}\)}]\begingroup Set of wind farms connected to bus $b$\nomeqref {0}\nompageref{1}
+  \item [{\(b\in\mathcal{B}\)}]\begingroup Index and set of buses\nomeqref {0}\nompageref{1}
+  \item [{\(d\in\mathcal{D}\)}]\begingroup Index and set of electrical demands\nomeqref {0}\nompageref{1}
+  \item [{\(e\in\mathcal{E}\)}]\begingroup Index and set of BESSs\nomeqref {0}\nompageref{1}
+  \item [{\(g\in\mathcal{G}\)}]\begingroup Index and set of thermal generators\nomeqref {0}\nompageref{1}
+  \item [{\(i\in\mathcal{I}\)}]\begingroup Index and set of DCCs\nomeqref {0}\nompageref{1}
+  \item [{\(k\in\mathcal{K}\)}]\begingroup Index and set of workload balancing time intervals\nomeqref {0}\nompageref{1}
+  \item [{\(l\in\mathcal{L}\)}]\begingroup Index and set of transmission lines\nomeqref {0}\nompageref{1}
+  \item [{\(s\in\mathcal{S}\)}]\begingroup Index and set of uncertainty scenarios\nomeqref {0}\nompageref{1}
+  \item [{\(t\in\mathcal{T}\)}]\begingroup Index and set of time periods\nomeqref {0}\nompageref{1}
+  \item [{\(w\in\mathcal{W}\)}]\begingroup Index and set of wind farms\nomeqref {0}\nompageref{1}
+  \item [{\(z\in\mathcal{Z}\)}]\begingroup Index and set of piecewise linearization segments\nomeqref {0}\nompageref{1}
 \nomgroup{P}
-  \item [{\(\gamma_{e}^{ch}\)}]\begingroup Charging ramping capability of BESS $e$\nomeqref {0}\nompageref{1}
-  \item [{\(\gamma_{e}^{dis}\)}]\begingroup Discharging ramping capability of BESS $e$\nomeqref {0}\nompageref{1}
-  \item [{\(\gamma_{g}^{su/sd}\)}]\begingroup Shut-up/shut-down ramping capabilities of conventional generator $g$\nomeqref {0}\nompageref{1}
-  \item [{\(\gamma_{g}^{up/dw}\)}]\begingroup Up/down-forward ramping capabilities of conventional generator $g$\nomeqref {0}\nompageref{1}
-  \item [{\(\iota_{l,b}\)}]\begingroup Generating shifting distribution factor between transmission line $l$ and bus $b$\nomeqref {0}\nompageref{1}
-  \item [{\(\lambda_{dcc,i,t}^{ini}\)}]\begingroup Initial load-rate of DCC $i$ at period $t$\nomeqref {0}\nompageref{1}
-  \item [{\(C_{dcc,i}\)}]\begingroup Effective capacitance of DCC $i$\nomeqref {0}\nompageref{1}
-  \item [{\(C_{sd}\)}]\begingroup Shut-down cost of conventional generator $g$\nomeqref {0}\nompageref{1}
-  \item [{\(C_{shed,w}\)}]\begingroup Power curtailment cost of wind farm $w$\nomeqref {0}\nompageref{1}
-  \item [{\(C_{su}\)}]\begingroup Shut-up cost of conventional generator $g$\nomeqref {0}\nompageref{1}
-  \item [{\(C_{voll,d}\)}]\begingroup Value of lost load $d$\nomeqref {0}\nompageref{1}
-  \item [{\(i_{leak,i}\)}]\begingroup Leakage current of DCC $i$\nomeqref {0}\nompageref{1}
-  \item [{\(p_l\)}]\begingroup Power of transmission line $l$\nomeqref {0}\nompageref{1}
-  \item [{\(p_{dcc,i,t}^{dyn}\)}]\begingroup Dynamic workload of DCC $i$ at period $t$\nomeqref {0}\nompageref{1}
-  \item [{\(p_{dcc,i,t}^{idle}\)}]\begingroup Static workload of DCC $i$ at period $t$\nomeqref {0}\nompageref{1}
-  \item [{\(T_{tol}\)}]\begingroup Latency threshold for workload processing delays\nomeqref {0}\nompageref{1}
+  \item [{\(\alpha_{i}\)}]\begingroup Workload processing efficiency coefficient of DCC $i$ (tasks/GHz/h)\nomeqref {0}\nompageref{1}
+  \item [{\(\beta_{i}\)}]\begingroup Voltage-frequency relationship coefficient for DCC $i$\nomeqref {0}\nompageref{1}
+  \item [{\(\eta_{e}^{ch}\)}]\begingroup Charging efficiency of BESS $e$ (p.u.)\nomeqref {0}\nompageref{1}
+  \item [{\(\eta_{e}^{dis}\)}]\begingroup Discharging efficiency of BESS $e$ (p.u.)\nomeqref {0}\nompageref{1}
+  \item [{\(\gamma_{e}^{ch}\)}]\begingroup Charging ramping capability of BESS $e$ (MW/h)\nomeqref {0}\nompageref{1}
+  \item [{\(\gamma_{e}^{dis}\)}]\begingroup Discharging ramping capability of BESS $e$ (MW/h)\nomeqref {0}\nompageref{1}
+  \item [{\(\gamma_{g}^{dw}\)}]\begingroup Downward ramping capability of generator $g$ (MW/h)\nomeqref {0}\nompageref{1}
+  \item [{\(\gamma_{g}^{sd}\)}]\begingroup Shut-down ramping capability of generator $g$ (MW/h)\nomeqref {0}\nompageref{1}
+  \item [{\(\gamma_{g}^{su}\)}]\begingroup Start-up ramping capability of generator $g$ (MW/h)\nomeqref {0}\nompageref{1}
+  \item [{\(\gamma_{g}^{up}\)}]\begingroup Upward ramping capability of generator $g$ (MW/h)\nomeqref {0}\nompageref{1}
+  \item [{\(\iota_{l,b}\)}]\begingroup GSDF between line $l$ and bus $b$\nomeqref {0}\nompageref{1}
+  \item [{\(\lambda_{dcc,i,t}^{dyn}\)}]\begingroup Dynamic workload arrival rate of DCC $i$ at period $t$ (tasks/h)\nomeqref {0}\nompageref{1}
+  \item [{\(\lambda_{dcc,i,t}^{ini}\)}]\begingroup Initial workload arrival rate of DCC $i$ at period $t$ (tasks/h)\nomeqref {0}\nompageref{1}
+  \item [{\(\mu_{dcc,i,t}\)}]\begingroup Service processing rate of DCC $i$ at period $t$ (tasks/h)\nomeqref {0}\nompageref{1}
+  \item [{\(\omega_{g}^{dt}\)}]\begingroup Minimum down time requirement of generator $g$ (h)\nomeqref {0}\nompageref{1}
+  \item [{\(\omega_{g}^{ut}\)}]\begingroup Minimum up time requirement of generator $g$ (h)\nomeqref {0}\nompageref{1}
+  \item [{\(\overline{e}_{e}\)}]\begingroup Maximum energy storage capacity of BESS $e$ (MWh)\nomeqref {0}\nompageref{1}
+  \item [{\(\overline{p}_{e}^{ch}\)}]\begingroup Maximum charging power of BESS $e$ (MW)\nomeqref {0}\nompageref{1}
+  \item [{\(\overline{p}_{e}^{dis}\)}]\begingroup Maximum discharging power of BESS $e$ (MW)\nomeqref {0}\nompageref{1}
+  \item [{\(\overline{p}_{g}\)}]\begingroup Maximum power output of thermal generator $g$ (MW)\nomeqref {0}\nompageref{1}
+  \item [{\(\overline{p}_{l}\)}]\begingroup Maximum power flow capacity of line $l$ (MW)\nomeqref {0}\nompageref{1}
+  \item [{\(\underline{e}_{e}\)}]\begingroup Minimum energy storage capacity of BESS $e$ (MWh)\nomeqref {0}\nompageref{1}
+  \item [{\(\underline{p}_{g}\)}]\begingroup Minimum power output of thermal generator $g$ (MW)\nomeqref {0}\nompageref{1}
+  \item [{\(C_{dcc,i}\)}]\begingroup Capacitance parameter of DCC $i$ servers (F)\nomeqref {0}\nompageref{1}
+  \item [{\(C_{dcc,i}^{pen}\)}]\begingroup Workload shedding penalty cost for DCC $i$ (\$/MWh)\nomeqref {0}\nompageref{1}
+  \item [{\(C_{sd,g}\)}]\begingroup Shut-down cost of thermal generator $g$ (\$)\nomeqref {0}\nompageref{1}
+  \item [{\(C_{shed,w}\)}]\begingroup Curtailment penalty cost for wind farm $w$ (\$/MWh)\nomeqref {0}\nompageref{1}
+  \item [{\(C_{su,g}\)}]\begingroup Start-up cost of thermal generator $g$ (\$)\nomeqref {0}\nompageref{1}
+  \item [{\(C_{voll,d}\)}]\begingroup Value of lost load for demand $d$ (\$/MWh)\nomeqref {0}\nompageref{1}
+  \item [{\(f_{dcc,i}^{max}\)}]\begingroup Maximum operating frequency of DCC $i$ (GHz)\nomeqref {0}\nompageref{1}
+  \item [{\(f_{dcc,i}^{min}\)}]\begingroup Minimum operating frequency of DCC $i$ (GHz)\nomeqref {0}\nompageref{1}
+  \item [{\(i_{leak,i}\)}]\begingroup Leakage current parameter of DCC $i$ (A)\nomeqref {0}\nompageref{1}
+  \item [{\(p_{dcc,i,t}^{dyn}\)}]\begingroup Dynamic workload power demand of DCC $i$ at period $t$ (MW)\nomeqref {0}\nompageref{1}
+  \item [{\(p_{dcc,i,t}^{idle}\)}]\begingroup Static (idle) power consumption of DCC $i$ at period $t$ (MW)\nomeqref {0}\nompageref{1}
+  \item [{\(T_{q,t}\)}]\begingroup Average workload queuing delay at period $t$ (h)\nomeqref {0}\nompageref{1}
+  \item [{\(T_{tol}\)}]\begingroup Maximum tolerable latency threshold for workload processing (h)\nomeqref {0}\nompageref{1}
+  \item [{\(v_{dcc,i}^{max}\)}]\begingroup Maximum supply voltage of DCC $i$ (V)\nomeqref {0}\nompageref{1}
+  \item [{\(v_{dcc,i}^{min}\)}]\begingroup Minimum supply voltage of DCC $i$ (V)\nomeqref {0}\nompageref{1}
+  \item [{\(W_{dcc,i,t}\)}]\begingroup Total workload assigned to DCC $i$ at period $t$ (tasks)\nomeqref {0}\nompageref{1}
 \nomgroup{V}
-  \item [{\(\lambda_{dcc,i,t}\)}]\begingroup Workload rate of DCC $i$ at period $t$\nomeqref {0}\nompageref{1}
-  \item [{\(\omega_{g}^{dt}\)}]\begingroup Min shut-down duration of conventional generator $g$\nomeqref {0}\nompageref{1}
-  \item [{\(\omega_{g}^{ut}\)}]\begingroup Min shut-up duration of conventional generator $g$\nomeqref {0}\nompageref{1}
-  \item [{\(\phi_{dcc,i,t}^{dvfs}\)}]\begingroup Power regulation of DCC $i$ via DVFS technique\nomeqref {0}\nompageref{1}
-  \item [{\(\varDelta \lambda_{dcc,i,t}\)}]\begingroup Adjusted load-rate of DCC $i$ at period $t$\nomeqref {0}\nompageref{1}
-  \item [{\(\varDelta p_{d,t,s}\)}]\begingroup Shedded load $d$ at period $t$ under scenario $s$ \nomeqref {0}\nompageref{1}
-  \item [{\(\varDelta p_{dcc,i,t}^{bal}\)}]\begingroup Shifted workload of DCC $i$ at period $t$\nomeqref {0}\nompageref{1}
-  \item [{\(\varDelta p_{w,t,s}\)}]\begingroup Abandoned output of wind farm $w$ at period $t$ under scenario $s$\nomeqref {0}\nompageref{1}
-  \item [{\(\varepsilon_{e,t,s}^{ch}\)}]\begingroup Charging state decision of BESS $e$ at period $t$ under scenario $s$\nomeqref {0}\nompageref{1}
-  \item [{\(\varepsilon_{e,t,s}^{dis}\)}]\begingroup Discharging state decision of BESS $e$ at period $t$ under scenario $s$\nomeqref {0}\nompageref{1}
-  \item [{\(f_{dcc,i,t}\)}]\begingroup Operational frequency of DCC $i$ at period $t$\nomeqref {0}\nompageref{1}
-  \item [{\(p_{add,i, t,s}\)}]\begingroup workload of DCC $i$ at period $t$ under scenario $s$\nomeqref {0}\nompageref{1}
-  \item [{\(p_{d,t,s}\)}]\begingroup Power of demand $d$ at period $t$ under scenario $s$\nomeqref {0}\nompageref{1}
-  \item [{\(p_{dcc,i,t}\)}]\begingroup Workload consumption of DCC $i$ at period $t$\nomeqref {0}\nompageref{1}
-  \item [{\(p_{e,t,s}^{ch}\)}]\begingroup Charging power of BESS $e$ at period $t$ under scenario $s$\nomeqref {0}\nompageref{1}
-  \item [{\(p_{e,t,s}^{dis}\)}]\begingroup Discharging power of BESS $e$ at period $t$ under scenario $s$\nomeqref {0}\nompageref{1}
-  \item [{\(p_{g,t,s}\)}]\begingroup Output of conventional generator $g$ at period $t$ under scenario $s$\nomeqref {0}\nompageref{1}
-  \item [{\(p_{w,t,s}\)}]\begingroup Stochastic output of wind farm $w$ at period $t$ under scenario $s$\nomeqref {0}\nompageref{1}
-  \item [{\(u_{g,t}\)}]\begingroup Shut-down decision of conventional generator $g$ at period $t$\nomeqref {0}\nompageref{1}
-  \item [{\(v_{dcc,i,t}\)}]\begingroup Supply voltage of DCC $i$ at period $t$\nomeqref {0}\nompageref{1}
-  \item [{\(v_{g,t}\)}]\begingroup Shut-up decision of conventional generator $g$ at period $t$\nomeqref {0}\nompageref{1}
-  \item [{\(x_{g,t}\)}]\begingroup Operation state of conventional generator $g$ at period $t$\nomeqref {0}\nompageref{1}
+  \item [{\(\delta_{i,t}^{shed}\)}]\begingroup Workload shedding indicator for DCC $i$ at period $t$\nomeqref {0}\nompageref{1}
+  \item [{\(\lambda_{dcc,i,t}\)}]\begingroup Actual workload processing rate of DCC $i$ at period $t$ (tasks/h)\nomeqref {0}\nompageref{1}
+  \item [{\(\theta_{b,t}\)}]\begingroup Voltage angle at bus $b$ at period $t$ (rad)\nomeqref {0}\nompageref{1}
+  \item [{\(\varDelta \lambda_{dcc,i,t}^{bal}\)}]\begingroup Workload shifting rate adjustment of DCC $i$ at period $t$ (tasks/h)\nomeqref {0}\nompageref{1}
+  \item [{\(\varDelta p_{dcc,i,t}^{bal}\)}]\begingroup Workload shifting power adjustment of DCC $i$ at period $t$ (MW)\nomeqref {0}\nompageref{1}
+  \item [{\(\xi_{i,z,t}\)}]\begingroup Variable for piecewise linearization segment $z$ of DCC $i$ at period $t$\nomeqref {0}\nompageref{1}
+  \item [{\(\zeta_{i,z,t}\)}]\begingroup Continuous weight for piecewise linearization segment $z$ of DCC $i$ at period $t$\nomeqref {0}\nompageref{1}
+  \item [{\(e_{e,t}\)}]\begingroup Energy storage level of BESS $e$ at period $t$ (MWh)\nomeqref {0}\nompageref{1}
+  \item [{\(f_{dcc,i,t}\)}]\begingroup Operating frequency of DCC $i$ servers at period $t$ (GHz)\nomeqref {0}\nompageref{1}
+  \item [{\(p_{d,t}^{shed}\)}]\begingroup Load shedding of demand $d$ at period $t$ (MW)\nomeqref {0}\nompageref{1}
+  \item [{\(p_{dcc,i,t}\)}]\begingroup Total power consumption of DCC $i$ at period $t$ (MW)\nomeqref {0}\nompageref{1}
+  \item [{\(p_{e,t}^{ch}\)}]\begingroup Charging power of BESS $e$ at period $t$ (MW)\nomeqref {0}\nompageref{1}
+  \item [{\(p_{e,t}^{dis}\)}]\begingroup Discharging power of BESS $e$ at period $t$ (MW)\nomeqref {0}\nompageref{1}
+  \item [{\(p_{g,t}\)}]\begingroup Output of thermal generator $g$ at period $t$ (MW)\nomeqref {0}\nompageref{1}
+  \item [{\(p_{l,t}\)}]\begingroup Power flow on line $l$ at period $t$ (MW)\nomeqref {0}\nompageref{1}
+  \item [{\(p_{w,t}\)}]\begingroup Output of wind farm $w$ at period $t$ (MW)\nomeqref {0}\nompageref{1}
+  \item [{\(p_{w,t}^{shed}\)}]\begingroup Power curtailment of wind farm $w$ at period $t$ (MW)\nomeqref {0}\nompageref{1}
+  \item [{\(Q_{i,t}\)}]\begingroup Workload queue length of DCC $i$ at period $t$ (tasks)\nomeqref {0}\nompageref{1}
+  \item [{\(T_{wait,i,t}\)}]\begingroup Average waiting time for workloads in DCC $i$ at period $t$ (h)\nomeqref {0}\nompageref{1}
+  \item [{\(u_{e,t}^{ch}\)}]\begingroup Charging status of BESS $e$ at period $t$\nomeqref {0}\nompageref{1}
+  \item [{\(u_{e,t}^{dis}\)}]\begingroup Discharging status of BESS $e$ at period $t$\nomeqref {0}\nompageref{1}
+  \item [{\(u_{g,t}\)}]\begingroup Commitment status of generator $g$ at period $t$\nomeqref {0}\nompageref{1}
+  \item [{\(v_{dcc,i,t}\)}]\begingroup Supply voltage of DCC $i$ servers at period $t$ (V)\nomeqref {0}\nompageref{1}
+  \item [{\(y_{g,t}^{sd}\)}]\begingroup Shut-down decision of generator $g$ at period $t$\nomeqref {0}\nompageref{1}
+  \item [{\(y_{g,t}^{su}\)}]\begingroup Start-up decision of generator $g$ at period $t$\nomeqref {0}\nompageref{1}
 
 \end{thenomenclature}

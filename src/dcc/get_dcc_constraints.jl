@@ -103,10 +103,7 @@ end
 
 # end # module
 function test_dcc_configuations(DataCentras, NT, ND2)
-
 	workload_multijob = DataCentras.computational_power_tasks' * 10
-
-
 
 	dcc_workload_consumption = zeros(ND2, NT)
 	for t in 1:NT
