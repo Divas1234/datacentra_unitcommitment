@@ -4,12 +4,9 @@ function readxlssheet()
 	println("Step-1: Pkgs and functions are loaded")
 	filepath = pwd()
 	# df = XLSX.readxlsx(filepath * "\\master-2\\case1\\data\\data.xlsx")
-	if Sys.iswindows()
-		df = XLSX.readxlsx("D:/GithubClonefiles/datacentra_unitcommitment/data/data.xlsx")
-	end
-	if Sys.isapple()
-		df = XLSX.readxlsx("/Users/yuanyiping/Documents/GitHub/datacentra_unitcommitment/data/data.xlsx")
-	end
+	data_xlsx = joinpath(pwd(), "data", "data.xlsx")
+	isfile(data_xlsx) || error("Input data not found: $data_xlsx")
+	df = XLSX.readxlsx(data_xlsx)
 	# part-1: read frequency data
 	unitsfreqparam = df["units_frequencyparam"]
 	windsfreqparam = df["winds_frequencyparam"]
@@ -46,20 +43,25 @@ function readxlssheet()
 	Sheet8_list = string("A2", ":", "C", string(size(loaddata[:], 1)))
 	loaddata = convert(Array{Float64, 2}, loaddata[Sheet8_list])
 
-	data_cnetra_data = df["data_centra"]
-	Sheet9_list = string("A2", ":", "I", string(size(data_cnetra_data[:], 1)))
-	datacentra_data = convert(Array{Float64, 2}, data_cnetra_data[Sheet9_list])
+	data_centra_data = df["data_centra"]
+	datacentra_data = convert(Array{Float64, 2}, data_centra_data["A2:K9"])
 
 	data_centra_jobcurve = df["data_centra_jobcurve"]
 	Sheet9_list = string("A2", ":", "H", string(size(data_centra_jobcurve[:], 1)))
 	data_centra_jobcurve = convert(Array{Float64, 2}, data_centra_jobcurve[Sheet9_list])
 
+	mg_bus_map_sheet = df["mg_bus_map"]
+	mg_bus_map = convert(Array{Float64, 2}, mg_bus_map_sheet["A2:B7"])
+
+	tie_lines_sheet = df["tie_lines"]
+	tie_lines = convert(Array{Float64, 2}, tie_lines_sheet["A2:G2"])
+
 	return unitsfreqparam, windsfreqparam, strogesystemdata, gendata, gencost, linedata,
-		   loadcurve, loaddata, datacentra_data, data_centra_jobcurve
+		   loadcurve, loaddata, datacentra_data, data_centra_jobcurve, mg_bus_map, tie_lines
 end
 
 function forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsFreqParam,
-					   StrogeData, datacentra_Data, data_centra_jobcurve)
+					   StrogeData, datacentra_Data, data_centra_jobcurve, mg_bus_map, tie_lines)
 
 	# DataGen,DataBranch,DataLoad,LoadCurve,GenCost = IEEE_RTS6()
 	NB = Int64(maximum([maximum(DataBranch[:, 2]), maximum(DataBranch[:, 3])]))::Int64
@@ -133,6 +135,29 @@ function forminputdata(DataGen, DataBranch, DataLoad, LoadCurve, GenCost, UnitsF
 
 	# renormazied data
 	#ANCHOR - default, the cdata centra is considered in the scheduling process.
+	# reformat data
+	# member variables
+	"""
+	mutable struct config
+	 	is_NetWorkCon::Int64
+	 	is_ThermalUnitCon::Int64
+	 	is_WindUnitCon::Int64
+	 	is_SysticalCon::Int64
+	 	is_PieceLinear::Int64
+	 	is_NumSeg::Int64
+	 	is_Alpha::Float64
+	 	is_Belta::Float64
+	 	is_CoalPrice::Int64
+	 	is_ActiveLoad::Int64
+	 	is_WindIntegration::Int64
+	 	is_LoadsCuttingCoefficient::Float64
+	 	is_WindsCuttingCoefficient::Float64
+	 	is_MaxIterationsNum::Int64
+	 	is_CalculPrecision::Float64
+	 	is_ConsiderDataCentra::Int64
+	end
+	"""
+
 	config_param = config(0, 1, 1, 1, 1, 3, 0.005, 0.005, 1, 1, 1, 1e5, 1e5, 50, 0.01, 1)
 
 	units = unit(Gens_Index, Gens_LocateBus, Gens_Pmax, Gens_Pmin, Gens_RU, Gens_RD,

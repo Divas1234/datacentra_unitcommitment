@@ -40,9 +40,9 @@ Stochastic Unit Commitment (SUC) model for power system optimization.
 - `cr⁺`                                : Up reserve cost
 - `cr⁻`                                : Down reserve cost
 """
-function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND2::Int64,
+function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND2::Int64, NM::Int64,
 					   units::unit, loads::load, winds::wind, lines::transmissionline, ess::pss,
-					   DataCentras::data_centra, config_param::config)
+					   DataCentras::data_centra, config_param::config, index_microgrid_bus::Matrix{Int64})
 	println("Step-3: Creating dispatching model")
 
 	if config_param.is_NetWorkCon == 1
@@ -118,6 +118,13 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 		@variable(scuc, weight_fv²_plus[1:(ND2 * NS), 1:NT, 1:num_sos], Bin)
 		@variable(scuc, weight_fv²λ_minus[1:(ND2 * NS), 1:NT, 1:num_sos], Bin)
 		@variable(scuc, weight_fv²λ_plus[1:(ND2 * NS), 1:NT, 1:num_sos], Bin)
+	end
+
+	if NM > 0
+		@variable(scuc, transfer_power_from_1to2[1:NT] >= 0)
+		@variable(scuc, transfer_power_from_2to1[1:NT] >= 0)
+		@variable(scuc, transfer_workload_from_1to2[1:NT] >= 0)
+		@variable(scuc, transfer_workload_from_2to1[1:NT] >= 0)
 	end
 
 	ρ⁺ = c₀ * 2
@@ -224,8 +231,19 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 	println("\t constraints: 4) loadcurtailments and spoliedwinds\t\t\t done")
 
 	# generatos power limits
+	# cneter dispatching model
+	# @constraint(scuc,
+	# 			[s = 1:NS, t = 1:NT],
+	# 			pg₀[(1 + (s - 1) * NG):(s * NG), t] + sr⁺[(1 + (s - 1) * NG):(s * NG), t] .<=
+	# 			units.p_max[:, 1] .* x[:, t])
+	# @constraint(scuc,
+	# 			[s = 1:NS, t = 1:NT],
+	# 			pg₀[(1 + (s - 1) * NG):(s * NG), t] - sr⁻[(1 + (s - 1) * NG):(s * NG), t] .>=
+	# 			units.p_min[:, 1] .* x[:, t])
+	# println("\t constraints: 5) generatos power limits\t\t\t\t\t done")
+
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT],
+				[s = 1:NS, t = 1:NT, n = 1:NM],
 				pg₀[(1 + (s - 1) * NG):(s * NG), t] + sr⁺[(1 + (s - 1) * NG):(s * NG), t] .<=
 				units.p_max[:, 1] .* x[:, t])
 	@constraint(scuc,
@@ -258,6 +276,29 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 
 	# @constraint(scuc,[s = 1:NS,t = 1:NT],sum(pg₀[1 + (s - 1) * NG:s * NG,t]) + sum(winds.scenarios_curve[s,t] .* winds.p_max[:,1] - Δpw[1 + (s - 1) * NW:s * NW,t]) - sum(loads.load_curve[:,t] - Δpd[1 + (s - 1) * ND:s * ND,t]) .== 0)
 
+	# NOTE
+	"""
+	distributed scheduling mode
+	for inividual thermal units, the electrical balancing process within each microgrid can be achieved.
+	"""
+	vec_microgridzoom_BusIndex = zeros(NM, NB)
+	vec_microgridzoom_ThermalIndex = zeros(NM, NG)
+	vec_microgridzoom_WindsIndex = zeros(NM, NW)
+	vec_microgridzoom_LoadsIndex = zeros(NM, ND)
+	vec_microgridzoom_PssIndex = zeros(NM, NC)
+	vec_microgridzoom_DCCIndex = zeros(NM, ND2)
+
+	for n in 1:NM
+		# filtered_index_each_mirocgrid = findall(x->x==n, index_microgrid_bus[2, :][1, :])
+		# vec_tem(n, filtered_index_each_mirocgrid) .== 1
+		vec_microgridzoom_BusIndex[n, findall(x->x == n, index_microgrid_bus[2, :][:, 1])] .== 1
+		vec_microgridzoom_ThermalIndex[n, findall(x->x in vec_microgridzoom_BusIndex[n, :], units.index[:, 1])] .== 1
+		vec_microgridzoom_WindsIndex[n, findall(x->x in vec_microgridzoom_BusIndex[n, :], winds.index[:, 1])] .== 1
+		vec_microgridzoom_LoadsIndex[n, findall(x->x in vec_microgridzoom_BusIndex[n, :], loads.index[:, 1])] .== 1
+		vec_microgridzoom_PssIndex[n, findall(x->x in vec_microgridzoom_BusIndex[n, :], ess.index[:, 1])] .== 1
+		vec_microgridzoom_DCCIndex[n, findall(x->x in vec_microgridzoom_BusIndex[n, :], data_centra.index[:, 1])] .== 1
+	end
+
 	if config_param.is_ConsiderDataCentra == 0
 		@constraint(scuc,
 					[s = 1:NS, t = 1:NT],
@@ -268,18 +309,39 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 					sum(pc⁻[(NC * (s - 1) + 1):(s * NC), t]) -
 					sum(pc⁺[(NC * (s - 1) + 1):(s * NC), t]) .== 0)
 	else
+		#NOTE - center scheduling mode
+		# @constraint(scuc,
+		# 			[s = 1:NS, t = 1:NT],
+		# 			sum(pg₀[(1 + (s - 1) * NG):(s * NG), t]) +
+		# 			sum(winds.scenarios_curve[s, t] * winds.p_max[:, 1] -
+		# 				Δpw[(1 + (s - 1) * NW):(s * NW), t]) -
+		# 			sum(loads.load_curve[:, t] - Δpd[(1 + (s - 1) * ND):(s * ND), t]) +
+		# 			sum(pc⁻[(NC * (s - 1) + 1):(s * NC), t]) -
+		# 			sum(pc⁺[(NC * (s - 1) + 1):(s * NC), t]) -
+		# 			sum(dc_p[(ND2 * (s - 1) + 1):(s * ND2), t])
+		# 			.==
+		# 			0)
+
+		# distributed scheduling mode
 		@constraint(scuc,
-					[s = 1:NS, t = 1:NT],
-					sum(pg₀[(1 + (s - 1) * NG):(s * NG), t]) +
-					sum(winds.scenarios_curve[s, t] * winds.p_max[:, 1] -
-						Δpw[(1 + (s - 1) * NW):(s * NW), t]) -
-					sum(loads.load_curve[:, t] - Δpd[(1 + (s - 1) * ND):(s * ND), t]) +
-					sum(pc⁻[(NC * (s - 1) + 1):(s * NC), t]) -
-					sum(pc⁺[(NC * (s - 1) + 1):(s * NC), t]) -
-					sum(dc_p[(ND2 * (s - 1) + 1):(s * ND2), t])
+					[s = 1:NS, t = 1:NT, n = 1:NM],
+					sum(pg₀[(1 + (s - 1) * NG):(s * NG), t] .* vec_microgridzoom_ThermalIndex[n, :]) +
+					sum((winds.scenarios_curve[s, t] * winds.p_max[:, 1] - Δpw[(1 + (s - 1) * NW):(s * NW), t]) .* vec_microgridzoom_WindsIndex[n, :]) -
+					sum((loads.load_curve[:, t] - Δpd[(1 + (s - 1) * ND):(s * ND), t]) .* vec_microgridzoom_LoadsIndex[n, :]) +
+					sum(pc⁻[(NC * (s - 1) + 1):(s * NC), t] .* vec_microgridzoom_PssIndex[n, :]) -
+					sum(pc⁺[(NC * (s - 1) + 1):(s * NC), t] .* vec_microgridzoom_PssIndex[n, :]) -
+					sum(dc_p[(ND2 * (s - 1) + 1):(s * ND2), t] .* vec_microgridzoom_DCCIndex[n, :])
 					.==
 					0)
 	end
+
+	# if NM > 0
+	# 	@variable(scuc, transfer_power_from_1to2[1:NT] >= 0)
+	# 	@variable(scuc, transfer_power_from_2to1[1:NT] >= 0)
+	# 	@variable(scuc, transfer_workload_from_1to2[1:NT] >= 0)
+	# 	@variable(scuc, transfer_workload_from_2to1[1:NT] >= 0)
+	# end
+
 	println("\t constraints: 7) power balance constraints\t\t\t\t done")
 
 	# ramp-up and ramp-down constraints
@@ -287,8 +349,7 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 				[s = 1:NS, t = 1:NT],
 				pg₀[(1 + (s - 1) * NG):(s * NG), t] -
 				((t == 1) ? units.p_0[:, 1] :
-				 pg₀[(1 + (s - 1) * NG):(s * NG),
-					 t - 1]) .<=
+				 pg₀[(1 + (s - 1) * NG):(s * NG), t - 1]) .<=
 				units.ramp_up[:, 1] .* ((t == 1) ? onoffinit[:, 1] : x[:, t - 1]) +
 				units.shut_up[:, 1] .* ((t == 1) ? ones(NG, 1) : u[:, t - 1]) +
 				units.p_max[:, 1] .* (ones(NG, 1) - ((t == 1) ? onoffinit[:, 1] : x[:, t - 1])))

@@ -1,4 +1,4 @@
-using Statistics, LaTeXStrings, Plots
+using Statistics, LaTeXStrings, Plots, DelimitedFiles
 function draw_workload_envelope(NT, ND2, workload_dis, figure_type)
 	# workload_dis = DataCentras.computational_power_tasks
 
@@ -194,7 +194,6 @@ function draw_dcc_power_dvfs_subfigures(res)
 	mkpath(dirname(filepath_dc_fv))
 	mkpath(dirname(filepath_dc_fv²λ))
 	try
-		using DelimitedFiles
 		dc_fv_data = res["dc_fv²"]
 		dc_fv_lambda_data = res["dc_fv²λ"]
 		# coerce to a plain matrix if possible

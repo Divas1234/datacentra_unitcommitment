@@ -1,0 +1,143 @@
+\begin{thebibliography}{10}
+
+\bibitem{zhou2025data}
+Yongcheng Zhou, Fanchao Wei, Shuangxiu Li, Zhonghao Wang, Jinfu Liu, and Daren Yu.
+\newblock Data center load modeling through optimal energy consumption characteristics: A path to simultaneously enhance energy efficiency and demand response quality.
+\newblock {\em Applied Energy}, 393:126095, 2025.
+
+\bibitem{10874152}
+Athanasios Tsiligkaridis, Panagiotis Andrianesis, Ayse~K. Coskun, Michael~C. Caramanis, and Ioannis~Ch. Paschalidis.
+\newblock Distributed economic dispatch in power networks incorporating data center flexibility.
+\newblock {\em IEEE Transactions on Sustainable Computing}, pages 1--15, 2025.
+
+\bibitem{6041050}
+Jie Li, Zuyi Li, Kui Ren, and Xue Liu.
+\newblock Towards optimal electric demand management for internet data centers.
+\newblock {\em IEEE Transactions on Smart Grid}, 3(1):183--192, 2012.
+
+\bibitem{7039172}
+Adam Wierman, Zhenhua Liu, Iris Liu, and Hamed Mohsenian-Rad.
+\newblock Opportunities and challenges for data center demand response.
+\newblock In {\em International Green Computing Conference}, pages 1--10, 2014.
+
+\bibitem{10806734}
+Juntao Duan, Yuanzheng Li, Yang Li, Pu~Yang, and Zhigang Zeng.
+\newblock Statistical feasibility robust optimization with polyhedron uncertainty set for hydrogen-data center microgrid operations.
+\newblock {\em IEEE Trans. Autom. Sci. Eng.}, 22:9884--9902, 2025.
+
+\bibitem{doi:10.1049/icp.2025.0664}
+Xiyu Wen, Jizhong Zhu, and Hanjiang Dong.
+\newblock Carbon emission-aware coordinated dispatch of multi-regional microgrids with data centers.
+\newblock {\em IET Conference Proceedings}, 2024:1014--1019, 2025.
+
+\bibitem{wangClusterFrameworksEfficient2018}
+Kun Wang, Qihua Zhou, Song Guo, and Jiangtao Luo.
+\newblock Cluster {{Frameworks}} for {{Efficient Scheduling}} and {{Resource Allocation}} in {{Data Center Networks}}: {{A Survey}}.
+\newblock 20:3560--3580.
+
+\bibitem{wang2020flexible}
+Peng Wang, Yujie Cao, and Zhaohao Ding.
+\newblock Flexible multi-energy scheduling scheme for data center to facilitate wind power integration.
+\newblock {\em Ieee Access}, 8:88876--88891, 2020.
+
+\bibitem{kuehnDVFSpowerManagementPerformance2019}
+Paul~J. Kuehn and Maggie Mashaly.
+\newblock {{DVFS-power}} management and performance engineering of data center server clusters.
+\newblock In {\em 2019 15th {{Annual Conference}} on {{Wireless On-demand Network Systems}} and {{Services}} ({{WONS}})}, pages 91--98, Wengen, Switzerland, 2019. IEEE.
+
+\bibitem{hanDualtimeScaleCollaborative2025}
+Juntao Han, Yuejun Yan, Yongzhen Wang, Kai Han, Yibo Han, and Jiayu Lin.
+\newblock Dual-time scale collaborative optimization of data center energy system: Considering multi-task response mechanism and hybrid hydrogen-battery energy storage.
+\newblock {\em Journal of Energy Storage}, 119:116244, May 2025.
+
+\bibitem{dingEmissionawareStochasticResource2018}
+Zhaohao Ding, Liye Xie, Ying Lu, Peng Wang, and Shiwei Xia.
+\newblock Emission-aware stochastic resource planning scheme for data center microgrid considering batch workload scheduling and risk management.
+\newblock {\em IEEE Transactions on Industry Applications}, 54(6):5599--5608, November 2018.
+
+\bibitem{hanDatadrivenDistributionallyRobust2025}
+Juntao Han, Kai Han, Te~Han, Yongzhen Wang, Yibo Han, and Jiayu Lin.
+\newblock Data-driven distributionally robust optimization of low-carbon data center energy systems considering multi-task response and renewable energy uncertainty.
+\newblock 102:111937.
+
+\bibitem{lin2023workload}
+Chengdong Lin, Kun Wang, Zhenjiang Li, and Yu~Pu.
+\newblock A workload-aware dvfs robust to concurrent tasks for mobile devices.
+\newblock In {\em Proceedings of the 29th Annual International Conference on Mobile Computing and Networking}, pages 1--16, 2023.
+
+\bibitem{8520806}
+Chengxi Gao, Victor~C.S. Lee, and Keqin Li.
+\newblock D-srtf: Distributed shortest remaining time first scheduling for data center networks.
+\newblock {\em IEEE Transactions on Cloud Computing}, 9(2):562--575, 2021.
+
+\bibitem{wangSchedulingMachineLearningBasedFlow2018}
+Lin Wang, Xinbo Wang, Massimo Tornatore, Kwangjoon Kim, Sun~Me Kim, Dae\{-\}Ub Kim, Kyeong\{-\}Eun Han, and Biswanath Mukherjee.
+\newblock Scheduling with {{Machine-Learning-Based Flow Detection}} for {{Packet-Switched Optical Data Center Networks}}.
+\newblock {\em \{JOCN\}}, 10:365--375, 2018.
+
+\bibitem{yu2023demand}
+He~Yu, Yingchun Wang, Jun Li, Wei Wei, and Lipan Fan.
+\newblock Demand-responsive data center energy supply optimized scheduling.
+\newblock In {\em 2023 IEEE 7th Conference on Energy Internet and Energy System Integration (EI2)}, pages 4494--4499. IEEE, 2023.
+
+\bibitem{Yu2024EnablingEnergyEfficientDataCenter}
+Nanpeng Yu, Daniel Wong, and Hyeran Jeon.
+\newblock Enabling energy efficient data center in smart power distribution systems.
+\newblock (CEC-500-2024-035), May 2024.
+
+\bibitem{zhang2024data}
+Yijia Zhang, Athanasios Tsiligkaridis, Ioannis~Ch Paschalidis, and Ayse~K Coskun.
+\newblock Data center and load aggregator coordination towards electricity demand response.
+\newblock {\em Sustainable Computing: Informatics and Systems}, 42:100957, 2024.
+
+\bibitem{wang2017dvfs}
+Songyun Wang, Zhuzhong Qian, Jiabin Yuan, and Ilsun You.
+\newblock A dvfs based energy-efficient tasks scheduling in a data center.
+\newblock {\em Ieee Access}, 5:13090--13102, 2017.
+
+\bibitem{hanumaiah2012energy}
+Vinay Hanumaiah and Sarma Vrudhula.
+\newblock Energy-efficient operation of multicore processors by dvfs, task migration, and active cooling.
+\newblock {\em IEEE Transactions on Computers}, 63(2):349--360, 2012.
+
+\bibitem{gu2014optimal}
+Lin Gu, Deze Zeng, Ahmed Barnawi, Song Guo, and Ivan Stojmenovic.
+\newblock Optimal task placement with qos constraints in geo-distributed data centers using dvfs.
+\newblock {\em IEEE Transactions on Computers}, 64(7):2049--2059, 2014.
+
+\bibitem{bani2017scalability}
+Sulieman Bani-Ahmad, Saleh Sa’adeh, et~al.
+\newblock Scalability of the dvfs power management technique as applied to 3-tier data center architecture in cloud computing.
+\newblock {\em Journal of Computer and Communications}, 5(01):69, 2017.
+
+\bibitem{hussain2022deadline}
+Mehboob Hussain, Lian-Fu Wei, Amir Rehman, Fakhar Abbas, Abid Hussain, and Muqadar Ali.
+\newblock Deadline-constrained energy-aware workflow scheduling in geographically distributed cloud data centers.
+\newblock {\em Future Generation Computer Systems}, 132:211--222, 2022.
+
+\bibitem{dayarathna2015data}
+Miyuru Dayarathna, Yonggang Wen, and Rui Fan.
+\newblock Data center energy consumption modeling: A survey.
+\newblock {\em IEEE Communications surveys \& tutorials}, 18(1):732--794, 2015.
+
+\bibitem{wang2015proactive}
+Hao Wang, Jianwei Huang, Xiaojun Lin, and Hamed Mohsenian-Rad.
+\newblock Proactive demand response for data centers: A win-win solution.
+\newblock {\em IEEE Transactions on Smart Grid}, 7(3):1584--1596, 2015.
+
+\bibitem{leyffer2025mccormick}
+Sven Leyffer and Paul Manns.
+\newblock Mccormick envelopes in mixed-integer pde-constrained optimization.
+\newblock {\em Mathematical Programming}, pages 1--46, 2025.
+
+\bibitem{zhang2017chance}
+Yao Zhang, Jianxue Wang, Bo~Zeng, and Zechun Hu.
+\newblock Chance-constrained two-stage unit commitment under uncertain load and wind power output using bilinear benders decomposition.
+\newblock {\em IEEE Transactions on Power Systems}, 32(5):3637--3647, 2017.
+
+\bibitem{Lubin2023}
+Miles Lubin, Oscar Dowson, Joaquim {Dias Garcia}, Joey Huchette, Beno{\^i}t Legat, and Juan~Pablo Vielma.
+\newblock {JuMP} 1.0: {R}ecent improvements to a modeling language for mathematical optimization.
+\newblock {\em Mathematical Programming Computation}, 2023.
+
+\end{thebibliography}

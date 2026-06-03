@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.23)  5 NOV 2025 15:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.9.23)  30 DEC 2025 10:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1100,19 +1100,19 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 <./fig/framework.pdf, id=102, 222.13087pt x 204.67165pt>
 File: ./fig/framework.pdf Graphic file (type pdf)
 <use ./fig/framework.pdf>
-Package pdftex.def Info: ./fig/framework.pdf  used on input line 181.
+Package pdftex.def Info: ./fig/framework.pdf  used on input line 180.
 (pdftex.def)             Requested size: 180.60315pt x 166.41084pt.
 <./fig/proposed_framework.pdf, id=103, 351.80031pt x 300.59302pt>
 File: ./fig/proposed_framework.pdf Graphic file (type pdf)
 <use ./fig/proposed_framework.pdf>
-Package pdftex.def Info: ./fig/proposed_framework.pdf  used on input line 189.
+Package pdftex.def Info: ./fig/proposed_framework.pdf  used on input line 188.
 (pdftex.def)             Requested size: 180.60315pt x 154.31406pt.
 
 
 <./fig/dcc_types.pdf, id=111, 332.10475pt x 167.89125pt>
 File: ./fig/dcc_types.pdf Graphic file (type pdf)
 <use ./fig/dcc_types.pdf>
-Package pdftex.def Info: ./fig/dcc_types.pdf  used on input line 231.
+Package pdftex.def Info: ./fig/dcc_types.pdf  used on input line 230.
 (pdftex.def)             Requested size: 245.10315pt x 123.91222pt.
 
 
@@ -1120,20 +1120,20 @@ Package pdftex.def Info: ./fig/dcc_types.pdf  used on input line 231.
 
 pdfTeX warning: pdflatex.exe (file ./fig/proposed_framework.pdf): PDF inclusion
 : multiple pdfs with page group included in a single page
->]
+> <./fig/dcc_types.pdf>]
 
-<./fig/Qos.pdf, id=414, 389.726pt x 219.46992pt>
+<./fig/Qos.pdf, id=429, 389.726pt x 219.46992pt>
 File: ./fig/Qos.pdf Graphic file (type pdf)
 <use ./fig/Qos.pdf>
-Package pdftex.def Info: ./fig/Qos.pdf  used on input line 293.
+Package pdftex.def Info: ./fig/Qos.pdf  used on input line 292.
 (pdftex.def)             Requested size: 245.10315pt x 138.029pt.
 
 
-[5 <./fig/dcc_types.pdf> <./fig/Qos.pdf>]
-<./fig/sos1_relaxed.pdf, id=490, 614.295pt x 213.95735pt>
+[5 <./fig/Qos.pdf>]
+<./fig/sos1_relaxed.pdf, id=491, 614.295pt x 213.95735pt>
 File: ./fig/sos1_relaxed.pdf Graphic file (type pdf)
 <use ./fig/sos1_relaxed.pdf>
-Package pdftex.def Info: ./fig/sos1_relaxed.pdf  used on input line 342.
+Package pdftex.def Info: ./fig/sos1_relaxed.pdf  used on input line 341.
 (pdftex.def)             Requested size: 503.10315pt x 175.23068pt.
 
 
@@ -1144,28 +1144,28 @@ Package pdftex.def Info: ./fig/sos1_relaxed.pdf  used on input line 342.
 
 
 [7]
-<./fig/workload_distribution.pdf, id=577, 433.62pt x 289.08pt>
+<./fig/workload_distribution.pdf, id=579, 433.62pt x 289.08pt>
 File: ./fig/workload_distribution.pdf Graphic file (type pdf)
 <use ./fig/workload_distribution.pdf>
 Package pdftex.def Info: ./fig/workload_distribution.pdf  used on input line 47
-3.
+2.
 (pdftex.def)             Requested size: 208.98215pt x 128.03368pt.
-<./fig/loadcurve.pdf, id=578, 408.20001pt x 255.67921pt>
+<./fig/loadcurve.pdf, id=580, 408.20001pt x 255.67921pt>
 File: ./fig/loadcurve.pdf Graphic file (type pdf)
 <use ./fig/loadcurve.pdf>
-Package pdftex.def Info: ./fig/loadcurve.pdf  used on input line 481.
+Package pdftex.def Info: ./fig/loadcurve.pdf  used on input line 480.
 (pdftex.def)             Requested size: 208.97937pt x 130.89793pt.
-<./fig/windscurve_result.pdf, id=579, 417.26639pt x 256.90167pt>
+<./fig/windscurve_result.pdf, id=581, 417.26639pt x 256.90167pt>
 File: ./fig/windscurve_result.pdf Graphic file (type pdf)
 <use ./fig/windscurve_result.pdf>
-Package pdftex.def Info: ./fig/windscurve_result.pdf  used on input line 489.
+Package pdftex.def Info: ./fig/windscurve_result.pdf  used on input line 488.
 (pdftex.def)             Requested size: 208.98286pt x 142.26851pt.
 
-
-
-Overfull \hbox (3.20901pt too wide) in paragraph at lines 500--521
+Overfull \hbox (3.20901pt too wide) in paragraph at lines 499--520
  [][] 
  []
+
+
 
 
 
@@ -1174,18 +1174,18 @@ sult.pdf>]
 <./fig/balanceprocess.pdf, id=639, 409.08975pt x 251.0983pt>
 File: ./fig/balanceprocess.pdf Graphic file (type pdf)
 <use ./fig/balanceprocess.pdf>
-Package pdftex.def Info: ./fig/balanceprocess.pdf  used on input line 567.
+Package pdftex.def Info: ./fig/balanceprocess.pdf  used on input line 565.
 (pdftex.def)             Requested size: 232.20355pt x 142.26543pt.
 <./fig/dcc_dvfs_workloadreallocation.pdf, id=640, 257.27318pt x 454.5542pt>
 File: ./fig/dcc_dvfs_workloadreallocation.pdf Graphic file (type pdf)
 <use ./fig/dcc_dvfs_workloadreallocation.pdf>
 Package pdftex.def Info: ./fig/dcc_dvfs_workloadreallocation.pdf  used on input
- line 574.
+ line 572.
 (pdftex.def)             Requested size: 193.5pt x 341.88583pt.
 <./fig/res_dcc_power_plots.pdf, id=641, 803.0pt x 806.94075pt>
 File: ./fig/res_dcc_power_plots.pdf Graphic file (type pdf)
 <use ./fig/res_dcc_power_plots.pdf>
-Package pdftex.def Info: ./fig/res_dcc_power_plots.pdf  used on input line 588.
+Package pdftex.def Info: ./fig/res_dcc_power_plots.pdf  used on input line 586.
 
 (pdftex.def)             Requested size: 469.56189pt x 471.8799pt.
 
@@ -1202,9 +1202,9 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-[10 <./fig/res_dcc_power_plots.pdf>]
+[10 <./fig/res_dcc_power_plots.pdf>] (./New_IEEEtran_how-to.bbl
 
-(./New_IEEEtran_how-to.bbl
+
 
 [11])
 
@@ -1221,10 +1221,10 @@ Package rerunfilecheck Info: File `New_IEEEtran_how-to.out' has not changed.
 (rerunfilecheck)             Checksum: 961813E797E0C5EA15240594FF418A41;2027.
  ) 
 Here is how much of TeX's memory you used:
- 26370 strings out of 473190
- 519181 string characters out of 5699139
- 970791 words of memory out of 5000000
- 49035 multiletter control sequences out of 15000+600000
+ 26369 strings out of 473190
+ 519167 string characters out of 5699139
+ 969791 words of memory out of 5000000
+ 49034 multiletter control sequences out of 15000+600000
  662938 words of font info for 139 fonts, out of 8000000 for 9000
  1145 hyphenation exceptions out of 8191
  110i,12n,107p,1194b,583s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1253,7 +1253,7 @@ uctiveCodingEditors/texlive/2025/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb><
 d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/texmf-dist/fonts/type1/
 urw/times/utmr8a.pfb><d:/CommonSoftwares/ProductiveCodingEditors/texlive/2025/t
 exmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on New_IEEEtran_how-to.pdf (12 pages, 7051039 bytes).
+Output written on New_IEEEtran_how-to.pdf (12 pages, 7050785 bytes).
 PDF statistics:
  1477 PDF objects out of 1728 (max. 8388607)
  901 compressed objects within 10 object streams

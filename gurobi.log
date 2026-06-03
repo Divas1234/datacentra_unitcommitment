@@ -1,0 +1,15 @@
+
+Gurobi 13.0.1 (win64, gurobi_cl) logging started Tue May 19 11:01:53 2026
+
+Set parameter Username
+Set parameter LicenseID to value 2797465
+Set parameter LogFile to value "gurobi.log"
+Using license file C:\Users\∆Ø¡¡æ≤\gurobi.lic
+Academic license - for non-commercial use only - expires 2027-03-24
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (win64 - Windows 11+.0 (26200.2))
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+
+Error 10003: Unable to open file '/?' for input
+

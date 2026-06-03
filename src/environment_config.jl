@@ -5,7 +5,7 @@ Pkg.activate("./.pkg")
 # 			"LaTeXStrings", "Plots", "JLD", "DataFrames", "Clustering",
 # 			"StatsPlots", "CSV", "BenchmarkTools"
 # 		])
-using Revise, JuMP, Gurobi, Test, DelimitedFiles, PlotlyJS, LaTeXStrings, Plots, DataFrames, Clustering, StatsPlots, CSV, BenchmarkTools
+using Revise, JuMP, Gurobi, Test, DelimitedFiles, LaTeXStrings, Plots, DataFrames, Clustering, StatsPlots, CSV, BenchmarkTools
 gr()
 using Random
 using DataFrames
