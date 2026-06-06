@@ -1,8 +1,13 @@
 {
-    "editor.fontFamily": "Geist Mono, JuliaMono, MapleMono, Input Mono, Consolas, 'Courier New', monospace",
+    "editor.fontFamily": "SF Mono, JetBrains Mono, Geist Mono, JuliaMono, MapleMono, Input Mono, Consolas, 'Courier New', monospace",
     "editor.allowVariableFontsInAccessibilityMode": true,
     "editor.fontWeight": "normal",
     "codingcopilot.enableCompletionLanguage": {
         "scmInput": false
-    }
+    },
+    "editor.smoothScrolling": true,
+    "workbench.list.smoothScrolling": true,
+    "terminal.integrated.smoothScrolling": true,
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.cursorBlinking": "expand"
 }
