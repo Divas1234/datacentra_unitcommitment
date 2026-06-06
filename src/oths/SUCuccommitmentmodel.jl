@@ -13,36 +13,38 @@ include(joinpath(@__DIR__, "..", "dcc", "get_dcc_constraints.jl"))
 Stochastic Unit Commitment (SUC) model for power system optimization.
 
 # Arguments
-- `NT::Int64`: Number of time periods
-- `NB::Int64`: Number of buses
-- `NG::Int64`: Number of generators
-- `ND::Int64`: Number of demands/loads
-- `NC::Int64`: Number of energy storage units
-- `units::unit`: Generator unit data
-- `loads::load`: Load data
-- `winds::wind`: Wind generation data
-- `lines::transmissionline`: Transmission line data
-- `config_param::config`: Configuration parameters
+
+  - `NT::Int64`: Number of time periods
+  - `NB::Int64`: Number of buses
+  - `NG::Int64`: Number of generators
+  - `ND::Int64`: Number of demands/loads
+  - `NC::Int64`: Number of energy storage units
+  - `units::unit`: Generator unit data
+  - `loads::load`: Load data
+  - `winds::wind`: Wind generation data
+  - `lines::transmissionline`: Transmission line data
+  - `config_param::config`: Configuration parameters
 
 # Returns
-- Tuple containing optimization results:
-- `x₀`                                 : Unit commitment states
-- `p₀`                                 : Power dispatch
-- `pᵨ`                                 : Load curtailment
-- `pᵩ`                                 : Wind curtailment
-- `seq_sr⁺`                            : Up reserve sequence
-- `seq_sr⁻`                            : Down reserve sequence
-- `pss_charge_p⁺`                      : Storage charging power
-- `pss_charge_p⁻`                      : Storage discharging power
-- `su_cost`                            : Startup cost
-- `sd_cost`                            : Shutdown cost
-- `prod_cost`                          : Production cost
-- `cr⁺`                                : Up reserve cost
-- `cr⁻`                                : Down reserve cost
+
+  - Tuple containing optimization results:
+  - `x₀`                                 : Unit commitment states
+  - `p₀`                                 : Power dispatch
+  - `pᵨ`                                 : Load curtailment
+  - `pᵩ`                                 : Wind curtailment
+  - `seq_sr⁺`                            : Up reserve sequence
+  - `seq_sr⁻`                            : Down reserve sequence
+  - `pss_charge_p⁺`                      : Storage charging power
+  - `pss_charge_p⁻`                      : Storage discharging power
+  - `su_cost`                            : Startup cost
+  - `sd_cost`                            : Shutdown cost
+  - `prod_cost`                          : Production cost
+  - `cr⁺`                                : Up reserve cost
+  - `cr⁻`                                : Down reserve cost
 """
 function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND2::Int64, NM::Int64,
-					   units::unit, loads::load, winds::wind, lines::transmissionline, ess::pss,
-					   DataCentras::data_centra, config_param::config, index_microgrid_bus::Matrix{Int64})
+		units::unit, loads::load, winds::wind, lines::transmissionline, ess::pss,
+		DataCentras::data_centra, config_param::config, index_microgrid_bus::Matrix{Int64},)
 	println("Step-3: Creating dispatching model")
 
 	if config_param.is_NetWorkCon == 1
@@ -60,7 +62,7 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 	# creat scucsimulation_model
 	# scuc = Model(CPLEX.Optimizer)
 	scuc = Model(Gurobi.Optimizer)
-
+	set_attribute(scuc, "DualReductions", 0)
 	# NS = 1 # for test
 
 	# binary variables
@@ -121,10 +123,10 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 	end
 
 	if NM > 0
-		@variable(scuc, transfer_power_from_1to2[1:NT] >= 0)
-		@variable(scuc, transfer_power_from_2to1[1:NT] >= 0)
-		@variable(scuc, transfer_workload_from_1to2[1:NT] >= 0)
-		@variable(scuc, transfer_workload_from_2to1[1:NT] >= 0)
+		@variable(scuc, transfer_power_from_1to2[1:NS, 1:NT] >= 0)
+		@variable(scuc, transfer_power_from_2to1[1:NS, 1:NT] >= 0)
+		# @variable(scuc, transfer_workload_from_1to2[1:NS, 1:NT] >= 0)
+		# @variable(scuc, transfer_workload_from_2to1[1:NS, 1:NT] >= 0)
 	end
 
 	ρ⁺ = c₀ * 2
@@ -141,21 +143,21 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 
 	# model-2:MILP with piece linearization equation of nonliear equation
 	@objective(scuc,
-			   Min,
-			   100*sum(sum(su₀[i, t] + sd₀[i, t] for i in 1:NG) for t in 1:NT)+
-			   pₛ *
-			   c₀ *
-			   (sum(sum(sum(sum(pgₖ[i + (s - 1) * NG, t, :] .* eachslope[:, i] for t in 1:NT))
-						for s in 1:NS) for i in 1:NG) +
-				sum(sum(sum(x[:, t] .* refcost[:, 1] for t in 1:NT)) for s in 1:NS) +
-				sum(sum(sum(ρ⁺ * sr⁺[i + (s - 1) * NG, t] + ρ⁻ * sr⁻[i + (s - 1) * NG, t]
-							for i in 1:NG) for t in 1:NT) for s in 1:NS))+
-			   pₛ *
-			   load_curtailment_penalty *
-			   sum(sum(sum(Δpd[(1 + (s - 1) * ND):(s * ND), t]) for t in 1:NT) for s in 1:NS)+
-			   pₛ *
-			   wind_curtailment_penalty *
-			   sum(sum(sum(Δpw[(1 + (s - 1) * NW):(s * NW), t]) for t in 1:NT) for s in 1:NS))
+		Min,
+		100*sum(sum(su₀[i, t] + sd₀[i, t] for i in 1:NG) for t in 1:NT)+
+		pₛ *
+		c₀ *
+		(sum(sum(sum(sum(pgₖ[i + (s - 1) * NG, t, :] .* eachslope[:, i] for t in 1:NT))
+			 for s in 1:NS) for i in 1:NG) +
+		 sum(sum(sum(x[:, t] .* refcost[:, 1] for t in 1:NT)) for s in 1:NS) +
+		 sum(sum(sum(ρ⁺ * sr⁺[i + (s - 1) * NG, t] + ρ⁻ * sr⁻[i + (s - 1) * NG, t]
+				 for i in 1:NG) for t in 1:NT) for s in 1:NS))+
+		pₛ *
+		load_curtailment_penalty *
+		sum(sum(sum(Δpd[(1 + (s - 1) * ND):(s * ND), t]) for t in 1:NT) for s in 1:NS)+
+		pₛ *
+		wind_curtailment_penalty *
+		sum(sum(sum(Δpw[(1 + (s - 1) * NW):(s * NW), t]) for t in 1:NT) for s in 1:NS))
 
 	#
 	# for test
@@ -200,8 +202,8 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 
 	# binary variable logic
 	@constraint(scuc,
-				[i = 1:NG, t = 1:NT],
-				u[i, t] - v[i, t]==x[i, t] - ((t == 1) ? onoffinit[i] : x[i, t - 1]))
+		[i = 1:NG, t = 1:NT],
+		u[i, t] - v[i, t]==x[i, t] - ((t == 1) ? onoffinit[i] : x[i, t - 1]))
 	@constraint(scuc, [i = 1:NG, t = 1:NT], u[i, t] + v[i, t]<=1)
 	println("\t constraints: 2) binary variable logic\t\t\t\t\t done")
 
@@ -220,12 +222,12 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 
 	# loadcurtailments and spoliedwinds limits
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT],
-				Δpw[(1 + (s - 1) * NW):(s * NW), t] .<=
-				winds.scenarios_curve[s, t] * winds.p_max[:, 1])
+		[s = 1:NS, t = 1:NT],
+		Δpw[(1 + (s - 1) * NW):(s * NW), t] .<=
+		winds.scenarios_curve[s, t] * winds.p_max[:, 1])
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT],
-				Δpd[(1 + (s - 1) * ND):(s * ND), t] .<= loads.load_curve[:, t])
+		[s = 1:NS, t = 1:NT],
+		Δpd[(1 + (s - 1) * ND):(s * ND), t] .<= loads.load_curve[:, t])
 	# @constraint(scuc, [s=1:NS, t = 1:NT], Δpw[1+(s-1)*NW:s*NW, t] .== zeros(NW,1))
 	# @constraint(scuc, [s=1:NS, t = 1:NT], Δpd[1+(s-1)*ND:s*ND, t] .== zeros(ND,1))
 	println("\t constraints: 4) loadcurtailments and spoliedwinds\t\t\t done")
@@ -243,13 +245,13 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 	# println("\t constraints: 5) generatos power limits\t\t\t\t\t done")
 
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT, n = 1:NM],
-				pg₀[(1 + (s - 1) * NG):(s * NG), t] + sr⁺[(1 + (s - 1) * NG):(s * NG), t] .<=
-				units.p_max[:, 1] .* x[:, t])
+		[s = 1:NS, t = 1:NT, n = 1:NM],
+		pg₀[(1 + (s - 1) * NG):(s * NG), t] + sr⁺[(1 + (s - 1) * NG):(s * NG), t] .<=
+		units.p_max[:, 1] .* x[:, t])
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT],
-				pg₀[(1 + (s - 1) * NG):(s * NG), t] - sr⁻[(1 + (s - 1) * NG):(s * NG), t] .>=
-				units.p_min[:, 1] .* x[:, t])
+		[s = 1:NS, t = 1:NT],
+		pg₀[(1 + (s - 1) * NG):(s * NG), t] - sr⁻[(1 + (s - 1) * NG):(s * NG), t] .>=
+		units.p_min[:, 1] .* x[:, t])
 	println("\t constraints: 5) generatos power limits\t\t\t\t\t done")
 
 	# system reserves
@@ -261,15 +263,15 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 	forcast_error = 0.05
 	forcast_reserve = winds.scenarios_curve * sum(winds.p_max[:, 1]) * forcast_error
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT, i = 1:NG],
-				sum(sr⁺[(1 + (s - 1) * NG):(s * NG), t]) +
-				sum(pc⁻[(NC * (s - 1) + 1):(s * NC), t])>=0.5 * units.p_max[i, 1] * x[i, t])
+		[s = 1:NS, t = 1:NT, i = 1:NG],
+		sum(sr⁺[(1 + (s - 1) * NG):(s * NG), t]) +
+		sum(pc⁻[(NC * (s - 1) + 1):(s * NC), t])>=0.5 * units.p_max[i, 1] * x[i, t])
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT],
-				sum(sr⁻[(1 + (s - 1) * NG):(s * NG), t]) +
-				sum(pc⁺[(NC * (s - 1) + 1):(s * NC), t])>=
-				1.0 * (config_param.is_Alpha * forcast_reserve[s, t] +
-					   config_param.is_Belta * sum(loads.load_curve[:, t])))
+		[s = 1:NS, t = 1:NT],
+		sum(sr⁻[(1 + (s - 1) * NG):(s * NG), t]) +
+		sum(pc⁺[(NC * (s - 1) + 1):(s * NC), t])>=
+		1.0 * (config_param.is_Alpha * forcast_reserve[s, t] +
+			   config_param.is_Belta * sum(loads.load_curve[:, t])))
 	println("\t constraints: 6) system reserves limits\t\t\t\t\t done")
 
 	# power balance constraints
@@ -281,6 +283,24 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 	distributed scheduling mode
 	for inividual thermal units, the electrical balancing process within each microgrid can be achieved.
 	"""
+	# vec_microgridzoom_BusIndex = zeros(NM, NB)
+	# vec_microgridzoom_ThermalIndex = zeros(NM, NG)
+	# vec_microgridzoom_WindsIndex = zeros(NM, NW)
+	# vec_microgridzoom_LoadsIndex = zeros(NM, ND)
+	# vec_microgridzoom_PssIndex = zeros(NM, NC)
+	# vec_microgridzoom_DCCIndex = zeros(NM, ND2)
+
+	# for n in 1:NM
+	# 	# filtered_index_each_mirocgrid = findall(x->x==n, index_microgrid_bus[2, :][1, :])
+	# 	# vec_tem(n, filtered_index_each_mirocgrid) .== 1
+	# 	vec_microgridzoom_BusIndex[n, findall(x->x == n, index_microgrid_bus[2, :][:, 1])] .== 1
+	# 	vec_microgridzoom_ThermalIndex[n, findall(x->x in vec_microgridzoom_BusIndex[n, :], units.index[:, 1])] .== 1
+	# 	vec_microgridzoom_WindsIndex[n, findall(x->x in vec_microgridzoom_BusIndex[n, :], winds.index[:, 1])] .== 1
+	# 	vec_microgridzoom_LoadsIndex[n, findall(x->x in vec_microgridzoom_BusIndex[n, :], loads.index[:, 1])] .== 1
+	# 	vec_microgridzoom_PssIndex[n, findall(x->x in vec_microgridzoom_BusIndex[n, :], ess.index[:, 1])] .== 1
+	# 	vec_microgridzoom_DCCIndex[n, findall(x->x in vec_microgridzoom_BusIndex[n, :], data_centra.index[:, 1])] .== 1
+	# end
+
 	vec_microgridzoom_BusIndex = zeros(NM, NB)
 	vec_microgridzoom_ThermalIndex = zeros(NM, NG)
 	vec_microgridzoom_WindsIndex = zeros(NM, NW)
@@ -291,23 +311,30 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 	for n in 1:NM
 		# filtered_index_each_mirocgrid = findall(x->x==n, index_microgrid_bus[2, :][1, :])
 		# vec_tem(n, filtered_index_each_mirocgrid) .== 1
-		vec_microgridzoom_BusIndex[n, findall(x->x == n, index_microgrid_bus[2, :][:, 1])] .== 1
-		vec_microgridzoom_ThermalIndex[n, findall(x->x in vec_microgridzoom_BusIndex[n, :], units.index[:, 1])] .== 1
-		vec_microgridzoom_WindsIndex[n, findall(x->x in vec_microgridzoom_BusIndex[n, :], winds.index[:, 1])] .== 1
-		vec_microgridzoom_LoadsIndex[n, findall(x->x in vec_microgridzoom_BusIndex[n, :], loads.index[:, 1])] .== 1
-		vec_microgridzoom_PssIndex[n, findall(x->x in vec_microgridzoom_BusIndex[n, :], ess.index[:, 1])] .== 1
-		vec_microgridzoom_DCCIndex[n, findall(x->x in vec_microgridzoom_BusIndex[n, :], data_centra.index[:, 1])] .== 1
+		vec_microgridzoom_BusIndex[n, findall(x->x == n, index_microgrid_bus[2, :][:, 1])] .= 1
+		locatedbus_index = findall(x->x == n, index_microgrid_bus[2, :][:, 1])
+		vec_microgridzoom_ThermalIndex[n, findall(x->x in locatedbus_index, units.locatebus[:, 1])[:, 1]] .= 1
+		vec_microgridzoom_WindsIndex[n, findall(x->x in locatedbus_index, winds.index[:, 1])[:, 1]] .= 1
+		vec_microgridzoom_LoadsIndex[n, findall(x->x in locatedbus_index, loads.index[:, 1])[:, 1]] .= 1
+		vec_microgridzoom_PssIndex[n, findall(x->x in locatedbus_index, ess.index[:, 1])[:, 1]] .= 1
+		vec_microgridzoom_DCCIndex[n, findall(x->x in locatedbus_index, DataCentras.index[:, 1])[:, 1]] .= 1
 	end
+	# @show vec_microgridzoom_BusIndex
+	# @show vec_microgridzoom_ThermalIndex
+	# @show vec_microgridzoom_WindsIndex
+	# @show vec_microgridzoom_LoadsIndex
+	# @show vec_microgridzoom_PssIndex
+	# @show vec_microgridzoom_DCCIndex
 
 	if config_param.is_ConsiderDataCentra == 0
 		@constraint(scuc,
-					[s = 1:NS, t = 1:NT],
-					sum(pg₀[(1 + (s - 1) * NG):(s * NG), t]) +
-					sum(winds.scenarios_curve[s, t] * winds.p_max[:, 1] -
-						Δpw[(1 + (s - 1) * NW):(s * NW), t]) -
-					sum(loads.load_curve[:, t] - Δpd[(1 + (s - 1) * ND):(s * ND), t]) +
-					sum(pc⁻[(NC * (s - 1) + 1):(s * NC), t]) -
-					sum(pc⁺[(NC * (s - 1) + 1):(s * NC), t]) .== 0)
+			[s = 1:NS, t = 1:NT],
+			sum(pg₀[(1 + (s - 1) * NG):(s * NG), t]) +
+			sum(winds.scenarios_curve[s, t] * winds.p_max[:, 1] -
+				Δpw[(1 + (s - 1) * NW):(s * NW), t]) -
+			sum(loads.load_curve[:, t] - Δpd[(1 + (s - 1) * ND):(s * ND), t]) +
+			sum(pc⁻[(NC * (s - 1) + 1):(s * NC), t]) -
+			sum(pc⁺[(NC * (s - 1) + 1):(s * NC), t]) .== 0)
 	else
 		#NOTE - center scheduling mode
 		# @constraint(scuc,
@@ -324,54 +351,56 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 
 		# distributed scheduling mode
 		@constraint(scuc,
-					[s = 1:NS, t = 1:NT, n = 1:NM],
-					sum(pg₀[(1 + (s - 1) * NG):(s * NG), t] .* vec_microgridzoom_ThermalIndex[n, :]) +
-					sum((winds.scenarios_curve[s, t] * winds.p_max[:, 1] - Δpw[(1 + (s - 1) * NW):(s * NW), t]) .* vec_microgridzoom_WindsIndex[n, :]) -
-					sum((loads.load_curve[:, t] - Δpd[(1 + (s - 1) * ND):(s * ND), t]) .* vec_microgridzoom_LoadsIndex[n, :]) +
-					sum(pc⁻[(NC * (s - 1) + 1):(s * NC), t] .* vec_microgridzoom_PssIndex[n, :]) -
-					sum(pc⁺[(NC * (s - 1) + 1):(s * NC), t] .* vec_microgridzoom_PssIndex[n, :]) -
-					sum(dc_p[(ND2 * (s - 1) + 1):(s * ND2), t] .* vec_microgridzoom_DCCIndex[n, :])
-					.==
-					0)
+			[s = 1:NS, t = 1:NT, n = 1:NM],
+			sum(pg₀[(1 + (s - 1) * NG):(s * NG), t] .* vec_microgridzoom_ThermalIndex[n, :]) +
+			sum((winds.scenarios_curve[s, t] * winds.p_max[:, 1] - Δpw[(1 + (s - 1) * NW):(s * NW), t]) .* vec_microgridzoom_WindsIndex[n, :]) -
+			sum((loads.load_curve[:, t] - Δpd[(1 + (s - 1) * ND):(s * ND), t]) .* vec_microgridzoom_LoadsIndex[n, :]) +
+			sum(pc⁻[(NC * (s - 1) + 1):(s * NC), t] .* vec_microgridzoom_PssIndex[n, :]) -
+			sum(pc⁺[(NC * (s - 1) + 1):(s * NC), t] .* vec_microgridzoom_PssIndex[n, :]) -
+			sum(dc_p[(ND2 * (s - 1) + 1):(s * ND2), t] .* vec_microgridzoom_DCCIndex[n, :]) +
+			((n == 1) ? transfer_power_from_2to1[s, t] - transfer_power_from_1to2[s, t] : transfer_power_from_1to2[s, t] - transfer_power_from_2to1[s, t])
+			# ((n == 1) ? transfer_workload_from_2to1[s, t] - transfer_workload_from_1to2[s, t] : transfer_workload_from_1to2[s, t] - transfer_workload_from_2to1[s, t])
+			.==
+			0)
 	end
 
-	# if NM > 0
-	# 	@variable(scuc, transfer_power_from_1to2[1:NT] >= 0)
-	# 	@variable(scuc, transfer_power_from_2to1[1:NT] >= 0)
-	# 	@variable(scuc, transfer_workload_from_1to2[1:NT] >= 0)
-	# 	@variable(scuc, transfer_workload_from_2to1[1:NT] >= 0)
-	# end
+	tie_line_pmax = 10.0
+	if NM > 0
+		@constraint(scuc, [s = 1:NS, t = 1:NT], transfer_power_from_1to2[s, t] <= tie_line_pmax)
+		@constraint(scuc, [s = 1:NS, t = 1:NT], transfer_power_from_2to1[s, t] <= tie_line_pmax)
+	end
+	# @constraint(scuc, [s = 1:NS, t = 1:NT], dc_p[((s - 1) * ND2 + 1):(s * ND2), t] .== DataCentras.idale .+ DataCentras.sv_constant ./ DataCentras.μ .* workload_multijob[:, t] .* dc_fv²λ[((s - 1) * ND2 + 1):(s * ND2), t])
 
 	println("\t constraints: 7) power balance constraints\t\t\t\t done")
 
 	# ramp-up and ramp-down constraints
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT],
-				pg₀[(1 + (s - 1) * NG):(s * NG), t] -
-				((t == 1) ? units.p_0[:, 1] :
-				 pg₀[(1 + (s - 1) * NG):(s * NG), t - 1]) .<=
-				units.ramp_up[:, 1] .* ((t == 1) ? onoffinit[:, 1] : x[:, t - 1]) +
-				units.shut_up[:, 1] .* ((t == 1) ? ones(NG, 1) : u[:, t - 1]) +
-				units.p_max[:, 1] .* (ones(NG, 1) - ((t == 1) ? onoffinit[:, 1] : x[:, t - 1])))
+		[s = 1:NS, t = 1:NT],
+		pg₀[(1 + (s - 1) * NG):(s * NG), t] -
+		((t == 1) ? units.p_0[:, 1] :
+		 pg₀[(1 + (s - 1) * NG):(s * NG), t - 1]) .<=
+		units.ramp_up[:, 1] .* ((t == 1) ? onoffinit[:, 1] : x[:, t - 1]) +
+		units.shut_up[:, 1] .* ((t == 1) ? ones(NG, 1) : u[:, t - 1]) +
+		units.p_max[:, 1] .* (ones(NG, 1) - ((t == 1) ? onoffinit[:, 1] : x[:, t - 1])))
 
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT],
-				((t == 1) ? units.p_0[:, 1] : pg₀[(1 + (s - 1) * NG):(s * NG), t - 1]) -
-				pg₀[(1 + (s - 1) * NG):(s * NG), t] .<=
-				units.ramp_down[:, 1] .* x[:, t] +
-				units.shut_down[:, 1] .* v[:, t] +
-				units.p_max[:, 1] .* (x[:, t]))
+		[s = 1:NS, t = 1:NT],
+		((t == 1) ? units.p_0[:, 1] : pg₀[(1 + (s - 1) * NG):(s * NG), t - 1]) -
+		pg₀[(1 + (s - 1) * NG):(s * NG), t] .<=
+		units.ramp_down[:, 1] .* x[:, t] +
+		units.shut_down[:, 1] .* v[:, t] +
+		units.p_max[:, 1] .* (x[:, t]))
 	println("\t constraints: 8) ramp-up/ramp-down constraints\t\t\t\t done")
 
 	# PWL constraints
 	eachseqment = (units.p_max - units.p_min) / 3
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT, i = 1:NG],
-				pg₀[i + (s - 1) * NG, t] .==
-				units.p_min[i, 1] * x[i, t] + sum(pgₖ[i + (s - 1) * NG, t, :]))
+		[s = 1:NS, t = 1:NT, i = 1:NG],
+		pg₀[i + (s - 1) * NG, t] .==
+		units.p_min[i, 1] * x[i, t] + sum(pgₖ[i + (s - 1) * NG, t, :]))
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT, i = 1:NG, k = 1:3],
-				pgₖ[i + (s - 1) * NG, t, k]<=eachseqment[i, 1] * x[i, t])
+		[s = 1:NS, t = 1:NT, i = 1:NG, k = 1:3],
+		pgₖ[i + (s - 1) * NG, t, k]<=eachseqment[i, 1] * x[i, t])
 	println("\t constraints: 9) piece linearization constraints\t\t\t done")
 
 	# transmissionline power limits for basline states
@@ -384,27 +413,27 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 			subGsdf_dcces = Gsdf[1, data_centra.locatebus]
 
 			@constraint(scuc,
-						[s = 1:NS, t = 1:NT],
-						sum(subGsdf_units[i] * pg₀[i + (s - 1) * NG, t] for i in 1:NG) +
-						sum(subGsdf_winds[w] * (winds.scenarios_curve[s, t] * winds.p_max[w, 1] -
-												Δpw[(s - 1) * NW + w, t]) for w in 1:NW) -
-						sum(subGsdf_loads[d] * (loads.load_curve[d, t] - Δpd[(s - 1) * ND + d, t])
-							for d in 1:ND) + sum(subGsdf_psses[c] *
-							(pc⁻[(s - 1) * NC + c, t] - pc⁺[(s - 1) * NC + c, t]) for c in 1:NC) -
-						(config_param.is_ConsiderDataCentra == 0 ? 0 :
-						 (sum(subGsdf_dcces[i] * (dc_p[(s - 1) * ND2 + i, t]) for i in 1:ND2)))
-						<=
-						lines.p_max[l, 1])
+				[s = 1:NS, t = 1:NT],
+				sum(subGsdf_units[i] * pg₀[i + (s - 1) * NG, t] for i in 1:NG) +
+				sum(subGsdf_winds[w] * (winds.scenarios_curve[s, t] * winds.p_max[w, 1] -
+										Δpw[(s - 1) * NW + w, t]) for w in 1:NW) -
+				sum(subGsdf_loads[d] * (loads.load_curve[d, t] - Δpd[(s - 1) * ND + d, t])
+				for d in 1:ND) + sum(subGsdf_psses[c] *
+					(pc⁻[(s - 1) * NC + c, t] - pc⁺[(s - 1) * NC + c, t]) for c in 1:NC) -
+				(config_param.is_ConsiderDataCentra == 0 ? 0 :
+				 (sum(subGsdf_dcces[i] * (dc_p[(s - 1) * ND2 + i, t]) for i in 1:ND2)))
+				<=
+				lines.p_max[l, 1])
 			@constraint(scuc,
-						[s = 1:NS, t = 1:NT],
-						sum(subGsdf_units[i] * pg₀[i + (s - 1) * NG, t] for i in 1:NG) +
-						sum(subGsdf_winds[w] * (winds.scenarios_curve[s, t] * winds.p_max[w, 1] -
-												Δpw[(s - 1) * NW + w, t]) for w in 1:NW) -
-						sum(subGsdf_loads[d] * (loads.load_curve[d, t] - Δpd[(s - 1) * ND + d, t])
-							for d in 1:ND) + sum(subGsdf_psses[c] *
-							(pc⁻[(s - 1) * NC + c, t] - pc⁺[(s - 1) * NC + c, t]) for c in 1:NC) -
-						(config_param.is_ConsiderDataCentra == 0 ? 0 :
-						 (sum(subGsdf_dcces[i] * (dc_p[(s - 1) * ND2 + i, t]) for i in 1:ND2)))>=lines.p_min[l, 1])
+				[s = 1:NS, t = 1:NT],
+				sum(subGsdf_units[i] * pg₀[i + (s - 1) * NG, t] for i in 1:NG) +
+				sum(subGsdf_winds[w] * (winds.scenarios_curve[s, t] * winds.p_max[w, 1] -
+										Δpw[(s - 1) * NW + w, t]) for w in 1:NW) -
+				sum(subGsdf_loads[d] * (loads.load_curve[d, t] - Δpd[(s - 1) * ND + d, t])
+				for d in 1:ND) + sum(subGsdf_psses[c] *
+					(pc⁻[(s - 1) * NC + c, t] - pc⁺[(s - 1) * NC + c, t]) for c in 1:NC) -
+				(config_param.is_ConsiderDataCentra == 0 ? 0 :
+				 (sum(subGsdf_dcces[i] * (dc_p[(s - 1) * ND2 + i, t]) for i in 1:ND2)))>=lines.p_min[l, 1])
 		end
 		println("\t constraints: 10) transmissionline limits for basline\t\t\t done")
 	end
@@ -412,67 +441,67 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 	# ess system constraints
 	# REVIEW - discharge/charge limits
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT],
-				pc⁺[((s - 1) * NC + 1):(s * NC), t] .<=
-				ess.p⁺[:, 1] .* κ⁺[((s - 1) * NC + 1):(s * NC), t]) # charge power
+		[s = 1:NS, t = 1:NT],
+		pc⁺[((s - 1) * NC + 1):(s * NC), t] .<=
+		ess.p⁺[:, 1] .* κ⁺[((s - 1) * NC + 1):(s * NC), t]) # charge power
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT],
-				pc⁻[((s - 1) * NC + 1):(s * NC), t] .<=
-				ess.p⁻[:, 1] .* κ⁻[((s - 1) * NC + 1):(s * NC), t]) # discharge power
+		[s = 1:NS, t = 1:NT],
+		pc⁻[((s - 1) * NC + 1):(s * NC), t] .<=
+		ess.p⁻[:, 1] .* κ⁻[((s - 1) * NC + 1):(s * NC), t]) # discharge power
 
 	# coupling limits for adjacent discharge/charge constraints
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT],
-				pc⁺[((s - 1) * NC + 1):(s * NC), t] -
-				((t == 1) ? ess.P₀[:, 1] : pc⁺[((s - 1) * NC + 1):(s * NC), t - 1]) .<=
-				ess.γ⁺[:, 1])
+		[s = 1:NS, t = 1:NT],
+		pc⁺[((s - 1) * NC + 1):(s * NC), t] -
+		((t == 1) ? ess.P₀[:, 1] : pc⁺[((s - 1) * NC + 1):(s * NC), t - 1]) .<=
+		ess.γ⁺[:, 1])
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT],
-				((t == 1) ? ess.P₀[:, 1] : pc⁺[((s - 1) * NC + 1):(s * NC), t - 1]) -
-				pc⁺[((s - 1) * NC + 1):(s * NC), t] .<= ess.γ⁻[:, 1])
+		[s = 1:NS, t = 1:NT],
+		((t == 1) ? ess.P₀[:, 1] : pc⁺[((s - 1) * NC + 1):(s * NC), t - 1]) -
+		pc⁺[((s - 1) * NC + 1):(s * NC), t] .<= ess.γ⁻[:, 1])
 
 	# Mutual exclusion constraints in charge and discharge states
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT, c = 1:NC],
-				κ⁺[(s - 1) * NC + c, t] + κ⁻[(s - 1) * NC + c, t]<=1)
+		[s = 1:NS, t = 1:NT, c = 1:NC],
+		κ⁺[(s - 1) * NC + c, t] + κ⁻[(s - 1) * NC + c, t]<=1)
 
 	# Energy storage constraint
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT],
-				qc[((s - 1) * NC + 1):(s * NC), t] .<= ess.Q_max[:, 1])
+		[s = 1:NS, t = 1:NT],
+		qc[((s - 1) * NC + 1):(s * NC), t] .<= ess.Q_max[:, 1])
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT],
-				qc[((s - 1) * NC + 1):(s * NC), t] .>= ess.Q_min[:, 1])
+		[s = 1:NS, t = 1:NT],
+		qc[((s - 1) * NC + 1):(s * NC), t] .>= ess.Q_min[:, 1])
 	@constraint(scuc,
-				[s = 1:NS, t = 1:NT],
-				qc[((s - 1) * NC + 1):(s * NC),
-				   t] .==
-				((t == 1) ? ess.P₀[:, 1] : qc[((s - 1) * NC + 1):(s * NC), t - 1]) +
-				ess.η⁺[:, 1] .* pc⁺[((s - 1) * NC + 1):(s * NC), t] -
-				(ones(NC, 1) ./ ess.η⁻[:, 1]) .* pc⁻[((s - 1) * NC + 1):(s * NC), t])
+		[s = 1:NS, t = 1:NT],
+		qc[((s - 1) * NC + 1):(s * NC),
+			t,] .==
+		((t == 1) ? ess.P₀[:, 1] : qc[((s - 1) * NC + 1):(s * NC), t - 1]) +
+		ess.η⁺[:, 1] .* pc⁺[((s - 1) * NC + 1):(s * NC), t] -
+		(ones(NC, 1) ./ ess.η⁻[:, 1]) .* pc⁻[((s - 1) * NC + 1):(s * NC), t])
 
 	# inital-time and end-time equaltimes
 	@constraint(scuc,
-				[s = 1:NS],
-				0.95*ess.P₀[:, 1] .<=
-				qc[((s - 1) * NC + 1):(s * NC), NT] .<=
-				1.1*ess.P₀[:, 1])
+		[s = 1:NS],
+		0.95*ess.P₀[:, 1] .<=
+		qc[((s - 1) * NC + 1):(s * NC), NT] .<=
+		1.1*ess.P₀[:, 1])
 	@constraint(scuc,
-				[s = 1:NS, c = 1:NC, t = 1:NT],
-				α[(s - 1) * NC + c,
-				  t]>=κ⁺[(s - 1) * NC + 1, t] - ((t == 1) ? 0 : κ⁺[(s - 1) * NC + 1, t - 1]))
+		[s = 1:NS, c = 1:NC, t = 1:NT],
+		α[(s - 1) * NC + c,
+			t,]>=κ⁺[(s - 1) * NC + 1, t] - ((t == 1) ? 0 : κ⁺[(s - 1) * NC + 1, t - 1]))
 	@constraint(scuc,
-				[s = 1:NS, c = 1:NC, t = 1:NT],
-				β[(s - 1) * NC + c,
-				  t]>=((t == 1) ? 0 : κ⁺[(s - 1) * NC + 1, t - 1]) - κ⁺[(s - 1) * NC + 1, t])
+		[s = 1:NS, c = 1:NC, t = 1:NT],
+		β[(s - 1) * NC + c,
+			t,]>=((t == 1) ? 0 : κ⁺[(s - 1) * NC + 1, t - 1]) - κ⁺[(s - 1) * NC + 1, t])
 
 	@constraint(scuc,
-				[s = 1:NS, c = 1:NC],
-				sum(α[(s - 1) * NC + c, t] for t in 1:NT)<=2)
+		[s = 1:NS, c = 1:NC],
+		sum(α[(s - 1) * NC + c, t] for t in 1:NT)<=2)
 
 	@constraint(scuc,
-				[s = 1:NS, c = 1:NC],
-				sum(β[(s - 1) * NC + c, t] for t in 1:NT)<=2)
+		[s = 1:NS, c = 1:NC],
+		sum(β[(s - 1) * NC + c, t] for t in 1:NT)<=2)
 
 	# # magic constraint
 	# least_operatime = 0.0
@@ -483,8 +512,8 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 	# add_dcc_constraints!
 	if config_param.is_ConsiderDataCentra == 1
 		add_dcc_constraints!(scuc, DataCentras, config_param, NS::Int, NT::Int, ND2::Int, num_sos::Int, dc_p,
-							 dc_fv², dc_fv²λ, dc_fv²_plus, dc_fv²_minus, dc_fv²_2_plus, dc_fv²_2_minus, dc_fv²λ_plus, dc_fv²λ_minus, dc_fv²λ_2_plus, dc_fv²λ_2_minus, weight_fv²_minus, weight_fv²_plus,
-							 weight_fv²λ_minus, weight_fv²λ_plus)
+			dc_fv², dc_fv²λ, dc_fv²_plus, dc_fv²_minus, dc_fv²_2_plus, dc_fv²_2_minus, dc_fv²λ_plus, dc_fv²λ_minus, dc_fv²λ_2_plus, dc_fv²λ_2_minus, weight_fv²_minus, weight_fv²_plus,
+			weight_fv²λ_minus, weight_fv²λ_plus,)
 	end
 
 	# println("\n")
@@ -522,16 +551,16 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 	prod_cost = pₛ *
 				c₀ *
 				(sum(sum(sum(sum(pᵪ[i + (s - 1) * NG, t, :] .* eachslope[:, i] for t in 1:NT))
-						 for s in 1:NS) for i in 1:NG) +
+					 for s in 1:NS) for i in 1:NG) +
 				 sum(sum(sum(x₀[:, t] .* refcost[:, 1] for t in 1:NT)) for s in 1:NS))
 	cr⁺ = pₛ *
 		  c₀ *
 		  sum(sum(sum(ρ⁺ * r⁺[i + (s - 1) * NG, t] for i in 1:NG) for t in 1:NT)
-			  for s in 1:NS)
+		  for s in 1:NS)
 	cr⁻ = pₛ *
 		  c₀ *
 		  sum(sum(sum(ρ⁺ * r⁻[i + (s - 1) * NG, t] for i in 1:NG) for t in 1:NT)
-			  for s in 1:NS)
+		  for s in 1:NS)
 	seq_sr⁺ = pₛ * c₀ * sum(ρ⁺ * r⁺[i, :] for i in 1:NG)
 	seq_sr⁻ = pₛ * c₀ * sum(ρ⁺ * r⁻[i, :] for i in 1:NG)
 	𝜟pd = pₛ * sum(sum(sum(pᵨ[(1 + (s - 1) * ND):(s * ND), t]) for t in 1:NT) for s in 1:NS)
@@ -619,8 +648,8 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 				writedlm(io, [" "])
 				writedlm(io, ["list 4: dc_fv²λ"])
 				writedlm(io,
-						 (JuMP.value.(dc_fv²λ)[1:(ND2 * 1), 1:NT] ./
-						  JuMP.value.(dc_fv²)[1:((ND2 * 1)'), 1:NT])', 't')
+					(JuMP.value.(dc_fv²λ)[1:(ND2 * 1), 1:NT] ./
+					 JuMP.value.(dc_fv²)[1:((ND2 * 1)'), 1:NT])', 't',)
 				writedlm(io, [" "])
 				writedlm(io, ["list 5: dc_fv²λ_minus"])
 				writedlm(io, (JuMP.value.(dc_fv²λ_minus)[1:(ND2 * 1), 1:NT])', '\t')
@@ -648,36 +677,36 @@ function SUC_scucmodel(NT::Int64, NB::Int64, NG::Int64, ND::Int64, NC::Int64, ND
 	end
 
 	result = Dict("x₀"            => x₀,
-				  "p₀"            => p₀,
-				  "pᵨ"            => pᵨ,
-				  "pᵩ"            => pᵩ,
-				  "seq_sr⁺"       => seq_sr⁺,
-				  "seq_sr⁻"       => seq_sr⁻,
-				  "pss_charge_p⁺" => pss_charge_p⁺,
-				  "pss_charge_p⁻" => pss_charge_p⁻,
-				  # "pss_charge_q⁺" => pss_charge_q⁺,
-				  "su_cost"   => su_cost,
-				  "sd_cost"   => sd_cost,
-				  "prod_cost" => prod_cost,
-				  "cr⁺"     => cr⁺,
-				  "cr⁻"     => cr⁻)
+		"p₀"            => p₀,
+		"pᵨ"            => pᵨ,
+		"pᵩ"            => pᵩ,
+		"seq_sr⁺"       => seq_sr⁺,
+		"seq_sr⁻"       => seq_sr⁻,
+		"pss_charge_p⁺" => pss_charge_p⁺,
+		"pss_charge_p⁻" => pss_charge_p⁻,
+		# "pss_charge_q⁺" => pss_charge_q⁺,
+		"su_cost"   => su_cost,
+		"sd_cost"   => sd_cost,
+		"prod_cost" => prod_cost,
+		"cr⁺"     => cr⁺,
+		"cr⁻"     => cr⁻,)
 
 	if config_param.is_ConsiderDataCentra == 1
 		dc_result = Dict("dc_p"                => JuMP.value.(dc_p[1:(ND2 * NS), 1:NT]),
-						 "dc_fv²"             => JuMP.value.(dc_fv²[1:(ND2 * NS), 1:NT]),
-						 "dc_fv²λ"           => JuMP.value.(dc_fv²λ[1:(ND2 * NS), 1:NT]),
-						 "dc_fv²_plus"        => JuMP.value.(dc_fv²_plus[1:(ND2 * NS), 1:NT]),
-						 "dc_fv²_minus"       => JuMP.value.(dc_fv²_minus[1:(ND2 * NS), 1:NT]),
-						 "dc_fv²_2_plus"      => JuMP.value.(dc_fv²_2_plus[1:(ND2 * NS), 1:NT]),
-						 "dc_fv²_2_minus"     => JuMP.value.(dc_fv²_2_minus[1:(ND2 * NS), 1:NT]),
-						 "dc_fv²λ_plus"      => JuMP.value.(dc_fv²λ_plus[1:(ND2 * NS), 1:NT]),
-						 "dc_fv²λ_minus"     => JuMP.value.(dc_fv²λ_minus[1:(ND2 * NS), 1:NT]),
-						 "dc_fv²λ_2_plus"    => JuMP.value.(dc_fv²λ_2_plus[1:(ND2 * NS), 1:NT]),
-						 "dc_fv²λ_2_minus"   => JuMP.value.(dc_fv²λ_2_minus[1:(ND2 * NS), 1:NT]),
-						 "weight_fv²_minus"   => JuMP.value.(weight_fv²_minus[1:(ND2 * NS), 1:NT, 1:num_sos]),
-						 "weight_fv²_plus"    => JuMP.value.(weight_fv²_plus[1:(ND2 * NS), 1:NT, 1:num_sos]),
-						 "weight_fv²λ_minus" => JuMP.value.(weight_fv²λ_minus[1:(ND2 * NS), 1:NT, 1:num_sos]),
-						 "weight_fv²λ_plus"  => JuMP.value.(weight_fv²λ_plus[1:(ND2 * NS), 1:NT, 1:num_sos]))
+			"dc_fv²"             => JuMP.value.(dc_fv²[1:(ND2 * NS), 1:NT]),
+			"dc_fv²λ"           => JuMP.value.(dc_fv²λ[1:(ND2 * NS), 1:NT]),
+			"dc_fv²_plus"        => JuMP.value.(dc_fv²_plus[1:(ND2 * NS), 1:NT]),
+			"dc_fv²_minus"       => JuMP.value.(dc_fv²_minus[1:(ND2 * NS), 1:NT]),
+			"dc_fv²_2_plus"      => JuMP.value.(dc_fv²_2_plus[1:(ND2 * NS), 1:NT]),
+			"dc_fv²_2_minus"     => JuMP.value.(dc_fv²_2_minus[1:(ND2 * NS), 1:NT]),
+			"dc_fv²λ_plus"      => JuMP.value.(dc_fv²λ_plus[1:(ND2 * NS), 1:NT]),
+			"dc_fv²λ_minus"     => JuMP.value.(dc_fv²λ_minus[1:(ND2 * NS), 1:NT]),
+			"dc_fv²λ_2_plus"    => JuMP.value.(dc_fv²λ_2_plus[1:(ND2 * NS), 1:NT]),
+			"dc_fv²λ_2_minus"   => JuMP.value.(dc_fv²λ_2_minus[1:(ND2 * NS), 1:NT]),
+			"weight_fv²_minus"   => JuMP.value.(weight_fv²_minus[1:(ND2 * NS), 1:NT, 1:num_sos]),
+			"weight_fv²_plus"    => JuMP.value.(weight_fv²_plus[1:(ND2 * NS), 1:NT, 1:num_sos]),
+			"weight_fv²λ_minus" => JuMP.value.(weight_fv²λ_minus[1:(ND2 * NS), 1:NT, 1:num_sos]),
+			"weight_fv²λ_plus"  => JuMP.value.(weight_fv²λ_plus[1:(ND2 * NS), 1:NT, 1:num_sos]),)
 
 		merge!(result, dc_result)
 

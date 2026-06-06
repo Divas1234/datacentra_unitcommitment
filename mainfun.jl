@@ -9,7 +9,7 @@ NT, NB, NG, ND, NC, ND2, NM, units, loads, winds, lines, ess, DataCentras, confi
 
 @show Int64.(mg_bus_map)'
 # @show tie_lines
-index_microgrid_bus = Int64.(mg_bus_map)'
+index_microgrid_bus = copy(Int64.(mg_bus_map)')
 
 # ===== 段落2：工作负载包络图绘制 =====
 # 先绘制数据中心工作负载分布，用于结果展示与后续子图拼接。
@@ -17,24 +17,14 @@ workload_dis = DataCentras.computational_power_tasks;
 figure_type="evenvelope"
 @show p = draw_workload_envelope(NT, ND2, workload_dis, figure_type);
 
-index_microgrid_bus
-# DEBUG - for each microgrid operations.
-vec_tem = zeros(NM, NB)
-for n in 1:NM
-	filtered_index_each_mirocgrid = findall(x->x==n, index_microgrid_bus[n, :][1, :])
-	vec_tem(n, filtered_index_each_mirocgrid) .== 1
-end
-
-index_microgrid_bus[2, :][:, 1]
-vec_tem[1, findall(x->x == 1, index_microgrid_bus[2, :][:, 1])] .== 1
-
-#  NOTE - MODEL 1
+##  NOTE - MODEL 1
 #! Run the SUC-SCUC model (considering data centra)
-NM
 # ===== 段落3：模型1（考虑数据中心）求解 =====
+config_param.is_NetWorkCon == 1
 config_param.is_ConsiderDataCentra = 1
 res = SUC_scucmodel(NT, NB, NG, ND, NC, ND2, NM, units, loads, winds, lines, ess, DataCentras, config_param, index_microgrid_bus)
-# ===== 段落4：模型1关键变量导出（CSV） =====
+
+#%% ===== 段落4：模型1关键变量导出（CSV） =====
 # 导出 dc_fv² 与 dc_fv²λ，便于外部分析与复现实验。
 #save results as csv files.
 # save res["dc_fv²"] as CSV
@@ -101,8 +91,8 @@ rut = @timed res = SUC_scucmodel(NT, NB, NG, ND, NC, ND2, units, loads, winds, l
 @show "runtime = $(rut.time) s"
 @show "CPU memory = $(rut.bytes / 1028 / 1028) MiB"
 
-res = SUC_scucmodel(NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, ess, DataCentras, config_param)
-
+# res = SUC_scucmodel(NT, NB, NG, ND, NC, ND2, units, loads, winds, lines, ess, DataCentras, config_param)
+res = SUC_scucmodel(NT, NB, NG, ND, NC, ND2, NM, units, loads, winds, lines, ess, DataCentras, config_param, index_microgrid_bus)
 #? Save the balance results
 savebalance_result(res["p₀"], res["pᵨ"], res["pᵩ"], res["pss_charge_p⁺"], res["pss_charge_p⁻"], 1)
 

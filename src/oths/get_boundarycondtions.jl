@@ -5,8 +5,8 @@ function get_uc_boundaryconditions(is_display_uc_boundarycondtion)
 
 	# 将原始数据整理为统一的模型输入结构与维度信息
 	forminput_args = (DataGen, DataBranch, DataLoad, LoadCurve, GenCost,
-					  UnitsFreqParam, StrogeData, datacentra_Data,
-					  data_centra_jobcurve, mg_bus_map, tie_lines)
+		UnitsFreqParam, StrogeData, datacentra_Data,
+		data_centra_jobcurve, mg_bus_map, tie_lines,)
 	config_param, units, lines, loads, ess, NB, NG, NL, ND, NT, NC, ND2, DataCentras = forminputdata(forminput_args...)
 
 	NM = Int(maximum(mg_bus_map[:, 2]))

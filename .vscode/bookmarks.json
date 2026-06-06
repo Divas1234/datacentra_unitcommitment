@@ -1,15 +1,10 @@
 {
 	"files": [
 		{
-			"path": "mainfun.jl",
+			"path": "src/oths/SUCuccommitmentmodel.jl",
 			"bookmarks": [
 				{
-					"line": 10,
-					"column": 23,
-					"label": ""
-				},
-				{
-					"line": 37,
+					"line": 352,
 					"column": 0,
 					"label": ""
 				}
