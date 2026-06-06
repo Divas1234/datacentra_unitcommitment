@@ -1,0 +1,8 @@
+Data center result directory: D:\zhujing_repo\output\data_centra\master-3(iter=12)
+Microgrid balance directory: D:\zhujing_repo\output\bench
+DCC count: 8
+Time periods: 24
+Total DCC workload: 13.973233 p.u.
+Peak total DCC workload: 1.091557 p.u.
+Inter-park mutual aid is visualized as each DCC/park's deviation from its own daily mean workload.
+The coupled coordination figure infers tie-line mutual aid from each microgrid's local supply-demand surplus.

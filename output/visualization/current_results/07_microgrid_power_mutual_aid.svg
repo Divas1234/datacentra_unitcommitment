@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="460" viewBox="0 0 980 460">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>
+text { font-family: Arial, 'Microsoft YaHei', sans-serif; fill: #1f2933; }
+.title { font-size: 22px; font-weight: 700; }
+.axis { font-size: 12px; fill: #52606d; }
+.legend { font-size: 12px; fill: #334e68; }
+.grid { stroke: #e4e7eb; stroke-width: 1; }
+.axisline { stroke: #9aa5b1; stroke-width: 1; }
+</style>
+<text x="32" y="34" class="title">Microgrid Mutual Aid and Balance</text>
+<line x1="76" y1="62.0" x2="790" y2="62.0" class="grid"/>
+<line x1="76" y1="147.0" x2="790" y2="147.0" class="grid"/>
+<line x1="76" y1="232.0" x2="790" y2="232.0" class="grid"/>
+<line x1="76" y1="317.0" x2="790" y2="317.0" class="grid"/>
+<line x1="76" y1="402.0" x2="790" y2="402.0" class="grid"/>
+<line x1="76" y1="361.3" x2="790" y2="361.3" class="axisline"/>
+<path d="M76.0,259.7 L107.0,261.0 L138.1,261.0 L169.1,261.0 L200.2,261.0 L231.2,261.0 L262.3,259.4 L293.3,215.8 L324.3,248.2 L355.4,248.2 L386.4,197.4 L417.5,205.4 L448.5,202.3 L479.6,199.8 L510.6,199.4 L541.7,258.2 L572.7,260.6 L603.7,261.0 L634.8,261.0 L665.8,261.0 L696.9,261.0 L727.9,259.4 L759.0,246.5 L790.0,259.5" fill="none" stroke="#8e6c8a" stroke-width="2.4"/>
+<path d="M76.0,229.7 L107.0,190.7 L138.1,198.7 L169.1,158.8 L200.2,166.7 L231.2,148.4 L262.3,169.5 L293.3,194.2 L324.3,161.5 L355.4,169.0 L386.4,170.1 L417.5,162.6 L448.5,167.9 L479.6,173.2 L510.6,170.0 L541.7,154.7 L572.7,171.1 L603.7,161.5 L634.8,169.9 L665.8,195.7 L696.9,169.4 L727.9,158.8 L759.0,171.7 L790.0,196.9" fill="none" stroke="#54a24b" stroke-width="2.4"/>
+<path d="M76.0,272.1 L107.0,272.1 L138.1,234.7 L169.1,257.6 L200.2,252.1 L231.2,272.1 L262.3,272.1 L293.3,272.1 L324.3,272.1 L355.4,272.1 L386.4,272.1 L417.5,272.1 L448.5,272.1 L479.6,272.1 L510.6,272.1 L541.7,272.1 L572.7,272.1 L603.7,263.0 L634.8,272.1 L665.8,233.8 L696.9,272.1 L727.9,272.1 L759.0,269.4 L790.0,164.5" fill="none" stroke="#4c78a8" stroke-width="2.4"/>
+<path d="M76.0,350.2 L107.0,369.9 L138.1,362.7 L169.1,400.2 L200.2,389.8 L231.2,402.0 L262.3,350.3 L293.3,350.2 L324.3,358.2 L355.4,353.2 L386.4,350.2 L417.5,350.2 L448.5,350.2 L479.6,350.2 L510.6,350.2 L541.7,350.2 L572.7,362.4 L603.7,386.4 L634.8,367.7 L665.8,362.7 L696.9,382.4 L727.9,350.2 L759.0,350.2 L790.0,350.2" fill="none" stroke="#e45756" stroke-width="2.4"/>
+<path d="M76.0,206.1 L107.0,188.1 L138.1,226.3 L169.1,201.1 L200.2,204.1 L231.2,178.0 L262.3,145.7 L293.3,126.8 L324.3,134.4 L355.4,137.0 L386.4,84.2 L417.5,84.7 L448.5,86.9 L479.6,89.8 L510.6,86.1 L541.7,129.7 L572.7,160.7 L603.7,184.6 L634.8,165.1 L665.8,224.3 L696.9,179.3 L727.9,134.9 L759.0,137.7 L790.0,280.9" fill="none" stroke="#111827" stroke-width="2.4"/>
+<text x="76.0" y="430" text-anchor="middle" class="axis">1</text>
+<text x="138.1" y="430" text-anchor="middle" class="axis">3</text>
+<text x="200.2" y="430" text-anchor="middle" class="axis">5</text>
+<text x="262.3" y="430" text-anchor="middle" class="axis">7</text>
+<text x="324.3" y="430" text-anchor="middle" class="axis">9</text>
+<text x="386.4" y="430" text-anchor="middle" class="axis">11</text>
+<text x="448.5" y="430" text-anchor="middle" class="axis">13</text>
+<text x="510.6" y="430" text-anchor="middle" class="axis">15</text>
+<text x="572.7" y="430" text-anchor="middle" class="axis">17</text>
+<text x="634.8" y="430" text-anchor="middle" class="axis">19</text>
+<text x="696.9" y="430" text-anchor="middle" class="axis">21</text>
+<text x="759.0" y="430" text-anchor="middle" class="axis">23</text>
+<text x="433.0" y="452" text-anchor="middle" class="axis">Time (h)</text>
+<text x="18" y="232.0" transform="rotate(-90 18 232.0)" text-anchor="middle" class="axis">Power (p.u.)</text>
+<rect x="810" y="65" width="14" height="14" fill="#8e6c8a"/>
+<text x="832" y="76" class="legend">Thermal</text>
+<rect x="810" y="89" width="14" height="14" fill="#54a24b"/>
+<text x="832" y="100" class="legend">Wind</text>
+<rect x="810" y="113" width="14" height="14" fill="#4c78a8"/>
+<text x="832" y="124" class="legend">Data center load</text>
+<rect x="810" y="137" width="14" height="14" fill="#e45756"/>
+<text x="832" y="148" class="legend">BESS net support</text>
+<rect x="810" y="161" width="14" height="14" fill="#111827"/>
+<text x="832" y="172" class="legend">Supply - demand</text>
+</svg>
